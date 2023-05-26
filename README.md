@@ -73,6 +73,13 @@ https://meet.google.com/sya-jckw-ivq
   - 문자 리터럴
     - 2진수로 변환하는 방법
       - ASCII, ISO-8859-1, KSC-5601(완성형), 조합형, MS-949, Unicode, UTF-8
+  - 변수 사용법
+    - JVM이 관리하는 메모리 영역 소개
+    - 변수 선언, 변수에 값 할당
+    - Primitive Data Type 소개: byte, short, int, long, char, float, double, boolean
+- 프로젝트 실습
+  - 3. 변수를 사용하여 데이터를 저장하기
+
 
 
 ## 구글 미트 접속
