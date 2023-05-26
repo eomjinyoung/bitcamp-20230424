@@ -2,7 +2,7 @@ package com.eomcs.lang.ex03;
 
 //# 논리값 리터럴
 //- 참, 거짓을 표현할 때 사용한다.
-//
+// 
 public class Exam0500 {
   public static void main(String[] args) {
     
