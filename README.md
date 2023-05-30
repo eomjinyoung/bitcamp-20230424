@@ -83,7 +83,12 @@ https://meet.google.com/sya-jckw-ivq
 ### 6일(5/30,화)
 
 - 자바 프로그래밍
-
+  - 표준 입출력 API 사용법(com.eomcs.lang.ex99)
+  - 변수 사용법(com.eomcs.lang.ex04)
+  - 배열 사용법(com.eomcs.lang.ex04)
+- 프로젝트 실습
+  - 4. 키보드로 값을 입력 받기
+  - 5. 배열과 반복문을 이용하여 여러 개의 데이터를 입력 받기
 
 
 ## 구글 미트 접속
