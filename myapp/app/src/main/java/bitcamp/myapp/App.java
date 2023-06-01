@@ -1,13 +1,9 @@
 package bitcamp.myapp;
 
-// 코드 본문에서 사용할 클래스가 어떤 패키지의 클래스인지 지정한다.
 import java.util.Scanner;
 
 public class App {
   public static void main(String[] args) {
-    printTitle();
-
-    // 키보드 스캐너 준비
     Scanner scanner = new Scanner(System.in);
 
     final int MAX_SIZE = 100;
@@ -20,26 +16,18 @@ public class App {
     String[] password = new String[MAX_SIZE];
     char[] gender = new char[MAX_SIZE];
 
-    // 회원정보 등록
+    printTitle();
+
     for (int i = 0; i < MAX_SIZE; i++) {
-
       inputMember(scanner, i, name, email, password, gender, no, userId++);
-
       length++;
-
       if (!promptContinue(scanner)) {
         break;
       }
     }
 
-    System.out.println("---------------------------------------");
+    printMembers(length, no, name, email, gender);
 
-    System.out.println("번호, 이름, 이메일, 성별");
-    System.out.println("---------------------------------------");
-
-    for (int i = 0; i < length; i++) {
-      System.out.printf("%d, %s, %s, %c\n", no[i], name[i], email[i], gender[i]);
-    }
     scanner.close();
   }
 
@@ -92,4 +80,13 @@ public class App {
     return true;
   }
 
+  static void printMembers(int length, int[] no, String[] name, String[] email, char[] gender) {
+    System.out.println("---------------------------------------");
+    System.out.println("번호, 이름, 이메일, 성별");
+    System.out.println("---------------------------------------");
+
+    for (int i = 0; i < length; i++) {
+      System.out.printf("%d, %s, %s, %c\n", no[i], name[i], email[i], gender[i]);
+    }
+  }
 }
