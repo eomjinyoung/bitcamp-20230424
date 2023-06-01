@@ -11,45 +11,76 @@ public class App {
     // 키보드 스캐너 준비
     Scanner scanner = new Scanner(System.in);
 
-    int[] no = new int[3];
-    String[] name = new String[3];
-    int[] age = new int[3];
-    boolean[] working = new boolean[3];
-    char[] gender = new char[3];
-    float[] leftEye = new float[3];
-    float[] rightEye = new float[3];
+    final int MAX_SIZE = 100;
+    int userId = 1;
+    int length = 0;
 
-    for (int count = 0; count < 3; count++) {
-      System.out.print("번호? ");
-      no[count] = scanner.nextInt();
+    int[] no = new int[MAX_SIZE];
+    String[] name = new String[MAX_SIZE];
+    String[] email = new String[MAX_SIZE];
+    String[] password = new String[MAX_SIZE];
+    char[] gender = new char[MAX_SIZE];
+
+    // 회원정보 등록
+    for (int i = 0; i < MAX_SIZE; i++) {
 
       System.out.print("이름? ");
-      name[count] = scanner.next();
+      name[i] = scanner.next();
 
-      System.out.print("나이? ");
-      age[count] = scanner.nextInt();
+      System.out.print("이메일? ");
+      email[i] = scanner.next();
 
-      System.out.print("재직중(true/false)? ");
-      working[count] = scanner.nextBoolean();
+      System.out.print("암호? ");
+      password[i] = scanner.next();
 
-      System.out.print("성별(남자:M, 여자:W)? ");
-      String str = scanner.next();
-      gender[count] = str.charAt(0);
+      loop: while (true) {
+        System.out.println("성별: ");
+        System.out.println("  1. 남자");
+        System.out.println("  2. 여자");
+        System.out.print("> ");
+        String menuNo = scanner.next();
 
-      System.out.print("시력(왼쪽, 오른쪽)? ");
-      leftEye[count] = scanner.nextFloat();
-      rightEye[count] = scanner.nextFloat();
+        // if (menuNo.equals("1")) {
+        // gender[i] = 'M';
+        // break;
+        // } else if (menuNo.equals("2")) {
+        // gender[i] = 'W';
+        // break;
+        // } else {
+        // System.out.println("무효한 번호입니다.");
+        // }
+
+        switch (menuNo) {
+          case "1":
+            gender[i] = 'M';
+            break loop;
+          case "2":
+            gender[i] = 'W';
+            break loop;
+          default:
+            System.out.println("무효한 번호입니다.");
+        }
+      }
+
+      no[i] = userId++;
+
+      length++;
+
+      System.out.print("계속 하시겠습니까?(Y/n) ");
+      scanner.nextLine(); // 이전에 next()를 실행한 후 남아 있던 줄바꿈 코드를 제거한다.
+      String response = scanner.nextLine();
+      if (!response.equals("") && !response.equalsIgnoreCase("Y")) {
+        break;
+      }
     }
 
     System.out.println("---------------------------------------");
 
-    for (int count = 0; count < 3; count++) {
-      System.out.printf("번호: %d\n", no[count]);
-      System.out.printf("이름: %s\n", name[count]);
-      System.out.printf("나이: %d\n", age[count]);
-      System.out.printf("재직자: %b\n", working[count]);
-      System.out.printf("성별(남자(M), 여자(W)): %c\n", gender[count]);
-      System.out.printf("좌우시력: %.1f,%.1f\n", leftEye[count], rightEye[count]);
+    System.out.println("번호, 이름, 이메일, 성별");
+    System.out.println("---------------------------------------");
+
+    for (int i = 0; i < length; i++) {
+      System.out.printf("%d, %s, %s, %c\n", no[i], name[i], email[i], gender[i]);
     }
     scanner.close();
   }
