@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 public class App {
   public static void main(String[] args) {
-    System.out.println("나의 목록 관리 시스템");
-    System.out.println("----------------------------------");
+    printTitle();
 
     // 키보드 스캐너 준비
     Scanner scanner = new Scanner(System.in);
@@ -24,52 +23,11 @@ public class App {
     // 회원정보 등록
     for (int i = 0; i < MAX_SIZE; i++) {
 
-      System.out.print("이름? ");
-      name[i] = scanner.next();
-
-      System.out.print("이메일? ");
-      email[i] = scanner.next();
-
-      System.out.print("암호? ");
-      password[i] = scanner.next();
-
-      loop: while (true) {
-        System.out.println("성별: ");
-        System.out.println("  1. 남자");
-        System.out.println("  2. 여자");
-        System.out.print("> ");
-        String menuNo = scanner.next();
-
-        // if (menuNo.equals("1")) {
-        // gender[i] = 'M';
-        // break;
-        // } else if (menuNo.equals("2")) {
-        // gender[i] = 'W';
-        // break;
-        // } else {
-        // System.out.println("무효한 번호입니다.");
-        // }
-
-        switch (menuNo) {
-          case "1":
-            gender[i] = 'M';
-            break loop;
-          case "2":
-            gender[i] = 'W';
-            break loop;
-          default:
-            System.out.println("무효한 번호입니다.");
-        }
-      }
-
-      no[i] = userId++;
+      inputMember(scanner, i, name, email, password, gender, no, userId++);
 
       length++;
 
-      System.out.print("계속 하시겠습니까?(Y/n) ");
-      scanner.nextLine(); // 이전에 next()를 실행한 후 남아 있던 줄바꿈 코드를 제거한다.
-      String response = scanner.nextLine();
-      if (!response.equals("") && !response.equalsIgnoreCase("Y")) {
+      if (!promptContinue(scanner)) {
         break;
       }
     }
@@ -84,4 +42,54 @@ public class App {
     }
     scanner.close();
   }
+
+  static void printTitle() {
+    System.out.println("나의 목록 관리 시스템");
+    System.out.println("----------------------------------");
+  }
+
+  static void inputMember(Scanner scanner, int i,
+      String[] name, String[] email, String[] password, char[] gender, int[] no, int userId) {
+
+    System.out.print("이름? ");
+    name[i] = scanner.next();
+
+    System.out.print("이메일? ");
+    email[i] = scanner.next();
+
+    System.out.print("암호? ");
+    password[i] = scanner.next();
+
+    loop: while (true) {
+      System.out.println("성별: ");
+      System.out.println("  1. 남자");
+      System.out.println("  2. 여자");
+      System.out.print("> ");
+      String menuNo = scanner.next();
+      scanner.nextLine(); // 입력 값(token)을 읽고 난 후에 남아 있는 줄바꿈 코드를 제거한다.
+
+      switch (menuNo) {
+        case "1":
+          gender[i] = 'M';
+          break loop;
+        case "2":
+          gender[i] = 'W';
+          break loop;
+        default:
+          System.out.println("무효한 번호입니다.");
+      }
+    }
+
+    no[i] = userId++;
+  }
+
+  static boolean promptContinue(Scanner scanner) {
+    System.out.print("계속 하시겠습니까?(Y/n) ");
+    String response = scanner.nextLine();
+    if (!response.equals("") && !response.equalsIgnoreCase("Y")) {
+      return false;
+    }
+    return true;
+  }
+
 }
