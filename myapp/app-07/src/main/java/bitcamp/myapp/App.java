@@ -68,7 +68,7 @@ public class App {
       }
     }
 
-    no[i] = userId++;
+    no[i] = userId;
   }
 
   static boolean promptContinue(Scanner scanner) {

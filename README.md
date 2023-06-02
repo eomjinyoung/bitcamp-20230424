@@ -115,8 +115,15 @@ https://meet.google.com/sya-jckw-ivq
 - 자바 프로그래밍
   - 흐름제어문 사용법
   - static 메서드 사용법
+    - call by value, call by reference
+    - 로컬 변수와 JVM Stack 메모리 영역
+    - 인스턴스와 Heap 메모리 영역
+    - 레퍼런스를 리턴하기
   - static 변수 사용법
 - 프로젝트 실습
+  - 8. 스태틱 메서드 간에 변수 공유하기
+- 기타
+  - 개인 별 *프로그래머스* 회원 가입 및 코딩테스트 연습 시작
 
 ## 구글 미트 접속
 

@@ -3,30 +3,30 @@ package bitcamp.myapp;
 import java.util.Scanner;
 
 public class App {
+  
+  static Scanner scanner = new Scanner(System.in);
+
+  static final int MAX_SIZE = 100;
+  static int[] no = new int[MAX_SIZE];
+  static String[] name = new String[MAX_SIZE];
+  static String[] email = new String[MAX_SIZE];
+  static String[] password = new String[MAX_SIZE];
+  static char[] gender = new char[MAX_SIZE];
+  static int userId = 1;
+  static int length = 0;
+  
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
-
-    final int MAX_SIZE = 100;
-    int userId = 1;
-    int length = 0;
-
-    int[] no = new int[MAX_SIZE];
-    String[] name = new String[MAX_SIZE];
-    String[] email = new String[MAX_SIZE];
-    String[] password = new String[MAX_SIZE];
-    char[] gender = new char[MAX_SIZE];
 
     printTitle();
 
-    for (int i = 0; i < MAX_SIZE; i++) {
-      inputMember(scanner, i, name, email, password, gender, no, userId++);
-      length++;
-      if (!promptContinue(scanner)) {
+    while (length < MAX_SIZE) {
+      inputMember();
+      if (!promptContinue()) {
         break;
       }
     }
 
-    printMembers(length, no, name, email, gender);
+    printMembers();
 
     scanner.close();
   }
@@ -36,17 +36,16 @@ public class App {
     System.out.println("----------------------------------");
   }
 
-  static void inputMember(Scanner scanner, int i,
-      String[] name, String[] email, String[] password, char[] gender, int[] no, int userId) {
+  static void inputMember() {
 
     System.out.print("이름? ");
-    name[i] = scanner.next();
+    name[length] = scanner.next();
 
     System.out.print("이메일? ");
-    email[i] = scanner.next();
+    email[length] = scanner.next();
 
     System.out.print("암호? ");
-    password[i] = scanner.next();
+    password[length] = scanner.next();
 
     loop: while (true) {
       System.out.println("성별: ");
@@ -58,20 +57,21 @@ public class App {
 
       switch (menuNo) {
         case "1":
-          gender[i] = 'M';
+          gender[length] = 'M';
           break loop;
         case "2":
-          gender[i] = 'W';
+          gender[length] = 'W';
           break loop;
         default:
           System.out.println("무효한 번호입니다.");
       }
     }
 
-    no[i] = userId++;
+    no[length] = userId++;
+    length++;
   }
 
-  static boolean promptContinue(Scanner scanner) {
+  static boolean promptContinue() {
     System.out.print("계속 하시겠습니까?(Y/n) ");
     String response = scanner.nextLine();
     if (!response.equals("") && !response.equalsIgnoreCase("Y")) {
@@ -80,7 +80,7 @@ public class App {
     return true;
   }
 
-  static void printMembers(int length, int[] no, String[] name, String[] email, char[] gender) {
+  static void printMembers() {
     System.out.println("---------------------------------------");
     System.out.println("번호, 이름, 이메일, 성별");
     System.out.println("---------------------------------------");
