@@ -25,24 +25,7 @@ public class MemberHandler {
     name[length] = Prompt.inputString("이름? ");
     email[length] = Prompt.inputString("이메일? ");
     password[length] = Prompt.inputString("암호? ");
-
-    loop: while (true) {
-      String menuNo = Prompt.inputString("성별:\n" + 
-      "  1. 남자\n" + 
-      "  2. 여자\n" + 
-      "> ");
-
-      switch (menuNo) {
-        case "1":
-          gender[length] = MALE;
-          break loop;
-        case "2":
-          gender[length] = FEMALE;
-          break loop;
-        default:
-          System.out.println("무효한 번호입니다.");
-      }
-    }
+    gender[length] = inputGender((char)0);
 
     no[length] = userId++;
     length++;
@@ -75,6 +58,51 @@ public class MemberHandler {
 
   public static String toGenderString(char gender) {
     return gender == 'M' ? "남성" : "여성";
+  }
+
+  public static void updateMember() {
+    String memberNo = Prompt.inputString("번호? ");
+    for (int i = 0; i < length; i++) {
+      if (no[i] == Integer.parseInt(memberNo)) {
+        System.out.printf("이름(%s)? ", name[i]);
+        name[i] = Prompt.inputString("");
+        System.out.printf("이메일(%s)? ", email[i]);
+        email[i] = Prompt.inputString("");
+        System.out.printf("새암호? ");
+        password[i] = Prompt.inputString("");
+        gender[i] = inputGender(gender[i]);
+        return;
+      }
+    }
+    System.out.println("해당 번호의 회원이 없습니다!");
+  }
+
+  private static char inputGender(char gender) {
+    String label;
+    if (gender == 0) {
+      label = "성별?\n";
+    } else {
+      label = String.format("성별(%s)?\n", toGenderString(gender));
+    }
+    loop: while (true) {
+      String menuNo = Prompt.inputString(label + 
+      "  1. 남자\n" + 
+      "  2. 여자\n" + 
+      "> ");
+
+      switch (menuNo) {
+        case "1":
+          return MALE;
+        case "2":
+          return FEMALE;
+        default:
+          System.out.println("무효한 번호입니다.");
+      }
+    }
+  }
+
+  public static void deleteMember() {
+    
   }
 
   private static boolean available() {
