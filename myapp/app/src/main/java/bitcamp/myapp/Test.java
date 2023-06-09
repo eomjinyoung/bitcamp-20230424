@@ -13,19 +13,19 @@ public class Test {
     Calculator c1 = new Calculator();
     Calculator c2 = new Calculator();
 
-    Calculator.init(c1, 2);
-    Calculator.init(c2, 3);
-    Calculator.multiple(c1, 3);
-    Calculator.minus(c2, 1);
-    Calculator.plus(c1, 7);
-    Calculator.multiple(c2, 7);
-    Calculator.minus(c1, 2);
-    Calculator.plus(c2, 15);
-    Calculator.divide(c1, 2);
-    Calculator.divide(c2, 3);
+    c1.init(2);
+    c2.init(3);
+    c1.multiple(3);
+    c2.minus(1);
+    c1.plus(7);
+    c2.multiple(7);
+    c1.minus(2);
+    c2.plus(15);
+    c1.divide(2);
+    c2.divide(3);
     
-    System.out.println(Calculator.getResult(c1));
-    System.out.println(Calculator.getResult(c2));
+    System.out.println(c1.getResult());
+    System.out.println(c2.getResult());
   }
 
 }
