@@ -1,4 +1,4 @@
-package bitcamp.test.step06;
+package bitcamp.test.step07;
 
 // 1) 낱개의 변수 사용
 // 2) 낱개의 변수 재사용
@@ -6,6 +6,7 @@ package bitcamp.test.step06;
 // 4) 클래스를 이용하여 데이터 타입 정의(중첩클래스; 로컬 클래스)
 // 5) 출력 기능을 별도의 메서드로 분리(중첩클래스; 스태틱 중첩 클래스) 
 // 6) 합계 및 평균을 계산하는 기능을 메서드로 분리
+// 7) GRASP 패턴: Information Expert(정보를 갖고 있는 클래스가 그 정보를 다룬다.)
 public class App {
   
   static class Score {
@@ -15,6 +16,11 @@ public class App {
     int math;
     int sum;
     float aver;
+
+    static void compute(Score s) {
+      s.sum = s.kor + s.eng + s.math;
+      s.aver = s.sum / 3f;
+    }
   }
   
   public static void main(String[] args) {
@@ -28,7 +34,7 @@ public class App {
     s.kor = 100;
     s.eng = 100;
     s.math = 100;
-    compute(s);
+    Score.compute(s);
     scores[length++] = s;
 
     s = new Score();
@@ -36,7 +42,7 @@ public class App {
     s.kor = 90;
     s.eng = 90;
     s.math = 90;
-    compute(s);
+    Score.compute(s);
     scores[length++] = s;
 
     s = new Score();
@@ -44,18 +50,13 @@ public class App {
     s.kor = 80;
     s.eng = 80;
     s.math = 80;
-    compute(s);
+    Score.compute(s);
     scores[length++] = s;
 
     for (int i = 0; i < length; i++) {
       printScore(scores[i]);
     }
 
-  }
-
-  static void compute(Score s) {
-    s.sum = s.kor + s.eng + s.math;
-    s.aver = s.sum / 3f;
   }
 
   static void printScore(Score s) {
