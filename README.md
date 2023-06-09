@@ -166,7 +166,17 @@ https://meet.google.com/sya-jckw-ivq
   - 프로그래머스 일별 점수 보고(6/7)
   - github.com 잔디 확인
 
+### 13일(6/9,금)
 
+- 자바 프로그래밍
+  - 클래스 사용법(계속)
+    - 스태틱 필드와 스태틱 메서드 사용법
+    - 인스턴스 필드와 인스턴스 메서드 사용법
+    - 패키지 사용법: import, public 접근 제어
+    - GRASP 패턴: Information Expert 패턴 소개 
+    - GoF의 Design Patters: Factory Method 패턴 소개
+    - 생성자 사용법
+    - private/public, setter/getter 사용법
 
 
 ## 구글 미트 접속
