@@ -1,8 +1,8 @@
 # 네이버 클라우드 7기(2023-04-24 ~ 2023-10-27)
 
-## 구글 미트 접속
+## 웨일즈 화상회의
 
-https://meet.google.com/sya-jckw-ivq
+https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 ## 학습 내용
 
@@ -178,7 +178,10 @@ https://meet.google.com/sya-jckw-ivq
     - 생성자 사용법
     - private/public, setter/getter 사용법
 
+### 14일(6/12,월)
 
-## 구글 미트 접속
 
-https://meet.google.com/sya-jckw-ivq
+
+## 웨일즈 화상회의
+
+https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
