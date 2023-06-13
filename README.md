@@ -195,6 +195,14 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 ### 15일(6/13,화)
 
+- 자바 프로그래밍(com.eomcs.oop.ex03.*)
+  - 클래스 로딩과 스태틱 필드: Method Area 메모리 영역
+  - new 연산자와 인스턴스 필드: Heap 메모리 영역
+  - 메서드와 로컬 변수: JVM Stack 메모리 영역
+- 프로젝트 실습
+  - 13. 게시판 관리 기능 추가
+
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
