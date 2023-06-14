@@ -3,7 +3,7 @@ package bitcamp.myapp.handler;
 import bitcamp.myapp.vo.Board;
 import bitcamp.util.Prompt;
 
-public class BoardHandler {
+public class BoardHandler2 {
 
   static final int MAX_SIZE = 100;
   static Board[] boards = new Board[MAX_SIZE];
@@ -55,7 +55,7 @@ public class BoardHandler {
         return;
       }
     }
-    System.out.println("해당 번호의 게시글이 없습니다!");
+    System.out.println("해당 번호의 독서록이 없습니다!");
   }
 
   public static void updateBoard() {
@@ -72,14 +72,14 @@ public class BoardHandler {
         return;
       }
     }
-    System.out.println("해당 번호의 게시글이 없습니다!");
+    System.out.println("해당 번호의 독서록이 없습니다!");
   }
 
 
   public static void deleteBoard() {
     int deletedIndex = indexOf(Prompt.inputInt("번호? "));
     if (deletedIndex == -1) {
-      System.out.println("해당 번호의 게시글이 없습니다!");
+      System.out.println("해당 번호의 독서록이 없습니다!");
       return;
     }
 
