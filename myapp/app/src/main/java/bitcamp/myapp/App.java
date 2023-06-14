@@ -9,7 +9,7 @@ public class App {
   public static void main(String[] args) {
 
     // 기본 생성자를 이용해 Prompt 인스턴스를 준비한다.
-    // => 기본 생성자는 Scanner를 키보드와 연결한다.
+    // => 기본 생성자는 Scanner를 키보드와 연결한다. OK
     Prompt prompt = new Prompt();
 
     MemberHandler memberHandler = new MemberHandler(prompt);
