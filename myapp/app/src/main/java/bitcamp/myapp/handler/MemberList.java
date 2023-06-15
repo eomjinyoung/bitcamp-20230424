@@ -3,17 +3,26 @@ package bitcamp.myapp.handler;
 import bitcamp.myapp.vo.Member;
 
 public class MemberList {
-  private static final int MAX_SIZE = 100;
+  private static final int DEFAULT_SIZE = 3;
 
-  private Member[] members = new Member[MAX_SIZE];
+  private Member[] members = new Member[DEFAULT_SIZE];
   private int length;
 
   public boolean add(Member m) {
-    if (!available()) {
-      return false;
+    if (this.length == members.length) {
+      increase();
     }
     this.members[this.length++] = m;
     return true;
+  }
+
+  private void increase() {
+    Member[] arr = new Member[members.length + (members.length >> 1)];
+    for (int i = 0; i < members.length; i++) {
+      arr[i] = members[i];
+    }
+    members = arr;
+    System.out.println("배열 확장: " + members.length);
   }
 
   public Member[] list() {
@@ -61,9 +70,5 @@ public class MemberList {
       }
     }
     return -1;
-  }
-
-  private boolean available() {
-    return this.length < MAX_SIZE;
   }
 }

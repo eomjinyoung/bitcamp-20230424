@@ -57,10 +57,7 @@ public class BoardHandler implements Handler {
     board.setWriter(this.prompt.inputString("작성자? "));
     board.setPassword(this.prompt.inputString("암호? "));
 
-    if (!this.list.add(board)) {
-      System.out.println("더이상 입력할 수 없습니다!");
-      return;
-    }
+    this.list.add(board);
   }
 
   private void printBoards() {
