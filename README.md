@@ -209,6 +209,15 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 14. 스태틱 필드의 한계 확인
   - 15. 인스턴스 필드와 인스턴스 메서드, 생성자와 의존 객체 주입
   
+
+### 17일(6/15,목)
+
+- 자바 프로그래밍(com.eomcs.oop.ex03.*)
+  - Eclipse IDE로 디버깅하는 방법
+- 프로젝트 실습
+  - 16. GRASP 패턴: Information Expert 적용
+
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
