@@ -110,4 +110,36 @@
   - UI가 CLI에서 윈도우 또는 웹으로 바뀌더라도 인스턴스 목록 다루는 기능은 재사용 가능
 - 배열 크기 자동 증가 기능 추가
 
-## 19. 
+## 19. 다형성을 이용하여 MemberList를 범용으로 만들기
+
+- 목록 관리 범용 클래스 ArrayList 정의
+  - 다형성의 polymorphic variable 문법 활용
+- equals() 메서드와 오버라이딩 활용
+  - Object 클래스와 상속
+- MemberHandler와 BoardHandler에 적용
+
+## 20. LinkedList 자료구조 구현하기
+
+- 목록 관리 범용 클래스 LinkedList 정의
+  - LinkedList 구동원리 이해 및 구현
+  - 중첩 클래스 활용
+- MemberHandler와 BoardHandler에 적용
+
+## 21. 인터페이스를 이용하여 List 사용 규칙 정의하기
+
+- 목록 관리 객체의 사용 규칙을 인터페이스 정의
+  - List 인터페이스 정의
+  - ArrayList, LinkedList에 List 인터페이스 적용
+- MemberHandler와 BoardHandler에 적용
+
+## 22. Stack, Queue 자료구조 구현하기
+
+- Stack과 Queue의 구동원리 이해 및 구현
+- Prompt 클래스에 적용
+
+## 23. Iterator 디자인 패턴을 활용하여 목록 조회 기능을 캡슐화하기
+
+- GoF의 디자인 패턴 중 Iterator 패턴의 동작원리 이해 및 구현
+- ArrayList, LinkedList, Stack, Queue에 적용
+
+
