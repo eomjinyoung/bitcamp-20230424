@@ -216,6 +216,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - Eclipse IDE로 디버깅하는 방법
 - 프로젝트 실습
   - 16. GRASP 패턴: Information Expert 적용
+  - 17. 인터페이스를 이용한 객체 사용 규칙 정의
 
 
 ## 웨일즈 화상회의
