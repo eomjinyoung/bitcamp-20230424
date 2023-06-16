@@ -224,6 +224,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 자바 프로그래밍(com.eomcs.basic.ex01.*)
   - java.lang.Object 클래스 사용법
 - 프로젝트 실습
+  - 19. 다형성을 이용하여 범용으로 사용할 수 있는 목록 클래스 만들기
 
 
 ## 웨일즈 화상회의

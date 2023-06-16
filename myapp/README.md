@@ -110,12 +110,15 @@
   - UI가 CLI에서 윈도우 또는 웹으로 바뀌더라도 인스턴스 목록 다루는 기능은 재사용 가능
 - 배열 크기 자동 증가 기능 추가
 
-## 19. 다형성을 이용하여 MemberList를 범용으로 만들기
+## 19. 다형성을 이용하여 범용으로 사용할 수 있는 목록 클래스 만들기
 
 - 목록 관리 범용 클래스 ArrayList 정의
   - 다형성의 polymorphic variable 문법 활용
 - equals() 메서드와 오버라이딩 활용
   - Object 클래스와 상속
+  - Member와 Board 클래스에 적용
+- 오버로딩을 활용하여 생성자를 추가
+  - Member와 Board 클래스 적용
 - MemberHandler와 BoardHandler에 적용
 
 ## 20. LinkedList 자료구조 구현하기
