@@ -134,6 +134,7 @@
   - List 인터페이스 정의
   - ArrayList, LinkedList에 List 인터페이스 적용
 - MemberHandler와 BoardHandler에 적용
+  - List 구현체를 생성자를 통해 주입: DI(Dependency Injection) 적용
 
 ## 22. Stack, Queue 자료구조 구현하기
 

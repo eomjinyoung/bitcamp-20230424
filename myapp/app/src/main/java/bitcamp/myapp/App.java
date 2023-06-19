@@ -3,21 +3,19 @@ package bitcamp.myapp;
 import bitcamp.myapp.handler.BoardHandler;
 import bitcamp.myapp.handler.Handler;
 import bitcamp.myapp.handler.MemberHandler;
+import bitcamp.util.ArrayList;
+import bitcamp.util.LinkedList;
 import bitcamp.util.Prompt;
 
 public class App {
 
   public static void main(String[] args) {
 
-    // 기본 생성자를 이용해 Prompt 인스턴스를 준비한다.
-    // => 기본 생성자는 Scanner를 키보드와 연결한다. OK
     Prompt prompt = new Prompt();
 
-    // 모든 핸들러는 Handler 규칙에 따라 정의되었기 때문에
-    // Handler 레퍼런스에 그 주소를 담을 수 있다.
-    Handler memberHandler = new MemberHandler(prompt, "회원");
-    Handler boardHandler = new BoardHandler(prompt, "게시글");
-    Handler readingHandler = new BoardHandler(prompt, "독서록");
+    Handler memberHandler = new MemberHandler(prompt, "회원", new ArrayList());
+    Handler boardHandler = new BoardHandler(prompt, "게시글", new LinkedList());
+    Handler readingHandler = new BoardHandler(prompt, "독서록", new LinkedList());
 
     printTitle();
 

@@ -6,4 +6,5 @@ public interface List {
   Object[] toArray();
   boolean remove(Object value);
   Object remove(int index);
+  int size();
 }

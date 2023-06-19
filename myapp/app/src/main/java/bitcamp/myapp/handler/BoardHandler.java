@@ -1,21 +1,21 @@
 package bitcamp.myapp.handler;
 
 import bitcamp.myapp.vo.Board;
-import bitcamp.util.LinkedList;
 import bitcamp.util.List;
 import bitcamp.util.Prompt;
 
 public class BoardHandler implements Handler {
 
 
-  private List list = new LinkedList();
+  private List list;
   private Prompt prompt;
 
   private String title;
 
-  public BoardHandler(Prompt prompt, String title) {
+  public BoardHandler(Prompt prompt, String title, List list) {
     this.prompt = prompt;
     this.title = title;
+    this.list = list;
   }
 
   public void execute() {
@@ -67,9 +67,8 @@ public class BoardHandler implements Handler {
     System.out.println("번호, 제목, 작성자, 조회수, 등록일");
     System.out.println("---------------------------------------");
 
-    Object[] arr = this.list.toArray();
-    for (Object obj : arr) {
-      Board board = (Board) obj;
+    for (int i = 0; i < this.list.size(); i++) {
+      Board board = (Board) this.list.get(i);
       System.out.printf("%d, %s, %s, %d, %tY-%5$tm-%5$td\n",
           board.getNo(),
           board.getTitle(),
@@ -121,9 +120,8 @@ public class BoardHandler implements Handler {
   }
 
   private Board findBy(int no) {
-    Object[] arr = this.list.toArray();
-    for (Object obj : arr) {
-      Board b = (Board) obj;
+    for (int i = 0; i < this.list.size(); i++) {
+      Board b = (Board) this.list.get(i);
       if (b.getNo() == no) {
         return b;
       }
