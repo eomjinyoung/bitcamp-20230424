@@ -1,6 +1,7 @@
 package bitcamp.myapp.handler;
 
 import bitcamp.myapp.vo.Board;
+import bitcamp.util.ArrayList;
 import bitcamp.util.Prompt;
 
 public class BoardHandler implements Handler {

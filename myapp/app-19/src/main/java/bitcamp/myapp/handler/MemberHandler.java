@@ -1,6 +1,7 @@
 package bitcamp.myapp.handler;
 
 import bitcamp.myapp.vo.Member;
+import bitcamp.util.ArrayList;
 import bitcamp.util.Prompt;
 
 public class MemberHandler implements Handler {
