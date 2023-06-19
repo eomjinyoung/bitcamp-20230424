@@ -114,7 +114,7 @@ public class BoardHandler implements Handler {
   }
 
   private void deleteBoard() {
-    if (!this.list.delete(new Board(this.prompt.inputInt("번호? ")))) {
+    if (!this.list.remove(new Board(this.prompt.inputInt("번호? ")))) {
       System.out.println("해당 번호의 게시글이 없습니다!");
     }
   }
