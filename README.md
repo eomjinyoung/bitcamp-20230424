@@ -235,7 +235,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 ### 20일(6/20,화)
 
 - 프로젝트 실습
-  - 
+  - 22. Stack, Queue 자료구조 구현하기
 
 
 ## 웨일즈 화상회의

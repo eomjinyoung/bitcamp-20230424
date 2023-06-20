@@ -147,7 +147,9 @@
     - App, BoardHandler, MemberHandler 변경
   - MenuPrompt 클래스에 입력한 명령어의 history 기능을 추가
 
-## 23. Iterator 디자인 패턴을 활용하여 목록 조회 기능을 캡슐화하기
+## 23. 
+
+## 24. Iterator 디자인 패턴을 활용하여 목록 조회 기능을 캡슐화하기
 
 - GoF의 디자인 패턴 중 Iterator 패턴의 동작원리 이해 및 구현
 - ArrayList, LinkedList, Stack, Queue에 적용
