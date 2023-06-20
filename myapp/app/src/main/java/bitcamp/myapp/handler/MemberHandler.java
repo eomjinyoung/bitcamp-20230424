@@ -2,26 +2,30 @@ package bitcamp.myapp.handler;
 
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.List;
-import bitcamp.util.Prompt;
+import bitcamp.util.MenuPrompt;
 
 public class MemberHandler implements Handler {
 
   private List list;
-  private Prompt prompt;
+  private MenuPrompt prompt;
   private String title;
 
-  public MemberHandler(Prompt prompt, String title, List list) {
+  public MemberHandler(MenuPrompt prompt, String title, List list) {
     this.prompt = prompt;
     this.title = title;
     this.list = list;
   }
 
   public void execute() {
+
+    prompt.appendBreadcrumb(this.title);
+
     printMenu();
 
     while (true) {
-      String menuNo = prompt.inputString("%s> ", this.title);
+      String menuNo = prompt.inputMenu();
       if (menuNo.equals("0")) {
+        prompt.removeBreadcrumb();
         return;
       } else if (menuNo.equals("menu")) {
         printMenu();

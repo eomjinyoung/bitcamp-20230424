@@ -27,9 +27,30 @@ public class Stack extends LinkedList {
   }
 
   public Object pop() {
-    if (this.size() == 0) {
+    if (this.empty()) {
       return null;
     }
     return this.remove(this.size() - 1);
   }
+
+  public Object peek() {
+    if (this.empty()) {
+      return null;
+    }
+    return this.get(this.size() - 1);
+  }
+
+  public boolean empty() {
+    return this.size() == 0;
+  }
 }
+
+
+
+
+
+
+
+
+
+
