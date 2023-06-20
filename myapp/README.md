@@ -147,9 +147,17 @@
     - App, BoardHandler, MemberHandler 변경
   - MenuPrompt 클래스에 입력한 명령어의 history 기능을 추가
 
-## 23. Observer 디자인 패턴을 활용하여 기본 메뉴 명령의 삽입/삭제를 쉽게 하기
+## 23. Composite, Command, Observer 디자인 패턴을 활용하기
 
-- Observer 디자인 패턴의 클래스 구조 및 구동 원리 이해
+- Composite 패턴을 활용하여 메뉴 구현하기
+  - MenuPrompt에 적용
+  - MenuItem, Menu 클래스 정의
+- Command 패턴을 활용하여 메뉴 기능 구현하기
+  - BoardHandler, MemberHandler에 적용
+    - Command 인터페이스 정의
+    - BoardXxxCommand, MemberXxxCommand 클래스로 분해
+- Observer 패턴을 활용하여 메뉴 명령 처리하기
+  - MenuItem와 Command 객체 연결
 
 
 ## 24. Iterator 디자인 패턴을 활용하여 목록 조회 기능을 캡슐화하기
