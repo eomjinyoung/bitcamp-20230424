@@ -5,11 +5,11 @@ import bitcamp.util.ActionListener;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.List;
 
-public class BoardAddHandler implements ActionListener {
+public class BoardAddListener implements ActionListener {
 
   private List list;
 
-  public BoardAddHandler(List list) {
+  public BoardAddListener(List list) {
     this.list = list;
   }
 
