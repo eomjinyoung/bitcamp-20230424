@@ -1,16 +1,13 @@
 package bitcamp.myapp.handler;
 
 import bitcamp.myapp.vo.Board;
-import bitcamp.util.ActionListener;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.List;
 
-public class BoardDeleteListener implements ActionListener {
-
-  private List list;
+public class BoardDeleteListener extends AbstractBoardListener {
 
   public BoardDeleteListener(List list) {
-    this.list = list;
+    super(list);
   }
 
   @Override
