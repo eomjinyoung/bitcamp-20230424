@@ -147,7 +147,7 @@
     - App, BoardHandler, MemberHandler 변경
   - MenuPrompt 클래스에 입력한 명령어의 history 기능을 추가
 
-## 23. Composite, Command, Observer 디자인 패턴을 활용하기
+## 23. Composite, Command, Observer 디자인 패턴, 추상 클래스/메서드 활용하기
 
 - Composite 패턴을 활용하여 메뉴 구현하기
   - BreadcrumbPrompt에 적용
