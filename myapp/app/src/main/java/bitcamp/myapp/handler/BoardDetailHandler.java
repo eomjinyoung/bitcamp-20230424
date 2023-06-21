@@ -3,12 +3,12 @@ package bitcamp.myapp.handler;
 import bitcamp.myapp.vo.Board;
 import bitcamp.util.List;
 
-public class BoardHandler implements Handler {
+public class BoardDetailHandler implements Handler {
 
 
   private List list;
 
-  public BoardHandler(List list) {
+  public BoardDetailHandler(List list) {
     this.list = list;
   }
 
