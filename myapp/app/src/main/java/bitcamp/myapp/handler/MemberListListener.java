@@ -1,16 +1,13 @@
 package bitcamp.myapp.handler;
 
 import bitcamp.myapp.vo.Member;
-import bitcamp.util.ActionListener;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.List;
 
-public class MemberListListener implements ActionListener {
-
-  private List list;
+public class MemberListListener extends AbstractMemberListener {
 
   public MemberListListener(List list) {
-    this.list = list;
+    super(list);
   }
 
   @Override
@@ -25,10 +22,6 @@ public class MemberListListener implements ActionListener {
           m.getNo(), m.getName(), m.getEmail(),
           toGenderString(m.getGender()));
     }
-  }
-
-  private static String toGenderString(char gender) {
-    return gender == 'M' ? "남성" : "여성";
   }
 
 }
