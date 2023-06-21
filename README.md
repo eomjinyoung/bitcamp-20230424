@@ -237,6 +237,11 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 22. Stack, Queue 자료구조 구현하기
 
+### 21일(6/21,수)
+
+- 프로젝트 실습
+  - 22. Stack, Queue 자료구조 구현하기
+
 
 ## 웨일즈 화상회의
 

@@ -2,17 +2,17 @@ package bitcamp.myapp.handler;
 
 import bitcamp.myapp.vo.Board;
 import bitcamp.util.List;
-import bitcamp.util.MenuPrompt;
+import bitcamp.util.BreadcrumbPrompt;
 
 public class BoardHandler implements Handler {
 
 
   private List list;
-  private MenuPrompt prompt;
+  private BreadcrumbPrompt prompt;
 
   private String title;
 
-  public BoardHandler(MenuPrompt prompt, String title, List list) {
+  public BoardHandler(BreadcrumbPrompt prompt, String title, List list) {
     this.prompt = prompt;
     this.title = title;
     this.list = list;
