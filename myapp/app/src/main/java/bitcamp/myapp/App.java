@@ -52,25 +52,11 @@ public class App {
     readingMenu.add(new Menu("삭제", new BoardDeleteListener(readingList)));
     mainMenu.add(readingMenu);
 
-
-    //    Handler memberHandler = new MemberHandler(prompt, "회원", new ArrayList());
-    //    Handler boardHandler = new BoardDeleteListener(prompt, "게시글", new LinkedList());
-    //    Handler readingHandler = new BoardDeleteListener(prompt, "독서록", new LinkedList());
-
     printTitle();
 
     mainMenu.execute(prompt);
 
     prompt.close();
-  }
-
-  static String getMenu() {
-    StringBuilder menu = new StringBuilder();
-    menu.append("1. 회원\n");
-    menu.append("2. 게시글\n");
-    menu.append("3. 독서록\n");
-    menu.append("0. 종료\n");
-    return menu.toString();
   }
 
   static void printTitle() {
