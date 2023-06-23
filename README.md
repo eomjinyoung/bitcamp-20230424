@@ -244,7 +244,21 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 추상 클래스와 추상 메서드
 - 프로젝트 실습
   - 23. Composite, Command, Observer 디자인 패턴, 추상 클래스/메서드 활용하기
+  
+### 22일(6/22,목)
 
+- 자바 프로그래밍(com.eomcs.oop)
+  - ex03: 스태틱 필드/블록, 인스턴스 필드/블록/생성자 사용법
+  - ex05: 상속 사용법
+  - ex06: 다형성 사용법
+
+### 23일(6/23,금)
+
+- 자바 프로그래밍(com.eomcs.oop)
+  - ex06: 다형성 사용법(계속)
+  - com.eomcs.basic
+    - ex01: Object 클래스 사용법
+    - ex02: String, Wrapper, Date, Calendar 클래스 사용법 
 
 ## 웨일즈 화상회의
 

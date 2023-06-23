@@ -163,7 +163,11 @@
   - AbstractBoardListener 추상 클래스 정의
     - 추상 메서드 도입
 
-## 24. Iterator 디자인 패턴을 활용하여 목록 조회 기능을 캡슐화하기
+## 24. 제네릭을 사용하여 타입을 파라미터로 다루기
+
+- ArrayList, LinkedList, Stack, Queue에 제네릭 적용하기
+
+## 25. Iterator 디자인 패턴을 활용하여 목록 조회 기능을 캡슐화하기
 
 - GoF의 디자인 패턴 중 Iterator 패턴의 동작원리 이해 및 구현
 - ArrayList, LinkedList, Stack, Queue에 적용
