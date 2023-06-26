@@ -1,7 +1,7 @@
 package bitcamp.util;
 
 
-public class LinkedList<E> implements List<E> {
+public class LinkedList implements List {
 
   Node head;
   Node tail;

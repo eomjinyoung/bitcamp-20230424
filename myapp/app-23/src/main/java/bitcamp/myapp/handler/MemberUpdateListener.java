@@ -4,9 +4,9 @@ import bitcamp.myapp.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.List;
 
-public class MemberDetailListener extends AbstractMemberListener {
+public class MemberUpdateListener extends AbstractMemberListener {
 
-  public MemberDetailListener(List<Member> list) {
+  public MemberUpdateListener(List list) {
     super(list);
   }
 
@@ -20,8 +20,10 @@ public class MemberDetailListener extends AbstractMemberListener {
       return;
     }
 
-    System.out.printf("이름: %s\n", m.getName());
-    System.out.printf("이메일: %s\n", m.getEmail());
-    System.out.printf("성별: %s\n", toGenderString(m.getGender()));
+    m.setName(prompt.inputString("이름(%s)? ", m.getName()));
+    m.setEmail(prompt.inputString("이메일(%s)? ", m.getEmail()));
+    m.setPassword(prompt.inputString("새암호? "));
+    m.setGender(inputGender(m.getGender(), prompt));
   }
+
 }

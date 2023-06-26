@@ -1,13 +1,16 @@
 package bitcamp.util;
 
-public class ArrayList<E> implements List<E> {
+public class ArrayList implements List {
   private static final int DEFAULT_SIZE = 3;
 
   private Object[] list = new Object[DEFAULT_SIZE];
   private int length;
 
   @Override
-  public boolean add(E obj) {
+  // 컴파일러에게 다음 메서드가 수퍼클래스의 메서드를 재정의한 것인지?
+  // 또는 인터페이스의 메서드를 구현한 것인지?
+  // 검사해달라는 표시다.
+  public boolean add(Object obj) {
     if (this.length == list.length) {
       increase();
     }
@@ -33,17 +36,16 @@ public class ArrayList<E> implements List<E> {
     return arr;
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  public E get(int index) {
+  public Object get(int index) {
     if (!isValid(index)) {
       return null;
     }
-    return (E) this.list[index];
+    return this.list[index];
   }
 
   @Override
-  public boolean remove(E obj) {
+  public boolean remove(Object obj) {
     int deletedIndex = indexOf(obj);
     if (deletedIndex == -1) {
       return false;
@@ -56,9 +58,8 @@ public class ArrayList<E> implements List<E> {
     return true;
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  public E remove(int index) {
+  public Object remove(int index) {
     if (!isValid(index)) {
       return null;
     }
@@ -70,7 +71,7 @@ public class ArrayList<E> implements List<E> {
     }
     this.list[--this.length] = null;
 
-    return (E) old;
+    return old;
   }
 
   @Override
@@ -82,7 +83,7 @@ public class ArrayList<E> implements List<E> {
     return index >= 0 && index < this.length;
   }
 
-  private int indexOf(E obj) {
+  private int indexOf(Object obj) {
     for (int i = 0; i < this.length; i++) {
       Object item = this.list[i];
       if (item.equals(obj)) {

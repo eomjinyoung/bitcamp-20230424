@@ -6,7 +6,7 @@ import bitcamp.util.List;
 
 public class MemberDetailListener extends AbstractMemberListener {
 
-  public MemberDetailListener(List<Member> list) {
+  public MemberDetailListener(List list) {
     super(list);
   }
 
