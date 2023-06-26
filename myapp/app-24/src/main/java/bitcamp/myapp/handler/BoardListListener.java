@@ -2,7 +2,6 @@ package bitcamp.myapp.handler;
 
 import bitcamp.myapp.vo.Board;
 import bitcamp.util.BreadcrumbPrompt;
-import bitcamp.util.Iterator;
 import bitcamp.util.List;
 
 public class BoardListListener extends AbstractBoardListener {
@@ -17,10 +16,8 @@ public class BoardListListener extends AbstractBoardListener {
     System.out.println("번호, 제목, 작성자, 조회수, 등록일");
     System.out.println("---------------------------------------");
 
-    Iterator<Board> iterator = list.iterator();
-
-    while (iterator.hasNext()) {
-      Board board = iterator.next();
+    for (int i = 0; i < this.list.size(); i++) {
+      Board board = this.list.get(i);
       System.out.printf("%d, %s, %s, %d, %tY-%5$tm-%5$td\n",
           board.getNo(),
           board.getTitle(),

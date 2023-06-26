@@ -2,18 +2,18 @@ package bitcamp.util;
 
 import java.lang.reflect.Array;
 
-public class ArrayList<E> extends AbstractList<E> {
-
+public class ArrayList<E> implements List<E> {
   private static final int DEFAULT_SIZE = 3;
 
   private Object[] list = new Object[DEFAULT_SIZE];
+  private int length;
 
   @Override
   public boolean add(E obj) {
-    if (this.size == list.length) {
+    if (this.length == list.length) {
       increase();
     }
-    this.list[this.size++] = obj;
+    this.list[this.length++] = obj;
     return true;
   }
 
@@ -28,8 +28,8 @@ public class ArrayList<E> extends AbstractList<E> {
 
   @Override
   public Object[] toArray() {
-    Object[] arr = new Object[this.size];
-    for (int i = 0; i < this.size; i++) {
+    Object[] arr = new Object[this.length];
+    for (int i = 0; i < this.length; i++) {
       arr[i] = this.list[i];
     }
     return arr;
@@ -40,10 +40,10 @@ public class ArrayList<E> extends AbstractList<E> {
   public <T> T[] toArray(T[] arr) {
     T[] values = null;
 
-    if (arr.length < this.size) {
+    if (arr.length < this.length) {
       // 파라미터로 받은 배열이 목록의 개수 보다 작다면,
       // 새 배열을 만들어 저장한다.
-      values = (T[]) Array.newInstance(arr.getClass().getComponentType(), this.size);
+      values = (T[]) Array.newInstance(arr.getClass().getComponentType(), this.length);
 
     } else {
       // 파라미터로 받은 배열이 목록에 저장된 개수와 같거나 크다면,
@@ -51,7 +51,7 @@ public class ArrayList<E> extends AbstractList<E> {
       values = arr;
     }
 
-    for (int i = 0; i < this.size; i++) {
+    for (int i = 0; i < this.length; i++) {
       values[i] = (T) list[i];
     }
     return values;
@@ -73,10 +73,10 @@ public class ArrayList<E> extends AbstractList<E> {
       return false;
     }
 
-    for (int i = deletedIndex; i < this.size - 1; i++) {
+    for (int i = deletedIndex; i < this.length - 1; i++) {
       this.list[i] = this.list[i + 1];
     }
-    this.list[--this.size] = null;
+    this.list[--this.length] = null;
     return true;
   }
 
@@ -89,16 +89,25 @@ public class ArrayList<E> extends AbstractList<E> {
 
     Object old = this.list[index];
 
-    for (int i = index; i < this.size - 1; i++) {
+    for (int i = index; i < this.length - 1; i++) {
       this.list[i] = this.list[i + 1];
     }
-    this.list[--this.size] = null;
+    this.list[--this.length] = null;
 
     return (E) old;
   }
 
+  @Override
+  public int size() {
+    return this.length;
+  }
+
+  private boolean isValid(int index) {
+    return index >= 0 && index < this.length;
+  }
+
   private int indexOf(E obj) {
-    for (int i = 0; i < this.size; i++) {
+    for (int i = 0; i < this.length; i++) {
       Object item = this.list[i];
       if (item.equals(obj)) {
         return i;

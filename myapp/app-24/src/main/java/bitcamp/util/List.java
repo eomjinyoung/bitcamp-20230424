@@ -8,5 +8,4 @@ public interface List<E> {
   boolean remove(E value);
   E remove(int index);
   int size();
-  Iterator<E> iterator();
 }
