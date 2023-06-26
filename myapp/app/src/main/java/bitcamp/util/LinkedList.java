@@ -1,14 +1,15 @@
 package bitcamp.util;
 
+import java.lang.reflect.Array;
 
 public class LinkedList<E> implements List<E> {
 
-  Node head;
-  Node tail;
+  Node<E> head;
+  Node<E> tail;
   int size;
 
   public static void main(String[] args) {
-    LinkedList list = new LinkedList();
+    LinkedList<Integer> list = new LinkedList<>();
     list.add(Integer.valueOf(100)); // index: 0
     list.add(Integer.valueOf(200)); // index: 1
     list.add(Integer.valueOf(300)); // index: 2
@@ -42,7 +43,7 @@ public class LinkedList<E> implements List<E> {
     //    System.out.println(list.retrieve(600));
   }
 
-  static void print(LinkedList list) {
+  static void print(LinkedList<Integer> list) {
     Object[] arr = list.toArray();
     for (Object obj : arr) {
       System.out.print(obj);
@@ -52,8 +53,8 @@ public class LinkedList<E> implements List<E> {
   }
 
   @Override
-  public boolean add(Object value) {
-    Node node = new Node();
+  public boolean add(E value) {
+    Node<E> node = new Node<>();
     node.value = value;
 
     if (this.head == null) {
@@ -71,7 +72,7 @@ public class LinkedList<E> implements List<E> {
   public Object[] toArray() {
     Object[] arr = new Object[this.size];
 
-    Node cursor = this.head;
+    Node<E> cursor = this.head;
     for (int i = 0; i < this.size; i++) {
       arr[i] = cursor.value;
       cursor = cursor.next;
@@ -80,13 +81,35 @@ public class LinkedList<E> implements List<E> {
     return arr;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public Object get(int index) {
+  public <T> T[] toArray(T[] arr) {
+    T[] values = null;
+
+    if (arr.length < this.size) {
+      values = (T[]) Array.newInstance(arr.getClass().getComponentType(), this.size);
+
+    } else {
+      values = arr;
+    }
+
+    Node<E> cursor = this.head;
+    for (int i = 0; i < this.size; i++) {
+      arr[i] = (T) cursor.value;
+      cursor = cursor.next;
+    }
+
+    return values;
+  }
+
+
+  @Override
+  public E get(int index) {
     if (!isValid(index)) {
       return null;
     }
 
-    Node cursor = this.head;
+    Node<E> cursor = this.head;
 
     for (int i = 0; i < index; i++) {
       cursor = cursor.next;
@@ -96,9 +119,9 @@ public class LinkedList<E> implements List<E> {
   }
 
   @Override
-  public boolean remove(Object value) {
-    Node prev = null;
-    Node cursor = this.head;
+  public boolean remove(E value) {
+    Node<E> prev = null;
+    Node<E> cursor = this.head;
 
     while (cursor != null) {
       if (cursor.value.equals(value)) {
@@ -126,14 +149,14 @@ public class LinkedList<E> implements List<E> {
   }
 
   @Override
-  public Object remove(int index) {
+  public E remove(int index) {
     if (!isValid(index)) {
       return null;
     }
 
     // 삭제하려는 값이 있는 노드까지 이동한다.
-    Node prev = null;
-    Node cursor = this.head;
+    Node<E> prev = null;
+    Node<E> cursor = this.head;
 
     for (int i = 0; i < index; i++) {
       prev = cursor; // 다음 노드로 이동하기 전에 현재 커서가 가리키는 노드를 prev에 보관한다.
@@ -141,7 +164,7 @@ public class LinkedList<E> implements List<E> {
     }
 
     // 삭제할 값을 리턴할 수 있도록 보관한다.
-    Object old = cursor.value;
+    E old = cursor.value;
 
     if (prev == null) {
       this.head = cursor.next;
@@ -170,9 +193,9 @@ public class LinkedList<E> implements List<E> {
     return index >= 0 && index < this.size;
   }
 
-  static class Node {
-    Object value;
-    Node next;
+  static class Node<T> {
+    T value;
+    Node<T> next;
   }
 
 }

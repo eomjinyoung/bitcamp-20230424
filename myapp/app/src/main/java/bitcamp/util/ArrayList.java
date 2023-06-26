@@ -1,5 +1,7 @@
 package bitcamp.util;
 
+import java.lang.reflect.Array;
+
 public class ArrayList<E> implements List<E> {
   private static final int DEFAULT_SIZE = 3;
 
@@ -31,6 +33,28 @@ public class ArrayList<E> implements List<E> {
       arr[i] = this.list[i];
     }
     return arr;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public <T> T[] toArray(T[] arr) {
+    T[] values = null;
+
+    if (arr.length < this.length) {
+      // 파라미터로 받은 배열이 목록의 개수 보다 작다면,
+      // 새 배열을 만들어 저장한다.
+      values = (T[]) Array.newInstance(arr.getClass().getComponentType(), this.length);
+
+    } else {
+      // 파라미터로 받은 배열이 목록에 저장된 개수와 같거나 크다면,
+      // 파라미터로 받은 배열을 그대로 사용한다.
+      values = arr;
+    }
+
+    for (int i = 0; i < this.length; i++) {
+      values[i] = (T) list[i];
+    }
+    return values;
   }
 
   @SuppressWarnings("unchecked")

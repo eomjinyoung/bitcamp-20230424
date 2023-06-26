@@ -166,6 +166,7 @@
 ## 24. 제네릭을 사용하여 타입을 파라미터로 다루기
 
 - ArrayList, LinkedList, Stack, Queue에 제네릭 적용하기
+- T[] toArray(T[]) 메서드 추가하기
 
 ## 25. Iterator 디자인 패턴을 활용하여 목록 조회 기능을 캡슐화하기
 
