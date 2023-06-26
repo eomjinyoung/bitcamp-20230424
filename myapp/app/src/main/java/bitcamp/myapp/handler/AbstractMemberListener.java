@@ -1,9 +1,9 @@
 package bitcamp.myapp.handler;
 
+import java.util.List;
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.ActionListener;
 import bitcamp.util.BreadcrumbPrompt;
-import bitcamp.util.List;
 
 public abstract class AbstractMemberListener implements ActionListener {
 

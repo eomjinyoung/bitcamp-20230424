@@ -1,8 +1,10 @@
 package bitcamp.util;
 
+import java.util.Stack;
+
 public class BreadcrumbPrompt extends Prompt {
 
-  private Stack breadcrumbs = new Stack();
+  private Stack<String> breadcrumbs = new Stack<>();
 
   public void appendBreadcrumb(String title) {
     this.breadcrumbs.push(title);

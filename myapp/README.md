@@ -173,5 +173,10 @@
 - GoF의 디자인 패턴 중 Iterator 패턴의 동작원리 이해 및 구현
 - ArrayList, LinkedList, Stack, Queue에 적용
 - 중접 클래스 문법을 이용하여 Iterator 구현하기
+  - static/non-static nested 클래스 문법을 활용하는 방법
+  - local/anonymous 클래스 문법을 활용하는 방법
 
+## 26. 자바 Collection API 사용하기
+
+- 목록을 다루는 기존 클래스를 자바 컬렉션 API 로 교체
 

@@ -1,9 +1,11 @@
 package bitcamp.util;
 
+import java.util.ArrayList;
+
 public class Menu {
 
   private String title;
-  private ArrayList listeners = new ArrayList();
+  private ArrayList<ActionListener> listeners = new ArrayList<>();
 
   public Menu(String title) {
     this.title = title;
@@ -28,7 +30,7 @@ public class Menu {
 
   public void execute(BreadcrumbPrompt prompt) {
     for (int i = 0; i < listeners.size(); i++) {
-      ActionListener listener = (ActionListener) listeners.get(i);
+      ActionListener listener = listeners.get(i);
       listener.service(prompt);
     }
   }

@@ -1,8 +1,8 @@
 package bitcamp.myapp.handler;
 
+import java.util.List;
 import bitcamp.myapp.vo.Board;
 import bitcamp.util.ActionListener;
-import bitcamp.util.List;
 
 public abstract class AbstractBoardListener implements ActionListener {
 
