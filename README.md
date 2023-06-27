@@ -267,6 +267,19 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 25. Iterator 디자인 패턴을 활용하여 목록 조회 기능을 캡슐화하기
   - 26. 자바 Collection API 사용하기
 
+### 25일(6/27,화)
+
+- 자바 프로그래밍(com.eomcs.io)
+  - File 클래스 사용법(ex01)
+  - 바이너리 파일 입출력 다루기(ex02)
+  - 프로젝트에서 외부 라이브러리를 사용하는 방법
+    - JPEG 파일의 위도 경도 알아내기 
+    - 1) search.maven.org 사이트에서 라이브러리 검색
+    - 2) 빌드 스크립트 파일(build.gradle)에 등록
+    - 3) 라이브러리 다운로드 및 이클립스 설정 파일 갱신: gradle eclipse 실행
+    - 4) Eclipse IDE에서 해당 프로젝트를 refresh 한다.
+    - 5) 프로젝트에서 외부 라이브러리 확인
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
