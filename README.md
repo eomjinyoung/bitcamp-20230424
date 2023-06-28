@@ -288,7 +288,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
     - 바이트 스트림으로 텍스트 입출력하기
 - 프로젝트 실습
   - 27. File I/O API를 이용하여 데이터를 바이너리 형식으로 입출력하기
-  
+  - 28. 상속을 이용하여 primitive type과 String 출력 기능을 추가하기
 
 
 ## 웨일즈 화상회의
