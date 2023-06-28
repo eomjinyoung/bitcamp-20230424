@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import bitcamp.io.DataOutputStream;
 import bitcamp.myapp.handler.BoardAddListener;
 import bitcamp.myapp.handler.BoardDeleteListener;
 import bitcamp.myapp.handler.BoardDetailListener;
@@ -196,42 +197,17 @@ public class App {
 
   private void saveMember() {
     try {
-      FileOutputStream out = new FileOutputStream("member.data");
+      DataOutputStream out = new DataOutputStream("member.data");
 
       // 저장할 데이터의 개수를 먼저 출력한다.
-      int size = memberList.size();
-      out.write(size >> 8);
-      out.write(size);
+      out.writeShort(memberList.size());
 
       for (Member member : memberList) {
-        int no = member.getNo();
-        out.write(no >> 24);
-        out.write(no >> 16);
-        out.write(no >> 8);
-        out.write(no);
-
-        byte[] bytes = member.getName().getBytes("UTF-8");
-        // 출력할 바이트의 개수를 2바이트로 표시한다.
-        out.write(bytes.length >> 8);
-        out.write(bytes.length);
-
-        // 문자열의 바이트를 출력한다.
-        out.write(bytes);
-
-
-        bytes = member.getEmail().getBytes("UTF-8");
-        out.write(bytes.length >> 8);
-        out.write(bytes.length);
-        out.write(bytes);
-
-        bytes = member.getPassword().getBytes("UTF-8");
-        out.write(bytes.length >> 8);
-        out.write(bytes.length);
-        out.write(bytes);
-
-        char gender = member.getGender();
-        out.write(gender >> 8);
-        out.write(gender);
+        out.writeInt(member.getNo());
+        out.writeUTF(member.getName());
+        out.writeUTF(member.getEmail());
+        out.writeUTF(member.getPassword());
+        out.writeChar(member.getGender());
       }
       out.close();
 
