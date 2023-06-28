@@ -2,7 +2,7 @@ package bitcamp.myapp.vo;
 
 public class Board {
 
-  private static int boardNo = 1;
+  public static int boardNo = 1;
 
   private int no;
   private String title;

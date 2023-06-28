@@ -2,7 +2,7 @@ package bitcamp.myapp.vo;
 
 public class Member {
 
-  private static int userId = 1;
+  public static int userId = 1;
 
   public static final char MALE = 'M';
   public static final char FEMALE = 'W';
