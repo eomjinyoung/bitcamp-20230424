@@ -1,5 +1,7 @@
 package bitcamp.myapp;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import bitcamp.myapp.handler.BoardAddListener;
@@ -23,16 +25,105 @@ import bitcamp.util.MenuGroup;
 
 public class App {
 
+  ArrayList<Member> memberList = new ArrayList<>();
+  LinkedList<Board> boardList = new LinkedList<>();
+  LinkedList<Board> readingList = new LinkedList<>();
+
+  BreadcrumbPrompt prompt = new BreadcrumbPrompt();
+
+  MenuGroup mainMenu = new MenuGroup("메인");
+
+  public App() {
+    prepareMenu();
+  }
+
   public static void main(String[] args) {
+    new App().execute();
+  }
 
-    ArrayList<Member> memberList = new ArrayList<>();
-    LinkedList<Board> boardList = new LinkedList<>();
-    LinkedList<Board> readingList = new LinkedList<>();
+  public void execute() {
+    printTitle();
 
-    BreadcrumbPrompt prompt = new BreadcrumbPrompt();
+    loadData();
+    mainMenu.execute(prompt);
+    saveData();
 
-    MenuGroup mainMenu = new MenuGroup("메인");
+    prompt.close();
+  }
 
+  private void loadData() {
+    try {
+      FileInputStream in = new FileInputStream("member.data");
+      int size = in.read() << 8;
+      size |= in.read();
+
+      byte[] buf = new byte[1000];
+
+      for (int i = 0; i < size; i++) {
+        Member member = new Member();
+        member.setNo(in.read() << 24 | in.read() << 16 | in.read() << 8 | in.read());
+
+        int count = in.read(buf);
+        member.setName(new String(buf, 0, count, "UTF-8"));
+
+
+
+      }
+
+      in.close();
+
+    } catch (Exception e) {
+      System.out.println("회원 정보를 읽는 중 오류 발생!");
+    }
+  }
+
+  private void saveData() {
+    try {
+      FileOutputStream out = new FileOutputStream("member.data");
+
+      // 저장할 데이터의 개수를 먼저 출력한다.
+      int size = memberList.size();
+      out.write(size >> 8);
+      out.write(size);
+
+      for (Member member : memberList) {
+        int no = member.getNo();
+        out.write(no >> 24);
+        out.write(no >> 16);
+        out.write(no >> 8);
+        out.write(no);
+
+        byte[] bytes = member.getName().getBytes("UTF-8");
+        // 출력할 바이트의 개수를 2바이트로 표시한다.
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+
+        // 문자열의 바이트를 출력한다.
+        out.write(bytes);
+
+
+        bytes = member.getEmail().getBytes("UTF-8");
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        bytes = member.getPassword().getBytes("UTF-8");
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        char gender = member.getGender();
+        out.write(gender >> 8);
+        out.write(gender);
+      }
+      out.close();
+
+    } catch (Exception e) {
+      System.out.println("회원 정보를 저장하는 중 오류 발생!");
+    }
+  }
+
+  private void prepareMenu() {
     MenuGroup memberMenu = new MenuGroup("회원");
     memberMenu.add(new Menu("등록", new MemberAddListener(memberList)));
     memberMenu.add(new Menu("목록", new MemberListListener(memberList)));
@@ -62,13 +153,8 @@ public class App {
     helloMenu.addActionListener(new HelloListener());
     helloMenu.addActionListener(new FooterListener());
     mainMenu.add(helloMenu);
-
-    printTitle();
-
-    mainMenu.execute(prompt);
-
-    prompt.close();
   }
+
 
   static void printTitle() {
     System.out.println("나의 목록 관리 시스템");
