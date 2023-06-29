@@ -1,24 +1,44 @@
 package bitcamp.io;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
-public class DataOutputStream extends OutputStream {
+public class BufferedDataOutputStream extends FileOutputStream {
 
-  OutputStream original;
+  byte[] buf = new byte[8192];
+  int cursor;
 
-  public DataOutputStream(OutputStream original) {
-    this.original = original;
+  public BufferedDataOutputStream(String name) throws FileNotFoundException {
+    super(name);
   }
 
   @Override
   public void write(int b) throws IOException {
-    original.write(b);
+    if (cursor == buf.length) { // 버퍼가 다 찼다면,
+      super.write(buf); // 버퍼에 들어있는 데이터를 한 번에 출력한다.
+      cursor = 0; // 다시 커서를 초기화시킨다.
+    }
+    buf[cursor++] = (byte) b; // 버퍼에 빈 공간이 있다면 버퍼에 저장한다.
+  }
+
+  @Override
+  public void flush() throws IOException {
+    super.write(buf, 0, cursor);
+    cursor = 0;
   }
 
   @Override
   public void close() throws IOException {
-    original.close();
+    this.flush();
+    super.close();
+  }
+
+  @Override
+  public void write(byte[] arr) throws IOException {
+    for (int i = 0; i < arr.length; i++) {
+      this.write(arr[i]);
+    }
   }
 
   public void writeShort(int v) throws IOException {

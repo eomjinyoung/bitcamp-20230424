@@ -1,24 +1,13 @@
 package bitcamp.io;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
-public class DataOutputStream extends OutputStream {
+public class DataOutputStream extends FileOutputStream {
 
-  OutputStream original;
-
-  public DataOutputStream(OutputStream original) {
-    this.original = original;
-  }
-
-  @Override
-  public void write(int b) throws IOException {
-    original.write(b);
-  }
-
-  @Override
-  public void close() throws IOException {
-    original.close();
+  public DataOutputStream(String name) throws FileNotFoundException {
+    super(name);
   }
 
   public void writeShort(int v) throws IOException {

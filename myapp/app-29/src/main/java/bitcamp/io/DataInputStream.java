@@ -1,24 +1,13 @@
 package bitcamp.io;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
-public class DataInputStream extends InputStream {
+public class DataInputStream extends FileInputStream {
 
-  InputStream original;
-
-  public DataInputStream(InputStream original) {
-    this.original = original;
-  }
-
-  @Override
-  public int read() throws IOException {
-    return original.read();
-  }
-
-  @Override
-  public void close() throws IOException {
-    original.close();
+  public DataInputStream(String name) throws FileNotFoundException {
+    super(name);
   }
 
   public short readShort() throws IOException {
@@ -50,7 +39,6 @@ public class DataInputStream extends InputStream {
     this.read(buf);
     return new String(buf, "UTF-8");
   }
-
 
 }
 
