@@ -123,8 +123,10 @@ public class App {
         memberList.add(member);
       }
 
-      // 데이터를 로딩한 이후에 추가할 회원의 번호를 설정한다.
-      Member.userId = memberList.get(memberList.size() - 1).getNo() + 1;
+      if (memberList.size() > 0) {
+        // 데이터를 로딩한 이후에 추가할 회원의 번호를 설정한다.
+        Member.userId = memberList.get(memberList.size() - 1).getNo() + 1;
+      }
 
       in.close();
 
@@ -153,9 +155,11 @@ public class App {
         list.add(board);
       }
 
-      Board.boardNo = Math.max(
-          Board.boardNo,
-          list.get(list.size() - 1).getNo() + 1);
+      if (boardList.size() > 0) {
+        Board.boardNo = Math.max(
+            Board.boardNo,
+            list.get(list.size() - 1).getNo() + 1);
+      }
 
       in.close();
 

@@ -212,3 +212,27 @@
 
 - 입출력 관련 클래스를 자바 스트림 클래스로 교체
   - java.io.* 패키지의 클래스 사용
+
+## 32. 인스턴스를 통째로 입출력하기(객체 직렬화)
+
+- ObjectInputStream/ObjectOutputStream 사용법
+  - java.io.Serializable 인터페이스 사용법
+  - transient modifier 사용법
+
+## 33. character stream API를 사용하여 CSV 텍스트 형식으로 입출력하기
+
+- CSV 형식으로 데이터를 읽고 쓰는 법
+- FileReader/FileWriter 사용법
+
+## 34. 리팩토링: Factory Method 패턴(GoF), Information Expert 패턴(GRASP)
+
+- CSV 데이터 생성을 Board 클래스에 맡기기
+  - Information Expert 패턴 적용
+- CSV 데이터를 가지로 Board 클래스 생성하기
+  - Factory Method 패턴 적용
+
+## 35. JSON 형식으로 입출력하기
+
+- JSON 형식으로 데이터를 읽고 쓰는 법
+- Gson 라이브러리 사용법
+
