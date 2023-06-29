@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import bitcamp.io.BufferedInputStream;
 import bitcamp.io.BufferedOutputStream;
 import bitcamp.io.DataInputStream;
 import bitcamp.io.DataOutputStream;
@@ -107,7 +108,8 @@ public class App {
   private void loadMember() {
     try {
       FileInputStream in0 = new FileInputStream("member.data");
-      DataInputStream in = new DataInputStream(in0); // <== Decorator 역할을 수행!
+      BufferedInputStream in1 = new BufferedInputStream(in0); // <== Decorator 역할을 수행!
+      DataInputStream in = new DataInputStream(in1); // <== Decorator 역할을 수행!
 
       int size = in.readShort();
 
@@ -134,7 +136,8 @@ public class App {
   private void loadBoard(String filename, List<Board> list) {
     try {
       FileInputStream in0 = new FileInputStream(filename);
-      DataInputStream in = new DataInputStream(in0); // <== Decorator 역할을 수행!
+      BufferedInputStream in1 = new BufferedInputStream(in0); // <== Decorator 역할을 수행!
+      DataInputStream in = new DataInputStream(in1); // <== Decorator 역할을 수행!
 
       int size = in.readShort();
 
