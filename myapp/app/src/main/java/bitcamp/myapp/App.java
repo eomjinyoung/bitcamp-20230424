@@ -3,8 +3,8 @@ package bitcamp.myapp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import bitcamp.io.DataInputStream;
-import bitcamp.io.DataOutputStream;
+import bitcamp.io.BufferedDataInputStream;
+import bitcamp.io.BufferedDataOutputStream;
 import bitcamp.myapp.handler.BoardAddListener;
 import bitcamp.myapp.handler.BoardDeleteListener;
 import bitcamp.myapp.handler.BoardDetailListener;
@@ -103,7 +103,7 @@ public class App {
 
   private void loadMember() {
     try {
-      DataInputStream in = new DataInputStream("member.data");
+      BufferedDataInputStream in = new BufferedDataInputStream("member.data");
 
       int size = in.readShort();
 
@@ -129,7 +129,7 @@ public class App {
 
   private void loadBoard(String filename, List<Board> list) {
     try {
-      DataInputStream in = new DataInputStream(filename);
+      BufferedDataInputStream in = new BufferedDataInputStream(filename);
 
       int size = in.readShort();
 
@@ -158,7 +158,7 @@ public class App {
 
   private void saveMember() {
     try {
-      DataOutputStream out = new DataOutputStream("member.data");
+      BufferedDataOutputStream out = new BufferedDataOutputStream("member.data");
 
       out.writeShort(memberList.size());
 
@@ -178,7 +178,7 @@ public class App {
 
   private void saveBoard(String filename, List<Board> list) {
     try {
-      DataOutputStream out = new DataOutputStream(filename);
+      BufferedDataOutputStream out = new BufferedDataOutputStream(filename);
 
       out.writeShort(list.size());
 
