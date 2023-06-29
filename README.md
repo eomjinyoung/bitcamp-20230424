@@ -290,7 +290,14 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 27. File I/O API를 이용하여 데이터를 바이너리 형식으로 입출력하기
   - 28. 상속을 이용하여 primitive type과 String 출력 기능을 추가하기
 
+### 27일(6/29,목)
 
+- 자바 프로그래밍(com.eomcs.io)
+  - 바이너리 파일 입출력 다루기(ex04)(자습)
+    - primitive type 과 String 값을 입출력하기
+  - 버퍼 사용하기(ex06)
+    - 버퍼 사용 전/후 성능 비교
+    
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
