@@ -207,3 +207,8 @@
   - BufferedInputStream, DataInputStream, FileInputStream
 - BufferedDataOutputStream 분해
   - BufferedOutputStream, DataOutputStream, FileOutputStream
+
+## 31. Java Stream API 로 교체하기
+
+- 입출력 관련 클래스를 자바 스트림 클래스로 교체
+  - java.io.* 패키지의 클래스 사용
