@@ -306,6 +306,11 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 30. 입출력 기능 확장에 상속 대신 Decorator 패턴을 적용하기
   - 31. Java Stream API 로 교체하기
 
+### 28일(6/30,금)
+
+- 프로젝트 실습
+  - 
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

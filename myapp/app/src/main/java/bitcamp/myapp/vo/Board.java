@@ -1,6 +1,9 @@
 package bitcamp.myapp.vo;
 
-public class Board {
+import java.io.Serializable;
+
+public class Board implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   public static int boardNo = 1;
 
