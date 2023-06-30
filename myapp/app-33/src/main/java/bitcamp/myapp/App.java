@@ -22,7 +22,6 @@ import bitcamp.myapp.handler.MemberDetailListener;
 import bitcamp.myapp.handler.MemberListListener;
 import bitcamp.myapp.handler.MemberUpdateListener;
 import bitcamp.myapp.vo.Board;
-import bitcamp.myapp.vo.CsvObject;
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.Menu;
@@ -68,9 +67,9 @@ public class App {
   }
 
   private void saveData() {
-    saveCsv("member.csv", memberList);
-    saveCsv("board.csv", boardList);
-    saveCsv("reading.csv", readingList);
+    saveMember("member.csv", memberList);
+    saveBoard("board.csv", boardList);
+    saveBoard("reading.csv", readingList);
   }
 
   private void prepareMenu() {
@@ -170,19 +169,42 @@ public class App {
     }
   }
 
-  private void saveCsv(String filename, List<? extends CsvObject> list) {
+  private void saveMember(String filename, List<Member> list) {
     try {
       FileWriter out0 = new FileWriter(filename);
       BufferedWriter out1 = new BufferedWriter(out0); // <== Decorator(장식품) 역할 수행!
       PrintWriter out = new PrintWriter(out1); // <== Decorator(장식품) 역할 수행!
 
-      for (CsvObject obj : list) {
-        out.println(obj.toCsvString());
-        // Board나 Member 클래스에 필드가 추가/변경/삭제되더라도
-        // 여기 코드를 변경할 필요가 없다.
-        // 이것이 Information Expert 설계를 적용하는 이유다!
-        // 설계를 어떻게 하느냐에 따라 유지보수가 쉬워질 수도 있고,
-        // 어려워질 수도 있다.
+      for (Member member : list) {
+        out.printf("%d,%s,%s,%s,%c\n",
+            member.getNo(),
+            member.getName(),
+            member.getEmail(),
+            member.getPassword(),
+            member.getGender());
+      }
+      out.close();
+
+    } catch (Exception e) {
+      System.out.println("회원 정보를 저장하는 중 오류 발생!");
+    }
+  }
+
+  private void saveBoard(String filename, List<Board> list) {
+    try {
+      FileWriter out0 = new FileWriter(filename);
+      BufferedWriter out1 = new BufferedWriter(out0); // <== Decorator(장식품) 역할 수행!
+      PrintWriter out = new PrintWriter(out1); // <== Decorator(장식품) 역할 수행!
+
+      for (Board board : list) {
+        out.printf("%d,%s,%s,%s,%s,%d,%d\n",
+            board.getNo(),
+            board.getTitle(),
+            board.getContent(),
+            board.getWriter(),
+            board.getPassword(),
+            board.getViewCount(),
+            board.getCreatedDate());
       }
       out.close();
 
