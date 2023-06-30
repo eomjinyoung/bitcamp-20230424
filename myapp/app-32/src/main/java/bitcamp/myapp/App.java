@@ -1,11 +1,11 @@
 package bitcamp.myapp;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedWriter;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,9 +68,9 @@ public class App {
   }
 
   private void saveData() {
-    saveMember("member.csv", memberList);
-    saveBoard("board.csv", boardList);
-    saveBoard("reading.csv", readingList);
+    saveMember("member.data2", memberList);
+    saveBoard("board.data2", boardList);
+    saveBoard("reading.data2", readingList);
   }
 
   private void prepareMenu() {
@@ -156,17 +156,14 @@ public class App {
 
   private void saveMember(String filename, List<Member> list) {
     try {
-      FileWriter out0 = new FileWriter(filename);
-      BufferedWriter out1 = new BufferedWriter(out0); // <== Decorator(장식품) 역할 수행!
-      PrintWriter out = new PrintWriter(out1); // <== Decorator(장식품) 역할 수행!
+      FileOutputStream out0 = new FileOutputStream(filename);
+      BufferedOutputStream out1 = new BufferedOutputStream(out0); // <== Decorator(장식품) 역할 수행!
+      ObjectOutputStream out = new ObjectOutputStream(out1); // <== Decorator(장식품) 역할 수행!
+
+      out.writeShort(list.size());
 
       for (Member member : list) {
-        out.printf("%d,%s,%s,%s,%c\n",
-            member.getNo(),
-            member.getName(),
-            member.getEmail(),
-            member.getPassword(),
-            member.getGender());
+        out.writeObject(member);
       }
       out.close();
 
@@ -177,19 +174,14 @@ public class App {
 
   private void saveBoard(String filename, List<Board> list) {
     try {
-      FileWriter out0 = new FileWriter(filename);
-      BufferedWriter out1 = new BufferedWriter(out0); // <== Decorator(장식품) 역할 수행!
-      PrintWriter out = new PrintWriter(out1); // <== Decorator(장식품) 역할 수행!
+      FileOutputStream out0 = new FileOutputStream(filename);
+      BufferedOutputStream out1 = new BufferedOutputStream(out0); // <== Decorator(장식품) 역할 수행!
+      ObjectOutputStream out = new ObjectOutputStream(out1); // <== Decorator(장식품) 역할 수행!
+
+      out.writeShort(list.size());
 
       for (Board board : list) {
-        out.printf("%d,%s,%s,%s,%s,%d,%d\n",
-            board.getNo(),
-            board.getTitle(),
-            board.getContent(),
-            board.getWriter(),
-            board.getPassword(),
-            board.getViewCount(),
-            board.getCreatedDate());
+        out.writeObject(board);
       }
       out.close();
 
