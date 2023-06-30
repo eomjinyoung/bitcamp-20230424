@@ -24,6 +24,19 @@ public class Member implements Serializable, CsvObject {
     this.no = no;
   }
 
+  public static Member fromCsv(String csv) {
+    String[] values = csv.split(",");
+
+    Member member = new Member();
+    member.setNo(Integer.parseInt(values[0]));
+    member.setName(values[1]);
+    member.setEmail(values[2]);
+    member.setPassword(values[3]);
+    member.setGender(values[4].charAt(0));
+
+    return member;
+  }
+
   @Override
   public String toCsvString() {
     return String.format("%d,%s,%s,%s,%c",

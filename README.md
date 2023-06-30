@@ -310,6 +310,10 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 - 프로젝트 실습
   - 32. 인스턴스를 통째로 입출력하기(객체 직렬화)
+  - 33. character stream API를 사용하여 CSV 텍스트 형식으로 입출력하기
+  - 34. 리팩토링: Factory Method 패턴(GoF), Information Expert 패턴(GRASP)
+
+  
 
 ## 웨일즈 화상회의
 

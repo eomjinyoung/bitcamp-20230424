@@ -230,6 +230,8 @@
   - Information Expert 패턴 적용
 - CSV 데이터를 가지로 Board 클래스 생성하기
   - Factory Method 패턴 적용
+  - Reflection API 사용법
+    - Class, Method 사용법
 
 ## 35. JSON 형식으로 입출력하기
 

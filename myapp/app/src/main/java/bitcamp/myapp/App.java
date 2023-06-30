@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -62,9 +63,9 @@ public class App {
   }
 
   private void loadData() {
-    loadMember("member.csv", memberList);
-    loadBoard("board.csv", boardList);
-    loadBoard("reading.csv", readingList);
+    loadCsv("member.csv", memberList, Member.class);
+    loadCsv("board.csv", boardList, Board.class);
+    loadCsv("reading.csv", readingList, Board.class);
   }
 
   private void saveData() {
@@ -105,62 +106,24 @@ public class App {
     mainMenu.add(helloMenu);
   }
 
-  private void loadMember(String filename, List<Member> list) {
+  @SuppressWarnings("unchecked")
+  private <T> void loadCsv(String filename, List<T> list, Class<T> clazz) {
     try {
+      Method factoryMethod = clazz.getDeclaredMethod("fromCsv", String.class);
+
       FileReader in0 = new FileReader(filename);
       BufferedReader in = new BufferedReader(in0); // <== Decorator 역할을 수행!
 
       String line = null;
 
       while ((line = in.readLine()) != null) {
-        String[] values = line.split(",");
-        Member member = new Member();
-        member.setNo(Integer.parseInt(values[0]));
-        member.setName(values[1]);
-        member.setEmail(values[2]);
-        member.setPassword(values[3]);
-        member.setGender(values[4].charAt(0));
-        list.add(member);
+        list.add((T)factoryMethod.invoke(null, line)); // Reflection API를 사용하여 스태틱 메서드 호출
+        // list.add(Member.fromCsv(line)); // 직접 스태틱 메서드 호출
       }
 
       if (list.size() > 0) {
         // 데이터를 로딩한 이후에 추가할 회원의 번호를 설정한다.
         Member.userId = memberList.get(memberList.size() - 1).getNo() + 1;
-      }
-
-      in.close();
-
-    } catch (Exception e) {
-      System.out.println("회원 정보를 읽는 중 오류 발생!");
-    }
-  }
-
-  private void loadBoard(String filename, List<Board> list) {
-    try {
-      FileReader in0 = new FileReader(filename);
-      BufferedReader in = new BufferedReader(in0); // <== Decorator 역할을 수행!
-
-      String line = null;
-
-      while ((line = in.readLine()) != null) {
-        String[] values = line.split(",");
-
-        Board board = new Board();
-        board.setNo(Integer.parseInt(values[0]));
-        board.setTitle(values[1]);
-        board.setContent(values[2]);
-        board.setWriter(values[3]);
-        board.setPassword(values[4]);
-        board.setViewCount(Integer.parseInt(values[5]));
-        board.setCreatedDate(Long.parseLong(values[6]));
-
-        list.add(board);
-      }
-
-      if (list.size() > 0) {
-        Board.boardNo = Math.max(
-            Board.boardNo,
-            list.get(list.size() - 1).getNo() + 1);
       }
 
       in.close();

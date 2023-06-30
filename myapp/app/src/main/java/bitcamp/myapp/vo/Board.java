@@ -24,6 +24,21 @@ public class Board implements Serializable, CsvObject {
     this.no = no;
   }
 
+  public static Board fromCsv(String csv) {
+    String[] values = csv.split(",");
+
+    Board board = new Board();
+    board.setNo(Integer.parseInt(values[0]));
+    board.setTitle(values[1]);
+    board.setContent(values[2]);
+    board.setWriter(values[3]);
+    board.setPassword(values[4]);
+    board.setViewCount(Integer.parseInt(values[5]));
+    board.setCreatedDate(Long.parseLong(values[6]));
+
+    return board;
+  }
+
   @Override
   public String toCsvString() {
     return String.format("%d,%s,%s,%s,%s,%d,%d",
