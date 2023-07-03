@@ -13,6 +13,8 @@ public class MemberAddListener extends AbstractMemberListener {
   @Override
   public void service(BreadcrumbPrompt prompt) {
     Member m = new Member();
+
+    m.setNo(Member.userId++);
     m.setName(prompt.inputString("이름? "));
     m.setEmail(prompt.inputString("이메일? "));
     m.setPassword(prompt.inputString("암호? "));
