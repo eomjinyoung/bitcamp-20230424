@@ -321,6 +321,14 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 35. JSON 형식으로 입출력하기
 
+### 30일(7/04,화)
+
+- 자바 프로그래밍(com.eomcs.oop)
+  - 추상클래스(ex07) 사용법
+    - Template Method 패턴(GoF)
+  - 인터페이스(ex09, ex10) 사용법
+
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
