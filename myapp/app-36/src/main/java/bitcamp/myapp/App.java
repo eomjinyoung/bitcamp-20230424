@@ -1,6 +1,5 @@
 package bitcamp.myapp;
 
-import java.util.LinkedList;
 import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.dao.BoardListDao;
 import bitcamp.myapp.dao.MemberDao;
@@ -28,9 +27,6 @@ public class App {
   MemberDao memberDao = new MemberListDao("member.json");
   BoardDao boardDao = new BoardListDao("board.json");
   BoardDao readingDao = new BoardListDao("reading.json");
-
-  LinkedList<Board> boardList = new LinkedList<>();
-  LinkedList<Board> readingList = new LinkedList<>();
 
   BreadcrumbPrompt prompt = new BreadcrumbPrompt();
 
