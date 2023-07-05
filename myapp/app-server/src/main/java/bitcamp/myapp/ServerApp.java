@@ -1,5 +1,7 @@
 package bitcamp.myapp;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
@@ -13,11 +15,13 @@ public class ServerApp {
 
     Socket socket = serverSocket.accept();
 
-    InputStream in = socket.getInputStream();
-    OutputStream out = socket.getOutputStream();
+    InputStream in0 = socket.getInputStream();
+    DataInputStream in = new DataInputStream(in0);
 
-    int b = in.read();
-    System.out.println(b);
+    OutputStream out0 = socket.getOutputStream();
+    DataOutputStream out = new DataOutputStream(out0);
+
+    System.out.println(in.readUTF());
 
     in.close();
     out.close();

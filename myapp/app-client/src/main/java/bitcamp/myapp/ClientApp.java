@@ -1,5 +1,7 @@
 package bitcamp.myapp;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -14,10 +16,13 @@ public class ClientApp {
 
     Socket socket = new Socket(args[0], 8888);
 
-    OutputStream out = socket.getOutputStream();
-    InputStream in = socket.getInputStream();
+    OutputStream out0 = socket.getOutputStream();
+    DataOutputStream out = new DataOutputStream(out0);
 
-    out.write(100);
+    InputStream in0 = socket.getInputStream();
+    DataInputStream in = new DataInputStream(in0);
+
+    out.writeUTF("안녕! Hello!");
 
     out.close();
     in.close();
