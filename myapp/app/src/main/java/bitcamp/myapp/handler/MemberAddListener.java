@@ -4,12 +4,11 @@ import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
 
-public class MemberAddListener extends AbstractMemberListener {
+public class MemberAddListener implements MemberActionListener {
 
   MemberDao memberDao;
 
   public MemberAddListener(MemberDao memberDao) {
-    super(null);
     this.memberDao = memberDao;
   }
 
@@ -19,7 +18,7 @@ public class MemberAddListener extends AbstractMemberListener {
     m.setName(prompt.inputString("이름? "));
     m.setEmail(prompt.inputString("이메일? "));
     m.setPassword(prompt.inputString("암호? "));
-    m.setGender(inputGender((char)0, prompt));
+    m.setGender(MemberActionListener.inputGender((char)0, prompt));
 
     memberDao.insert(m);
   }

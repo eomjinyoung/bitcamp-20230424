@@ -38,6 +38,39 @@ public class MemberListDao implements MemberDao {
     return this.list;
   }
 
+  @Override
+  public Member findBy(int no) {
+    for (int i = 0; i < this.list.size(); i++) {
+      Member m = this.list.get(i);
+      if (m.getNo() == no) {
+        return m;
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public int update(Member member) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getNo() == member.getNo()) {
+        list.set(i, member);
+        return 1;
+      }
+    }
+    return 0;
+  }
+
+  @Override
+  public int delete(int no) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getNo() == no) {
+        list.remove(i);
+        return 1;
+      }
+    }
+    return 0;
+  }
+
   private <T> void loadJson(List<T> list, Class<T> clazz) {
     try {
       FileReader in0 = new FileReader(filename);

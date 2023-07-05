@@ -3,14 +3,14 @@ package bitcamp.myapp.handler;
 import java.util.List;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
+import bitcamp.util.ActionListener;
 import bitcamp.util.BreadcrumbPrompt;
 
-public class MemberListListener extends AbstractMemberListener {
+public class MemberListListener implements ActionListener {
 
   MemberDao memberDao;
 
   public MemberListListener(MemberDao memberDao) {
-    super(null);
     this.memberDao = memberDao;
   }
 
@@ -24,7 +24,7 @@ public class MemberListListener extends AbstractMemberListener {
     for (Member m : list) {
       System.out.printf("%d, %s, %s, %s\n",
           m.getNo(), m.getName(), m.getEmail(),
-          toGenderString(m.getGender()));
+          m.getGender() == 'M' ? "남성" : "여성");
     }
   }
 

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +27,6 @@ import bitcamp.myapp.handler.MemberListListener;
 import bitcamp.myapp.handler.MemberUpdateListener;
 import bitcamp.myapp.vo.AutoIncrement;
 import bitcamp.myapp.vo.Board;
-import bitcamp.myapp.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.Menu;
 import bitcamp.util.MenuGroup;
@@ -37,7 +35,6 @@ public class App {
 
   MemberDao memberDao = new MemberListDao("member.json");
 
-  ArrayList<Member> memberList = new ArrayList<>();
   LinkedList<Board> boardList = new LinkedList<>();
   LinkedList<Board> readingList = new LinkedList<>();
 
@@ -69,13 +66,11 @@ public class App {
   }
 
   private void loadData() {
-    loadJson("member.json", memberList, Member.class);
     loadJson("board.json", boardList, Board.class);
     loadJson("reading.json", readingList, Board.class);
   }
 
   private void saveData() {
-    saveJson("member.json", memberList);
     saveJson("board.json", boardList);
     saveJson("reading.json", readingList);
   }
@@ -84,9 +79,9 @@ public class App {
     MenuGroup memberMenu = new MenuGroup("회원");
     memberMenu.add(new Menu("등록", new MemberAddListener(memberDao)));
     memberMenu.add(new Menu("목록", new MemberListListener(memberDao)));
-    memberMenu.add(new Menu("조회", new MemberDetailListener(memberList)));
-    memberMenu.add(new Menu("변경", new MemberUpdateListener(memberList)));
-    memberMenu.add(new Menu("삭제", new MemberDeleteListener(memberList)));
+    memberMenu.add(new Menu("조회", new MemberDetailListener(memberDao)));
+    memberMenu.add(new Menu("변경", new MemberUpdateListener(memberDao)));
+    memberMenu.add(new Menu("삭제", new MemberDeleteListener(memberDao)));
     mainMenu.add(memberMenu);
 
     MenuGroup boardMenu = new MenuGroup("게시글");
