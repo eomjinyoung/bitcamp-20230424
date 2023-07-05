@@ -11,37 +11,35 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import bitcamp.myapp.vo.AutoIncrement;
-import bitcamp.myapp.vo.Member;
+import bitcamp.myapp.vo.Board;
 
-public class MemberListDao implements MemberDao {
+public class BoardListDao implements BoardDao {
 
   String filename;
-  ArrayList<Member> list = new ArrayList<>();
+  ArrayList<Board> list = new ArrayList<>();
 
-  public MemberListDao(String filename) {
+  public BoardListDao(String filename) {
     this.filename = filename;
-    loadJson(list, Member.class);
+    loadJson(list, Board.class);
   }
 
   @Override
-  public void insert(Member member) {
-    // 데이터 입력할 때 해당 데이터의 식별 번호는 DAO에서 관리한다.
-    member.setNo(Member.userId++);
-    this.list.add(member);
-
-    // 데이터를 등록할 때 마다 즉시 파일에 저장한다.
+  public void insert(Board board) {
+    board.setNo(Board.boardNo++);
+    board.setCreatedDate(System.currentTimeMillis());
+    this.list.add(board);
     saveJson(list);
   }
 
   @Override
-  public List<Member> list() {
+  public List<Board> list() {
     return this.list;
   }
 
   @Override
-  public Member findBy(int no) {
+  public Board findBy(int no) {
     for (int i = 0; i < this.list.size(); i++) {
-      Member m = this.list.get(i);
+      Board m = this.list.get(i);
       if (m.getNo() == no) {
         return m;
       }
@@ -50,10 +48,10 @@ public class MemberListDao implements MemberDao {
   }
 
   @Override
-  public int update(Member member) {
+  public int update(Board board) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == member.getNo()) {
-        list.set(i, member);
+      if (list.get(i).getNo() == board.getNo()) {
+        list.set(i, board);
         saveJson(list);
         return 1;
       }

@@ -70,5 +70,14 @@
     "password": "1111",
     "viewCount": 0,
     "createdDate": 1688373445883
+  },
+  {
+    "no": 29,
+    "title": "그렇군요",
+    "content": "내용입니ㅏㄷ.",
+    "writer": "ㅐㅏ",
+    "password": "1111",
+    "viewCount": 1,
+    "createdDate": 1688528174098
   }
 ]
