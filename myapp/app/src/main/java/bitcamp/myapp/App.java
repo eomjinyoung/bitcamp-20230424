@@ -11,6 +11,8 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import bitcamp.myapp.dao.MemberDao;
+import bitcamp.myapp.dao.MemberListDao;
 import bitcamp.myapp.handler.BoardAddListener;
 import bitcamp.myapp.handler.BoardDeleteListener;
 import bitcamp.myapp.handler.BoardDetailListener;
@@ -32,6 +34,8 @@ import bitcamp.util.Menu;
 import bitcamp.util.MenuGroup;
 
 public class App {
+
+  MemberDao memberDao = new MemberListDao("member.json");
 
   ArrayList<Member> memberList = new ArrayList<>();
   LinkedList<Board> boardList = new LinkedList<>();
@@ -78,8 +82,8 @@ public class App {
 
   private void prepareMenu() {
     MenuGroup memberMenu = new MenuGroup("회원");
-    memberMenu.add(new Menu("등록", new MemberAddListener(memberList)));
-    memberMenu.add(new Menu("목록", new MemberListListener(memberList)));
+    memberMenu.add(new Menu("등록", new MemberAddListener(memberDao)));
+    memberMenu.add(new Menu("목록", new MemberListListener(memberDao)));
     memberMenu.add(new Menu("조회", new MemberDetailListener(memberList)));
     memberMenu.add(new Menu("변경", new MemberUpdateListener(memberList)));
     memberMenu.add(new Menu("삭제", new MemberDeleteListener(memberList)));

@@ -334,6 +334,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
     - 주현욱, 서재운, 한태영, 김성주, 김세연
     - 오동현(예비군)
 
+### 31일(7/05,수)
+
+
+
+
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
