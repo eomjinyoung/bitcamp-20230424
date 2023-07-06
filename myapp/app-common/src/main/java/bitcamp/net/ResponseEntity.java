@@ -42,6 +42,10 @@ public class ResponseEntity {
   }
 
   public ResponseEntity result(Object obj) {
+    if (obj == null) {
+      return this;
+    }
+
     if (obj.getClass() == String.class) {
       this.result = (String) obj;
     } else {

@@ -57,11 +57,11 @@ public class ServerApp {
       String command = request.getCommand();
       System.out.println(command);
 
-      ResponseEntity response = new ResponseEntity();
-
       if (command.equals("quit")) {
         break;
       }
+
+      ResponseEntity response = new ResponseEntity();
 
       switch (command) {
         case "board/list":

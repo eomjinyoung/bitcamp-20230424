@@ -36,6 +36,10 @@ public class RequestEntity {
   }
 
   public RequestEntity data(Object obj) {
+    if (obj == null) {
+      return this;
+    }
+
     if (obj.getClass() == String.class) {
       this.data = (String) obj;
     } else {
