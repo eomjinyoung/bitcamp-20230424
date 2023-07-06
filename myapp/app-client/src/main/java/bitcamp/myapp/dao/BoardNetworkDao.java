@@ -108,7 +108,25 @@ public class BoardNetworkDao implements BoardDao {
 
   @Override
   public int delete(int no) {
-    return 0;
+    try {
+      out.writeUTF(new RequestEntity()
+          .command(dataName + "/delete")
+          .data(no)
+          .toJson());
+
+      ResponseEntity response = ResponseEntity.fromJson(in.readUTF());
+
+      if (response.getStatus().equals(ResponseEntity.ERROR)) {
+        throw new RuntimeException(response.getResult());
+      } else if (response.getStatus().equals(ResponseEntity.FAILURE)) {
+        return 0;
+      }
+
+      return response.getObject(Integer.class);
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 

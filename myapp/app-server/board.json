@@ -45,15 +45,6 @@
     "createdDate": 1688023186454
   },
   {
-    "no": 10,
-    "title": "제목3",
-    "content": "내용3",
-    "writer": "유관순",
-    "password": "1111",
-    "viewCount": 0,
-    "createdDate": 1688023186454
-  },
-  {
     "no": 16,
     "title": "제목4",
     "content": "내용4",
@@ -88,15 +79,6 @@
     "password": "1111",
     "viewCount": 2,
     "createdDate": 1688528071417
-  },
-  {
-    "no": 30,
-    "title": "zzz",
-    "content": "zzzzzz",
-    "writer": "zzz",
-    "password": "1111",
-    "viewCount": 0,
-    "createdDate": 1688622408796
   },
   {
     "no": 31,

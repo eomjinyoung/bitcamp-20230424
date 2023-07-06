@@ -82,6 +82,10 @@ public class ServerApp {
           int value = boardDao.update(request.getObject(Board.class));
           response.status(ResponseEntity.SUCCESS).result(value);
           break;
+        case "board/delete":
+          value = boardDao.delete(request.getObject(Integer.class));
+          response.status(ResponseEntity.SUCCESS).result(value);
+          break;
         default:
           response.status(ResponseEntity.ERROR).result("해당 명령을 지원하지 않습니다!");
       }
