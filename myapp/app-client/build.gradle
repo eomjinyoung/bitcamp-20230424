@@ -8,6 +8,9 @@ repositories {
 }
 
 dependencies {
+    // 서브 프로젝트의 클래스를 사용하기
+    implementation project(':app-common')
+    
     // Google JSON 라이브러리
     implementation 'com.google.code.gson:gson:2.10.1'
   
