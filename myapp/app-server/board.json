@@ -28,11 +28,11 @@
   },
   {
     "no": 7,
-    "title": "ok",
-    "content": "okok",
+    "title": "okok222",
+    "content": "okok222222",
     "writer": "ok",
     "password": "1111",
-    "viewCount": 0,
+    "viewCount": 2,
     "createdDate": 1688023186454
   },
   {
@@ -52,15 +52,6 @@
     "password": "1111",
     "viewCount": 0,
     "createdDate": 1688107003795
-  },
-  {
-    "no": 23,
-    "title": "제목5",
-    "content": "내용5",
-    "writer": "오호라",
-    "password": "1111",
-    "viewCount": 0,
-    "createdDate": 1688107114795
   },
   {
     "no": 25,
@@ -88,5 +79,14 @@
     "password": "ok",
     "viewCount": 0,
     "createdDate": 1688622418868
+  },
+  {
+    "no": 32,
+    "title": "ok",
+    "content": "okok",
+    "writer": "okokok",
+    "password": "1111",
+    "viewCount": 0,
+    "createdDate": 1688628110815
   }
 ]
