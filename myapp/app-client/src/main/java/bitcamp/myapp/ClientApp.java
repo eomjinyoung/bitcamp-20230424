@@ -3,7 +3,6 @@ package bitcamp.myapp;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
-import com.google.gson.Gson;
 import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.dao.BoardNetworkDao;
 import bitcamp.myapp.dao.MemberDao;
@@ -81,8 +80,7 @@ public class ClientApp {
     mainMenu.execute(prompt);
 
     try {
-      out.writeUTF(new Gson().toJson(
-          new RequestEntity().command("quit")));
+      out.writeUTF(new RequestEntity().command("quit").toJson());
 
     } catch (Exception e) {
       System.out.println("종료 오류!");

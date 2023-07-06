@@ -54,7 +54,7 @@ public class ServerApp {
     Gson gson = new Gson();
 
     while (true) {
-      Map<String,Object> request = gson.fromJson(in.readUTF(), Map.class);
+      Map<String,Object> request = RequestEntity.fromJson(in.readUTF(), Map.class);
 
       String command = (String) request.get("command");
       System.out.println(command);
@@ -66,6 +66,7 @@ public class ServerApp {
       } else if (command.equals("board/list")) {
         response.put("status", "success");
         response.put("result", gson.toJson(boardDao.list()));
+      } else if (command.equals("board/insert")) {
 
       } else {
         response.put("status", "failure");
