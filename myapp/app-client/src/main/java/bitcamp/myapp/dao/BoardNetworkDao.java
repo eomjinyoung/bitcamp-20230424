@@ -83,7 +83,27 @@ public class BoardNetworkDao implements BoardDao {
 
   @Override
   public int update(Board board) {
-    return 0;
+    try {
+      // 서버에 요청을 보낸다.
+      out.writeUTF(new RequestEntity()
+          .command(dataName + "/update")
+          .data(board)
+          .toJson());
+
+      // 서버에서 보낸 응답을 받는다.
+      ResponseEntity response = ResponseEntity.fromJson(in.readUTF());
+
+      if (response.getStatus().equals(ResponseEntity.ERROR)) {
+        throw new RuntimeException(response.getResult());
+      } else if (response.getStatus().equals(ResponseEntity.FAILURE)) {
+        return 0;
+      }
+
+      return response.getObject(Integer.class);
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
