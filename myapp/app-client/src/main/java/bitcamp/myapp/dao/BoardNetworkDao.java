@@ -2,6 +2,7 @@ package bitcamp.myapp.dao;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.List;
 import bitcamp.myapp.vo.Board;
 import bitcamp.net.RequestEntity;
@@ -30,12 +31,11 @@ public class BoardNetworkDao implements BoardDao {
 
       // 서버에서 보낸 응답을 받는다.
       ResponseEntity response = ResponseEntity.fromJson(in.readUTF());
-      if (response.getStatus().equals(ResponseEntity.FAILURE)) {
+      if (response.getStatus().equals(ResponseEntity.ERROR)) {
         throw new RuntimeException(response.getResult());
       }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
 
@@ -53,16 +53,32 @@ public class BoardNetworkDao implements BoardDao {
 
       return response.getList(Board.class);
 
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
-    return null;
   }
 
   @Override
   public Board findBy(int no) {
-    return null;
+    try {
+      out.writeUTF(new RequestEntity()
+          .command(dataName + "/findBy")
+          .data(no)
+          .toJson());
+
+      ResponseEntity response = ResponseEntity.fromJson(in.readUTF());
+
+      if (response.getStatus().equals(ResponseEntity.ERROR)) {
+        throw new RuntimeException(response.getResult());
+      } else if (response.getStatus().equals(ResponseEntity.FAILURE)) {
+        return null;
+      }
+
+      return response.getObject(Board.class);
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
