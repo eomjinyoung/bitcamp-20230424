@@ -32,8 +32,6 @@ public class DaoBuilder {
             requestEntity.data(args[0]);
           }
 
-          System.out.println(requestEntity.toJson());
-
           // 요청 정보 전송
           out.writeUTF(requestEntity.toJson());
 
