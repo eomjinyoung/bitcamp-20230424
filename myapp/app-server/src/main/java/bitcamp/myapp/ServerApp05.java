@@ -17,14 +17,14 @@ import bitcamp.net.ResponseEntity;
 // 3) 메서드의 파라미터와 리턴 타입을 알아내기
 // 4) 메서드 호출 및 리턴 값 받기
 // 5) 리팩토링
-public class ServerApp {
+public class ServerApp05 {
 
   int port;
   ServerSocket serverSocket;
 
   HashMap<String,Object> daoMap = new HashMap<>();
 
-  public ServerApp(int port) throws Exception {
+  public ServerApp05(int port) throws Exception {
     this.port = port;
 
     daoMap.put("member", new MemberListDao("member.json"));
@@ -42,7 +42,7 @@ public class ServerApp {
       return;
     }
 
-    ServerApp app = new ServerApp(Integer.parseInt(args[0]));
+    ServerApp05 app = new ServerApp05(Integer.parseInt(args[0]));
     app.execute();
     app.close();
   }

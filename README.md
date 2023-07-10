@@ -356,6 +356,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 38. DAO 프록시 객체를 자동 생성하기
 
+### 34일(7/10,월)
+
+- 프로젝트 실습
+  - 39. Reflection API를 활용하여 DAO 메서드 호출을 자동화하기
+  
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
