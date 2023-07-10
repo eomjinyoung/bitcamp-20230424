@@ -358,9 +358,11 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 ### 34일(7/10,월)
 
+- 자바 프로그래밍(com.eomcs.exception)
+  - 예외 처리 문법을 사용하는 방법
 - 프로젝트 실습
   - 39. Reflection API를 활용하여 DAO 메서드 호출을 자동화하기
-  
+
 
 ## 웨일즈 화상회의
 
