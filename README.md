@@ -365,11 +365,13 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 ### 35일(7/11,화)
 
-- 자바 프로그래밍(com.eomcs.exception)
-  - 
+- 자바 프로그래밍
+  - 네트워킹 프로그래밍(com.eomcs.net)
+  - character stream API 사용법(com.eomcs.io.ex3)
 - 프로젝트 실습
   - 40. 예외 처리하기
   - 41. 여러 클라이언트의 요청을 순차적으로 처리하기: Stateful 방식
+  - 42. 여러 클라이언트의 요청을 순차적으로 처리하기: Stateless 방식
 
 ## 웨일즈 화상회의
 

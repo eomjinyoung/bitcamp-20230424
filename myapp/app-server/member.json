@@ -77,25 +77,11 @@
     "gender": "M"
   },
   {
-    "no": 17,
-    "name": "김선준",
-    "email": "kim@naver.com",
-    "password": "1111",
-    "gender": "M"
-  },
-  {
-    "no": 18,
-    "name": "운동을 사랑하는 김선준",
-    "email": "kim@test.com",
-    "password": "1111",
-    "gender": "W"
-  },
-  {
     "no": 20,
-    "name": "베토벤 최근우",
-    "email": "ang@test.com",
+    "name": "111",
+    "email": "111",
     "password": "111",
-    "gender": "W"
+    "gender": "M"
   },
   {
     "no": 21,
@@ -105,17 +91,10 @@
     "gender": "M"
   },
   {
-    "no": 23,
-    "name": "호호잇 김호일",
-    "email": "hohoit@test.com",
-    "password": "1111",
-    "gender": "M"
-  },
-  {
     "no": 25,
-    "name": "멋있는 이정훈",
-    "email": "lee@test.com",
-    "password": "1111",
+    "name": "qqq",
+    "email": "",
+    "password": "",
     "gender": "M"
   }
 ]
