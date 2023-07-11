@@ -363,6 +363,13 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 39. Reflection API를 활용하여 DAO 메서드 호출을 자동화하기
 
+### 35일(7/11,화)
+
+- 자바 프로그래밍(com.eomcs.exception)
+  - 
+- 프로젝트 실습
+  - 40. 예외 처리하기
+  - 41. 여러 클라이언트의 요청을 순차적으로 처리하기: Stateful 방식
 
 ## 웨일즈 화상회의
 

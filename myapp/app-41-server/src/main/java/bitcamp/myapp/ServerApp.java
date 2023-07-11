@@ -73,6 +73,7 @@ public class ServerApp {
     }
   }
 
+  // 클라이언트와 접속이 이루어지면 클라이언트의 요청을 처리한다.
   public void processRequest(Socket socket) {
     try (Socket s = socket;
         DataInputStream in = new DataInputStream(socket.getInputStream());
@@ -83,48 +84,52 @@ public class ServerApp {
           socketAddress.getHostString(),
           socketAddress.getPort());
 
-      // 클라이언트 요청을 반복해서 처리하지 않는다.
-      // => 접속 -> 요청 -> 실행 -> 응답 -> 연결 끊기
-      RequestEntity request = RequestEntity.fromJson(in.readUTF());
+      while (true) {
+        RequestEntity request = RequestEntity.fromJson(in.readUTF());
 
-      String command = request.getCommand();
-      System.out.println(command);
+        String command = request.getCommand();
+        System.out.println(command);
 
-      String[] values = command.split("/");
-      String dataName = values[0];
-      String methodName = values[1];
+        if (command.equals("quit")) {
+          break;
+        }
 
-      Object dao = daoMap.get(dataName);
-      if (dao == null) {
-        out.writeUTF(new ResponseEntity()
-            .status(ResponseEntity.ERROR)
-            .result("데이터를 찾을 수 없습니다.")
-            .toJson());
-        return;
-      }
+        String[] values = command.split("/");
+        String dataName = values[0];
+        String methodName = values[1];
 
-      Method method = findMethod(dao, methodName);
-      if (method == null) {
-        out.writeUTF(new ResponseEntity()
-            .status(ResponseEntity.ERROR)
-            .result("메서드를 찾을 수 없습니다.")
-            .toJson());
-        return;
-      }
+        Object dao = daoMap.get(dataName);
+        if (dao == null) {
+          out.writeUTF(new ResponseEntity()
+              .status(ResponseEntity.ERROR)
+              .result("데이터를 찾을 수 없습니다.")
+              .toJson());
+          continue;
+        }
 
-      try {
-        Object result = call(dao, method, request);
+        Method method = findMethod(dao, methodName);
+        if (method == null) {
+          out.writeUTF(new ResponseEntity()
+              .status(ResponseEntity.ERROR)
+              .result("메서드를 찾을 수 없습니다.")
+              .toJson());
+          continue;
+        }
 
-        ResponseEntity response = new ResponseEntity();
-        response.status(ResponseEntity.SUCCESS);
-        response.result(result);
-        out.writeUTF(response.toJson());
+        try {
+          Object result = call(dao, method, request);
 
-      } catch (Exception e) {
-        ResponseEntity response = new ResponseEntity();
-        response.status(ResponseEntity.ERROR);
-        response.result(e.getMessage());
-        out.writeUTF(response.toJson());
+          ResponseEntity response = new ResponseEntity();
+          response.status(ResponseEntity.SUCCESS);
+          response.result(result);
+          out.writeUTF(response.toJson());
+
+        } catch (Exception e) {
+          ResponseEntity response = new ResponseEntity();
+          response.status(ResponseEntity.ERROR);
+          response.result(e.getMessage());
+          out.writeUTF(response.toJson());
+        }
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());

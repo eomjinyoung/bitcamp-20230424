@@ -79,32 +79,5 @@
     "password": "1111",
     "viewCount": 1,
     "createdDate": 1688528174098
-  },
-  {
-    "no": 37,
-    "title": "2",
-    "content": "0",
-    "writer": "0",
-    "password": "0",
-    "viewCount": 0,
-    "createdDate": 1689042465801
-  },
-  {
-    "no": 38,
-    "title": "yy",
-    "content": "yy",
-    "writer": "yy",
-    "password": "11",
-    "viewCount": 0,
-    "createdDate": 1689042478784
-  },
-  {
-    "no": 40,
-    "title": "이 편지는 영국에서부터 시작되어",
-    "content": "~~~~~~~~ 이 글을 주변의 5명에게 공유하지 않으면 컴파일 에러가 발생합니다.",
-    "writer": "404",
-    "password": "testtesttesttesttest",
-    "viewCount": 0,
-    "createdDate": 1689042668477
   }
 ]
