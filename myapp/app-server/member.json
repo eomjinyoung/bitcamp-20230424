@@ -84,24 +84,10 @@
     "gender": "M"
   },
   {
-    "no": 21,
-    "name": "자바고수 이진석",
-    "email": "lee@test.com",
-    "password": "1111",
-    "gender": "M"
-  },
-  {
     "no": 25,
     "name": "qqq",
     "email": "",
     "password": "",
-    "gender": "M"
-  },
-  {
-    "no": 26,
-    "name": "진석이는 자바를 사랑해",
-    "email": "jinsuck@naver.com",
-    "password": "1234",
     "gender": "M"
   },
   {
@@ -112,24 +98,24 @@
     "gender": "M"
   },
   {
-    "no": 28,
-    "name": "자바를꽉자바",
+    "no": 34,
+    "name": "네카라쿠베는내꺼!",
     "email": "-이진석-",
-    "password": "111",
+    "password": "11111",
     "gender": "M"
   },
   {
-    "no": 29,
-    "name": "야옹야옹 타이거즈",
-    "email": "@test.com",
-    "password": "1",
-    "gender": "W"
+    "no": 35,
+    "name": "자바고수 이진석",
+    "email": "1111",
+    "password": "1111",
+    "gender": "M"
   },
   {
-    "no": 30,
-    "name": "크림빵 먹는 진석이",
-    "email": "cream@test.com",
-    "password": "1111",
+    "no": 36,
+    "name": "개발왕진석",
+    "email": "몽키D진석",
+    "password": "11",
     "gender": "M"
   }
 ]
