@@ -124,12 +124,5 @@
     "email": "@test.com",
     "password": "1",
     "gender": "W"
-  },
-  {
-    "no": 30,
-    "name": "크림빵 먹는 진석이",
-    "email": "cream@test.com",
-    "password": "1111",
-    "gender": "M"
   }
 ]
