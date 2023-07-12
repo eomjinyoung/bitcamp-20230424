@@ -19,23 +19,26 @@ public class CalcServer1 {
         System.out.printf("%s(%d) 클라이언트 접속!\n",
             sockAddr.getHostString(), sockAddr.getPort());
 
+        int result = 0;
+
         while (true) {
           String op = in.readUTF();
           if (op.equals("quit")) {
             break;
           }
 
-          int a = in.readInt();
-          int b = in.readInt();
+          int value = in.readInt();
 
           switch (op) {
-            case "+": out.writeUTF(String.format("%d", a + b)); break;
-            case "-": out.writeUTF(String.format("%d", a - b)); break;
-            case "*": out.writeUTF(String.format("%d", a * b)); break;
-            case "/": out.writeUTF(String.format("%d", a / b)); break;
-            case "%": out.writeUTF(String.format("%d", a % b)); break;
+            case "+": result += value; break;
+            case "-": result -= value; break;
+            case "*": result *= value; break;
+            case "/": result /= value; break;
+            case "%": result %= value; break;
             default: out.writeUTF("지원하지 않는 연산자입니다!");
           }
+
+          out.writeUTF(String.format("%d", result));
         }
       }
     }

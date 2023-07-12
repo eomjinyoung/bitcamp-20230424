@@ -13,7 +13,7 @@ public class CalcClient1 {
 
   static Pattern pattern = Pattern.compile("[0-9]+|\\p{Punct}");
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     try (
         Socket socket = new Socket("localhost", 8888);
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
@@ -21,35 +21,59 @@ public class CalcClient1 {
         Scanner keyscan = new Scanner(System.in);) {
 
       while (true) {
-        System.out.print("계산식> ");
+        System.out.print("계산식(예: + 3)> ");
         String input = keyscan.nextLine();
         if (input.equals("quit")) {
           out.writeUTF("quit");
           break;
         }
 
-        String[] values = parseExpression(input);
+        try {
+          Expression expr = parseExpression(input);
 
-        out.writeUTF(values[1]);
-        out.writeInt(Integer.parseInt(values[0]));
-        out.writeInt(Integer.parseInt(values[2]));
+          out.writeUTF(expr.op);
+          out.writeInt(expr.value);
 
-        String result = in.readUTF();
-        System.out.printf("결과: %s\n", result);
+          String result = in.readUTF();
+          System.out.printf("결과: %s\n", result);
+
+        } catch (ExpressionParseException e) {
+          System.out.println(e.getMessage());
+        }
       }
 
+    } catch (Exception e) {
+      System.out.println("서버 통신 오류!");
     }
   }
 
-  public static String[] parseExpression(String expr) {
+  public static Expression parseExpression(String expr) throws ExpressionParseException {
+    try {
+      Matcher matcher = pattern.matcher(expr);
 
-    Matcher matcher = pattern.matcher(expr);
+      ArrayList<String> values = new ArrayList<>();
+      while (matcher.find()) {
+        values.add(matcher.group());
+      }
 
-    ArrayList<String> values = new ArrayList<>();
-    while (matcher.find()) {
-      values.add(matcher.group());
+      if (values.size() != 2) {
+        throw new Exception("계산식이 옳지 않습니다!");
+      }
+
+      Expression obj = new Expression();
+      obj.op = values.get(0);
+      obj.value = Integer.parseInt(values.get(1));
+
+      return obj;
+
+    } catch (Exception e) {
+      throw new ExpressionParseException(e);
     }
-    return values.toArray(new String[] {});
+  }
+
+  static class Expression {
+    String op;
+    int value;
   }
 }
 
