@@ -373,6 +373,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 41. 여러 클라이언트의 요청을 순차적으로 처리하기: Stateful 방식
   - 42. 여러 클라이언트의 요청을 순차적으로 처리하기: Stateless 방식
 
+### 36일(7/12,수)
+
+- 자바 프로그래밍
+- 프로젝트 실습
+
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
