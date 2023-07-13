@@ -290,6 +290,10 @@
   - 스레드의 라이프사이클 이해
   - Thread 클래스와 Runnable 인터페이스 사용법
 
+## 44. DBMS 도입하기
+
+- DBMS 설치 및 사용법
+- SQL 및 JDBC Driver 개념과 사용법
 
 
 

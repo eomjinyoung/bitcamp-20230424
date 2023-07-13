@@ -98,24 +98,45 @@
     "gender": "M"
   },
   {
-    "no": 34,
-    "name": "네카라쿠베는내꺼!",
-    "email": "-이진석-",
-    "password": "11111",
+    "no": 62,
+    "name": "돈 조금줘서 애플 안 갈거라는",
+    "email": "이진석",
+    "password": "1",
     "gender": "M"
   },
   {
-    "no": 35,
-    "name": "자바고수 이진석",
-    "email": "1111",
-    "password": "1111",
+    "no": 63,
+    "name": "자습시간에 게임하는",
+    "email": "김선준",
+    "password": "1",
     "gender": "M"
   },
   {
-    "no": 36,
-    "name": "개발왕진석",
-    "email": "몽키D진석",
-    "password": "11",
+    "no": 64,
+    "name": "금요일 조퇴예정인",
+    "email": "김선준",
+    "password": "1",
+    "gender": "M"
+  },
+  {
+    "no": 65,
+    "name": "1",
+    "email": "1",
+    "password": "1",
+    "gender": "M"
+  },
+  {
+    "no": 66,
+    "name": "1",
+    "email": "1",
+    "password": "1",
+    "gender": "M"
+  },
+  {
+    "no": 67,
+    "name": "1",
+    "email": "1",
+    "password": "1",
     "gender": "M"
   }
 ]
