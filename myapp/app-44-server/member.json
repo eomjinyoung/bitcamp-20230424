@@ -126,6 +126,20 @@
     "gender": "M"
   },
   {
+    "no": 72,
+    "name": "난",
+    "email": "이진석",
+    "password": "1",
+    "gender": "W"
+  },
+  {
+    "no": 73,
+    "name": "나도 이진석",
+    "email": ".",
+    "password": "123",
+    "gender": "M"
+  },
+  {
     "no": 74,
     "name": "손흥민 봉준호 이진석 ",
     "email": "Let\u0027s go",
