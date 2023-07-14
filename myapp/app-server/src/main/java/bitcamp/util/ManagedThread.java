@@ -1,30 +1,33 @@
 package bitcamp.util;
 
 public class ManagedThread extends Thread {
-  static int no = 1;
+  //  static int no = 1;
 
-  int key;
+  //  int key;
   ResourcePool<ManagedThread> pool;
-  JobBox jobBox = new JobBox();
+  Job job;
 
   public ManagedThread(ResourcePool<ManagedThread> pool) {
     this.pool = pool;
-    key = no++;
+    //    key = no++;
   }
 
   public void setJob(Job job) {
-    jobBox.setJob(job);
+    this.job = job;
+    synchronized (this) {
+      this.notify();
+    }
   }
 
   @Override
   synchronized public void run() {
     while (true) {
       try {
-        synchronized (jobBox) {
-          jobBox.wait();
+        synchronized (this) {
+          this.wait();
         }
-        System.out.printf("%d 번 스레드 실행!\n", key);
-        jobBox.job.execute();
+        //        System.out.printf("%d 번 스레드 실행!\n", key);
+        this.job.execute();
         pool.returnResource(this);
 
       } catch (Exception e) {
