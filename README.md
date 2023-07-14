@@ -399,7 +399,8 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 멀티태스킹의 메커니즘 이해
   - 임계영역(Critical Region, Critical Section): 세마포어(Semaphore)와 뮤텍스(Mutex)
 - 프로젝트 실습
-
+  - 44. 스레드 재사용하기 : 스레드풀(thread pool) 구현
+  
 
 ## 웨일즈 화상회의
 

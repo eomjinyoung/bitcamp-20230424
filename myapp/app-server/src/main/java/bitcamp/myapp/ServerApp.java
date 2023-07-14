@@ -12,7 +12,6 @@ import bitcamp.myapp.dao.BoardListDao;
 import bitcamp.myapp.dao.MemberListDao;
 import bitcamp.net.RequestEntity;
 import bitcamp.net.ResponseEntity;
-import bitcamp.util.Job;
 import bitcamp.util.ManagedThread;
 import bitcamp.util.ThreadPool;
 
@@ -50,17 +49,6 @@ public class ServerApp {
   }
 
   public void execute() throws Exception {
-    class RequestProcessJob implements Job {
-      Socket socket;
-      public RequestProcessJob(Socket socket) {
-        this.socket = socket;
-      }
-      @Override
-      public void execute() {
-        processRequest(socket);
-      }
-    }
-
     System.out.println("[MyList 서버 애플리케이션]");
 
     this.serverSocket = new ServerSocket(port);
@@ -69,7 +57,7 @@ public class ServerApp {
     while (true) {
       Socket socket = serverSocket.accept();
       ManagedThread t = threadPool.getResource();
-      t.setJob(new RequestProcessJob(socket));
+      t.setJob(() ->processRequest(socket));
     }
   }
 
