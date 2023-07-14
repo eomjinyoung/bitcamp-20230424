@@ -290,7 +290,13 @@
   - 스레드의 라이프사이클 이해
   - Thread 클래스와 Runnable 인터페이스 사용법
 
-## 44. DBMS 도입하기
+## 44. 스레드 재사용하기 : 스레드풀(thread pool) 구현
+
+- 스레드를 재사용하는 방법
+- GoF의 FlyWeight 디자인 패턴을 적용하여 스레드풀을 구현하는 방법
+
+
+## 46. DBMS 도입하기
 
 - DBMS 설치 및 사용법
 - SQL 및 JDBC Driver 개념과 사용법

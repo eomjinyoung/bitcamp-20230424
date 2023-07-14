@@ -12,6 +12,9 @@ import bitcamp.myapp.dao.BoardListDao;
 import bitcamp.myapp.dao.MemberListDao;
 import bitcamp.net.RequestEntity;
 import bitcamp.net.ResponseEntity;
+import bitcamp.util.Job;
+import bitcamp.util.ManagedThread;
+import bitcamp.util.ThreadPool;
 
 public class ServerApp {
 
@@ -19,6 +22,9 @@ public class ServerApp {
   ServerSocket serverSocket;
 
   HashMap<String,Object> daoMap = new HashMap<>();
+
+  // 스레드를 리턴해 줄 스레드풀 준비
+  ThreadPool threadPool = new ThreadPool();
 
   public ServerApp(int port) throws Exception {
     this.port = port;
@@ -44,13 +50,13 @@ public class ServerApp {
   }
 
   public void execute() throws Exception {
-    class RequestAgentThread extends Thread {
+    class RequestProcessJob implements Job {
       Socket socket;
-      public RequestAgentThread(Socket socket) {
+      public RequestProcessJob(Socket socket) {
         this.socket = socket;
       }
       @Override
-      public void run() {
+      public void execute() {
         processRequest(socket);
       }
     }
@@ -61,7 +67,9 @@ public class ServerApp {
     System.out.println("서버 실행 중...");
 
     while (true) {
-      new RequestAgentThread(serverSocket.accept()).start();
+      Socket socket = serverSocket.accept();
+      ManagedThread t = threadPool.getResource();
+      t.setJob(new RequestProcessJob(socket));
     }
   }
 
@@ -93,7 +101,7 @@ public class ServerApp {
       System.out.printf("%s:%s 클라이언트가 접속했음!\n",
           socketAddress.getHostString(),
           socketAddress.getPort());
-
+      Thread.sleep(15000);
       // 클라이언트 요청을 반복해서 처리하지 않는다.
       // => 접속 -> 요청 -> 실행 -> 응답 -> 연결 끊기
       RequestEntity request = RequestEntity.fromJson(in.readUTF());
@@ -141,7 +149,6 @@ public class ServerApp {
       System.out.println(e.getMessage());
     }
   }
-
 }
 
 

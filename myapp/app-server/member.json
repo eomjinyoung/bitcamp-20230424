@@ -105,20 +105,6 @@
     "gender": "M"
   },
   {
-    "no": 63,
-    "name": "자습시간에 게임하는",
-    "email": "김선준",
-    "password": "1",
-    "gender": "M"
-  },
-  {
-    "no": 64,
-    "name": "금요일 조퇴예정인",
-    "email": "김선준",
-    "password": "1",
-    "gender": "M"
-  },
-  {
     "no": 65,
     "name": "1",
     "email": "1",
@@ -138,5 +124,40 @@
     "email": "1",
     "password": "1",
     "gender": "M"
+  },
+  {
+    "no": 71,
+    "name": "이진석 vs 홀란드",
+    "email": ".",
+    "password": "123",
+    "gender": "M"
+  },
+  {
+    "no": 72,
+    "name": "난",
+    "email": "이진석",
+    "password": "1",
+    "gender": "W"
+  },
+  {
+    "no": 73,
+    "name": "나도 이진석",
+    "email": ".",
+    "password": "123",
+    "gender": "M"
+  },
+  {
+    "no": 74,
+    "name": "손흥민 봉준호 이진석 ",
+    "email": "Let\u0027s go",
+    "password": "1",
+    "gender": "W"
+  },
+  {
+    "no": 75,
+    "name": "이진석",
+    "email": "두둥등장",
+    "password": "123",
+    "gender": "W"
   }
 ]
