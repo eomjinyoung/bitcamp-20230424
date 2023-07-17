@@ -395,12 +395,28 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 ### 38일(7/14,금)
 
 - 자바 프로그래밍
-  - 스레드 프로그래밍(com.eomcs.concurrent.ex5 ~ ex7)
+  - 스레드 프로그래밍(com.eomcs.concurrent.ex5 ~ ex6)
 - 멀티태스킹의 메커니즘 이해
   - 임계영역(Critical Region, Critical Section): 세마포어(Semaphore)와 뮤텍스(Mutex)
 - 프로젝트 실습
   - 44. 스레드 재사용하기 : 스레드풀(thread pool) 구현
   
+### 39일(7/16,월)
+
+- 자바 프로그래밍
+  - 스레드 프로그래밍(com.eomcs.concurrent.ex7)
+    - 스레드풀 사용법
+  - JDBC 프로그래밍(com.eomcs.jdbc)
+    - MySQL 로컬 설치 및 설정
+    - 사용자 추가/삭제
+    - 데이터베이스 추가/삭제
+    - 사용자, 데이터베이스, 테이블 정보 조회
+    - DBMS와 DBMS 클라이언트와 관계 
+
+- 프로젝트 실습
+  - 45. 스레드 재사용하기 : 자바에서 제공하는 스레드풀(thread pool) 사용
+
+
 
 ## 웨일즈 화상회의
 
