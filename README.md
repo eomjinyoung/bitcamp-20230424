@@ -401,7 +401,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 44. 스레드 재사용하기 : 스레드풀(thread pool) 구현
   
-### 39일(7/16,월)
+### 39일(7/17,월)
 
 - 자바 프로그래밍
   - 스레드 프로그래밍(com.eomcs.concurrent.ex7)
@@ -412,10 +412,16 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
     - 데이터베이스 추가/삭제
     - 사용자, 데이터베이스, 테이블 정보 조회
     - DBMS와 DBMS 클라이언트와 관계 
-
 - 프로젝트 실습
   - 45. 스레드 재사용하기 : 자바에서 제공하는 스레드풀(thread pool) 사용
 
+### 40일(7/18,화)
+
+- 자바 프로그래밍
+  - JDBC 프로그래밍(com.eomcs.jdbc)
+    - DBMS API와 ODBC API
+    - JDBC API와 JDBC 드라이버
+    - SQL - DDL 사용법
 
 
 ## 웨일즈 화상회의
