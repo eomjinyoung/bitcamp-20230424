@@ -18,8 +18,18 @@ public class MySQLMemberDao implements MemberDao {
 
   @Override
   public void insert(Member member) {
-    // TODO Auto-generated method stub
+    try (Statement stmt = con.createStatement()) {
 
+      stmt.executeUpdate(String.format(
+          "insert into myapp_member(name,email,password,gender) values('%s','%s','%s','%c')",
+          member.getName(),
+          member.getEmail(),
+          member.getPassword(),
+          member.getGender()));
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
@@ -49,20 +59,59 @@ public class MySQLMemberDao implements MemberDao {
 
   @Override
   public Member findBy(int no) {
-    // TODO Auto-generated method stub
-    return null;
+    try (Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(
+            "select member_no, name, email, gender from myapp_member where member_no=" + no)) {
+
+      if (rs.next()) {
+        Member m = new Member();
+        m.setNo(rs.getInt("member_no"));
+        m.setName(rs.getString("name"));
+        m.setEmail(rs.getString("email"));
+        m.setGender(rs.getString("gender").charAt(0));
+        return m;
+      }
+
+      return null;
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
   public int update(Member member) {
-    // TODO Auto-generated method stub
-    return 0;
+    try (Statement stmt = con.createStatement()) {
+
+      return stmt.executeUpdate(String.format(
+          "update myapp_member set"
+              + " name='%s',"
+              + " email='%s',"
+              + " password='%s',"
+              + " gender='%c'"
+              + " where member_no=%d",
+              member.getName(),
+              member.getEmail(),
+              member.getPassword(),
+              member.getGender(),
+              member.getNo()));
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
   public int delete(int no) {
-    // TODO Auto-generated method stub
-    return 0;
+    try (Statement stmt = con.createStatement()) {
+
+      return stmt.executeUpdate(String.format(
+          "delete from myapp_member where member_no=%d",
+          no));
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
 }

@@ -24,3 +24,12 @@ alter table myapp_member
   add constraint primary key (member_no),
   modify column member_no int not null auto_increment;
   
+  
+-- 게시판에 카테고리 컬럼 추가
+alter table myapp_board
+  add column category int not null;
+  
+  
+  
+  
+  
