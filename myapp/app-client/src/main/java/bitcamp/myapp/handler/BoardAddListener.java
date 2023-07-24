@@ -8,9 +8,11 @@ import bitcamp.util.BreadcrumbPrompt;
 public class BoardAddListener implements ActionListener {
 
   BoardDao boardDao;
+  int category;
 
-  public BoardAddListener(BoardDao boardDao) {
+  public BoardAddListener(BoardDao boardDao, int category) {
     this.boardDao = boardDao;
+    this.category = category;
   }
 
   @Override
@@ -20,6 +22,7 @@ public class BoardAddListener implements ActionListener {
     board.setContent(prompt.inputString("내용? "));
     board.setWriter(prompt.inputString("작성자? "));
     board.setPassword(prompt.inputString("암호? "));
+    board.setCategory(this.category);
 
     boardDao.insert(board);
   }
