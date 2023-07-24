@@ -10,12 +10,10 @@ import bitcamp.util.BreadcrumbPrompt;
 public class BoardListListener implements ActionListener {
 
   BoardDao boardDao;
-  int category;
   SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
-  public BoardListListener(BoardDao boardDao, int category) {
+  public BoardListListener(BoardDao boardDao) {
     this.boardDao = boardDao;
-    this.category = category;
   }
 
   @Override

@@ -449,6 +449,14 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 46. DBMS 도입하기
 
+### 43일(7/21,금)
+
+- 자바 프로그래밍
+  - JDBC 프로그래밍(com.eomcs.jdbc)
+    - PreparedStatement 사용법
+- 프로젝트 실습
+  - 46. DBMS 도입하기(계속)
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

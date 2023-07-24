@@ -36,12 +36,12 @@ public class ClientApp {
   public ClientApp(String ip, int port) throws Exception {
 
     Connection con = DriverManager.getConnection(
-        "jdbc:mysql://study:1111@localhost:3306/studydb" // JDBC URL
+        "jdbc:mysql://study:1111@192.168.0.21:3306/studydb" // JDBC URL
         );
 
     this.memberDao = new MySQLMemberDao(con);
-    this.boardDao = new MySQLBoardDao(con);
-    this.readingDao = null;
+    this.boardDao = new MySQLBoardDao(con, 1);
+    this.readingDao = new MySQLBoardDao(con, 2);
 
     prepareMenu();
   }
@@ -81,16 +81,16 @@ public class ClientApp {
     mainMenu.add(memberMenu);
 
     MenuGroup boardMenu = new MenuGroup("게시글");
-    boardMenu.add(new Menu("등록", new BoardAddListener(boardDao, 1)));
-    boardMenu.add(new Menu("목록", new BoardListListener(boardDao, 1)));
+    boardMenu.add(new Menu("등록", new BoardAddListener(boardDao)));
+    boardMenu.add(new Menu("목록", new BoardListListener(boardDao)));
     boardMenu.add(new Menu("조회", new BoardDetailListener(boardDao)));
     boardMenu.add(new Menu("변경", new BoardUpdateListener(boardDao)));
     boardMenu.add(new Menu("삭제", new BoardDeleteListener(boardDao)));
     mainMenu.add(boardMenu);
 
     MenuGroup readingMenu = new MenuGroup("독서록");
-    readingMenu.add(new Menu("등록", new BoardAddListener(boardDao, 2)));
-    readingMenu.add(new Menu("목록", new BoardListListener(boardDao, 2)));
+    readingMenu.add(new Menu("등록", new BoardAddListener(readingDao)));
+    readingMenu.add(new Menu("목록", new BoardListListener(readingDao)));
     readingMenu.add(new Menu("조회", new BoardDetailListener(readingDao)));
     readingMenu.add(new Menu("변경", new BoardUpdateListener(readingDao)));
     readingMenu.add(new Menu("삭제", new BoardDeleteListener(readingDao)));
