@@ -311,5 +311,6 @@
 
 - SQL 삽입 공격의 원리 이해
 - PreparedStatement 사용법
+- 테이블에 암호를 저장하는 방법
 
 
