@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.vo.Board;
+import bitcamp.myapp.vo.Member;
 
 public class MySQLBoardDao implements BoardDao {
 
@@ -26,7 +27,7 @@ public class MySQLBoardDao implements BoardDao {
 
       stmt.setString(1, board.getTitle());
       stmt.setString(2, board.getContent());
-      stmt.setString(3, board.getWriter());
+      stmt.setInt(3, board.getWriter().getNo());
       stmt.setString(4, board.getPassword());
       stmt.setInt(5, this.category);
 
@@ -54,7 +55,11 @@ public class MySQLBoardDao implements BoardDao {
           Board b = new Board();
           b.setNo(rs.getInt("board_no"));
           b.setTitle(rs.getString("title"));
-          b.setWriter(rs.getString("writer"));
+
+          Member writer = new Member();
+          writer.setNo(rs.getInt("writer"));
+          b.setWriter(writer);
+
           b.setViewCount(rs.getInt("view_count"));
           b.setCreatedDate(rs.getTimestamp("created_date"));
           list.add(b);
@@ -85,7 +90,11 @@ public class MySQLBoardDao implements BoardDao {
           b.setNo(rs.getInt("board_no"));
           b.setTitle(rs.getString("title"));
           b.setContent(rs.getString("content"));
-          b.setWriter(rs.getString("writer"));
+
+          Member writer = new Member();
+          writer.setNo(rs.getInt("writer"));
+          b.setWriter(writer);
+
           b.setViewCount(rs.getInt("view_count"));
           b.setCreatedDate(rs.getTimestamp("created_date"));
 

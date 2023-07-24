@@ -64,7 +64,7 @@ public class MySQLMemberDao implements MemberDao {
   @Override
   public Member findBy(int no) {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select member_no, name, email, gender"
+        "select member_no, name, email, gender, created_date"
             + " from myapp_member"
             + " where member_no=?")) {
 
@@ -77,6 +77,7 @@ public class MySQLMemberDao implements MemberDao {
           m.setName(rs.getString("name"));
           m.setEmail(rs.getString("email"));
           m.setGender(rs.getString("gender").charAt(0));
+          m.setCreatedDate(rs.getDate("created_date"));
           return m;
         }
         return null;

@@ -26,5 +26,6 @@ public class MemberDetailListener implements ActionListener {
     System.out.printf("이름: %s\n", m.getName());
     System.out.printf("이메일: %s\n", m.getEmail());
     System.out.printf("성별: %s\n", m.getGender() == 'M' ? "남성" : "여성");
+    System.out.printf("가입일: %s\n", m.getCreatedDate());
   }
 }

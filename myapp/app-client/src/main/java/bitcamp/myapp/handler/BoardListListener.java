@@ -28,7 +28,7 @@ public class BoardListListener implements ActionListener {
       System.out.printf("%d, %s, %s, %d, %s\n",
           board.getNo(),
           board.getTitle(),
-          board.getWriter(),
+          board.getWriter().getNo(),
           board.getViewCount(),
           dateFormatter.format(board.getCreatedDate()));
     }

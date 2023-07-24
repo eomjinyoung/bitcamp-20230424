@@ -18,7 +18,8 @@ create table myapp_member(
   name varchar(20) not null,
   email varchar(50) not null,
   password varchar(100) not null,
-  gender char(1) not null
+  gender char(1) not null,
+  created_date date default (current_date())
 );
 
 alter table myapp_member
