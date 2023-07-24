@@ -456,6 +456,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
     - PreparedStatement 사용법
 - 프로젝트 실습
   - 46. DBMS 도입하기(계속)
+  - 47. SQL 삽입 공격 차단하기
 
 ## 웨일즈 화상회의
 

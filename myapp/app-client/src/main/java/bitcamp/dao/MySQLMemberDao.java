@@ -20,7 +20,7 @@ public class MySQLMemberDao implements MemberDao {
   public void insert(Member member) {
     try (PreparedStatement stmt = con.prepareStatement(
         "insert into myapp_member(name,email,password,gender)"
-            + " values(?,?,?,?)")) {
+            + " values(?,?,sha1(?),?)")) {
 
       stmt.setString(1, member.getName());
       stmt.setString(2, member.getEmail());
@@ -93,7 +93,7 @@ public class MySQLMemberDao implements MemberDao {
         "update myapp_member set"
             + " name=?,"
             + " email=?,"
-            + " password=?,"
+            + " password=sha1(?),"
             + " gender=?"
             + " where member_no=?")) {
 
