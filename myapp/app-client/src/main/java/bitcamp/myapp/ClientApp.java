@@ -14,16 +14,20 @@ import bitcamp.myapp.handler.BoardUpdateListener;
 import bitcamp.myapp.handler.FooterListener;
 import bitcamp.myapp.handler.HeaderListener;
 import bitcamp.myapp.handler.HelloListener;
+import bitcamp.myapp.handler.LoginListener;
 import bitcamp.myapp.handler.MemberAddListener;
 import bitcamp.myapp.handler.MemberDeleteListener;
 import bitcamp.myapp.handler.MemberDetailListener;
 import bitcamp.myapp.handler.MemberListListener;
 import bitcamp.myapp.handler.MemberUpdateListener;
+import bitcamp.myapp.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.Menu;
 import bitcamp.util.MenuGroup;
 
 public class ClientApp {
+
+  public static Member loginUser;
 
   MemberDao memberDao;
   BoardDao boardDao;
@@ -68,6 +72,9 @@ public class ClientApp {
 
   public void execute() {
     printTitle();
+
+    new LoginListener(memberDao).service(prompt);
+
     mainMenu.execute(prompt);
   }
 

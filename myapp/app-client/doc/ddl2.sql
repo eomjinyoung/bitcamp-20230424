@@ -25,11 +25,15 @@ create table myapp_member(
 alter table myapp_member
   add constraint primary key (member_no),
   modify column member_no int not null auto_increment;
+
+alter table myapp_member
+  add constraint myapp_member_uk unique (email);
   
 -- 게시판 작성자에 대해 외부키 설정
 alter table myapp_board
   add constraint myapp_board_fk foreign key (writer) references myapp_member (member_no);
   
+
   
   
   

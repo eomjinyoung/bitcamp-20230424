@@ -458,6 +458,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 46. DBMS 도입하기(계속)
   - 47. SQL 삽입 공격 차단하기
   - 48. 외부키(Foreign Key) 사용하기
+  - 49. 로그인 적용하기
 
 ## 웨일즈 화상회의
 
