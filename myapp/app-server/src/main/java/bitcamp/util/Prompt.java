@@ -2,6 +2,7 @@ package bitcamp.util;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import bitcamp.net.NetProtocol;
 
 public class Prompt {
@@ -15,13 +16,13 @@ public class Prompt {
     this.out = out;
   }
 
-  public String inputString(String title, Object... args) throws Exception {
-    this.out.writeUTF(title);
+  public String inputString(String title, Object... args) throws IOException {
+    this.out.writeUTF(String.format(title, args));
     this.out.writeUTF(NetProtocol.PROMPT);
     return this.in.readUTF();
   }
 
-  public int inputInt(String title, Object... args) throws Exception {
+  public int inputInt(String title, Object... args) throws IOException {
     return Integer.parseInt(this.inputString(title, args));
   }
 
@@ -42,7 +43,7 @@ public class Prompt {
     buf.setLength(0);
   }
 
-  public void end() throws Exception {
+  public void end() throws IOException {
     this.out.writeUTF(buf.toString());
     this.out.writeUTF(NetProtocol.RESPONSE_END);
     buf.setLength(0);
