@@ -449,7 +449,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 46. DBMS 도입하기
 
-### 43일(7/21,금)
+### 44일(7/24,월)
 
 - 자바 프로그래밍
   - JDBC 프로그래밍(com.eomcs.jdbc)
@@ -459,6 +459,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 47. SQL 삽입 공격 차단하기
   - 48. 외부키(Foreign Key) 사용하기
   - 49. 로그인 적용하기
+
+### 45일(7/25,화)
+
+- 자바 프로그래밍
+- 프로젝트 실습
+  - 50. Application Server 아키텍터로 전환하기
 
 ## 웨일즈 화상회의
 
