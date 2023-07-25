@@ -86,12 +86,18 @@ public class ServerApp {
           InetSocketAddress clientAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
           System.out.printf("%s 클라이언트 접속함!\n", clientAddress.getHostString());
 
-          String request = in.readUTF();
-          out.writeUTF("응답1: " + request);
-          out.writeUTF("응답2: " + request);
-          out.writeUTF("응답3: " + request);
-          out.writeUTF("응답4: " + request);
-          out.writeUTF(NetProtocol.RESPONSE_END);
+          while (true) {
+            String request = in.readUTF();
+            if (request.equals("exit")) {
+              break;
+            }
+
+            out.writeUTF("응답1: " + request);
+            out.writeUTF("응답2: " + request);
+            out.writeUTF("응답3: " + request);
+            out.writeUTF("응답4: " + request);
+            out.writeUTF(NetProtocol.RESPONSE_END);
+          }
 
         } catch (Exception e) {
           System.out.println("클라이언트 통신 오류!");
