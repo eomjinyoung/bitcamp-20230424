@@ -1,7 +1,6 @@
 package bitcamp.myapp.handler;
 
 import java.io.IOException;
-import bitcamp.myapp.ServerApp;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
@@ -25,7 +24,7 @@ public class LoginListener implements MemberActionListener {
       if (loginUser == null) {
         prompt.println("회원 정보가 일치하지 않습니다.");
       } else {
-        ServerApp.loginUser = loginUser;
+        prompt.setAttribute("loginUser", loginUser);
         break;
       }
       prompt.end();

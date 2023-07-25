@@ -7,6 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import bitcamp.dao.MySQLBoardDao;
 import bitcamp.dao.MySQLMemberDao;
 import bitcamp.myapp.dao.BoardDao;
@@ -22,7 +24,6 @@ import bitcamp.myapp.handler.MemberDeleteListener;
 import bitcamp.myapp.handler.MemberDetailListener;
 import bitcamp.myapp.handler.MemberListListener;
 import bitcamp.myapp.handler.MemberUpdateListener;
-import bitcamp.myapp.vo.Member;
 import bitcamp.net.NetProtocol;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.Menu;
@@ -30,7 +31,8 @@ import bitcamp.util.MenuGroup;
 
 public class ServerApp {
 
-  public static Member loginUser;
+  // 자바 스레드풀 준비
+  ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
   Connection con;
   MemberDao memberDao;
@@ -71,36 +73,37 @@ public class ServerApp {
       System.out.println("서버 실행 중...");
 
       while (true) {
-        try (Socket socket = serverSocket.accept();
-            DataInputStream in = new DataInputStream(socket.getInputStream());
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream())) {
-
-          BreadcrumbPrompt prompt = new BreadcrumbPrompt(in, out);
-
-          InetSocketAddress clientAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
-          System.out.printf("%s 클라이언트 접속함!\n", clientAddress.getHostString());
-
-          out.writeUTF("[나의 목록 관리 시스템]\n"
-              + "-----------------------------------------");
-
-          new LoginListener(memberDao).service(prompt);
-
-          mainMenu.execute(prompt);
-          out.writeUTF(NetProtocol.NET_END);
-
-        } catch (Exception e) {
-          System.out.println("클라이언트 통신 오류!");
-          e.printStackTrace();
-        }
+        Socket socket = serverSocket.accept();
+        threadPool.execute(() -> processRequest(socket));
       }
-
-
     } catch (Exception e) {
       System.out.println("서버 실행 오류!");
       e.printStackTrace();
     }
+  }
 
+  private void processRequest(Socket socket) {
+    try (Socket s = socket;
+        DataInputStream in = new DataInputStream(socket.getInputStream());
+        DataOutputStream out = new DataOutputStream(socket.getOutputStream())) {
 
+      BreadcrumbPrompt prompt = new BreadcrumbPrompt(in, out);
+
+      InetSocketAddress clientAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
+      System.out.printf("%s 클라이언트 접속함!\n", clientAddress.getHostString());
+
+      out.writeUTF("[나의 목록 관리 시스템]\n"
+          + "-----------------------------------------");
+
+      new LoginListener(memberDao).service(prompt);
+
+      mainMenu.execute(prompt);
+      out.writeUTF(NetProtocol.NET_END);
+
+    } catch (Exception e) {
+      System.out.println("클라이언트 통신 오류!");
+      e.printStackTrace();
+    }
   }
 
   private void prepareMenu() {

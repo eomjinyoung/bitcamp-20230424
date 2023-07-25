@@ -3,10 +3,13 @@ package bitcamp.util;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import bitcamp.net.NetProtocol;
 
 public class Prompt {
 
+  Map<String,Object> context = new HashMap<>();
   StringBuffer buf = new StringBuffer();
   DataInputStream in;
   DataOutputStream out;
@@ -14,6 +17,14 @@ public class Prompt {
   public Prompt(DataInputStream in, DataOutputStream out) {
     this.in = in;
     this.out = out;
+  }
+
+  public void setAttribute(String name, Object value) {
+    context.put(name, value);
+  }
+
+  public Object getAttribute(String name) {
+    return context.get(name);
   }
 
   public String inputString(String title, Object... args) throws IOException {
