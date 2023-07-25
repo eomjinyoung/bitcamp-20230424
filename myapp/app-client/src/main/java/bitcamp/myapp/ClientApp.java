@@ -32,21 +32,18 @@ public class ClientApp {
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
         DataInputStream in = new DataInputStream(socket.getInputStream())) {
 
-      while (true) {
-        String input = prompt.inputString("> ");
+      System.out.println(in.readUTF());
 
-        out.writeUTF(input);
-        if (input.equals("exit")) {
+      while (true) {
+        String response = in.readUTF();
+        if (response.equals(NetProtocol.RESPONSE_END)) {
+          continue;
+        } else if (response.equals(NetProtocol.PROMPT)) {
+          out.writeUTF(prompt.inputString(""));
+        } else if (response.equals(NetProtocol.NET_END)) {
           break;
         }
-
-        while (true) {
-          String response = in.readUTF();
-          if (response.equals(NetProtocol.RESPONSE_END)) {
-            break;
-          }
-          System.out.println(response);
-        }
+        System.out.println(response);
       }
 
 

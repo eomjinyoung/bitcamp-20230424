@@ -1,33 +1,58 @@
 package bitcamp.util;
 
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import bitcamp.net.NetProtocol;
 
 public class Prompt {
 
-  private Scanner scanner;
+  StringBuffer buf = new StringBuffer();
+  DataInputStream in;
+  DataOutputStream out;
 
-  // default constructor 정의
-  public Prompt() {
-    this.scanner = new Scanner(System.in);
+  public Prompt(DataInputStream in, DataOutputStream out) {
+    this.in = in;
+    this.out = out;
   }
 
-  // 다른 입력 도구와 연결한다면
-  public Prompt(InputStream in) {
-    this.scanner = new Scanner(in);
+  public String inputString(String title, Object... args) throws Exception {
+    this.out.writeUTF(title);
+    this.out.writeUTF(NetProtocol.PROMPT);
+    return this.in.readUTF();
   }
 
-  public String inputString(String title, Object... args) {
-    System.out.printf(title, args);
-    return this.scanner.nextLine();
-  }
-
-  public int inputInt(String title, Object... args) {
+  public int inputInt(String title, Object... args) throws Exception {
     return Integer.parseInt(this.inputString(title, args));
   }
 
-  public void close() {
-    this.scanner.close();
+  public void print(String str) {
+    buf.append(str);
   }
 
+  public void println(String str) {
+    buf.append(str);
+    buf.append("\n");
+  }
+
+  public void printf(String format, Object... args) {
+    buf.append(String.format(format, args));
+  }
+
+  public void clear() {
+    buf.setLength(0);
+  }
+
+  public void end() throws Exception {
+    this.out.writeUTF(buf.toString());
+    this.out.writeUTF(NetProtocol.RESPONSE_END);
+    buf.setLength(0);
+  }
 }
+
+
+
+
+
+
+
+

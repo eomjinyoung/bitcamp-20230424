@@ -17,40 +17,46 @@ public class MenuGroup extends Menu {
 
   @Override
   public void execute(BreadcrumbPrompt prompt) {
+    try {
+      prompt.appendBreadcrumb(this.getTitle());
 
-    prompt.appendBreadcrumb(this.getTitle());
+      this.printMenu(prompt);
 
-    this.printMenu();
-
-    while (true) {
-      String input = prompt.inputMenu();
-      if (input.equals("menu")) {
-        this.printMenu();
-        continue;
-      }
-
-      try {
-        int menuNo = Integer.parseInt(input);
-        if (menuNo < 0 || menuNo > childs.size()) {
-          System.out.println("메뉴 번호가 옳지 않습니다!");
-        } else if (menuNo == 0) {
-          prompt.removeBreadcrumb();
-          return;
-        } else {
-          Menu menu = this.childs.get(menuNo - 1);
-          menu.execute(prompt);
+      while (true) {
+        String input = prompt.inputMenu();
+        if (input.equals("menu")) {
+          this.printMenu(prompt);
+          continue;
         }
-      } catch (Exception e) {
-        System.out.printf("실행 오류: %s\n", e.getMessage());
+
+        try {
+          int menuNo = Integer.parseInt(input);
+          if (menuNo < 0 || menuNo > childs.size()) {
+            prompt.println("메뉴 번호가 옳지 않습니다!");
+            prompt.end();
+          } else if (menuNo == 0) {
+            prompt.removeBreadcrumb();
+            return;
+          } else {
+            Menu menu = this.childs.get(menuNo - 1);
+            menu.execute(prompt);
+          }
+        } catch (Exception e) {
+          prompt.printf("실행 오류: %s\n", e.getMessage());
+          prompt.end();
+        }
       }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 
-  private void printMenu() {
+  private void printMenu(BreadcrumbPrompt prompt) throws Exception {
     for (int i = 0; i < childs.size(); i++) {
       Menu menu = childs.get(i);
-      System.out.printf("%d. %s\n", i + 1, menu.getTitle());
+      prompt.printf("%d. %s\n", i + 1, menu.getTitle());
     }
-    System.out.println("0. 이전/종료");
+    prompt.println("0. 이전/종료");
+    prompt.end();
   }
 }

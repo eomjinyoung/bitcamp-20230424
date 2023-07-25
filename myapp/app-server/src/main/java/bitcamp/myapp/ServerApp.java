@@ -34,11 +34,10 @@ public class ServerApp {
 
   public static Member loginUser;
 
+  Connection con;
   MemberDao memberDao;
   BoardDao boardDao;
   BoardDao readingDao;
-
-  BreadcrumbPrompt prompt = new BreadcrumbPrompt();
 
   MenuGroup mainMenu = new MenuGroup("메인");
 
@@ -48,7 +47,7 @@ public class ServerApp {
 
     this.port = port;
 
-    Connection con = DriverManager.getConnection(
+    con = DriverManager.getConnection(
         "jdbc:mysql://study:1111@localhost:3306/studydb" // JDBC URL
         );
 
@@ -60,18 +59,13 @@ public class ServerApp {
   }
 
   public void close() throws Exception {
-    prompt.close();
+    con.close();
   }
 
   public static void main(String[] args) throws Exception {
     ServerApp app = new ServerApp(8888);
     app.execute();
     app.close();
-  }
-
-  static void printTitle() {
-    System.out.println("나의 목록 관리 시스템");
-    System.out.println("----------------------------------");
   }
 
   public void execute() {
@@ -83,21 +77,16 @@ public class ServerApp {
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream())) {
 
+          BreadcrumbPrompt prompt = new BreadcrumbPrompt(in, out);
+
           InetSocketAddress clientAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
           System.out.printf("%s 클라이언트 접속함!\n", clientAddress.getHostString());
 
-          while (true) {
-            String request = in.readUTF();
-            if (request.equals("exit")) {
-              break;
-            }
+          out.writeUTF("[나의 목록 관리 시스템]\n"
+              + "-----------------------------------------");
 
-            out.writeUTF("응답1: " + request);
-            out.writeUTF("응답2: " + request);
-            out.writeUTF("응답3: " + request);
-            out.writeUTF("응답4: " + request);
-            out.writeUTF(NetProtocol.RESPONSE_END);
-          }
+          mainMenu.execute(prompt);
+          out.writeUTF(NetProtocol.NET_END);
 
         } catch (Exception e) {
           System.out.println("클라이언트 통신 오류!");
@@ -110,8 +99,8 @@ public class ServerApp {
       System.out.println("서버 실행 오류!");
       e.printStackTrace();
     }
-    //printTitle();
-    //mainMenu.execute(prompt);
+
+
   }
 
   private void prepareMenu() {
