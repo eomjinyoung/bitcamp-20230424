@@ -1,5 +1,6 @@
 package bitcamp.myapp.handler;
 
+import java.io.IOException;
 import bitcamp.myapp.ServerApp;
 import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.vo.Board;
@@ -15,7 +16,7 @@ public class BoardAddListener implements ActionListener {
   }
 
   @Override
-  public void service(BreadcrumbPrompt prompt) {
+  public void service(BreadcrumbPrompt prompt) throws IOException {
     Board board = new Board();
     board.setTitle(prompt.inputString("제목? "));
     board.setContent(prompt.inputString("내용? "));

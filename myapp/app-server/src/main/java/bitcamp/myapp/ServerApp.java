@@ -19,6 +19,7 @@ import bitcamp.myapp.handler.BoardUpdateListener;
 import bitcamp.myapp.handler.FooterListener;
 import bitcamp.myapp.handler.HeaderListener;
 import bitcamp.myapp.handler.HelloListener;
+import bitcamp.myapp.handler.LoginListener;
 import bitcamp.myapp.handler.MemberAddListener;
 import bitcamp.myapp.handler.MemberDeleteListener;
 import bitcamp.myapp.handler.MemberDetailListener;
@@ -84,6 +85,8 @@ public class ServerApp {
 
           out.writeUTF("[나의 목록 관리 시스템]\n"
               + "-----------------------------------------");
+
+          new LoginListener(memberDao).service(prompt);
 
           mainMenu.execute(prompt);
           out.writeUTF(NetProtocol.NET_END);
