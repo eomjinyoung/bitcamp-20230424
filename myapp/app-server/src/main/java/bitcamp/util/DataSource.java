@@ -69,6 +69,10 @@ public class DataSource {
     // 스레드가 작업을 끝냈으면, 이 스레드에 보관된 Connection 객체를 제거한다.
     Connection con = connectionBox.get();
     if (con != null) {
+      // 커넥션을 커넥션풀에 반납하기 전에 커넥션에서 수행한 작업 중
+      // 미완료 작업은 취소한다.
+      try {con.rollback();} catch (Exception e) {}
+
       // 스레드가 사용한 DB 커넥션을 다른 스레드에서 사용할 수 있도록 커넥션풀에 저장한다.
       // 다음에 다시 사용해야 하기 때문에 close() 하면 안된다.
       connectionPool.add(con);

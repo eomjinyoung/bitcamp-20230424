@@ -106,27 +106,27 @@ public class ServerApp {
 
   private void prepareMenu() {
     MenuGroup memberMenu = new MenuGroup("회원");
-    memberMenu.add(new Menu("등록", new MemberAddListener(memberDao)));
+    memberMenu.add(new Menu("등록", new MemberAddListener(memberDao, ds)));
     memberMenu.add(new Menu("목록", new MemberListListener(memberDao)));
     memberMenu.add(new Menu("조회", new MemberDetailListener(memberDao)));
-    memberMenu.add(new Menu("변경", new MemberUpdateListener(memberDao)));
-    memberMenu.add(new Menu("삭제", new MemberDeleteListener(memberDao)));
+    memberMenu.add(new Menu("변경", new MemberUpdateListener(memberDao, ds)));
+    memberMenu.add(new Menu("삭제", new MemberDeleteListener(memberDao, ds)));
     mainMenu.add(memberMenu);
 
     MenuGroup boardMenu = new MenuGroup("게시글");
     boardMenu.add(new Menu("등록", new BoardAddListener(boardDao, ds)));
     boardMenu.add(new Menu("목록", new BoardListListener(boardDao)));
-    boardMenu.add(new Menu("조회", new BoardDetailListener(boardDao)));
-    boardMenu.add(new Menu("변경", new BoardUpdateListener(boardDao)));
-    boardMenu.add(new Menu("삭제", new BoardDeleteListener(boardDao)));
+    boardMenu.add(new Menu("조회", new BoardDetailListener(boardDao, ds)));
+    boardMenu.add(new Menu("변경", new BoardUpdateListener(boardDao, ds)));
+    boardMenu.add(new Menu("삭제", new BoardDeleteListener(boardDao, ds)));
     mainMenu.add(boardMenu);
 
     MenuGroup readingMenu = new MenuGroup("독서록");
     readingMenu.add(new Menu("등록", new BoardAddListener(readingDao, ds)));
     readingMenu.add(new Menu("목록", new BoardListListener(readingDao)));
-    readingMenu.add(new Menu("조회", new BoardDetailListener(readingDao)));
-    readingMenu.add(new Menu("변경", new BoardUpdateListener(readingDao)));
-    readingMenu.add(new Menu("삭제", new BoardDeleteListener(readingDao)));
+    readingMenu.add(new Menu("조회", new BoardDetailListener(readingDao, ds)));
+    readingMenu.add(new Menu("변경", new BoardUpdateListener(readingDao, ds)));
+    readingMenu.add(new Menu("삭제", new BoardDeleteListener(readingDao, ds)));
     mainMenu.add(readingMenu);
 
     //    Menu helloMenu = new Menu("안녕!");
