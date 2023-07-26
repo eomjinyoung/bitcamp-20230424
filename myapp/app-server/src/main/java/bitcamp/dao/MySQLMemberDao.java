@@ -1,24 +1,24 @@
 package bitcamp.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
+import bitcamp.util.DataSource;
 
 public class MySQLMemberDao implements MemberDao {
 
-  Connection con;
+  DataSource ds;
 
-  public MySQLMemberDao(Connection con) {
-    this.con = con;
+  public MySQLMemberDao(DataSource ds) {
+    this.ds = ds;
   }
 
   @Override
   public void insert(Member member) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
         "insert into myapp_member(name,email,password,gender)"
             + " values(?,?,sha1(?),?)")) {
 
@@ -36,7 +36,7 @@ public class MySQLMemberDao implements MemberDao {
 
   @Override
   public List<Member> list() {
-    try (PreparedStatement stmt = con.prepareStatement(
+    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
         "select member_no, name, email, gender"
             + " from myapp_member"
             + " order by name asc");
@@ -63,7 +63,7 @@ public class MySQLMemberDao implements MemberDao {
 
   @Override
   public Member findBy(int no) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
         "select member_no, name, email, gender, created_date"
             + " from myapp_member"
             + " where member_no=?")) {
@@ -90,7 +90,7 @@ public class MySQLMemberDao implements MemberDao {
 
   @Override
   public Member findByEmailAndPassword(Member param) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
         "select member_no, name, email, gender, created_date"
             + " from myapp_member"
             + " where email=? and password=sha1(?)")) {
@@ -118,7 +118,7 @@ public class MySQLMemberDao implements MemberDao {
 
   @Override
   public int update(Member member) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
         "update myapp_member set"
             + " name=?,"
             + " email=?,"
@@ -141,7 +141,7 @@ public class MySQLMemberDao implements MemberDao {
 
   @Override
   public int delete(int no) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
         "delete from myapp_member where member_no=?")) {
 
       stmt.setInt(1, no);
