@@ -466,6 +466,11 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 50. Application Server 아키텍터로 전환하기
 
+### 46일(7/26,수)
+
+- 자바 프로그래밍
+- 프로젝트 실습
+  - 51. DB 커넥션 풀을 이용한 Connection 재사용하기
 
 
 ## 웨일즈 화상회의
