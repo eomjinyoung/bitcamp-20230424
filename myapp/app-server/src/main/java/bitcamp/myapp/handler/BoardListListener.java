@@ -29,9 +29,9 @@ public class BoardListListener implements ActionListener {
       prompt.printf("%d, %s, %s, %d, %s\n",
           board.getNo(),
           board.getTitle(),
-          "테스트",//board.getWriter().getName(),
+          board.getWriter().getName(),
           board.getViewCount(),
-          "2023-1-1"//dateFormatter.format(board.getCreatedDate())
+          dateFormatter.format(board.getCreatedDate())
           );
     }
   }
