@@ -59,6 +59,16 @@
       and board_no=#{boardNo}
   </select>
   
+  <update id="update" parameterType="bitcamp.myapp.vo.Board">
+	  update myapp_board set
+	    title=#{title},
+	    content=#{content}
+	  where 
+	    category=#{category}
+	    and board_no=#{no}
+	    and writer=#{writer.no}
+  </update>
+  
   <update id="updateCount" parameterType="bitcamp.myapp.vo.Board">
     update myapp_board set
       view_count=#{viewCount}
@@ -66,6 +76,14 @@
       category=#{category}
       and board_no=#{no}
   </update>
+  
+  <delete id="delete" parameterType="bitcamp.myapp.vo.Board">
+    delete from myapp_board
+    where 
+      category=#{category}
+      and board_no=#{no}
+      and writer=#{writer.no}
+  </delete>
 </mapper>
 
 

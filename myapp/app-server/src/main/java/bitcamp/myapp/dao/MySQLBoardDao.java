@@ -1,6 +1,5 @@
 package bitcamp.myapp.dao;
 
-import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,23 +47,9 @@ public class MySQLBoardDao implements BoardDao {
 
   @Override
   public int update(Board board) {
-    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
-        "update myapp_board set"
-            + " title=?,"
-            + " content=?"
-            + " where category=? and board_no=? and writer=?")) {
-
-      stmt.setString(1, board.getTitle());
-      stmt.setString(2, board.getContent());
-      stmt.setInt(3, this.category);
-      stmt.setInt(4, board.getNo());
-      stmt.setInt(5, board.getWriter().getNo());
-
-      return stmt.executeUpdate();
-
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
+    board.setCategory(this.category);
+    SqlSession sqlSession = sqlSessionFactory.openSession(false);
+    return sqlSession.update("bitcamp.myapp.dao.BoardDao.update", board);
   }
 
   @Override
@@ -76,19 +61,9 @@ public class MySQLBoardDao implements BoardDao {
 
   @Override
   public int delete(Board board) {
-    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
-        "delete from myapp_board"
-            + " where category=? and board_no=? and writer=?")) {
-
-      stmt.setInt(1, this.category);
-      stmt.setInt(2, board.getNo());
-      stmt.setInt(3, board.getWriter().getNo());
-
-      return stmt.executeUpdate();
-
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
+    board.setCategory(this.category);
+    SqlSession sqlSession = sqlSessionFactory.openSession(false);
+    return sqlSession.update("bitcamp.myapp.dao.BoardDao.delete", board);
   }
 
 }

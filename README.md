@@ -472,6 +472,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 51. DB 커넥션 풀을 이용한 Connection 재사용하기
 
+### 47일(7/27,목)
+
+- 자바 프로그래밍
+- 프로젝트 실습
+  - 52. Mybatis SQL-mapper 프레임워크 사용하기
+
 
 ## 웨일즈 화상회의
 
