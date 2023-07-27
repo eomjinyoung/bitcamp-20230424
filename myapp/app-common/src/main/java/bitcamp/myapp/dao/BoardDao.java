@@ -8,5 +8,6 @@ public interface BoardDao {
   List<Board> findAll();
   Board findBy(int no);
   int update(Board board);
+  int updateCount(Board board);
   int delete(Board board);
 }

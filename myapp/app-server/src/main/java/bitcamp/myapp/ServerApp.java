@@ -132,7 +132,7 @@ public class ServerApp {
     MenuGroup boardMenu = new MenuGroup("게시글");
     boardMenu.add(new Menu("등록", new BoardAddListener(boardDao, sqlSessionFactory)));
     boardMenu.add(new Menu("목록", new BoardListListener(boardDao)));
-    boardMenu.add(new Menu("조회", new BoardDetailListener(boardDao, ds)));
+    boardMenu.add(new Menu("조회", new BoardDetailListener(boardDao, sqlSessionFactory)));
     boardMenu.add(new Menu("변경", new BoardUpdateListener(boardDao, ds)));
     boardMenu.add(new Menu("삭제", new BoardDeleteListener(boardDao, ds)));
     mainMenu.add(boardMenu);
@@ -140,7 +140,7 @@ public class ServerApp {
     MenuGroup readingMenu = new MenuGroup("독서록");
     readingMenu.add(new Menu("등록", new BoardAddListener(readingDao, sqlSessionFactory)));
     readingMenu.add(new Menu("목록", new BoardListListener(readingDao)));
-    readingMenu.add(new Menu("조회", new BoardDetailListener(readingDao, ds)));
+    readingMenu.add(new Menu("조회", new BoardDetailListener(readingDao, sqlSessionFactory)));
     readingMenu.add(new Menu("변경", new BoardUpdateListener(readingDao, ds)));
     readingMenu.add(new Menu("삭제", new BoardDeleteListener(readingDao, ds)));
     mainMenu.add(readingMenu);

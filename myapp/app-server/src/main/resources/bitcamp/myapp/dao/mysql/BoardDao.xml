@@ -31,6 +31,7 @@
       b.title,
       b.view_count,
       b.created_date,
+      b.category,
       m.member_no,
       m.name
     from
@@ -48,6 +49,7 @@
       b.content,
       b.view_count,
       b.created_date,
+      b.category,
       m.member_no,
       m.name
     from
@@ -56,6 +58,14 @@
       category=#{categoryNo}
       and board_no=#{boardNo}
   </select>
+  
+  <update id="updateCount" parameterType="bitcamp.myapp.vo.Board">
+    update myapp_board set
+      view_count=#{viewCount}
+    where
+      category=#{category}
+      and board_no=#{no}
+  </update>
 </mapper>
 
 
