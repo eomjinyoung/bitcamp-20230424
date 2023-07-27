@@ -9,4 +9,24 @@
     values(#{title},#{content},#{writer.no},#{category})
   </insert>
   
+  <select id="findAll" parameterType="int">
+    select
+      b.board_no,
+      b.title,
+      b.view_count,
+      b.created_date,
+      m.member_no,
+      m.name
+    from
+      myapp_board b inner join myapp_member m on b.writer=m.member_no
+    where
+      category=#{categoryNo}
+    order by
+      board_no desc
+  </select>
 </mapper>
+
+
+
+
+

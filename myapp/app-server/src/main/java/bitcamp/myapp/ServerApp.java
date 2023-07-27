@@ -31,6 +31,7 @@ import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.DataSource;
 import bitcamp.util.Menu;
 import bitcamp.util.MenuGroup;
+import bitcamp.util.SqlSessionFactoryProxy;
 
 public class ServerApp {
 
@@ -58,7 +59,7 @@ public class ServerApp {
     SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
 
     // 3) 빌더 객체를 통해 SqlSessionFactory를 생성
-    sqlSessionFactory = builder.build(mybatisConfigIn);
+    sqlSessionFactory = new SqlSessionFactoryProxy(builder.build(mybatisConfigIn));
 
     this.memberDao = new MySQLMemberDao(ds);
     this.boardDao = new MySQLBoardDao(sqlSessionFactory, ds, 1);
@@ -115,6 +116,7 @@ public class ServerApp {
 
     } finally {
       ds.clean(); // 현재 스레드에 보관된 Connection 객체를 닫고, 스레드에서 제거한다.
+      ((SqlSessionFactoryProxy) sqlSessionFactory).clean();
     }
   }
 

@@ -2,7 +2,6 @@ package bitcamp.myapp.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -29,63 +28,10 @@ public class MySQLBoardDao implements BoardDao {
     sqlSession.insert("bitcamp.myapp.dao.BoardDao.insert", board);
   }
 
-  /*
-   select
-     b.board_no,
-     b.title,
-     b.view_count,
-     b.created_date,
-     m.member_no,
-     m.name
-   from
-     myapp_board b inner join myapp_member m on b.writer=m.member_no
-   where
-     category=1
-   order by
-     board_no desc
-   */
   @Override
   public List<Board> findAll() {
-    try (PreparedStatement stmt = ds.getConnection(false).prepareStatement(
-        "select" +
-            "  b.board_no, " +
-            "  b.title, " +
-            "  b.view_count, " +
-            "  b.created_date, " +
-            "  m.member_no, " +
-            "  m.name " +
-            " from " +
-            "  myapp_board b inner join myapp_member m on b.writer=m.member_no" +
-            " where " +
-            "  category=?" +
-            " order by " +
-            "  board_no desc"
-        )) {
-
-      stmt.setInt(1, this.category);
-
-      try (ResultSet rs = stmt.executeQuery()) {
-        List<Board> list = new ArrayList<>();
-        while (rs.next()) {
-          Board b = new Board();
-          b.setNo(rs.getInt("board_no"));
-          b.setTitle(rs.getString("title"));
-          b.setViewCount(rs.getInt("view_count"));
-          b.setCreatedDate(rs.getTimestamp("created_date"));
-
-          Member writer = new Member();
-          writer.setNo(rs.getInt("member_no"));
-          writer.setName(rs.getString("name"));
-          b.setWriter(writer);
-
-          list.add(b);
-        }
-        return list;
-      }
-
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
+    SqlSession sqlSession = sqlSessionFactory.openSession(true);
+    return sqlSession.selectList("bitcamp.myapp.dao.BoardDao.findAll", this.category);
   }
 
 
