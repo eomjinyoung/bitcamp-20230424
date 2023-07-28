@@ -28,7 +28,6 @@ import bitcamp.myapp.handler.MemberListListener;
 import bitcamp.myapp.handler.MemberUpdateListener;
 import bitcamp.net.NetProtocol;
 import bitcamp.util.BreadcrumbPrompt;
-import bitcamp.util.DataSource;
 import bitcamp.util.Menu;
 import bitcamp.util.MenuGroup;
 import bitcamp.util.SqlSessionFactoryProxy;
@@ -39,7 +38,7 @@ public class ServerApp {
   ExecutorService threadPool = Executors.newFixedThreadPool(2);
 
   SqlSessionFactory sqlSessionFactory;
-  DataSource ds = new DataSource("jdbc:mysql://localhost:3306/studydb", "study", "1111");
+
   MemberDao memberDao;
   BoardDao boardDao;
 
@@ -60,7 +59,7 @@ public class ServerApp {
     // 3) 빌더 객체를 통해 SqlSessionFactory를 생성
     sqlSessionFactory = new SqlSessionFactoryProxy(builder.build(mybatisConfigIn));
 
-    this.memberDao = new MySQLMemberDao(ds);
+    this.memberDao = new MySQLMemberDao(sqlSessionFactory);
     this.boardDao = new MySQLBoardDao(sqlSessionFactory);
 
     prepareMenu();
@@ -113,18 +112,17 @@ public class ServerApp {
       e.printStackTrace();
 
     } finally {
-      ds.clean(); // 현재 스레드에 보관된 Connection 객체를 닫고, 스레드에서 제거한다.
       ((SqlSessionFactoryProxy) sqlSessionFactory).clean();
     }
   }
 
   private void prepareMenu() {
     MenuGroup memberMenu = new MenuGroup("회원");
-    memberMenu.add(new Menu("등록", new MemberAddListener(memberDao, ds)));
+    memberMenu.add(new Menu("등록", new MemberAddListener(memberDao, sqlSessionFactory)));
     memberMenu.add(new Menu("목록", new MemberListListener(memberDao)));
     memberMenu.add(new Menu("조회", new MemberDetailListener(memberDao)));
-    memberMenu.add(new Menu("변경", new MemberUpdateListener(memberDao, ds)));
-    memberMenu.add(new Menu("삭제", new MemberDeleteListener(memberDao, ds)));
+    memberMenu.add(new Menu("변경", new MemberUpdateListener(memberDao, sqlSessionFactory)));
+    memberMenu.add(new Menu("삭제", new MemberDeleteListener(memberDao, sqlSessionFactory)));
     mainMenu.add(memberMenu);
 
     MenuGroup boardMenu = new MenuGroup("게시글");
