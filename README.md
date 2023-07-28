@@ -478,6 +478,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 52. Mybatis SQL-mapper 프레임워크 사용하기
 
+### 48일(7/28,금)
+
+- 자바 프로그래밍
+- 프로젝트 실습
+  - 52. Mybatis SQL-mapper 프레임워크 사용하기(계속)
+
 
 ## 웨일즈 화상회의
 

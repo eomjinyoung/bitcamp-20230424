@@ -10,10 +10,12 @@ import bitcamp.util.BreadcrumbPrompt;
 
 public class BoardUpdateListener implements ActionListener {
 
+  int category;
   BoardDao boardDao;
   SqlSessionFactory sqlSessionFactory;
 
-  public BoardUpdateListener(BoardDao boardDao, SqlSessionFactory sqlSessionFactory) {
+  public BoardUpdateListener(int category, BoardDao boardDao, SqlSessionFactory sqlSessionFactory) {
+    this.category = category;
     this.boardDao = boardDao;
     this.sqlSessionFactory = sqlSessionFactory;
   }
@@ -22,7 +24,7 @@ public class BoardUpdateListener implements ActionListener {
   public void service(BreadcrumbPrompt prompt) throws IOException {
     int boardNo = prompt.inputInt("번호? ");
 
-    Board board = boardDao.findBy(boardNo);
+    Board board = boardDao.findBy(category, boardNo);
     if (board == null) {
       prompt.println("해당 번호의 게시글이 없습니다!");
       return;

@@ -10,10 +10,12 @@ import bitcamp.util.BreadcrumbPrompt;
 
 public class BoardDeleteListener implements ActionListener {
 
+  int category;
   BoardDao boardDao;
   SqlSessionFactory sqlSessionFactory;
 
-  public BoardDeleteListener(BoardDao boardDao, SqlSessionFactory sqlSessionFactory) {
+  public BoardDeleteListener(int category, BoardDao boardDao, SqlSessionFactory sqlSessionFactory) {
+    this.category = category;
     this.boardDao = boardDao;
     this.sqlSessionFactory = sqlSessionFactory;
   }
@@ -24,6 +26,7 @@ public class BoardDeleteListener implements ActionListener {
     Board b = new Board();
     b.setNo(prompt.inputInt("번호? "));
     b.setWriter((Member) prompt.getAttribute("loginUser"));
+    b.setCategory(category);
 
     try {
       if (boardDao.delete(b) == 0) {
