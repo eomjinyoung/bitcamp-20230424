@@ -15,6 +15,10 @@ public class MenuGroup extends Menu {
     this.childs.add(menu);
   }
 
+  public void add(String menuPath, String title, ActionListener listener) {
+    this.childs.add(new Menu(menuPath, title, listener));
+  }
+
   @Override
   public void execute(BreadcrumbPrompt prompt) {
     try {
