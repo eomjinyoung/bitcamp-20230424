@@ -6,8 +6,8 @@ public class MenuGroup extends Menu {
 
   ArrayList<Menu> childs;
 
-  public MenuGroup(String title) {
-    super(title);
+  public MenuGroup(String path, String title) {
+    super(path, title);
     this.childs = new ArrayList<>();
   }
 

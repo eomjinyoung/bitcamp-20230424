@@ -15,19 +15,10 @@ import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.dao.MySQLBoardDao;
 import bitcamp.myapp.dao.MySQLMemberDao;
-import bitcamp.myapp.handler.BoardAddListener;
-import bitcamp.myapp.handler.BoardDeleteListener;
-import bitcamp.myapp.handler.BoardDetailListener;
-import bitcamp.myapp.handler.BoardListListener;
-import bitcamp.myapp.handler.BoardUpdateListener;
 import bitcamp.myapp.handler.LoginListener;
-import bitcamp.myapp.handler.MemberAddListener;
-import bitcamp.myapp.handler.MemberDeleteListener;
-import bitcamp.myapp.handler.MemberDetailListener;
-import bitcamp.myapp.handler.MemberListListener;
-import bitcamp.myapp.handler.MemberUpdateListener;
 import bitcamp.net.NetProtocol;
 import bitcamp.util.BreadcrumbPrompt;
+import bitcamp.util.DispatcherListener;
 import bitcamp.util.Menu;
 import bitcamp.util.MenuGroup;
 import bitcamp.util.SqlSessionFactoryProxy;
@@ -42,7 +33,8 @@ public class ServerApp {
   MemberDao memberDao;
   BoardDao boardDao;
 
-  MenuGroup mainMenu = new MenuGroup("메인");
+  MenuGroup mainMenu = new MenuGroup("/", "메인");
+  DispatcherListener facadeListener = new DispatcherListener();
 
   int port;
 
@@ -117,34 +109,29 @@ public class ServerApp {
   }
 
   private void prepareMenu() {
-    MenuGroup memberMenu = new MenuGroup("회원");
-    memberMenu.add(new Menu("등록", new MemberAddListener(memberDao, sqlSessionFactory)));
-    memberMenu.add(new Menu("목록", new MemberListListener(memberDao)));
-    memberMenu.add(new Menu("조회", new MemberDetailListener(memberDao)));
-    memberMenu.add(new Menu("변경", new MemberUpdateListener(memberDao, sqlSessionFactory)));
-    memberMenu.add(new Menu("삭제", new MemberDeleteListener(memberDao, sqlSessionFactory)));
+    MenuGroup memberMenu = new MenuGroup("member", "회원");
+    memberMenu.add(new Menu("member/add", "등록", facadeListener));
+    memberMenu.add(new Menu("member/list", "목록", facadeListener));
+    memberMenu.add(new Menu("member/detail", "조회", facadeListener));
+    memberMenu.add(new Menu("member/update", "변경", facadeListener));
+    memberMenu.add(new Menu("member/delete", "삭제", facadeListener));
     mainMenu.add(memberMenu);
 
-    MenuGroup boardMenu = new MenuGroup("게시글");
-    boardMenu.add(new Menu("등록", new BoardAddListener(1, boardDao, sqlSessionFactory)));
-    boardMenu.add(new Menu("목록", new BoardListListener(1, boardDao)));
-    boardMenu.add(new Menu("조회", new BoardDetailListener(1, boardDao, sqlSessionFactory)));
-    boardMenu.add(new Menu("변경", new BoardUpdateListener(1, boardDao, sqlSessionFactory)));
-    boardMenu.add(new Menu("삭제", new BoardDeleteListener(1, boardDao, sqlSessionFactory)));
+    MenuGroup boardMenu = new MenuGroup("board", "게시글");
+    boardMenu.add(new Menu("board/add", "등록", facadeListener));
+    boardMenu.add(new Menu("board/list", "목록", facadeListener));
+    boardMenu.add(new Menu("board/detail", "조회", facadeListener));
+    boardMenu.add(new Menu("board/update", "변경", facadeListener));
+    boardMenu.add(new Menu("board/delete", "삭제", facadeListener));
     mainMenu.add(boardMenu);
 
-    MenuGroup readingMenu = new MenuGroup("독서록");
-    readingMenu.add(new Menu("등록", new BoardAddListener(2, boardDao, sqlSessionFactory)));
-    readingMenu.add(new Menu("목록", new BoardListListener(2, boardDao)));
-    readingMenu.add(new Menu("조회", new BoardDetailListener(2, boardDao, sqlSessionFactory)));
-    readingMenu.add(new Menu("변경", new BoardUpdateListener(2, boardDao, sqlSessionFactory)));
-    readingMenu.add(new Menu("삭제", new BoardDeleteListener(2, boardDao, sqlSessionFactory)));
+    MenuGroup readingMenu = new MenuGroup("reading", "독서록");
+    readingMenu.add(new Menu("reading/add", "등록", facadeListener));
+    readingMenu.add(new Menu("reading/list", "목록", facadeListener));
+    readingMenu.add(new Menu("reading/detail", "조회", facadeListener));
+    readingMenu.add(new Menu("reading/update", "변경", facadeListener));
+    readingMenu.add(new Menu("reading/delete", "삭제", facadeListener));
     mainMenu.add(readingMenu);
 
-    //    Menu helloMenu = new Menu("안녕!");
-    //    helloMenu.addActionListener(new HeaderListener());
-    //    helloMenu.addActionListener(new HelloListener());
-    //    helloMenu.addActionListener(new FooterListener());
-    //    mainMenu.add(helloMenu);
   }
 }
