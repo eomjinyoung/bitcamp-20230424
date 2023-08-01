@@ -1,22 +1,15 @@
 package bitcamp.myapp;
 
 import java.net.Socket;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.apache.ibatis.session.SqlSessionFactory;
 import bitcamp.util.ApplicationContext;
 import bitcamp.util.DispatcherListener;
 import bitcamp.util.SqlSessionFactoryProxy;
-import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.http.HttpRequestDecoder;
-import io.netty.handler.codec.http.HttpResponseEncoder;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
+import reactor.core.publisher.Mono;
+import reactor.netty.DisposableServer;
+import reactor.netty.http.server.HttpServer;
 
 public class ServerApp {
 
@@ -42,63 +35,22 @@ public class ServerApp {
   }
 
   public void execute() throws Exception {
-    // ServerSocket을 통해 클라이언트 연결을 처리하는 스레드 그룹
-    EventLoopGroup bossGroup = new NioEventLoopGroup();
+    Path file = Paths.get(ServerApp.class.getResource("/static/index.html").toURI());
+    DisposableServer server = HttpServer
+        .create()
+        .port(8888)
+        .route(routes -> routes // 클라이언트 요청을 처리할 객체를 등록한다.
+            .get("/hello", (request, response) -> response.sendString(Mono.just("Hello, world!")))
+            .get("/board/list", (request, response) -> response.sendString(Mono.just("게시글 목록")))
+            .get("/board/add", (request, response) -> response.sendString(Mono.just("게시글 등록")))
+            .get("/board/detail", (request, response) -> response.sendString(Mono.just("게시글 조회")))
+            .file("/index.html", file)
+            )
+        .bindNow();
+    System.out.println("서버 실행됨!");
 
-    // 클라이언트와 연결된 Socket의 통신을 처리하는 스레드 그룹
-    EventLoopGroup workerGroup = new NioEventLoopGroup();
-
-    try {
-      // 서버 설정을 수행할 객체 준비
-      ServerBootstrap bootstrap = new ServerBootstrap();
-
-      // 서버로서 작업을 수행할 스레드 그룹을 설정
-      bootstrap.group(bossGroup, workerGroup);
-
-      // 클라이언트와 통신하는 채널의 타입을 지정
-      // 클라이언트가 연결되면 이 타입의 객체를 생성한다.
-      // 이 채널 객체가 클라이언트와의 통신을 수행한다.
-      bootstrap.channel(NioServerSocketChannel.class);
-
-      // 클라이언트와의 통신 과정을 로그로 남기는 일을 할 객체를 등록한다.
-      bootstrap.handler(new LoggingHandler(LogLevel.INFO));
-
-      // 클라이언트와 연결된 채널을 준비시키는 객체 설정
-      bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
-        @Override
-        public void initChannel(SocketChannel ch) throws Exception {
-          // 클라이언트가 연결되면 이 메서드가 호출되어
-          // 통신 채널을 준비한다.
-          System.out.println("클라이언트와 연결된 채널을 준비시킨다!");
-
-          // => 클라이언트가 보낸 요청을 처리할 객체 등록
-          ch.pipeline().addLast(new HttpRequestDecoder());
-          ch.pipeline().addLast(new HttpResponseEncoder());
-          ch.pipeline().addLast(new ServerHandler());
-        }
-      });
-
-      // 대기열 개수 설정
-      bootstrap.option(ChannelOption.SO_BACKLOG, 128);
-
-      // 클라이언트의 연결을 계속 유지할 것인지 설정
-      bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
-
-      System.out.println("ServerBootstrap 설정 완료!");
-
-      // 설정된 정보를 기반으로 서버 시작
-      ChannelFuture f = bootstrap.bind(port).sync();
-      System.out.println("서버 시작됨!");
-
-      // 모든 클라이언트의 연결이 끊어지면 종료하라고 예약한다.
-      // => 서버가 종료할 때까지 리턴되지 않는다.
-      f.channel().closeFuture().sync();
-      System.out.println("서버 종료됨!");
-
-    } finally {
-      workerGroup.shutdownGracefully();
-      bossGroup.shutdownGracefully();
-    }
+    server.onDispose().block();
+    System.out.println("서버 종료됨!");
   }
 
   private void processRequest(Socket socket) {

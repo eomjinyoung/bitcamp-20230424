@@ -20,8 +20,10 @@ dependencies {
     // Mybatis 라이브러리
     implementation 'org.mybatis:mybatis:3.5.13'
   
-    // Netty 프레임워크
-    implementation 'io.netty:netty-all:4.1.96.Final'
+    // Reactor Netty 프레임워크
+    implementation platform('io.projectreactor:reactor-bom:2022.0.9') 
+    implementation 'io.projectreactor.netty:reactor-netty-core' 
+    implementation 'io.projectreactor.netty:reactor-netty-http'
   
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
     implementation 'com.google.guava:guava:31.1-jre'
