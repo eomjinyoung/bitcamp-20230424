@@ -5,7 +5,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
+import bitcamp.util.Component;
 
+@Component("/member/add")
 public class MemberAddListener implements MemberActionListener {
 
   MemberDao memberDao;

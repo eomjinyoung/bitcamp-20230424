@@ -162,6 +162,12 @@ public class ApplicationContext {
         continue;
       }
 
+      Component compAnno = clazz.getAnnotation(Component.class);
+      if (compAnno == null) {
+        // @Component 애노테이션이 붙지 않았다면 객체 생성 대상에서 제외한다.
+        continue;
+      }
+
       // - 클래스 정보를 가지고 클래스의 생성자를 알아낸다.
       Constructor<?> constructor = clazz.getConstructors()[0];
 
@@ -175,7 +181,13 @@ public class ApplicationContext {
       Object obj = constructor.newInstance(args);
 
       // - 생성된 객체를 컨테이너에 저장한다.
-      beanContainer.put(clazz.getSimpleName(), obj);
+      if (compAnno.value().length() > 0) {
+        // @Component 애노테이션에 객체 이름이 지정되어 있다면 그 이름으로 객체를 저장한다.
+        beanContainer.put(compAnno.value(), obj);
+      } else {
+        // 그렇지 않다면, 클래스 이름으로 객체를 저장한다.
+        beanContainer.put(clazz.getSimpleName(), obj);
+      }
 
       System.out.printf("%s 객체 생성!\n", clazz.getName());
     }

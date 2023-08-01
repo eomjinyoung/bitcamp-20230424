@@ -6,7 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import bitcamp.myapp.vo.Board;
+import bitcamp.util.Component;
 
+@Component
 public class MySQLBoardDao implements BoardDao {
 
   SqlSessionFactory sqlSessionFactory;

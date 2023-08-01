@@ -27,7 +27,7 @@
     from
       myapp_member 
     order by
-      name desc
+      name asc
   </select>
   
   <select id="findBy" parameterType="int" resultMap="memberMap">
