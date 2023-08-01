@@ -12,14 +12,13 @@ public class DispatcherServlet implements Servlet {
 
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    PrintWriter out = response.getWriter();
-    out.println("Hello, world!");
-    out.println("반가워요!");
-
-    //    ActionListener listener = (ActionListener) iocContainer.getBean((String)prompt.getAttribute("menuPath"));
-    //    if (listener == null) {
-    //      throw new RuntimeException("해당 요청을 처리할 수 없습니다.");
-    //    }
-    //    listener.service(prompt);
+    Servlet servlet = (Servlet) iocContainer.getBean("/" + request.path());
+    if (servlet == null) {
+      response.setContentType("text/plain;charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      out.println("해당 요청을 처리할 수 없습니다!");
+      return;
+    }
+    servlet.service(request, response);
   }
 }

@@ -35,18 +35,37 @@ public class HttpServletResponse {
 
   // 서블릿이 클라이언트에게 응답할 때 사용할 출력 스트림 도구
   StringWriter buf = new StringWriter();
-  PrintWriter out = new PrintWriter(buf);
+  PrintWriter out;
+
+  // 응답 콘텐트의 타입
+  String contentType = "text/plain;charset=ISO-8859-1";
 
   public HttpServletResponse(HttpServerResponse original) {
     this.original = original;
   }
 
   public PrintWriter getWriter() {
+    if (out == null) {
+      out = new PrintWriter(buf);
+    }
     return this.out;
   }
 
   public String getContent() {
     return buf.toString();
+  }
+
+  public void setContentType(String contentType) {
+    if (out != null) {
+      // 출력 스트림을 사용한 상태라면 콘텐트 설정을 무시한다.
+      return;
+    }
+
+    this.contentType = contentType;
+  }
+
+  public String getContentType() {
+    return this.contentType;
   }
 
   public SocketAddress hostAddress() {
