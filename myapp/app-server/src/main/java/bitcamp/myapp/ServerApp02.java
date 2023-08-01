@@ -13,19 +13,15 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.http.HttpRequestDecoder;
-import io.netty.handler.codec.http.HttpResponseEncoder;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 
-public class ServerApp {
+public class ServerApp02 {
 
   ApplicationContext iocContainer;
   DispatcherListener facadeListener;
 
   int port;
 
-  public ServerApp(int port) throws Exception {
+  public ServerApp02(int port) throws Exception {
     this.port = port;
     //    iocContainer = new ApplicationContext(AppConfig.class);
     //    facadeListener = new DispatcherListener(iocContainer);
@@ -36,7 +32,7 @@ public class ServerApp {
   }
 
   public static void main(String[] args) throws Exception {
-    ServerApp app = new ServerApp(8888);
+    ServerApp02 app = new ServerApp02(8888);
     app.execute();
     app.close();
   }
@@ -60,9 +56,6 @@ public class ServerApp {
       // 이 채널 객체가 클라이언트와의 통신을 수행한다.
       bootstrap.channel(NioServerSocketChannel.class);
 
-      // 클라이언트와의 통신 과정을 로그로 남기는 일을 할 객체를 등록한다.
-      bootstrap.handler(new LoggingHandler(LogLevel.INFO));
-
       // 클라이언트와 연결된 채널을 준비시키는 객체 설정
       bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
         @Override
@@ -72,8 +65,6 @@ public class ServerApp {
           System.out.println("클라이언트와 연결된 채널을 준비시킨다!");
 
           // => 클라이언트가 보낸 요청을 처리할 객체 등록
-          ch.pipeline().addLast(new HttpRequestDecoder());
-          ch.pipeline().addLast(new HttpResponseEncoder());
           ch.pipeline().addLast(new ServerHandler());
         }
       });
