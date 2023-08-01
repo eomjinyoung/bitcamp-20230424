@@ -9,7 +9,7 @@ import bitcamp.util.ActionListener;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.Component;
 
-@Component
+@Component("/board/list")
 public class BoardListListener implements ActionListener {
 
   BoardDao boardDao;

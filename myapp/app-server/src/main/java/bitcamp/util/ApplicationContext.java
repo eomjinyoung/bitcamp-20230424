@@ -156,7 +156,7 @@ public class ApplicationContext {
 
     // 6) 로딩된 클래스 정보를 활용하여 객체를 생성한다.
     for (Class<?> clazz : classes) {
-
+      System.out.println(clazz.getName());
       if (clazz.isEnum() || clazz.isInterface() || clazz.isLocalClass() || clazz.isMemberClass()) {
         // 패키지 멤버 클래스가 아닌 경우 객체 생성 대상에서 제외한다.
         continue;
