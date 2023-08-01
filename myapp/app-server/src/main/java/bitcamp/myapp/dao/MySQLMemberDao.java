@@ -4,7 +4,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import bitcamp.myapp.vo.Member;
+import bitcamp.util.Component;
 
+@Component
 public class MySQLMemberDao implements MemberDao {
 
   SqlSessionFactory sqlSessionFactory;
