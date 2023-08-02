@@ -69,7 +69,7 @@ public class DispatcherServlet implements Servlet {
     try (BufferedReader in = new BufferedReader(new FileReader(realPath))) {
       int ch;
       while ((ch = in.read()) != -1) {
-        // 파일에서 한 줄씩 읽어서 버퍼에 담는다.
+        // 파일에서 한 문자씩 읽어서 버퍼에 담는다.
         strBuf.append((char)ch);
       }
     }
