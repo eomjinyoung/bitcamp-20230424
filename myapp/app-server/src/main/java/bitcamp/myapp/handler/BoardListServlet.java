@@ -45,7 +45,14 @@ public class BoardListServlet implements Servlet {
 
     out.println("<tbody>");
     for (Board board : list) {
-      out.printf("<tr><td>%d</td> <td>%s</td> <td>%s</td> <td>%d</td> <td>%s</td></tr>\n",
+      out.printf("<tr>"
+          + " <td>%d</td>"
+          + " <td><a href='/board/detail?category=%d&no=%d'>%s</a></td>"
+          + " <td>%s</td>"
+          + " <td>%d</td>"
+          + " <td>%s</td></tr>\n",
+          board.getNo(),
+          board.getCategory(),
           board.getNo(),
           board.getTitle(),
           board.getWriter().getName(),
