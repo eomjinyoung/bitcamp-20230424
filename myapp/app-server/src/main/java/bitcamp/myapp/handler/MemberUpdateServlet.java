@@ -9,13 +9,13 @@ import bitcamp.util.HttpServletRequest;
 import bitcamp.util.HttpServletResponse;
 import bitcamp.util.Servlet;
 
-@Component("/member/add")
-public class MemberAddListener implements Servlet {
+@Component("/member/update")
+public class MemberUpdateServlet implements Servlet {
 
   MemberDao memberDao;
   SqlSessionFactory sqlSessionFactory;
 
-  public MemberAddListener(MemberDao memberDao, SqlSessionFactory sqlSessionFactory) {
+  public MemberUpdateServlet(MemberDao memberDao, SqlSessionFactory sqlSessionFactory) {
     this.memberDao = memberDao;
     this.sqlSessionFactory = sqlSessionFactory;
   }
@@ -23,11 +23,12 @@ public class MemberAddListener implements Servlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-    Member m = new Member();
-    m.setName(request.getParameter("name"));
-    m.setEmail(request.getParameter("email"));
-    m.setPassword(request.getParameter("password"));
-    m.setGender(request.getParameter("gender").charAt(0));
+    Member member = new Member();
+    member.setNo(Integer.parseInt(request.getParameter("no")));
+    member.setName(request.getParameter("name"));
+    member.setEmail(request.getParameter("email"));
+    member.setPassword(request.getParameter("password"));
+    member.setGender(request.getParameter("gender").charAt(0));
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -39,20 +40,23 @@ public class MemberAddListener implements Servlet {
     out.println("<title>회원</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>회원 등록</h1>");
+    out.println("<h1>회원 변경</h1>");
 
     try {
-      memberDao.insert(m);
-      sqlSessionFactory.openSession(false).commit();
-      out.println("<p>등록 성공입니다!</p>");
-
+      if (memberDao.update(member) == 0) {
+        out.println("<p>회원이 없습니다.</p>");
+      } else {
+        sqlSessionFactory.openSession(false).commit();
+        out.println("<p>변경했습니다!</p>");
+      }
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
-      out.println("<p>등록 실패입니다!</p>");
+      out.println("<p>변경 실패입니다!</p>");
       e.printStackTrace();
     }
 
     out.println("</body>");
     out.println("</html>");
   }
+
 }

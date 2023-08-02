@@ -46,15 +46,15 @@ public class BoardUpdateServlet implements Servlet {
     out.println("<h1>게시글 변경</h1>");
     try {
       if (boardDao.update(board) == 0) {
-        out.println("게시글이 없거나 변경 권한이 없습니다.");
+        out.println("<p>게시글이 없거나 변경 권한이 없습니다.</p>");
       } else {
-        out.println("변경했습니다!");
+        out.println("<p>변경했습니다!</p>");
       }
       sqlSessionFactory.openSession(false).commit();
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
-      out.println("게시글 변경 실패입니다!");
+      out.println("<p>게시글 변경 실패입니다!</p>");
       e.printStackTrace();
     }
     out.println("</body>");
