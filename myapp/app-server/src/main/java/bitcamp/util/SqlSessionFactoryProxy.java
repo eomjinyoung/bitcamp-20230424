@@ -20,37 +20,23 @@ public class SqlSessionFactoryProxy implements SqlSessionFactory {
   public void clean() {
     SqlSession sqlSession = sqlSessionBox.get();
     if (sqlSession != null) {
+      sqlSession.close();
       sqlSession.rollback();
       sqlSessionBox.remove();
     }
   }
 
   public SqlSession openSession() {
-    return original.openSession();
+    return original.openSession(true);
   }
 
   public SqlSession openSession(boolean autoCommit) {
-
-    if (!autoCommit) {
-      // 수동 커밋으로 동작하는 SqlSession 을 원한다는 것은
-      // 여러 데이터 변경 작업을 묶어서 다루겠다는 의미다.
-      // 그렇게 하려면 동일한 SqlSession 객체를 사용해야 한다.
-      // 이를 위해 스레드에 SqlSession 객체를 보관해두고 리턴한다.
-
-      // 1) 스레드에 보관된 SqlSession 객체를 꺼낸다.
-      SqlSession sqlSession = sqlSessionBox.get();
-
-      if (sqlSession == null) {
-        // 2) 아직 스레드에 보관된 객체가 없다면 새로 만들어 보관한다.
-        sqlSession = original.openSession(false);
-        sqlSessionBox.set(sqlSession);
-      }
-
-      // 3) 스레드에 보관된 SqlSession 객체를 리턴한다.
-      return sqlSession;
+    SqlSession sqlSession = sqlSessionBox.get();
+    if (sqlSession == null) {
+      sqlSession = original.openSession(autoCommit);
+      sqlSessionBox.set(sqlSession);
     }
-
-    return original.openSession(autoCommit);
+    return sqlSession;
   }
 
   public SqlSession openSession(Connection connection) {

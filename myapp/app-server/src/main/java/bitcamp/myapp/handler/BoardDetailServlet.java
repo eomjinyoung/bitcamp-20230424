@@ -59,6 +59,8 @@ public class BoardDetailServlet implements Servlet {
       out.println("<div>");
       out.println("<button>변경</button>");
       out.println("<button type='reset'>초기화</button>");
+      out.printf("<a href='/board/delete?category=%d&no=%d'>삭제</a>\n",
+          board.getCategory(), board.getNo());
       out.printf("<a href='/board/list?category=%d'>목록</a>\n", board.getCategory());
       out.println("</div>");
       out.println("</form>");

@@ -44,9 +44,19 @@ public class DispatcherServlet implements Servlet {
       servlet.service(request, response);
 
     } catch (Exception e) {
-      response.setContentType("text/plain;charset=UTF-8");
+      response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
-      out.println("해당 요청을 처리할 수 없습니다!");
+      out.println("<!DOCTYPE html>");
+      out.println("<html>");
+      out.println("<head>");
+      out.println("<meta charset='UTF-8'>");
+      out.println("<title>게시글</title>");
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<h1>실행 오류!</h1>");
+      out.printf("<p>%s</p>\n", e.getMessage());
+      out.println("</body>");
+      out.println("</html>");
     }
   }
 

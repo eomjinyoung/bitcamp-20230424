@@ -54,7 +54,7 @@ public class BoardListServlet implements Servlet {
           board.getNo(),
           board.getCategory(),
           board.getNo(),
-          board.getTitle(),
+          (board.getTitle().length() > 0 ? board.getTitle() : "제목없음"),
           board.getWriter().getName(),
           board.getViewCount(),
           dateFormatter.format(board.getCreatedDate())
