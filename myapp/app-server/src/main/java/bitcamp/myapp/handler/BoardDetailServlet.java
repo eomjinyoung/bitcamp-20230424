@@ -42,9 +42,13 @@ public class BoardDetailServlet implements Servlet {
       out.println("<p>해당 번호의 게시글이 없습니다!</p>");
 
     } else {
+      out.println("<form action='/board/update'>");
+      out.printf("<input type='hidden' name='category' value='%d'>\n", board.getCategory());
       out.println("<table border='1'>");
-      out.printf("<tr><th style='width:120px;'>제목</th>"
-          + " <td style='width:300px;'><input type='text' name='title' value='%s'></td></tr>\n", board.getTitle());
+      out.printf("<tr><th style='width:120px;'>번호</th>"
+          + " <td style='width:300px;'><input type='text' name='no' value='%d' readonly></td></tr>\n", board.getNo());
+      out.printf("<tr><th>제목</th>"
+          + " <td><input type='text' name='title' value='%s'></td></tr>\n", board.getTitle());
       out.printf("<tr><th>내용</th>"
           + " <td><textarea name='content' style='height:200px; width:400px;'>%s</textarea></td></tr>\n", board.getContent());
       out.printf("<tr><th>작성자</th> <td>%s</td></tr>\n", board.getWriter().getName());
@@ -55,8 +59,9 @@ public class BoardDetailServlet implements Servlet {
       out.println("<div>");
       out.println("<button>변경</button>");
       out.println("<button type='reset'>초기화</button>");
-      out.println("<a href='/board/list?category=1'>목록</a>");
+      out.printf("<a href='/board/list?category=%d'>목록</a>\n", board.getCategory());
       out.println("</div>");
+      out.println("</form>");
       try {
         board.setViewCount(board.getViewCount() + 1);
         boardDao.updateCount(board);
