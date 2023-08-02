@@ -23,6 +23,8 @@ public class BoardListServlet implements Servlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+    int category = Integer.parseInt(request.getParameter("category"));
+
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     out.println("<!DOCTYPE html>");
@@ -34,14 +36,14 @@ public class BoardListServlet implements Servlet {
     out.println("<body>");
     out.println("<h1>게시글 목록</h1>");
     out.println("<div style='margin:5px;'>");
-    out.println("<a href='/board/form.html'>새 글</a>");
+    out.printf("<a href='/board/form?category=%d'>새 글</a>\n", category);
     out.println("</div>");
     out.println("<table border='1'>");
     out.println("<thead>");
     out.println("  <tr><th>번호</th> <th>제목</th> <th>작성자</th> <th>조회수</th> <th>등록일</th></tr>");
     out.println("</thead>");
 
-    List<Board> list = boardDao.findAll(Integer.parseInt(request.getParameter("category")));
+    List<Board> list = boardDao.findAll(category);
 
     out.println("<tbody>");
     for (Board board : list) {
@@ -61,6 +63,8 @@ public class BoardListServlet implements Servlet {
           );
     }
     out.println("</tbody>");
+    out.println("</table>");
+    out.println("<a href='/'>메인</a>");
     out.println("</body>");
     out.println("</html>");
   }

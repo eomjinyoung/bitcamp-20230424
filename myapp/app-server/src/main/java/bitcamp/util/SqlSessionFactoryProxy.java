@@ -23,11 +23,12 @@ public class SqlSessionFactoryProxy implements SqlSessionFactory {
       sqlSession.close();
       sqlSession.rollback();
       sqlSessionBox.remove();
+      System.out.println("스레드에서 SqlSession 제거!");
     }
   }
 
   public SqlSession openSession() {
-    return original.openSession(true);
+    return openSession(true);
   }
 
   public SqlSession openSession(boolean autoCommit) {
