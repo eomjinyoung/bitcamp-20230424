@@ -38,8 +38,7 @@ public class BoardListServlet implements Servlet {
     out.println("  <tr><th>번호</th> <th>제목</th> <th>작성자</th> <th>조회수</th> <th>등록일</th></tr>");
     out.println("</thead>");
 
-    int category = 1;
-    List<Board> list = boardDao.findAll(category);
+    List<Board> list = boardDao.findAll(Integer.parseInt(request.getParameter("category")));
 
     out.println("<tbody>");
     for (Board board : list) {
