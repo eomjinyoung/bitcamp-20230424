@@ -67,10 +67,10 @@ public class DispatcherServlet implements Servlet {
     // 클라이언트가 요청한 URL의 실제 파일 위치를 알아낸다.
     String realPath = getRealPath(url);
     try (BufferedReader in = new BufferedReader(new FileReader(realPath))) {
-      String line = null;
-      while ((line = in.readLine()) != null) {
+      int ch;
+      while ((ch = in.read()) != -1) {
         // 파일에서 한 줄씩 읽어서 버퍼에 담는다.
-        strBuf.append(line);
+        strBuf.append((char)ch);
       }
     }
 
