@@ -3,6 +3,7 @@ package bitcamp.util;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,10 +26,19 @@ public class HttpServletRequest {
 
   HttpServerRequest original;
   QueryStringDecoder qsDecoder;
+  Map<String,Object> attrMap = new HashMap<>();
 
   public HttpServletRequest(HttpServerRequest original) {
     this.original = original;
     this.qsDecoder = new QueryStringDecoder(original.uri());
+  }
+
+  public void setAttribute(String name, Object value) {
+    this.attrMap.put(name, value);
+  }
+
+  public Object getAttribute(String name) {
+    return this.attrMap.get(name);
   }
 
   public String getServletPath() {

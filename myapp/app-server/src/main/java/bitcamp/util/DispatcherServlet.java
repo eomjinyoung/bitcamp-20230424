@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.net.URL;
+import bitcamp.myapp.dao.MemberDao;
 
 public class DispatcherServlet implements Servlet {
 
@@ -24,11 +25,22 @@ public class DispatcherServlet implements Servlet {
         return;
       }
 
+      // HTML 문서를 요청할 경우,
+      if (request.getServletPath().endsWith(".html")) {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.print(getStaticContent(request.getServletPath()));
+        return;
+      }
+
       // 서블릿의 실행을 요구할 경우,
       Servlet servlet = (Servlet) iocContainer.getBean(request.getServletPath());
       if (servlet == null) {
         throw new Exception("요청한 URL이 유효하지 않습니다.");
       }
+
+      MemberDao memberDao = iocContainer.getBean(MemberDao.class);
+      request.setAttribute("loginUser", memberDao.findBy(3));
       servlet.service(request, response);
 
     } catch (Exception e) {
