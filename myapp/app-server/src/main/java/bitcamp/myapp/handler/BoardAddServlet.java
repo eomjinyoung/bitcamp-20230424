@@ -24,12 +24,18 @@ public class BoardAddServlet implements Servlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    if (loginUser == null) {
+      response.sendRedirect("/auth/form.html");
+      return;
+    }
+
     int category = Integer.parseInt(request.getParameter("category"));
 
     Board board = new Board();
     board.setTitle(request.getParameter("title"));
     board.setContent(request.getParameter("content"));
-    board.setWriter((Member) request.getAttribute("loginUser"));
+    board.setWriter(loginUser);
     board.setCategory(category);
 
     response.setContentType("text/html;charset=UTF-8");

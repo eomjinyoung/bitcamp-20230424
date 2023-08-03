@@ -27,11 +27,20 @@ public class HttpServletRequest {
   HttpServerRequest original;
   QueryStringDecoder qsDecoder;
   Map<String,Object> attrMap = new HashMap<>();
+  HttpSession session;
 
   public HttpServletRequest(HttpServerRequest original) {
     this.original = original;
     this.qsDecoder = new QueryStringDecoder(original.uri());
 
+  }
+
+  public void setSession(HttpSession session) {
+    this.session = session;
+  }
+
+  public HttpSession getSession() {
+    return this.session;
   }
 
   public void setAttribute(String name, Object value) {

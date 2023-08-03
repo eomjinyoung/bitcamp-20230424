@@ -1,7 +1,6 @@
 package bitcamp.util;
 
 import java.io.PrintWriter;
-import bitcamp.myapp.dao.MemberDao;
 
 public class DispatcherServlet implements Servlet {
 
@@ -20,8 +19,6 @@ public class DispatcherServlet implements Servlet {
         throw new Exception("요청한 URL이 유효하지 않습니다.");
       }
 
-      MemberDao memberDao = iocContainer.getBean(MemberDao.class);
-      request.setAttribute("loginUser", memberDao.findBy(3));
       servlet.service(request, response);
 
     } catch (Exception e) {
