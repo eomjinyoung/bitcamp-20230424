@@ -2,10 +2,13 @@ package bitcamp.util;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.nio.charset.Charset;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -27,12 +30,31 @@ public class HttpServletRequest {
   HttpServerRequest original;
   QueryStringDecoder qsDecoder;
   Map<String,Object> attrMap = new HashMap<>();
+  Map<String,List<String>> paramMap = new HashMap<>();
   HttpSession session;
 
   public HttpServletRequest(HttpServerRequest original) {
     this.original = original;
     this.qsDecoder = new QueryStringDecoder(original.uri());
+    for (Entry<String,List<String>> entry : qsDecoder.parameters().entrySet()) {
+      paramMap.put(entry.getKey(), entry.getValue());
+    }
+  }
 
+  public void parseFormBody(String body) {
+    // POST 요청으로 넘어온 파라미터 값을 기존 파라미터 맵에 보관한다.
+    QueryStringDecoder decoder = new QueryStringDecoder("/dumy?" + body, Charset.forName("UTF-8"));
+    Map<String,List<String>> bodyParams = decoder.parameters();
+    for (Entry<String,List<String>> entry : bodyParams.entrySet()) {
+      List<String> values = this.paramMap.get(entry.getKey());
+      if (values == null) {
+        values = new ArrayList<>();
+        values.addAll(entry.getValue());
+        this.paramMap.put(entry.getKey(), values);
+      } else {
+        values.addAll(entry.getValue());
+      }
+    }
   }
 
   public void setSession(HttpSession session) {
@@ -56,11 +78,19 @@ public class HttpServletRequest {
   }
 
   public String getParameter(String name) {
-    return qsDecoder.parameters().get(name).get(0);
+    List<String> values = this.paramMap.get(name);
+    if (values == null || values.size() == 0) {
+      return null;
+    }
+    return values.get(0);
   }
 
   public String[] getParameterValues(String name) {
-    return qsDecoder.parameters().get(name).toArray(new String[0]);
+    List<String> values = this.paramMap.get(name);
+    if (values == null || values.size() == 0) {
+      return null;
+    }
+    return values.toArray(new String[0]);
   }
 
   public ByteBufFlux receive() {

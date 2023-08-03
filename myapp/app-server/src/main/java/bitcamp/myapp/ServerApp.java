@@ -61,6 +61,7 @@ public class ServerApp {
   }
 
   private NettyOutbound processRequest(HttpServerRequest request, HttpServerResponse response) {
+
     HttpServletRequest request2 = new HttpServletRequest(request);
     HttpServletResponse response2 = new HttpServletResponse(response);
 
@@ -117,13 +118,28 @@ public class ServerApp {
         return response.sendFile(Path.of(ServerApp.class.getResource(resourcePath).toURI()));
       }
 
-      dispatcherServlet.service(request2, response2);
+      if (request.isFormUrlencoded()) {
+        return response.sendString(request.receive()
+            .aggregate()
+            .asString()
+            .map(body -> {
+              try {
+                System.out.println("test..ok");
+                request2.parseFormBody(body);
+                dispatcherServlet.service(request2, response2);
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+              response.addHeader("Content-Type", response2.getContentType());
+              return response2.getContent();
+            }));
 
-      // HTTP 응답 프로토콜의 헤더 설정
-      response.addHeader("Content-Type", response2.getContentType());
+      } else {
 
-      // 서블릿이 출력한 문자열을 버퍼에서 꺼내 HTTP 프로토콜에 맞춰 응답한다.
-      return response.sendString(Mono.just(response2.getContent()));
+        dispatcherServlet.service(request2, response2);
+        response.addHeader("Content-Type", response2.getContentType());
+        return response.sendString(Mono.just(response2.getContent()));
+      }
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -134,5 +150,7 @@ public class ServerApp {
           (SqlSessionFactoryProxy) iocContainer.getBean(SqlSessionFactory.class);
       sqlSessionFactoryProxy.clean();
     }
+
   }
+
 }

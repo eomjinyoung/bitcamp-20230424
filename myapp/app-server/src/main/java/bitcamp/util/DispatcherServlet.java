@@ -22,6 +22,7 @@ public class DispatcherServlet implements Servlet {
       servlet.service(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
       response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
       out.println("<!DOCTYPE html>");
