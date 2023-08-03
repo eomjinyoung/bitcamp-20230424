@@ -67,7 +67,7 @@ public class ServerApp {
 
       // 클라이언트가 보낸 쿠키들 중에서 세션ID가 있는지 확인한다.
       List<Cookie> cookies = request2.allCookies().get(MYAPP_SESSION_ID);
-      if (cookies.size() > 0) {
+      if (cookies != null) {
         // 세션ID가 있으면 이 값을 가지고 클라이언트를 구분한다.
         sessionId = cookies.get(0).value();
       } else {
