@@ -37,7 +37,7 @@ public class MemberDetailServlet implements Servlet {
       out.println("<p>해당 번호의 회원이 없습니다!</p>");
 
     } else {
-      out.println("<form action='/member/update'>");
+      out.println("<form action='/member/update' method='post'>");
       out.println("<table border='1'>");
       out.printf("<tr><th style='width:120px;'>번호</th>"
           + " <td style='width:300px;'><input type='text' name='no' value='%d' readonly></td></tr>\n", member.getNo());

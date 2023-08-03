@@ -28,14 +28,15 @@ import reactor.netty.http.server.HttpServerRequest;
 public class HttpServletRequest {
 
   HttpServerRequest original;
-  QueryStringDecoder qsDecoder;
   Map<String,Object> attrMap = new HashMap<>();
   Map<String,List<String>> paramMap = new HashMap<>();
   HttpSession session;
+  String servletPath;
 
   public HttpServletRequest(HttpServerRequest original) {
     this.original = original;
-    this.qsDecoder = new QueryStringDecoder(original.uri());
+    QueryStringDecoder qsDecoder = new QueryStringDecoder(original.uri());
+    this.servletPath = qsDecoder.path();
     for (Entry<String,List<String>> entry : qsDecoder.parameters().entrySet()) {
       paramMap.put(entry.getKey(), entry.getValue());
     }
@@ -74,7 +75,7 @@ public class HttpServletRequest {
   }
 
   public String getServletPath() {
-    return qsDecoder.path();
+    return this.servletPath;
   }
 
   public String getParameter(String name) {

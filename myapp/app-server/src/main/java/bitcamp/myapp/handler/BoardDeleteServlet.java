@@ -23,11 +23,17 @@ public class BoardDeleteServlet implements Servlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    if (loginUser == null) {
+      response.sendRedirect("/auth/form.html");
+      return;
+    }
+
     int category = Integer.parseInt(request.getParameter("category"));
 
     Board b = new Board();
     b.setNo(Integer.parseInt(request.getParameter("no")));
-    b.setWriter((Member) request.getAttribute("loginUser"));
+    b.setWriter(loginUser);
     b.setCategory(category);
 
     try {

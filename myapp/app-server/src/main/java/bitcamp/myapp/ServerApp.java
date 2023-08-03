@@ -119,12 +119,12 @@ public class ServerApp {
       }
 
       if (request.isFormUrlencoded()) {
+        // POST 방식으로 요청했다면,
         return response.sendString(request.receive()
             .aggregate()
             .asString()
             .map(body -> {
               try {
-                System.out.println("test..ok");
                 request2.parseFormBody(body);
                 dispatcherServlet.service(request2, response2);
               } catch (Exception e) {
@@ -135,7 +135,7 @@ public class ServerApp {
             }));
 
       } else {
-
+        // GET 방식으로 요청했다면,
         dispatcherServlet.service(request2, response2);
         response.addHeader("Content-Type", response2.getContentType());
         return response.sendString(Mono.just(response2.getContent()));
