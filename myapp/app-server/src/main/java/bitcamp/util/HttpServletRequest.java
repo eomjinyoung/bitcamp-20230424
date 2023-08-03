@@ -31,6 +31,7 @@ public class HttpServletRequest {
   public HttpServletRequest(HttpServerRequest original) {
     this.original = original;
     this.qsDecoder = new QueryStringDecoder(original.uri());
+
   }
 
   public void setAttribute(String name, Object value) {

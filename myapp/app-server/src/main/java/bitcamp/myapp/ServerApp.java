@@ -1,5 +1,6 @@
 package bitcamp.myapp;
 
+import java.nio.file.Path;
 import org.apache.ibatis.session.SqlSessionFactory;
 import bitcamp.myapp.config.AppConfig;
 import bitcamp.util.ApplicationContext;
@@ -54,6 +55,24 @@ public class ServerApp {
     HttpServletResponse response2 = new HttpServletResponse(response);
 
     try {
+      String servletPath = request2.getServletPath();
+
+      // favicon.ico 요청에 대한 응답
+      if (servletPath.equals("/favicon.ico")) {
+        response.addHeader("Content-Type", "image/vnd.microsoft.icon");
+        return response.sendFile(Path.of(ServerApp.class.getResource("/static/favicon.ico").toURI()));
+      }
+
+      // welcome 파일 또는 HTML 파일을 요청할 때
+      if (servletPath.endsWith("/") || servletPath.endsWith(".html")) {
+        String resourcePath = String.format("/static%s%s",
+            servletPath,
+            (servletPath.endsWith("/") ? "index.html" : ""));
+
+        response.addHeader("Content-Type", "text/html;charset=UTF-8");
+        return response.sendFile(Path.of(ServerApp.class.getResource(resourcePath).toURI()));
+      }
+
       dispatcherServlet.service(request2, response2);
 
       // HTTP 응답 프로토콜의 헤더 설정
