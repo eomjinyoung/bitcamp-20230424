@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
     // 서브 프로젝트의 클래스를 사용하기
-    implementation project(':app-common')
+    //implementation project(':app-common')
     
     // MySQL JDBC Driver
     implementation 'mysql:mysql-connector-java:8.0.33'
@@ -52,6 +52,16 @@ eclipse {
       sourceCompatibility = 17
       targetCompatibility = 17
       javaRuntimeName = "JavaSE-17"
+    }
+    wtp {
+        facet {
+            facet name: 'jst.java', version: '17'
+            //facet name: 'jst.web', version: '4.0'
+        }
+        component {
+            //contextPath = '/web'
+            //deployName = 'web'
+        }
     }
 }
 
