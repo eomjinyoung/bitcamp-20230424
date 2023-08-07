@@ -1,27 +1,25 @@
 package bitcamp.myapp.handler;
 
+import java.io.IOException;
 import java.io.PrintWriter;
-import org.apache.ibatis.session.SqlSessionFactory;
-import bitcamp.myapp.dao.MemberDao;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import bitcamp.myapp.vo.Member;
-import bitcamp.util.Component;
-import bitcamp.util.HttpServletRequest;
-import bitcamp.util.HttpServletResponse;
-import bitcamp.util.Servlet;
+import bitcamp.util.AbstractServlet;
 
-@Component("/member/update")
-public class MemberUpdateServlet implements Servlet {
-
-  MemberDao memberDao;
-  SqlSessionFactory sqlSessionFactory;
-
-  public MemberUpdateServlet(MemberDao memberDao, SqlSessionFactory sqlSessionFactory) {
-    this.memberDao = memberDao;
-    this.sqlSessionFactory = sqlSessionFactory;
-  }
+@WebServlet("/member/update")
+public class MemberUpdateServlet extends AbstractServlet {
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public void service(ServletRequest req, ServletResponse res)
+      throws ServletException, IOException {
+
+    HttpServletRequest request = (HttpServletRequest) req;
+    HttpServletResponse response = (HttpServletResponse) res;
 
     Member member = new Member();
     member.setNo(Integer.parseInt(request.getParameter("no")));
@@ -43,14 +41,14 @@ public class MemberUpdateServlet implements Servlet {
     out.println("<h1>회원 변경</h1>");
 
     try {
-      if (memberDao.update(member) == 0) {
+      if (InitServlet.memberDao.update(member) == 0) {
         out.println("<p>회원이 없습니다.</p>");
       } else {
-        sqlSessionFactory.openSession(false).commit();
+        InitServlet.sqlSessionFactory.openSession(false).commit();
         out.println("<p>변경했습니다!</p>");
       }
     } catch (Exception e) {
-      sqlSessionFactory.openSession(false).rollback();
+      InitServlet.sqlSessionFactory.openSession(false).rollback();
       out.println("<p>변경 실패입니다!</p>");
       e.printStackTrace();
     }

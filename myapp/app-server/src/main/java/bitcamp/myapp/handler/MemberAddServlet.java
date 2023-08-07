@@ -1,27 +1,25 @@
 package bitcamp.myapp.handler;
 
+import java.io.IOException;
 import java.io.PrintWriter;
-import org.apache.ibatis.session.SqlSessionFactory;
-import bitcamp.myapp.dao.MemberDao;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import bitcamp.myapp.vo.Member;
-import bitcamp.util.Component;
-import bitcamp.util.HttpServletRequest;
-import bitcamp.util.HttpServletResponse;
-import bitcamp.util.Servlet;
+import bitcamp.util.AbstractServlet;
 
-@Component("/member/add")
-public class MemberAddServlet implements Servlet {
-
-  MemberDao memberDao;
-  SqlSessionFactory sqlSessionFactory;
-
-  public MemberAddServlet(MemberDao memberDao, SqlSessionFactory sqlSessionFactory) {
-    this.memberDao = memberDao;
-    this.sqlSessionFactory = sqlSessionFactory;
-  }
+@WebServlet("/member/add")
+public class MemberAddServlet extends AbstractServlet {
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public void service(ServletRequest req, ServletResponse res)
+      throws ServletException, IOException {
+
+    HttpServletRequest request = (HttpServletRequest) req;
+    HttpServletResponse response = (HttpServletResponse) res;
 
     Member m = new Member();
     m.setName(request.getParameter("name"));
@@ -42,12 +40,12 @@ public class MemberAddServlet implements Servlet {
     out.println("<h1>회원 등록</h1>");
 
     try {
-      memberDao.insert(m);
-      sqlSessionFactory.openSession(false).commit();
+      InitServlet.memberDao.insert(m);
+      InitServlet.sqlSessionFactory.openSession(false).commit();
       out.println("<p>등록 성공입니다!</p>");
 
     } catch (Exception e) {
-      sqlSessionFactory.openSession(false).rollback();
+      InitServlet.sqlSessionFactory.openSession(false).rollback();
       out.println("<p>등록 실패입니다!</p>");
       e.printStackTrace();
     }

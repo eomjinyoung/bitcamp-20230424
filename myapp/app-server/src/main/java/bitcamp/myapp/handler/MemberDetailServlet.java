@@ -1,26 +1,27 @@
 package bitcamp.myapp.handler;
 
+import java.io.IOException;
 import java.io.PrintWriter;
-import bitcamp.myapp.dao.MemberDao;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import bitcamp.myapp.vo.Member;
-import bitcamp.util.Component;
-import bitcamp.util.HttpServletRequest;
-import bitcamp.util.HttpServletResponse;
-import bitcamp.util.Servlet;
+import bitcamp.util.AbstractServlet;
 
-@Component("/member/detail")
-public class MemberDetailServlet implements Servlet {
-
-  MemberDao memberDao;
-
-  public MemberDetailServlet(MemberDao memberDao) {
-    this.memberDao = memberDao;
-  }
+@WebServlet("/member/detail")
+public class MemberDetailServlet extends AbstractServlet {
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public void service(ServletRequest req, ServletResponse res)
+      throws ServletException, IOException {
 
-    Member member = memberDao.findBy(Integer.parseInt(request.getParameter("no")));
+    HttpServletRequest request = (HttpServletRequest) req;
+    HttpServletResponse response = (HttpServletResponse) res;
+
+    Member member = InitServlet.memberDao.findBy(Integer.parseInt(request.getParameter("no")));
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
