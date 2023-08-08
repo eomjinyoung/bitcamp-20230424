@@ -1,5 +1,5 @@
 // 클라이언트가 보낸 데이터 읽기 - 여러 개의 데이터를 같은 이름으로 보낸 경우
-package com.eomcs.web.ex04;
+package eomcs.servlet.ex04;
 
 import java.io.IOException;
 import java.io.PrintWriter;

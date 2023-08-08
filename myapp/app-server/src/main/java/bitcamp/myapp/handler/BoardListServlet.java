@@ -18,7 +18,7 @@ public class BoardListServlet extends HttpServlet {
   SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     int category = Integer.parseInt(request.getParameter("category"));

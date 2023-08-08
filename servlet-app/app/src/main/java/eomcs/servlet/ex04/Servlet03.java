@@ -1,5 +1,5 @@
 // 클라이언트가 보낸 데이터 읽기 - 파일 업로드 처리하기
-package com.eomcs.web.ex04;
+package eomcs.servlet.ex04;
 
 import java.io.IOException;
 import java.io.PrintWriter;

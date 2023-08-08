@@ -1,5 +1,5 @@
 // 썸네일 이미지 만들기
-package com.eomcs.web.ex04;
+package eomcs.servlet.ex04;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.Thumbnails.Builder;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 

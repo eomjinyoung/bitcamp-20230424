@@ -1,5 +1,5 @@
 // 클라이언트가 보낸 데이터 읽기 - 빈 값과 null
-package com.eomcs.web.ex04;
+package eomcs.servlet.ex04;
 
 import java.io.IOException;
 import java.io.PrintWriter;

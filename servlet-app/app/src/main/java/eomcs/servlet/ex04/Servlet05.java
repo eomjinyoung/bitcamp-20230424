@@ -1,5 +1,5 @@
 // 멀티파트 파일 업로드 처리하기 - Servlet 3.0의 기본 라이브러리 사용
-package com.eomcs.web.ex04;
+package eomcs.servlet.ex04;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -74,5 +74,5 @@ public class Servlet05 extends GenericServlet {
     }
     out.println("</body></html>");
   }
-} 
+}
 
