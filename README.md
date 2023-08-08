@@ -531,6 +531,9 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 - 자바 프로그래밍(eomcs-servlet)
   - 서블릿 작성 방법
+  - HTTP 프로토콜 이해: GET, POST, HEAD 요청
+  - HttpServlet 클래스 사용법
+  - URL 인코딩(퍼센트 인코딩) 원리 및 목적
 - 프로젝트 실습
   - 56. 웹 애플리케이션 자바 표준 기술 JavaEE 도입(계속)
 
