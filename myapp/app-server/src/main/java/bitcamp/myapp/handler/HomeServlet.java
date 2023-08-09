@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import bitcamp.myapp.vo.Member;
 
 @WebServlet("/index.html")
 public class HomeServlet extends HttpServlet {
@@ -32,7 +33,13 @@ public class HomeServlet extends HttpServlet {
     out.println("  <li><a href='/member/list'>회원</a></li>");
     out.println("  <li><a href='/board/list?category=1'>게시판</a></li>");
     out.println("  <li><a href='/board/list?category=2'>독서록</a></li>");
-    out.println("  <li><a href='/auth/form.html'>로그인</a></li>");
+
+    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+    if (loginUser == null) {
+      out.println("  <li><a href='/auth/form.html'>로그인</a></li>");
+    } else {
+      out.printf("  <li>%s <a href='/auth/logout'>로그아웃</a></li>", loginUser.getName());
+    }
     out.println("</ul>");
     out.println("</body>");
     out.println("</html>");
