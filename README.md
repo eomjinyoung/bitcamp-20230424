@@ -552,10 +552,18 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - exerd.com의 ER-Diagram 도구 설치
   - 제1정규화, 제2정규화, 제3정규화 방법
   - ER-Diagram 작성법
-  - Forward Engineering 방법
+  - 논리모델링 실습
 - 개인 프로젝트
   - DB 모델링 수행
 
+
+### 58일(8/11,금)
+
+- DB 모델링
+  - 물리모델링 실습
+  - Forward Engineering 방법
+- 개인 프로젝트
+  - DB 모델링 검토
 
 
 
