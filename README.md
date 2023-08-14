@@ -30,7 +30,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 ### 3일(5/24,수)
 
 - 개발 도구 준비(계속)
-  - 형상관리시스템 소개 
+  - 형상관리시스템 소개
   - git 사용법: clone, add, commit, push, pull
   - Gradle 설치 및 사용법: init, build, run
     - 빌드도구 소개 및 비교: Ant, Maven, Gradle
@@ -44,10 +44,9 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - Gradle을 이용한 실습 프로젝트 폴더 구성
   - 구성된 폴더의 용도
 - 자바 프로그래밍
-  - 소스 파일과 클래스 블록의 관계(com.eomcs.lang.ex01.*)
+  - 소스 파일과 클래스 블록의 관계(com.eomcs.lang.ex01.\*)
   - 클래스의 접근 범위: public 과 (default)
   - Entry Point: main() 메서드
-
 
 ### 4일(5/25,목)
 
@@ -62,7 +61,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
       - Sign-Magnitude, 1's Complement, 2's Complement, Excess-K
   - 부동소수점 리터럴
     - 32비트 크기의 2진수로 바꾸는 방법
-    - 64비트 크기의 2진수로 바꾸는 방법 
+    - 64비트 크기의 2진수로 바꾸는 방법
 - 프로젝트 실습
   - 1. 자바 프로젝트 준비하기
   - 2. 리터럴을 사용하여 데이터 출력하기
@@ -109,7 +108,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
     - final 적용
   - 6. 조건문을 활용하여 실행 흐름을 제어하기
   - 7. 기능 단위로 명령문 묶기 : 메서드 사용법
- 
+
 ### 9일(6/2,금)
 
 - 자바 프로그래밍
@@ -123,8 +122,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 8. 메서드 간에 변수 공유하기 : 스태틱 변수 사용법
 - 기타
-  - 개인 별 *프로그래머스* 회원 가입 및 코딩테스트 연습 시작
-
+  - 개인 별 _프로그래머스_ 회원 가입 및 코딩테스트 연습 시작
 
 ### 10일(6/5,월)
 
@@ -144,7 +142,6 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
     - 프로젝트 폴더 생성 및 초기화
     - 실습 프로젝트와 마찬가지로 1단계에서 9단계까지 진행
     - 각 단계별로 app 폴더를 백업할 것.
-
 
 ### 11일(6/7,수)
 
@@ -173,7 +170,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
     - 스태틱 필드와 스태틱 메서드 사용법
     - 인스턴스 필드와 인스턴스 메서드 사용법
     - 패키지 사용법: import, public 접근 제어
-    - GRASP 패턴: Information Expert 패턴 소개 
+    - GRASP 패턴: Information Expert 패턴 소개
     - GoF의 Design Patters: Factory Method 패턴 소개
     - 생성자 사용법
     - private/public, setter/getter 사용법
@@ -195,7 +192,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 ### 15일(6/13,화)
 
-- 자바 프로그래밍(com.eomcs.oop.ex03.*)
+- 자바 프로그래밍(com.eomcs.oop.ex03.\*)
   - 클래스 로딩과 스태틱 필드: Method Area 메모리 영역
   - new 연산자와 인스턴스 필드: Heap 메모리 영역
   - 메서드와 로컬 변수: JVM Stack 메모리 영역
@@ -208,11 +205,10 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 13. 게시판 관리 기능 추가(계속)
   - 14. 스태틱 필드의 한계 확인
   - 15. 인스턴스 필드와 인스턴스 메서드, 생성자와 의존 객체 주입
-  
 
 ### 17일(6/15,목)
 
-- 자바 프로그래밍(com.eomcs.oop.ex03.*)
+- 자바 프로그래밍(com.eomcs.oop.ex03.\*)
   - Eclipse IDE로 디버깅하는 방법
 - 프로젝트 실습
   - 16. GRASP 패턴: Information Expert 적용
@@ -221,7 +217,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 ### 18일(6/16,금)
 
-- 자바 프로그래밍(com.eomcs.basic.ex01.*)
+- 자바 프로그래밍(com.eomcs.basic.ex01.\*)
   - java.lang.Object 클래스 사용법
 - 프로젝트 실습
   - 19. 다형성을 이용하여 범용으로 사용할 수 있는 목록 클래스 만들기
@@ -244,7 +240,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 추상 클래스와 추상 메서드
 - 프로젝트 실습
   - 23. Composite, Command, Observer 디자인 패턴, 추상 클래스/메서드 활용하기
-  
+
 ### 22일(6/22,목)
 
 - 자바 프로그래밍(com.eomcs.oop)
@@ -258,7 +254,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - ex06: 다형성 사용법(계속)
   - com.eomcs.basic
     - ex01: Object 클래스 사용법
-    - ex02: String, Wrapper, Date, Calendar 클래스 사용법 
+    - ex02: String, Wrapper, Date, Calendar 클래스 사용법
 
 ### 24일(6/26,월)
 
@@ -273,13 +269,13 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - File 클래스 사용법(ex01)
   - 바이너리 파일 입출력 다루기(ex02)
   - 프로젝트에서 외부 라이브러리를 사용하는 방법
-    - JPEG 파일의 위도 경도 알아내기 
-    - 1) search.maven.org 사이트에서 라이브러리 검색
-    - 2) 의존 라이브러리 정보를 빌드 스크립트 파일(build.gradle)에 등록
-    - 3) 라이브러리 다운로드 및 이클립스 설정 파일 갱신: gradle eclipse 실행
-    - 4) Eclipse IDE에서 해당 프로젝트를 refresh 한다.
-    - 5) 프로젝트에서 외부 라이브러리 확인
-    - 6) 소스 파일에 해당 라이브러리 클래스를 적용
+    - JPEG 파일의 위도 경도 알아내기
+    - 1. search.maven.org 사이트에서 라이브러리 검색
+    - 2. 의존 라이브러리 정보를 빌드 스크립트 파일(build.gradle)에 등록
+    - 3. 라이브러리 다운로드 및 이클립스 설정 파일 갱신: gradle eclipse 실행
+    - 4. Eclipse IDE에서 해당 프로젝트를 refresh 한다.
+    - 5. 프로젝트에서 외부 라이브러리 확인
+    - 6. 소스 파일에 해당 라이브러리 클래스를 적용
 
 ### 26일(6/28,수)
 
@@ -400,7 +396,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 임계영역(Critical Region, Critical Section): 세마포어(Semaphore)와 뮤텍스(Mutex)
 - 프로젝트 실습
   - 44. 스레드 재사용하기 : 스레드풀(thread pool) 구현
-  
+
 ### 39일(7/17,월)
 
 - 자바 프로그래밍
@@ -411,7 +407,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
     - 사용자 추가/삭제
     - 데이터베이스 추가/삭제
     - 사용자, 데이터베이스, 테이블 정보 조회
-    - DBMS와 DBMS 클라이언트와 관계 
+    - DBMS와 DBMS 클라이언트와 관계
 - 프로젝트 실습
   - 45. 스레드 재사용하기 : 자바에서 제공하는 스레드풀(thread pool) 사용
 
@@ -429,13 +425,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - JDBC 프로그래밍(com.eomcs.jdbc)
     - SQL - DML 사용법
     - SQL - DQL 사용법
-  
 
 ### 42일(7/20,목)
 
 - 자바 프로그래밍
   - JDBC 프로그래밍(com.eomcs.jdbc)
-    - SQL - DQL 사용법: 조인, 서브쿼리, 그룹 
+    - SQL - DQL 사용법: 조인, 서브쿼리, 그룹
 
 ### 43일(7/21,금)
 
@@ -556,7 +551,6 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 개인 프로젝트
   - DB 모델링 수행
 
-
 ### 58일(8/11,금)
 
 - DB 모델링
@@ -565,7 +559,10 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 개인 프로젝트
   - DB 모델링 검토
 
+### 59일(8/14,월)
 
+- 프로젝트 실습
+  - 57. 파일 업로드 다루기 - multipart/form-data POST 요청 파라미터 인코딩
 
 ## 웨일즈 화상회의
 
