@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS myapp_board RESTRICT;
 -- 게시판유형
 DROP TABLE IF EXISTS myapp_board_category RESTRICT;
 
+-- 게시글첨부파일
+DROP TABLE IF EXISTS myapp_board_file RESTRICT;
+
 -- 회원
 CREATE TABLE myapp_member (
   member_no    INTEGER      NOT NULL COMMENT '번호', -- 번호
@@ -79,6 +82,24 @@ CREATE UNIQUE INDEX UIX_myapp_board_category
 ALTER TABLE myapp_board_category
   MODIFY COLUMN board_category_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '번호';
 
+-- 게시글첨부파일
+CREATE TABLE myapp_board_file (
+  board_file_no INTEGER      NOT NULL COMMENT '번호', -- 번호
+  filepath      VARCHAR(255) NOT NULL COMMENT '파일경로', -- 파일경로
+  board_no      INTEGER      NOT NULL COMMENT '게시글번호' -- 게시글번호
+)
+COMMENT '게시글첨부파일';
+
+-- 게시글첨부파일
+ALTER TABLE myapp_board_file
+  ADD CONSTRAINT PK_myapp_board_file -- 게시글첨부파일 기본키
+  PRIMARY KEY (
+  board_file_no -- 번호
+  );
+
+ALTER TABLE myapp_board_file
+  MODIFY COLUMN board_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '번호';
+
 -- 게시글
 ALTER TABLE myapp_board
   ADD CONSTRAINT FK_myapp_member_TO_myapp_board -- 회원 -> 게시글
@@ -97,4 +118,14 @@ ALTER TABLE myapp_board
   )
   REFERENCES myapp_board_category ( -- 게시판유형
   board_category_no -- 번호
+  );
+
+-- 게시글첨부파일
+ALTER TABLE myapp_board_file
+  ADD CONSTRAINT FK_myapp_board_TO_myapp_board_file -- 게시글 -> 게시글첨부파일
+  FOREIGN KEY (
+  board_no -- 게시글번호
+  )
+  REFERENCES myapp_board ( -- 게시글
+  board_no -- 번호
   );
