@@ -3,6 +3,7 @@ package bitcamp.myapp.handler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
 
@@ -53,6 +55,8 @@ public class BoardAddServlet extends HttpServlet {
       String uploadDir = 웹애플리케이션환경정보.getRealPath("/upload/board/");
       //      System.out.println(uploadDir);
 
+      ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
+
       for (FileItem part : parts) {
         if (part.isFormField()) { // 일반 데이터
           if (part.getFieldName().equals("title")) {
@@ -66,9 +70,19 @@ public class BoardAddServlet extends HttpServlet {
           // 업로드 파일은 배포 폴더에 저장한다.
           // 1) 파일을 저장할 때 사용할 이름을 준비한다.
           String filename = UUID.randomUUID().toString();
+
+          // 2) upload 배포 폴더에서 파일을 저장한다.
           part.write(new File(uploadDir, filename));
+
+          // 3) 파일 이름을 객체에 보관하여 목록에 추가한다.
+          AttachedFile attachedFile = new AttachedFile();
+          attachedFile.setFilePath(filename);
+
+          attachedFiles.add(attachedFile);
         }
       }
+      board.setAttachedFiles(attachedFiles);
+
 
       response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
@@ -82,7 +96,12 @@ public class BoardAddServlet extends HttpServlet {
       out.println("<body>");
       out.println("<h1>게시글 등록</h1>");
       try {
+        //        System.out.println(board.getNo());
         InitServlet.boardDao.insert(board);
+        //        System.out.println(board.getNo());
+        int count = InitServlet.boardDao.insertFiles(board);
+        System.out.println(count);
+
         InitServlet.sqlSessionFactory.openSession(false).commit();
         out.println("<p>등록 성공입니다!</p>");
 

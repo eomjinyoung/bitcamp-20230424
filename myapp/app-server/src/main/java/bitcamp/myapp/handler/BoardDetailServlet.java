@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 
 @WebServlet("/board/detail")
@@ -49,7 +50,15 @@ public class BoardDetailServlet extends HttpServlet {
       out.printf("<tr><th>작성자</th> <td>%s</td></tr>\n", board.getWriter().getName());
       out.printf("<tr><th>조회수</th> <td>%s</td></tr>\n", board.getViewCount());
       out.printf("<tr><th>등록일</th> <td>%tY-%1$tm-%1$td</td></tr>\n", board.getCreatedDate());
+      out.println("<tr><th>첨부파일</th><td>");
+
+      for (AttachedFile file : board.getAttachedFiles()) {
+        out.printf("<a href='/upload/board/%s'>%1$s</a><br>\n", file.getFilePath());
+      }
+
+      out.println("</td></tr>");
       out.println("</table>");
+
 
       out.println("<div>");
       out.println("<button>변경</button>");

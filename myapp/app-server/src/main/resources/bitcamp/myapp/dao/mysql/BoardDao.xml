@@ -18,9 +18,15 @@
       <result column="name"         property="name"/>
     </association>
     
+    <collection property="attachedFiles" ofType="attachedFile">
+      <id     column="board_file_no"    property="no"/>
+      <result column="filepath"         property="filePath"/>
+    </collection>
+    
   </resultMap>
 
-  <insert id="insert" parameterType="board">
+  <insert id="insert" parameterType="board"
+          useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
     insert into myapp_board(title,content,writer,category)
     values(#{title},#{content},#{writer.no},#{category})
   </insert>
@@ -51,12 +57,15 @@
       b.created_date,
       b.category,
       m.member_no,
-      m.name
+      m.name,
+      f.board_file_no,
+      f.filepath
     from
       myapp_board b inner join myapp_member m on b.writer=m.member_no
+      left outer join myapp_board_file f on b.board_no=f.board_no
     where
-      category=#{categoryNo}
-      and board_no=#{boardNo}
+      b.category=#{categoryNo}
+      and b.board_no=#{boardNo}
   </select>
   
   <update id="update" parameterType="board">
@@ -84,6 +93,12 @@
       and board_no=#{no}
       and writer=#{writer.no}
   </delete>
+  
+  <insert id="insertFiles" parameterType="board">
+    insert into myapp_board_file(filepath, board_no) 
+    values 
+    <foreach collection="attachedFiles" item="file" separator=",">(#{file.filePath}, #{no})</foreach>
+  </insert>
 </mapper>
 
 
