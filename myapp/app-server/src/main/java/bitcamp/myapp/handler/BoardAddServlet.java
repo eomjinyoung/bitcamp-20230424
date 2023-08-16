@@ -39,6 +39,8 @@ public class BoardAddServlet extends HttpServlet {
       board.setCategory(Integer.parseInt(request.getParameter("category")));
 
       String uploadDir = request.getServletContext().getRealPath("/upload/board/");
+      System.out.println(uploadDir);
+
       ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
 
       for (Part part : request.getParts()) {
