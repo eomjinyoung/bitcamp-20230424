@@ -363,5 +363,8 @@
 ## 57. 파일 업로드 다루기 - multipart/form-data POST 요청 파라미터 인코딩
 
 - apache.org의 라이브러리를 이용하여 multipart/form-data 파라미터를 다루는 방법
-- Servlet API를 이용하여 multipart/form-data 파라미터를 다루는 방법
 - 네이버클라우드 mysql DBMS 사용하기
+
+## 58. 파일 업로드 다루기 II - multipart/form-data POST 요청 파라미터 인코딩
+
+- Servlet API를 이용하여 multipart/form-data 파라미터를 다루는 방법

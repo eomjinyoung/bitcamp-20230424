@@ -564,6 +564,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 57. 파일 업로드 다루기 - multipart/form-data POST 요청 파라미터 인코딩
 
+### 60일(8/16,수)
+
+- 프로젝트 실습
+  - 57. 파일 업로드 다루기 - multipart/form-data POST 요청 파라미터 인코딩(계속)
+  - 58. 파일 업로드 다루기 II - multipart/form-data POST 요청 파라미터 인코딩
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
