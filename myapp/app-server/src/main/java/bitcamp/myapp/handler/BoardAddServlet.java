@@ -69,8 +69,11 @@ public class BoardAddServlet extends HttpServlet {
         //        System.out.println(board.getNo());
         InitServlet.boardDao.insert(board);
         //        System.out.println(board.getNo());
-        int count = InitServlet.boardDao.insertFiles(board);
-        System.out.println(count);
+
+        if (attachedFiles.size() > 0) {
+          int count = InitServlet.boardDao.insertFiles(board);
+          System.out.println(count);
+        }
 
         InitServlet.sqlSessionFactory.openSession(false).commit();
         out.println("<p>등록 성공입니다!</p>");

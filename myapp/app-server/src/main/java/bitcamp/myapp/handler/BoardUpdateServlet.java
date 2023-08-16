@@ -67,9 +67,11 @@ public class BoardUpdateServlet extends HttpServlet {
       if (InitServlet.boardDao.update(board) == 0) {
         out.println("<p>게시글이 없거나 변경 권한이 없습니다.</p>");
       } else {
-        // 게시글을 정상적으로 변경했으면, 그 게시글의 첨부파일을 추가한다.
-        int count = InitServlet.boardDao.insertFiles(board);
-        System.out.println(count);
+        if (attachedFiles.size() > 0) {
+          // 게시글을 정상적으로 변경했으면, 그 게시글의 첨부파일을 추가한다.
+          int count = InitServlet.boardDao.insertFiles(board);
+          System.out.println(count);
+        }
 
         out.println("<p>변경했습니다!</p>");
         response.setHeader("refresh", "1;url=/board/list?category=" + board.getCategory());
