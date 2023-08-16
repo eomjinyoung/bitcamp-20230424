@@ -42,7 +42,7 @@ public class BoardAddServlet extends HttpServlet {
       ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
 
       for (Part part : request.getParts()) {
-        System.out.println(part.getName());
+        //        System.out.println(part.getName());
         if (part.getName().equals("files") && part.getSize() > 0) {
           String filename = UUID.randomUUID().toString();
           part.write(uploadDir + filename);

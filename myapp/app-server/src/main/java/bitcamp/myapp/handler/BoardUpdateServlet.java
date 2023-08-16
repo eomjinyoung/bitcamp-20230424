@@ -1,24 +1,22 @@
 package bitcamp.myapp.handler;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import javax.servlet.http.Part;
 import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
 
 @WebServlet("/board/update")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 public class BoardUpdateServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
@@ -45,28 +43,20 @@ public class BoardUpdateServlet extends HttpServlet {
     out.println("<h1>게시글 변경</h1>");
 
     try {
-      List<FileItem> parts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+      Board board = new Board();
+      board.setWriter(loginUser);
+      board.setNo(Integer.parseInt(request.getParameter("no")));
+      board.setTitle(request.getParameter("title"));
+      board.setContent(request.getParameter("content"));
+      board.setCategory(Integer.parseInt(request.getParameter("category")));
 
       String uploadDir = request.getServletContext().getRealPath("/upload/board/");
       ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
 
-      Board board = new Board();
-      board.setWriter(loginUser);
-
-      for (FileItem part : parts) {
-        if (part.isFormField()) {
-          if (part.getFieldName().equals("title")) {
-            board.setTitle(part.getString("UTF-8"));
-          } else if (part.getFieldName().equals("content")) {
-            board.setContent(part.getString("UTF-8"));
-          } else if (part.getFieldName().equals("category")) {
-            board.setCategory(Integer.parseInt(part.getString("UTF-8")));
-          } else if (part.getFieldName().equals("no")) {
-            board.setNo(Integer.parseInt(part.getString("UTF-8")));
-          }
-        } else {
+      for (Part part : request.getParts()) {
+        if (part.getName().equals("files") && part.getSize() > 0) {
           String filename = UUID.randomUUID().toString();
-          part.write(new File(uploadDir, filename));
+          part.write(uploadDir + filename);
           AttachedFile attachedFile = new AttachedFile();
           attachedFile.setFilePath(filename);
           attachedFiles.add(attachedFile);
