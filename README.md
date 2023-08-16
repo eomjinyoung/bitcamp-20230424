@@ -570,6 +570,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 57. 파일 업로드 다루기 - multipart/form-data POST 요청 파라미터 인코딩(계속)
   - 58. 파일 업로드 다루기 II - multipart/form-data POST 요청 파라미터 인코딩
   - 59. 서블릿 컨테이너 삽입하기
+  - 60. 첨부파일을 네이버 클라우드의 스토리지 서비스에 저장하기
 
 ## 웨일즈 화상회의
 
