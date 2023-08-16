@@ -19,9 +19,10 @@ public class BoardDetailServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    Board board = InitServlet.boardDao.findBy(
-        Integer.parseInt(request.getParameter("category")),
-        Integer.parseInt(request.getParameter("no")));
+    int category = Integer.parseInt(request.getParameter("category"));
+    int no = Integer.parseInt(request.getParameter("no"));
+
+    Board board = InitServlet.boardDao.findBy(category, no);
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -53,7 +54,9 @@ public class BoardDetailServlet extends HttpServlet {
       out.println("<tr><th>첨부파일</th><td>");
 
       for (AttachedFile file : board.getAttachedFiles()) {
-        out.printf("<a href='/upload/board/%s'>%1$s</a><br>\n", file.getFilePath());
+        out.printf("<a href='/upload/board/%s'>%1$s</a>"
+            + " [<a href='/board/file/delete?category=%d&no=%d'>삭제</a>]"
+            + "<br>\n", file.getFilePath(), category, file.getNo());
       }
 
       out.println("</td></tr>");
