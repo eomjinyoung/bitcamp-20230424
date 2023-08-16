@@ -116,6 +116,12 @@
     where
       board_file_no=#{no}
   </select>
+  
+  <delete id="deleteFile" parameterType="int">
+    delete from myapp_board_file
+    where 
+      board_file_no=#{no}
+  </delete>
 </mapper>
 
 

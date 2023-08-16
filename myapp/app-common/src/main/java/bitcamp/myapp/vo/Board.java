@@ -18,6 +18,13 @@ public class Board implements Serializable {
   private int category;
   private List<AttachedFile> attachedFiles;
 
+
+  @Override
+  public String toString() {
+    return "Board [no=" + no + ", title=" + title + ", content=" + content + ", writer=" + writer
+        + ", password=" + password + ", viewCount=" + viewCount + ", createdDate=" + createdDate
+        + ", category=" + category + ", attachedFiles=" + attachedFiles + "]";
+  }
   @Override
   public int hashCode() {
     return Objects.hash(no);
