@@ -17,7 +17,8 @@ CREATE TABLE myapp_member (
   email        VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
   password     VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
   gender       CHAR(1)      NOT NULL COMMENT '성별', -- 성별
-  created_date DATE         NOT NULL DEFAULT (current_date()) COMMENT '등록일' -- 등록일
+  created_date DATE         NOT NULL DEFAULT (current_date()) COMMENT '등록일', -- 등록일
+  photo        VARCHAR(255) NULL     COMMENT '사진' -- 사진
 )
 COMMENT '회원';
 

@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>회원</h1>
-<form action='/member/add' method="post">
+<form action='/member/add' method="post" enctype="multipart/form-data">
 <table border="1">
 <tr>
   <th>이름</th> <td style="width:200px;"><input type='text' name='name'></td>
@@ -25,6 +25,9 @@
       <option value="W">여자</option>
     </select>  
   </td>
+</tr>
+<tr>
+  <th>사진</th> <td><input type='file' name='photo'></td>
 </tr>
 </table>
 <button>등록</button>
