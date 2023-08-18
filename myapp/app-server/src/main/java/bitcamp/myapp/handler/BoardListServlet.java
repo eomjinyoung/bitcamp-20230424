@@ -34,7 +34,7 @@ public class BoardListServlet extends HttpServlet {
     out.println("<body>");
     out.println("<h1>게시글 목록</h1>");
     out.println("<div style='margin:5px;'>");
-    out.printf("<a href='/board/form?category=%d'>새 글</a>\n", category);
+    out.printf("<a href='/board/form.jsp?category=%d'>새 글</a>\n", category);
     out.println("</div>");
     out.println("<table border='1'>");
     out.println("<thead>");
