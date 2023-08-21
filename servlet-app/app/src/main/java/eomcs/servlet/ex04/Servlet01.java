@@ -1,13 +1,13 @@
 // 클라이언트가 보낸 데이터 읽기 - GET 요청 데이터 읽기
 package eomcs.servlet.ex04;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/ex04/s1")
 public class Servlet01 extends GenericServlet {
@@ -219,7 +219,7 @@ public class Servlet01 extends GenericServlet {
 // => 웹 자원의 위치를 가리키는 식별자
 // => 종류
 //    URL(Uniform Resource Locator)
-//      scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
+//      scheme:[//[user:password@]host[:port]][/]path[?query string][#fragment]
 //      예) http://localhost:8080/ex04/s1?name=홍길동&age=20
 //
 //    URN(Uniform Resource Name)

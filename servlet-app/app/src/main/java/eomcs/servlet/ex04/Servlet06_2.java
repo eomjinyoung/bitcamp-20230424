@@ -1,13 +1,13 @@
 // 클라이언트가 보낸 데이터 읽기 - 여러 개의 데이터를 같은 이름으로 보낸 경우
 package eomcs.servlet.ex04;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/ex04/s6_2")
 public class Servlet06_2 extends GenericServlet {

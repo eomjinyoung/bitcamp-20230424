@@ -1,7 +1,6 @@
 package eomcs.servlet.ex02;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 // 서블릿 컨테이너가 관리하는 컴포넌트
@@ -19,7 +18,7 @@ import java.io.IOException;
 // => 필터를 정의할 때 순서에 의존하는 방식으로 프로그래밍 하지 말라.
 // => 필터의 실행 순서에 상관없이 각 필터가 독립적으로 동작하도록 작성하라.
 
-@WebFilter("/ex02/a/*")
+//@WebFilter("/ex02/a/*")
 public class Filter02 implements Filter {
 
   @Override
