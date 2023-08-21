@@ -581,6 +581,8 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 61. 네이버 클라우드의 Image Optimizer를 이용하여 썸네일 이미지 다루기
   - 62. JSP를 이용하여 콘텐트 출력문을 자동 생성하기
 
+### 62일(8/18,금)
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
