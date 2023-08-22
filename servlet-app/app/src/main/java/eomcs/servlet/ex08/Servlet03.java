@@ -54,7 +54,7 @@ public class Servlet03 extends HttpServlet {
     // 이미 클라이언트로 출력을 완료했는데 어떻게 응답헤더를 보내는가?
     // 다음 반복문 주석을 풀라!
     for (int i = 0; i < 1000; i++) {
-      out.println("안녕하세요! - /ex08/s3<br>");
+//      out.println("안녕하세요! - /ex08/s3<br>");
     }
     out.println("</body></html>");
 
