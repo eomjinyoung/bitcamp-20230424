@@ -73,7 +73,8 @@ public class BoardAddServlet extends HttpServlet {
         }
 
         InitServlet.sqlSessionFactory.openSession(false).commit();
-        out.println("<p>등록 성공입니다!</p>");
+        request.getRequestDispatcher("/board/list?category=" + board.getCategory()).forward(request, response);
+        return;
 
       } catch (Exception e) {
         InitServlet.sqlSessionFactory.openSession(false).rollback();
