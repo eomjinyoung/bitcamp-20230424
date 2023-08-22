@@ -35,33 +35,21 @@ public class MemberUpdateServlet extends HttpServlet {
       member.setPhoto(uploadFileUrl);
     }
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<meta http-equiv='refresh' content='1;url=/member/list'>");
-    out.println("<title>회원</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>회원 변경</h1>");
-
     try {
       if (InitServlet.memberDao.update(member) == 0) {
-        out.println("<p>회원이 없습니다.</p>");
+        throw new Exception("회원이 없습니다.");
       } else {
         InitServlet.sqlSessionFactory.openSession(false).commit();
-        out.println("<p>변경했습니다!</p>");
+        response.sendRedirect("list");
       }
     } catch (Exception e) {
       InitServlet.sqlSessionFactory.openSession(false).rollback();
-      out.println("<p>변경 실패입니다!</p>");
-      e.printStackTrace();
+
+      request.setAttribute("error", e);
+      request.setAttribute("message", e.getMessage());
+      request.setAttribute("refresh", "2;url=list");
+
+      request.getRequestDispatcher("/error").forward(request, response);
     }
-
-    out.println("</body>");
-    out.println("</html>");
   }
-
 }

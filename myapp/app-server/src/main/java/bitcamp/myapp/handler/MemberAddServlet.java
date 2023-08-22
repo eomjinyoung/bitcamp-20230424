@@ -34,31 +34,19 @@ public class MemberAddServlet extends HttpServlet {
       m.setPhoto(uploadFileUrl);
     }
 
-
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<meta http-equiv='refresh' content='1;url=/member/list'>");
-    out.println("<title>회원</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>회원 등록</h1>");
-
     try {
       InitServlet.memberDao.insert(m);
       InitServlet.sqlSessionFactory.openSession(false).commit();
-      out.println("<p>등록 성공입니다!</p>");
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       InitServlet.sqlSessionFactory.openSession(false).rollback();
-      out.println("<p>등록 실패입니다!</p>");
-      e.printStackTrace();
-    }
 
-    out.println("</body>");
-    out.println("</html>");
+      request.setAttribute("error", e);
+      request.setAttribute("message", "회원 등록 오류!");
+      request.setAttribute("refresh", "2;url=list");
+
+      request.getRequestDispatcher("/error").forward(request, response);
+    }
   }
 }

@@ -28,6 +28,9 @@ public class MemberListServlet extends HttpServlet {
     out.println("<title>회원</title>");
     out.println("</head>");
     out.println("<body>");
+
+    request.getRequestDispatcher("/header").include(request, response);
+
     out.println("<h1>회원 목록</h1>");
     out.println("<div style='margin:5px;'>");
     out.println("<a href='/member/form.html'>새 회원</a>");
@@ -51,6 +54,9 @@ public class MemberListServlet extends HttpServlet {
     out.println("</tbody>");
     out.println("</table>");
     out.println("<a href='/'>메인</a>");
+
+    request.getRequestDispatcher("/footer").include(request, response);
+
     out.println("</body>");
     out.println("</html>");
   }
