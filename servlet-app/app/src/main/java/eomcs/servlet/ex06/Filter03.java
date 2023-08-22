@@ -4,7 +4,7 @@ package eomcs.servlet.ex06;
 import javax.servlet.*;
 import java.io.IOException;
 
-//@WebFilter("/ex05/*")
+//@WebFilter("/ex06/*")
 public class Filter03 implements Filter {
 
   @Override

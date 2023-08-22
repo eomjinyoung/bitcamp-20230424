@@ -5,7 +5,7 @@ import javax.servlet.*;
 import java.io.IOException;
 
 //@WebFilter(
-//    value="/ex05/*",
+//    value="/ex06/*",
 //    initParams={
 //        @WebInitParam(name="encoding", value="UTF-8"),
 //        @WebInitParam(name="aaa", value="nono")
