@@ -2,22 +2,27 @@ package bitcamp.myapp.handler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import bitcamp.myapp.vo.Member;
+import bitcamp.myapp.vo.Board;
 
-@WebServlet("/member/list")
-public class MemberListServlet extends HttpServlet {
+@WebServlet("/board/list")
+public class BoardListServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
+  SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    int category = Integer.parseInt(request.getParameter("category"));
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -25,36 +30,46 @@ public class MemberListServlet extends HttpServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<meta charset='UTF-8'>");
-    out.println("<title>회원</title>");
+    out.println("<title>게시글</title>");
     out.println("</head>");
     out.println("<body>");
 
+    // HeaderServlet의 출력 결과를 합친다.
     request.getRequestDispatcher("/header").include(request, response);
 
-    out.println("<h1>회원 목록</h1>");
+    out.println("<h1>게시글 목록</h1>");
     out.println("<div style='margin:5px;'>");
-    out.println("<a href='/member/form'>새 회원</a>");
+    out.printf("<a href='/board/form?category=%d'>새 글</a>\n", category);
     out.println("</div>");
     out.println("<table border='1'>");
     out.println("<thead>");
-    out.println("  <tr><th>번호</th> <th>이름</th> <th>이메일</th></tr>");
+    out.println("  <tr><th>번호</th> <th>제목</th> <th>작성자</th> <th>조회수</th> <th>등록일</th></tr>");
     out.println("</thead>");
 
-    List<Member> list = InitServlet.memberDao.findAll();
-    for (Member m : list) {
+    List<Board> list = InitServlet.boardDao.findAll(category);
+
+    out.println("<tbody>");
+    for (Board board : list) {
       out.printf("<tr>"
           + " <td>%d</td>"
-          + " <td>"
-          + "<img src='http://mvsenqskbqzl19010704.cdn.ntruss.com/member/%s?type=f&w=30&h=40&faceopt=true&ttype=jpg'>"
-          + "<a href='/member/detail?no=%d'>%s</a></td>"
+          + " <td><a href='/board/detail?category=%d&no=%d'>%s</a></td>"
+          + " <td>%s</td>"
+          + " <td>%d</td>"
           + " <td>%s</td></tr>\n",
-          m.getNo(), m.getPhoto(), m.getNo(), m.getName(), m.getEmail());
+          board.getNo(),
+          board.getCategory(),
+          board.getNo(),
+          (board.getTitle().length() > 0 ? board.getTitle() : "제목없음"),
+          board.getWriter().getName(),
+          board.getViewCount(),
+          dateFormatter.format(board.getCreatedDate())
+          );
     }
-
     out.println("</tbody>");
     out.println("</table>");
     out.println("<a href='/'>메인</a>");
 
+    // FooterServlet의 출력 결과를 합친다.
     request.getRequestDispatcher("/footer").include(request, response);
 
     out.println("</body>");
@@ -62,3 +77,14 @@ public class MemberListServlet extends HttpServlet {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
