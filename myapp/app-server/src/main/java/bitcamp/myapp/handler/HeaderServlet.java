@@ -29,7 +29,7 @@ public class HeaderServlet extends HttpServlet {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      out.println("<a href='/auth/form.html'>로그인</a>");
+      out.println("<a href='/auth/form'>로그인</a>");
     } else {
       out.printf("%s %s <a href='/auth/logout'>로그아웃</a>\n",
               (loginUser.getPhoto() == null ?
