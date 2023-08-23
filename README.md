@@ -610,6 +610,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 세션 사용법
 - 프로젝트 실습
   - 62. forward/include/refresh/redirect 다루기(계속)
+  - 63. 쿠키와 ServletContext 보관소 활용하기
 
 ## 웨일즈 화상회의
 
