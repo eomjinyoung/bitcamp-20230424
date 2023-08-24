@@ -122,6 +122,12 @@
     where 
       board_file_no=#{no}
   </delete>
+
+  <delete id="deleteFiles" parameterType="int">
+    delete from myapp_board_file
+    where
+    board_no=#{no}
+  </delete>
 </mapper>
 
 
