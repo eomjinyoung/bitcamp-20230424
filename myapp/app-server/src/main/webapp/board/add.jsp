@@ -1,33 +1,18 @@
-package bitcamp.myapp.handler;
+<%@ page
+    language="java"
+    pageEncoding="UTF-8"
+    contentType="text/html;charset=UTF-8"
+    trimDirectiveWhitespaces="true" %>
+<%@ page import="java.io.IOException"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="bitcamp.myapp.dao.BoardDao"%>
+<%@ page import="bitcamp.myapp.vo.AttachedFile"%>
+<%@ page import="bitcamp.myapp.vo.Board"%>
+<%@ page import="bitcamp.myapp.vo.Member"%>
+<%@ page import="bitcamp.util.NcpObjectStorageService"%>
+<%@ page import="org.apache.ibatis.session.SqlSessionFactory"%>
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
-import bitcamp.myapp.dao.BoardDao;
-import bitcamp.myapp.vo.AttachedFile;
-import bitcamp.myapp.vo.Board;
-import bitcamp.myapp.vo.Member;
-import bitcamp.util.NcpObjectStorageService;
-import org.apache.ibatis.session.SqlSessionFactory;
-
-@WebServlet("/board/add")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-public class BoardAddServlet extends HttpServlet {
-
-  private static final long serialVersionUID = 1L;
-
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-
+<%
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
       response.sendRedirect("/auth/form.html");
@@ -63,7 +48,7 @@ public class BoardAddServlet extends HttpServlet {
       }
 
       sqlSessionFactory.openSession(false).commit();
-      response.sendRedirect("list?category=" + request.getParameter("category"));
+      response.sendRedirect("list.jsp?category=" + request.getParameter("category"));
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
@@ -76,9 +61,7 @@ public class BoardAddServlet extends HttpServlet {
 
       request.getRequestDispatcher("/error").forward(request, response);
     }
-  }
-}
-
+%>
 
 
 

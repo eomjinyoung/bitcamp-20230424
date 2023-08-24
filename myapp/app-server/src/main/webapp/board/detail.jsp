@@ -40,7 +40,7 @@
 <%
     } else {
 %>
-<form action='/board/update' method='post' enctype='multipart/form-data'>
+<form action='/board/update.jsp' method='post' enctype='multipart/form-data'>
 <input type='hidden' name='category' value='<%=board.getCategory()%>'>
 <table border='1'>
 <tr><th style='width:120px;'>번호</th>
@@ -58,7 +58,7 @@
       for (AttachedFile file : board.getAttachedFiles()) {
 %>
 <a href='https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/board/<%=file.getFilePath()%>'><%=file.getFilePath()%></a>
-[<a href='/board/file/delete?category=<%=category%>&no=<%=file.getNo()%>'>삭제</a>]
+[<a href='/board/fileDelete.jsp?category=<%=category%>&no=<%=file.getNo()%>'>삭제</a>]
 <br>
 <%
       }
@@ -70,8 +70,8 @@
 <div>
 <button>변경</button>
 <button type='reset'>초기화</button>
-<a href='/board/delete?category=<%=board.getCategory()%>&no=<%=board.getNo()%>'>삭제</a>
-<a href='/board/list?category=<%=board.getCategory()%>'>목록</a>
+<a href='/board/delete.jsp?category=<%=board.getCategory()%>&no=<%=board.getNo()%>'>삭제</a>
+<a href='/board/list.jsp?category=<%=board.getCategory()%>'>목록</a>
 </div>
 </form>
 <%
@@ -84,13 +84,13 @@
         sqlSessionFactory.openSession(false).rollback();
       }
     }
-    out.flush();
-
-    request.getRequestDispatcher("../footer.jsp").include(request, response);
-
-    out.println("</body>");
-    out.println("</html>");
 %>
+
+<jsp:include page="../footer.jsp"/>
+
+</body>
+</html>
+
 
 
 
