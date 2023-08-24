@@ -4,7 +4,6 @@
     contentType="text/html;charset=UTF-8"
     trimDirectiveWhitespaces="true"
     errorPage="/error.jsp"%>
-<%@ page import="java.io.IOException"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="bitcamp.myapp.dao.BoardDao"%>
 <%@ page import="bitcamp.myapp.vo.AttachedFile"%>
@@ -14,7 +13,6 @@
 <%@ page import="org.apache.ibatis.session.SqlSessionFactory"%>
 
 <%
-    // 오류가 발생했을 때 refresh 할 URL을 미리 지정한다.
     request.setAttribute("refresh", "2;url=list.jsp?category=" + request.getParameter("category"));
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
@@ -29,6 +27,7 @@
 
     Board board = new Board();
     board.setWriter(loginUser);
+    board.setNo(Integer.parseInt(request.getParameter("no")));
     board.setTitle(request.getParameter("title"));
     board.setContent(request.getParameter("content"));
     board.setCategory(Integer.parseInt(request.getParameter("category")));
@@ -45,14 +44,19 @@
     }
     board.setAttachedFiles(attachedFiles);
 
-    boardDao.insert(board);
-    if (attachedFiles.size() > 0) {
-        boardDao.insertFiles(board);
-    }
+    if (boardDao.update(board) == 0) {
+        throw new Exception("게시글이 없거나 변경 권한이 없습니다.");
+    } else {
+        if (attachedFiles.size() > 0) {
+          int count = boardDao.insertFiles(board);
+          System.out.println(count);
+        }
 
-    sqlSessionFactory.openSession(false).commit();
-    response.sendRedirect("list.jsp?category=" + request.getParameter("category"));
+        sqlSessionFactory.openSession(false).commit();
+        response.sendRedirect("list.jsp?category=" + request.getParameter("category"));
+    }
 %>
+
 
 
 
