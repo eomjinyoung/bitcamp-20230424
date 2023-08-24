@@ -103,4 +103,13 @@
     <url-pattern>/ex06/s4</url-pattern>
   </servlet-mapping>
   -->
+
+  <servlet>
+    <servlet-name>ex12.s1</servlet-name>
+    <servlet-class>eomcs.servlet.ex12.Servlet01</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ex12.s1</servlet-name>
+    <url-pattern>/ex12/s1</url-pattern>
+  </servlet-mapping>
 </web-app>
