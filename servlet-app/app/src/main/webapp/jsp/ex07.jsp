@@ -1,13 +1,14 @@
 <%@ page 
     language="java" 
-    contentType="text/html; charset=UTF-8"
+    contentType="text/plain; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.net.Socket"
     import="java.net.ServerSocket"
     import="java.util.List,java.util.Map,java.util.Set"
     trimDirectiveWhitespaces="true"
+    autoFlush="false"
     buffer="8kb"
-    autoFlush="false"%>
+    %>
 <%@ page import="java.sql.Connection"%>
 <%@ page import="java.sql.Statement"%>
 <!DOCTYPE html>
@@ -19,8 +20,8 @@
 <body>
 <h1>지시문(directive element)</h1>
 <%
-for (int i = 0; i < 1000; i++) {
-  out.print(". "); 
+for (int i = 0; i < 18000; i++) {
+  out.print(". ");
 }
 %>
 <p>출력완료!</p>
@@ -80,7 +81,14 @@ page 지시문
    - 출력 버퍼가 찼을 때 자동으로 출력한다.
    - 기본은 true 이다.
    - false로 설정하면 출력 버퍼가 찼을 때 예외가 발생한다.
-   
+
+8) errorPage="URL"
+   - JSP를 실행하는 중에 오류가 발생했을 때 포워딩할 URL을 지정한다.
+
+9) isErrorPage="true|false"
+   - JSP 페이지가 예외를 처리하는 페이지인지 지정한다.
+   - true로 설정하면, 포워딩할 때 받은 예외 객체를 사용할 수 있도록
+     Throwable 타입의 exception 빌트인 객체가 추가된다.
 --%>
 
 

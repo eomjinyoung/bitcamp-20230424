@@ -3,11 +3,9 @@
     pageEncoding="UTF-8"
     contentType="text/html;charset=UTF-8"
     isErrorPage="true"%>
-<%@ page import="org.apache.ibatis.session.SqlSessionFactory"%>
+<jsp:useBean id="sqlSessionFactory" type="org.apache.ibatis.session.SqlSessionFactory" scope="application"/>
 <%
-    SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) this.getServletContext().getAttribute("sqlSessionFactory");
-    sqlSessionFactory.openSession(false).commit();
-
+    sqlSessionFactory.openSession(false).rollback();
     if (request.getAttribute("refresh") != null) {
       response.setHeader("Refresh", (String) request.getAttribute("refresh"));
     }

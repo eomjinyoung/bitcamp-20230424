@@ -3,11 +3,9 @@
     pageEncoding="UTF-8"
     contentType="text/html;charset=UTF-8"%> <%-- directive element --%>
 <%@ page import="java.util.List"%>
-<%@ page import="bitcamp.myapp.dao.MemberDao"%>
 <%@ page import="bitcamp.myapp.vo.Member"%>
-<%@ page import="bitcamp.util.NcpObjectStorageService"%>
-<%@ page import="org.apache.ibatis.session.SqlSessionFactory"%>
 
+<jsp:useBean id="memberDao" type="bitcamp.myapp.dao.MemberDao" scope="application"/>
 
 <!DOCTYPE html>
 <html>
@@ -29,8 +27,6 @@
 </thead>
 
 <%
-    MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
-
     List<Member> list = memberDao.findAll();
     for (Member m : list) {
 %>

@@ -1,22 +1,19 @@
 <%@ page
     language="java"
     pageEncoding="UTF-8"
-    contentType="text/html;charset=UTF-8"%> <%-- directive element --%>
-<%@ page import="java.io.IOException"%>
+    contentType="text/html;charset=UTF-8"
+    trimDirectiveWhitespaces="true"
+    errorPage="/error.jsp"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List"%>
-<%@ page import="bitcamp.myapp.dao.BoardDao"%>
 <%@ page import="bitcamp.myapp.vo.Board"%>
-<%@ page import="bitcamp.util.NcpObjectStorageService"%>
-<%@ page import="org.apache.ibatis.session.SqlSessionFactory"%>
 
 <%!
-  // declaration element
   SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 %>
 
 <%
-  // scriptlet (scripting element)
+  request.setAttribute("refresh", "2;url=list.jsp?category=" + request.getParameter("category"));
   int category = Integer.parseInt(request.getParameter("category"));
 %>
 <!DOCTYPE html>
@@ -38,8 +35,9 @@
   <tr><th>번호</th> <th>제목</th> <th>작성자</th> <th>조회수</th> <th>등록일</th></tr>
 </thead>
 
+<jsp:useBean id="boardDao" type="bitcamp.myapp.dao.BoardDao" scope="application"/>
+
 <%
-  BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
   List<Board> list = boardDao.findAll(category);
 %>
 <tbody>
