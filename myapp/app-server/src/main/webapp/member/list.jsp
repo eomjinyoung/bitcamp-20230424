@@ -28,14 +28,15 @@
 
 <%
     List<Member> list = memberDao.findAll();
-    for (Member m : list) {
+    for (Member member : list) {
+      pageContext.setAttribute("member", member);
 %>
     <tr>
-        <td><%=m.getNo()%></td>
+        <td>${member.no}</td>
         <td>
-            <img src='http://mvsenqskbqzl19010704.cdn.ntruss.com/member/<%=m.getPhoto()%>?type=f&w=30&h=40&faceopt=true&ttype=jpg'>
-            <a href='/member/detail.jsp?no=<%=m.getNo()%>'><%=m.getName()%></a></td>
-        <td><%=m.getEmail()%></td>
+            <img src='http://mvsenqskbqzl19010704.cdn.ntruss.com/member/${member.photo}?type=f&w=30&h=40&faceopt=true&ttype=jpg'>
+            <a href='/member/detail.jsp?no=${member.no}'>${member.name}</a></td>
+        <td>${member.email}</td>
     </tr>
 
 <%
