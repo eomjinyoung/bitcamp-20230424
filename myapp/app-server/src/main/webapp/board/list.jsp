@@ -8,10 +8,6 @@
 <%@ page import="java.util.List"%>
 <%@ page import="bitcamp.myapp.vo.Board"%>
 
-<%!
-  SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-%>
-
 <%
   request.setAttribute("refresh", "2;url=list.jsp?category=" + request.getParameter("category"));
   int category = Integer.parseInt(request.getParameter("category"));
@@ -28,7 +24,7 @@
 
 <h1>게시글 목록-2</h1>
 <div style='margin:5px;'>
-<a href='/board/form.jsp?category=<%=category%>'>새 글</a>
+<a href='/board/form.jsp?category=${param.category}'>새 글</a>
 </div>
 <table border='1'>
 <thead>
@@ -43,16 +39,17 @@
 <tbody>
 <%
   for (Board board : list) {
+    pageContext.setAttribute("board", board);
 %>
     <tr>
-      <td><%=board.getNo()%></td>
-      <td><a href='/board/detail.jsp?category=<%=board.getCategory()%>&no=<%=board.getNo()%>'>
-        <%=(board.getTitle().length() > 0 ? board.getTitle() : "제목없음")%>
+      <td>${board.no}</td>
+      <td><a href='/board/detail.jsp?category=${board.category}&no=${board.no}'>
+        ${board.title.length() > 0 ? board.title : "제목없음"}
         </a>
       </td>
-      <td><%=board.getWriter().getName()%></td>
-      <td><%=board.getViewCount()%></td>
-      <td><%=dateFormatter.format(board.getCreatedDate())%></td>
+      <td>${board.writer.name}</td>
+      <td>${board.viewCount}</td>
+      <td>${simpleDateFormatter.format(board.createdDate)}</td>
     </tr>
 <%
   }

@@ -16,6 +16,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.text.SimpleDateFormat;
 
 // 웹애플리케이션 실행에 필요한 설정이나 객체를 준비한다.
 // 언제? 웹애플리케이션 시작될 때!
@@ -44,6 +45,7 @@ public class ContextLoaderListener implements ServletContextListener {
       ctx.setAttribute("boardDao", boardDao);
       ctx.setAttribute("memberDao", memberDao);
       ctx.setAttribute("ncpObjectStorageService", ncpObjectStorageService);
+      ctx.setAttribute("simpleDateFormatter", new SimpleDateFormat("yyyy-MM-dd"));
 
       System.out.println("ContextLoaderListener.contextInitialized() - 공통 객체 준비 완료!");
 

@@ -2,19 +2,6 @@
     language="java"
     pageEncoding="UTF-8"
     contentType="text/html;charset=UTF-8"%>
-
-<%
-    String email = "";
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-      for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("email")) {
-          email = cookie.getValue();
-          break;
-        }
-      }
-    }
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,14 +17,14 @@
 <form action='/auth/login.jsp' method='post'>
 <table border='1'>
 <tr>
-  <th>이메일</th> <td><input type='email' name='email' value='<%=email%>'></td>
+  <th>이메일</th> <td><input type='email' name='email' value='${cookie.email.value}'></td>
 </tr>
 <tr>
   <th>암호</th> <td><input type='password' name='password'></td>
 </tr>
 </table>
 <button>로그인</button>
- <input type='checkbox' name='saveEmail'> 이메일 저장
+ <input type='checkbox' name='saveEmail' ${cookie.email != null ? "checked" : ""}> 이메일 저장
 </form>
 
 <jsp:include page="../footer.jsp"/>
