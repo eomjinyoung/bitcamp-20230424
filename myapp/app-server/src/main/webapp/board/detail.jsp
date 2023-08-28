@@ -6,20 +6,10 @@
     errorPage="/error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-<%@ page import="bitcamp.myapp.vo.AttachedFile"%>
-<%@ page import="bitcamp.myapp.vo.Board"%>
 <c:set var="refresh" value="2;url=list.jsp?category=${param.category}" scope="request"/>
-
 <jsp:useBean id="boardDao" type="bitcamp.myapp.dao.BoardDao" scope="application"/>
 <jsp:useBean id="sqlSessionFactory" type="org.apache.ibatis.session.SqlSessionFactory" scope="application"/>
 <c:set var="board" value="${boardDao.findBy(param.category,param.no)}"/>
-<%--
-    Board board = boardDao.findBy(
-      Integer.parseInt(request.getParameter("category")),
-      Integer.parseInt(request.getParameter("no")));
-    pageContext.setAttribute("board", board);
---%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +40,7 @@
     <tr><th>조회수</th> <td>${board.viewCount}</td></tr>
     <tr><th>등록일</th> <td>${simpleDateFormatter.format(board.createdDate)}</td></tr>
     <tr><th>첨부파일</th><td>
-    <c:forEach items="${board.getAttachedFiles()}" var="file">
+    <c:forEach items="${board.attachedFiles}" var="file">
         <a href='https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/board/${file.filePath}'>${file.filePath}</a>
         [<a href='/board/fileDelete.jsp?category=${param.category}&no=${file.no}'>삭제</a>]<br>
     </c:forEach>
@@ -65,16 +55,9 @@
     <a href='/board/list.jsp?category=${param.category}'>목록</a>
     </div>
     </form>
-<%
-      try {
-        //board.setViewCount(board.getViewCount() + 1);
-        //boardDao.updateCount(board);
-        //sqlSessionFactory.openSession(false).commit();
-
-      } catch (Exception e) {
-        //sqlSessionFactory.openSession(false).rollback();
-      }
-%>
+    <c:set target="${pageScope.board}" property="viewCount" value="${board.viewCount + 1}"/>
+    <c:set var="updateCount" value="${boardDao.updateCount(board)}"/>
+    <% sqlSessionFactory.openSession(false).commit(); %>
 </c:if>
 
 <jsp:include page="../footer.jsp"/>
