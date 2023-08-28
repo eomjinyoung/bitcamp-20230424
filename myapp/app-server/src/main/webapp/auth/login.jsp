@@ -9,7 +9,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set name="refresh" value="2;url=/auth/form.jsp" scope="request"/>
+<c:set var="refresh" value="2;url=/auth/form.jsp" scope="request"/>
 
 <jsp:useBean id="m" class="bitcamp.myapp.vo.Member" scope="page"/>
 <c:set target="${pageScope.m}" property="email" value="${param.email}"/>
@@ -31,8 +31,7 @@
 </c:if>
 
 <jsp:useBean id="memberDao" type="bitcamp.myapp.dao.MemberDao" scope="application"/>
-<c:set name="loginUser" value="${memberDao.findByEmailAndPassword(m)}"/>
-
+<c:set var="loginUser" value="${memberDao.findByEmailAndPassword(m)}" scope="session"/>
 
 <jsp:useBean id="loginUser" type="bitcamp.myapp.vo.Member" scope="session"/>
 <c:redirect url="/"/>
