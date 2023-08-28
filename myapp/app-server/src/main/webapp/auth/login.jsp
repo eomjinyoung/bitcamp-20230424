@@ -4,9 +4,6 @@
     contentType="text/html;charset=UTF-8"
     trimDirectiveWhitespaces="true"
     errorPage="/error.jsp"%>
-<%@ page import="bitcamp.myapp.dao.MemberDao"%>
-<%@ page import="bitcamp.myapp.vo.Member"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="refresh" value="2;url=/auth/form.jsp" scope="request"/>
