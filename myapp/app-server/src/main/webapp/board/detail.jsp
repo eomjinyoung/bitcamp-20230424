@@ -4,18 +4,22 @@
     contentType="text/html;charset=UTF-8"
     trimDirectiveWhitespaces="true"
     errorPage="/error.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <%@ page import="bitcamp.myapp.vo.AttachedFile"%>
 <%@ page import="bitcamp.myapp.vo.Board"%>
+<c:set var="refresh" value="2;url=list.jsp?category=${param.category}" scope="request"/>
 
 <jsp:useBean id="boardDao" type="bitcamp.myapp.dao.BoardDao" scope="application"/>
 <jsp:useBean id="sqlSessionFactory" type="org.apache.ibatis.session.SqlSessionFactory" scope="application"/>
-<%
-    request.setAttribute("refresh", "2;url=list.jsp?category=" + request.getParameter("category"));
+<c:set var="board" value="${boardDao.findBy(param.category,param.no)}"/>
+<%--
     Board board = boardDao.findBy(
       Integer.parseInt(request.getParameter("category")),
       Integer.parseInt(request.getParameter("no")));
     pageContext.setAttribute("board", board);
-%>
+--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,59 +32,50 @@
 
 <h1>게시글</h1>
 
-<%
-    if (board == null) {
-%>
-<p>해당 번호의 게시글이 없습니다!</p>
-<%
-    } else {
-%>
-<form action='/board/update.jsp' method='post' enctype='multipart/form-data'>
-<input type='hidden' name='category' value='${board.category}'>
-<table border='1'>
-<tr><th style='width:120px;'>번호</th>
-<td style='width:300px;'><input type='text' name='no' value='${board.no}' readonly></td></tr>
-<tr><th>제목</th>
-<td><input type='text' name='title' value='${board.title}'></td></tr>
-<tr><th>내용</th>
-<td><textarea name='content' style='height:200px; width:400px;'>${board.content}</textarea></td></tr>
-<tr><th>작성자</th> <td>${board.writer.name}</td></tr>
-<tr><th>조회수</th> <td>${board.viewCount}</td></tr>
-<tr><th>등록일</th> <td>${simpleDateFormatter.format(board.createdDate)}</td></tr>
-<tr><th>첨부파일</th><td>
+<c:if test="${empty board}">
+    <p>해당 번호의 게시글이 없습니다!</p>
+</c:if>
 
-<%
-  for (AttachedFile file : board.getAttachedFiles()) {
-    pageContext.setAttribute("file", file);
-%>
-<a href='https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/board/${file.filePath}'>${file.filePath}</a>
-[<a href='/board/fileDelete.jsp?category=${param.category}&no=${file.no}'>삭제</a>]
-<br>
-<%
-      }
-%>
-<input type='file' name='files' multiple>
-</td></tr>
-</table>
+<c:if test="${not empty board}">
+    <form action='/board/update.jsp' method='post' enctype='multipart/form-data'>
+    <input type='hidden' name='category' value='${board.category}'>
+    <table border='1'>
+    <tr><th style='width:120px;'>번호</th>
+    <td style='width:300px;'><input type='text' name='no' value='${board.no}' readonly></td></tr>
+    <tr><th>제목</th>
+    <td><input type='text' name='title' value='${board.title}'></td></tr>
+    <tr><th>내용</th>
+    <td><textarea name='content' style='height:200px; width:400px;'>${board.content}</textarea></td></tr>
+    <tr><th>작성자</th> <td>${board.writer.name}</td></tr>
+    <tr><th>조회수</th> <td>${board.viewCount}</td></tr>
+    <tr><th>등록일</th> <td>${simpleDateFormatter.format(board.createdDate)}</td></tr>
+    <tr><th>첨부파일</th><td>
+    <c:forEach items="${board.getAttachedFiles()}" var="file">
+        <a href='https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/board/${file.filePath}'>${file.filePath}</a>
+        [<a href='/board/fileDelete.jsp?category=${param.category}&no=${file.no}'>삭제</a>]<br>
+    </c:forEach>
+        <input type='file' name='files' multiple>
+    </td></tr>
+    </table>
 
-<div>
-<button>변경</button>
-<button type='reset'>초기화</button>
-<a href='/board/delete.jsp?category=${param.category}&no=${param.no}'>삭제</a>
-<a href='/board/list.jsp?category=${param.category}'>목록</a>
-</div>
-</form>
+    <div>
+    <button>변경</button>
+    <button type='reset'>초기화</button>
+    <a href='/board/delete.jsp?category=${param.category}&no=${param.no}'>삭제</a>
+    <a href='/board/list.jsp?category=${param.category}'>목록</a>
+    </div>
+    </form>
 <%
       try {
-        board.setViewCount(board.getViewCount() + 1);
-        boardDao.updateCount(board);
-        sqlSessionFactory.openSession(false).commit();
+        //board.setViewCount(board.getViewCount() + 1);
+        //boardDao.updateCount(board);
+        //sqlSessionFactory.openSession(false).commit();
 
       } catch (Exception e) {
-        sqlSessionFactory.openSession(false).rollback();
+        //sqlSessionFactory.openSession(false).rollback();
       }
-    }
 %>
+</c:if>
 
 <jsp:include page="../footer.jsp"/>
 
