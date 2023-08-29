@@ -5,7 +5,7 @@
     trimDirectiveWhitespaces="true"
     errorPage="/error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="refresh" value="2;url=list.jsp?category=${param.category}" scope="request"/>
+<c:set var="refresh" value="2;url=list?category=${param.category}" scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
