@@ -12,7 +12,7 @@
 
 <c:choose>
     <c:when test="${empty sessionScope.loginUser}">
-        <a href='/auth/form.jsp'>로그인</a>
+        <a href='/auth/login'>로그인</a>
     </c:when>
     <c:otherwise>
         <c:if test="${empty sessionScope.loginUser.photo}">
@@ -21,7 +21,7 @@
         <c:if test="${not empty sessionScope.loginUser.photo}">
             <img src='http://mvsenqskbqzl19010704.cdn.ntruss.com/member/${loginUser.photo}?type=f&w=30&h=40&faceopt=true&ttype=jpg'>
         </c:if>
-        ${loginUser.name} <a href='/auth/logout.jsp'>로그아웃</a>
+        ${loginUser.name} <a href='/auth/logout'>로그아웃</a>
     </c:otherwise>
 </c:choose>
 </div>
