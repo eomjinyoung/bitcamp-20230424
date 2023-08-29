@@ -1,7 +1,6 @@
 package bitcamp.myapp.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -20,7 +19,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 @WebServlet("/board/update")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-public class BoardUpdateServlet extends HttpServlet {
+public class BoardUpdateController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
@@ -30,7 +29,7 @@ public class BoardUpdateServlet extends HttpServlet {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      response.sendRedirect("/auth/form.html");
+      response.sendRedirect("/auth/login");
       return;
     }
 
@@ -72,12 +71,9 @@ public class BoardUpdateServlet extends HttpServlet {
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
-
-      request.setAttribute("error", e);
-      request.setAttribute("message", e.getMessage());
-      request.setAttribute("refresh", "2;url=list?category=" + request.getParameter("category"));
-
-      request.getRequestDispatcher("/error").forward(request, response);
+      request.setAttribute("refresh", "2;url=detail?category=" + request.getParameter("category") +
+              "&no=" + request.getParameter("no"));
+      throw new ServletException(e);
     }
   }
 }

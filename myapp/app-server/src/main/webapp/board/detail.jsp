@@ -38,7 +38,7 @@
     <tr><th>첨부파일</th><td>
     <c:forEach items="${board.attachedFiles}" var="file">
         <a href='https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/board/${file.filePath}'>${file.filePath}</a>
-        [<a href='/board/fileDelete.jsp?category=${param.category}&no=${file.no}'>삭제</a>]<br>
+        [<a href='/board/fileDelete?category=${param.category}&no=${file.no}'>삭제</a>]<br>
     </c:forEach>
         <input type='file' name='files' multiple>
     </td></tr>

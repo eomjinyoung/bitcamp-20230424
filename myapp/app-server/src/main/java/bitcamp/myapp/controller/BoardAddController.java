@@ -1,7 +1,6 @@
 package bitcamp.myapp.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -20,9 +19,15 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 @WebServlet("/board/add")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-public class BoardAddServlet extends HttpServlet {
+public class BoardAddController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
+
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
+    request.getRequestDispatcher("/board/form.jsp").include(request, response);
+  }
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,7 +35,7 @@ public class BoardAddServlet extends HttpServlet {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      response.sendRedirect("/auth/form.html");
+      response.sendRedirect("/auth/login");
       return;
     }
 
@@ -67,14 +72,9 @@ public class BoardAddServlet extends HttpServlet {
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
-
-      // ErrorServlet 으로 포워딩 하기 전에 ErrorServlet이 사용할 데이터를
-      // ServletRequest 보관소에 저장한다.
-      request.setAttribute("error", e);
       request.setAttribute("message", "게시글 등록 오류!");
       request.setAttribute("refresh", "2;url=list?category=" + request.getParameter("category"));
-
-      request.getRequestDispatcher("/error").forward(request, response);
+      throw new ServletException(e);
     }
   }
 }

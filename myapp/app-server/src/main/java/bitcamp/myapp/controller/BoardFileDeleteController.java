@@ -11,55 +11,49 @@ import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
-import bitcamp.util.NcpObjectStorageService;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-@WebServlet("/board/file/delete")
-public class BoardFileDeleteServlet extends HttpServlet {
+@WebServlet("/board/fileDelete")
+public class BoardFileDeleteController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+          throws ServletException, IOException {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      response.sendRedirect("/auth/form.html");
+      response.sendRedirect("/auth/login");
       return;
     }
-
-    int category = Integer.parseInt(request.getParameter("category"));
-    int fileNo = Integer.parseInt(request.getParameter("no"));
 
     BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
     SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) this.getServletContext().getAttribute("sqlSessionFactory");
 
-    // 첨부파일 번호로 첨부파일 데이터를 가져온다.
-    AttachedFile attachedFile = boardDao.findFileBy(fileNo);
-    //    System.out.println(attachedFile);
-
-    // 첨부파일 데이터에 있는 게시글 번호로 게시글 데이터를 가져온다.
-    Board board = boardDao.findBy(category, attachedFile.getBoardNo());
-    //    System.out.println(board);
-
-    // 게시글 데이터의 작성자와 로그인 한 작성자가 일치하는지 검사한다.
-    if (board.getWriter().getNo() != loginUser.getNo()) {
-      throw new ServletException("게시글 변경 권한이 없습니다!");
-    }
-
-    // 일치하면 첨부파일을 삭제한다.
+    Board board = null;
     try {
+      int category = Integer.parseInt(request.getParameter("category"));
+      int fileNo = Integer.parseInt(request.getParameter("no"));
+
+      AttachedFile attachedFile = boardDao.findFileBy(fileNo);
+      board = boardDao.findBy(category, attachedFile.getBoardNo());
+      if (board.getWriter().getNo() != loginUser.getNo()) {
+        throw new Exception("게시글 변경 권한이 없습니다!");
+      }
+
       if (boardDao.deleteFile(fileNo) == 0) {
         throw new Exception("해당 번호의 첨부파일이 없거나 삭제 권한이 없습니다.");
       } else {
+        sqlSessionFactory.openSession(false).commit();
         response.sendRedirect("/board/detail?category=" + category + "&no=" + board.getNo());
       }
-      sqlSessionFactory.openSession(false).commit();
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
-      throw new RuntimeException(e);
+      request.setAttribute("refresh", "2;url=/board/detail?category=" + request.getParameter("category") +
+              "&no=" + board.getNo());
+      throw new ServletException(e);
     }
   }
 }
