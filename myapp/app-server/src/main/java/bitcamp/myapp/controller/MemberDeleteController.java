@@ -1,7 +1,6 @@
 package bitcamp.myapp.controller;
 
 import bitcamp.myapp.dao.MemberDao;
-import bitcamp.util.NcpObjectStorageService;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.io.IOException;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/member/delete")
-public class MemberDeleteServlet extends HttpServlet {
+public class MemberDeleteController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
@@ -34,11 +33,11 @@ public class MemberDeleteServlet extends HttpServlet {
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
 
-      request.setAttribute("error", e);
+      request.setAttribute("exception", e);
       request.setAttribute("message", e.getMessage());
       request.setAttribute("refresh", "2;url=list");
 
-      request.getRequestDispatcher("/error").forward(request, response);
+      request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
   }
 

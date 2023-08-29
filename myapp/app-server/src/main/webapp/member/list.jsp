@@ -15,7 +15,7 @@
 
 <h1>회원 목록</h1>
 <div style='margin:5px;'>
-<a href='/member/form.jsp'>새 회원</a>
+<a href='/member/add'>새 회원</a>
 </div>
 <table border='1'>
 <thead>
