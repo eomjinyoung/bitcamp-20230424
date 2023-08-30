@@ -1,10 +1,8 @@
 package bitcamp.myapp.servlet;
 
-import bitcamp.myapp.controller.*;
-import bitcamp.myapp.dao.BoardDao;
-import bitcamp.myapp.dao.MemberDao;
-import bitcamp.util.NcpObjectStorageService;
-import org.apache.ibatis.session.SqlSessionFactory;
+import bitcamp.myapp.config.AppConfig;
+import bitcamp.myapp.controller.PageController;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,34 +14,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/app/*")
+@WebServlet(
+        value = "/app/*",
+        loadOnStartup = 1)
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 public class DispatcherServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+
+  AnnotationConfigApplicationContext appCtx;
 
   Map<String, PageController> controllerMap = new HashMap<>();
 
   @Override
   public void init() throws ServletException {
-    MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
-    BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
-    SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) this.getServletContext().getAttribute("sqlSessionFactory");
-    NcpObjectStorageService ncpObjectStorageService = (NcpObjectStorageService) this.getServletContext().getAttribute("ncpObjectStorageService");
-
-    controllerMap.put("/", new HomeController());
-    controllerMap.put("/auth/login", new LoginController(memberDao));
-    controllerMap.put("/auth/logout", new LogoutController());
-    controllerMap.put("/member/list", new MemberListController(memberDao));
-    controllerMap.put("/member/add", new MemberAddController(memberDao, sqlSessionFactory, ncpObjectStorageService));
-    controllerMap.put("/member/detail", new MemberDetailController(memberDao));
-    controllerMap.put("/member/update", new MemberUpdateController(memberDao, sqlSessionFactory, ncpObjectStorageService));
-    controllerMap.put("/member/delete", new MemberDeleteController(memberDao, sqlSessionFactory));
-    controllerMap.put("/board/list", new BoardListController(boardDao));
-    controllerMap.put("/board/add", new BoardAddController(boardDao, sqlSessionFactory, ncpObjectStorageService));
-    controllerMap.put("/board/detail", new BoardDetailController(boardDao, sqlSessionFactory));
-    controllerMap.put("/board/update", new BoardUpdateController(boardDao, sqlSessionFactory, ncpObjectStorageService));
-    controllerMap.put("/board/delete", new BoardDeleteController(boardDao, sqlSessionFactory));
-    controllerMap.put("/board/fileDelete", new BoardFileDeleteController(boardDao, sqlSessionFactory));
+    System.out.println("DispatcherServlet.init() 호출됨!");
+    appCtx = new AnnotationConfigApplicationContext(AppConfig.class);
   }
 
   @Override
