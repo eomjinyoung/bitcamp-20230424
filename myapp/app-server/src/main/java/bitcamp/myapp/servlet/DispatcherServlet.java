@@ -2,7 +2,9 @@ package bitcamp.myapp.servlet;
 
 import bitcamp.myapp.controller.LoginController;
 import bitcamp.myapp.controller.LogoutController;
+import bitcamp.myapp.controller.MemberListController;
 import bitcamp.myapp.controller.PageController;
+import bitcamp.myapp.dao.MemberDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,8 +25,11 @@ public class DispatcherServlet extends HttpServlet {
 
   @Override
   public void init() throws ServletException {
-    controllerMap.put("/auth/login", new LoginController());
+    MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
+
+    controllerMap.put("/auth/login", new LoginController(memberDao));
     controllerMap.put("/auth/logout", new LogoutController());
+    controllerMap.put("/member/list", new MemberListController(memberDao));
   }
 
   @Override

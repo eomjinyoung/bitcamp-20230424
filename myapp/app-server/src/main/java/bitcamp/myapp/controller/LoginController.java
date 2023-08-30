@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginController implements PageController {
 
+  MemberDao memberDao;
+
+  public LoginController(MemberDao memberDao) {
+    this.memberDao = memberDao;
+  }
+
   @Override
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     if (request.getMethod().equals("GET")) {
@@ -28,7 +34,6 @@ public class LoginController implements PageController {
       response.addCookie(cookie);
     }
 
-    MemberDao memberDao = (MemberDao) request.getServletContext().getAttribute("memberDao");
     Member loginUser = memberDao.findByEmailAndPassword(m);
     if (loginUser == null) {
       request.setAttribute("refresh", "2;url=/app/auth/login");
