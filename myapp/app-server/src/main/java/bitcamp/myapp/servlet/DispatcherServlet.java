@@ -1,6 +1,7 @@
 package bitcamp.myapp.servlet;
 
 import bitcamp.myapp.controller.*;
+import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.util.NcpObjectStorageService;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -25,6 +26,7 @@ public class DispatcherServlet extends HttpServlet {
   @Override
   public void init() throws ServletException {
     MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
+    BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
     SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) this.getServletContext().getAttribute("sqlSessionFactory");
     NcpObjectStorageService ncpObjectStorageService = (NcpObjectStorageService) this.getServletContext().getAttribute("ncpObjectStorageService");
 
@@ -35,6 +37,12 @@ public class DispatcherServlet extends HttpServlet {
     controllerMap.put("/member/detail", new MemberDetailController(memberDao));
     controllerMap.put("/member/update", new MemberUpdateController(memberDao, sqlSessionFactory, ncpObjectStorageService));
     controllerMap.put("/member/delete", new MemberDeleteController(memberDao, sqlSessionFactory));
+    controllerMap.put("/board/list", new BoardListController(boardDao));
+    controllerMap.put("/board/add", new BoardAddController(boardDao, sqlSessionFactory, ncpObjectStorageService));
+    controllerMap.put("/board/detail", new BoardDetailController(boardDao, sqlSessionFactory));
+    controllerMap.put("/board/update", new BoardUpdateController(boardDao, sqlSessionFactory, ncpObjectStorageService));
+    controllerMap.put("/board/delete", new BoardDeleteController(boardDao, sqlSessionFactory));
+    controllerMap.put("/board/fileDelete", new BoardFileDeleteController(boardDao, sqlSessionFactory));
   }
 
   @Override

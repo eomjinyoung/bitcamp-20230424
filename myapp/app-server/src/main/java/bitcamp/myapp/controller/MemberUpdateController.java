@@ -5,14 +5,10 @@ import bitcamp.myapp.vo.Member;
 import bitcamp.util.NcpObjectStorageService;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-@WebServlet("/member/update")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 public class MemberUpdateController implements PageController {
 
   MemberDao memberDao;

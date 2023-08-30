@@ -6,30 +6,26 @@ import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet("/board/fileDelete")
-public class BoardFileDeleteController extends HttpServlet {
+public class BoardFileDeleteController implements PageController {
 
-  private static final long serialVersionUID = 1L;
+  BoardDao boardDao;
+  SqlSessionFactory sqlSessionFactory;
+
+  public BoardFileDeleteController(BoardDao boardDao, SqlSessionFactory sqlSessionFactory) {
+    this.boardDao = boardDao;
+    this.sqlSessionFactory = sqlSessionFactory;
+  }
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      request.setAttribute("viewUrl", "redirect:../auth/login");
-      return;
+      return "redirect:../auth/login";
     }
-
-    BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
-    SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) this.getServletContext().getAttribute("sqlSessionFactory");
 
     Board board = null;
     try {
@@ -46,14 +42,14 @@ public class BoardFileDeleteController extends HttpServlet {
         throw new Exception("해당 번호의 첨부파일이 없거나 삭제 권한이 없습니다.");
       } else {
         sqlSessionFactory.openSession(false).commit();
-        request.setAttribute("viewUrl", "redirect:detail?category=" + category + "&no=" + board.getNo());
+        return "redirect:detail?category=" + category + "&no=" + board.getNo();
       }
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
       request.setAttribute("refresh", "2;url=detail?category=" + request.getParameter("category") +
               "&no=" + board.getNo());
-      request.setAttribute("exception", e);
+      throw e;
     }
   }
 }

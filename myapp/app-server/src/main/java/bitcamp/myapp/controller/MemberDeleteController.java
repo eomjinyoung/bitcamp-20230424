@@ -3,11 +3,9 @@ package bitcamp.myapp.controller;
 import bitcamp.myapp.dao.MemberDao;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/delete")
 public class MemberDeleteController implements PageController {
 
   MemberDao memberDao;
