@@ -1,10 +1,9 @@
 package bitcamp.myapp.servlet;
 
-import bitcamp.myapp.controller.LoginController;
-import bitcamp.myapp.controller.LogoutController;
-import bitcamp.myapp.controller.MemberListController;
-import bitcamp.myapp.controller.PageController;
+import bitcamp.myapp.controller.*;
 import bitcamp.myapp.dao.MemberDao;
+import bitcamp.util.NcpObjectStorageService;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -26,10 +25,16 @@ public class DispatcherServlet extends HttpServlet {
   @Override
   public void init() throws ServletException {
     MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
+    SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) this.getServletContext().getAttribute("sqlSessionFactory");
+    NcpObjectStorageService ncpObjectStorageService = (NcpObjectStorageService) this.getServletContext().getAttribute("ncpObjectStorageService");
 
     controllerMap.put("/auth/login", new LoginController(memberDao));
     controllerMap.put("/auth/logout", new LogoutController());
     controllerMap.put("/member/list", new MemberListController(memberDao));
+    controllerMap.put("/member/add", new MemberAddController(memberDao, sqlSessionFactory, ncpObjectStorageService));
+    controllerMap.put("/member/detail", new MemberDetailController(memberDao));
+    controllerMap.put("/member/update", new MemberUpdateController(memberDao, sqlSessionFactory, ncpObjectStorageService));
+    controllerMap.put("/member/delete", new MemberDeleteController(memberDao, sqlSessionFactory));
   }
 
   @Override
