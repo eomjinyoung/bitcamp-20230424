@@ -19,13 +19,7 @@ public class LoginController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-
-    // 인클루딩 하는 경우,
-    // 여기서 콘텐트 타입을 미리 설정해야 한다.
-    response.setContentType("text/html;charset=UTF-8");
-
-    // View 컴포넌트를 인클루딩 한다.
-    request.getRequestDispatcher("/WEB-INF/jsp/auth/form.jsp").include(request, response);
+    request.setAttribute("viewUrl", "/WEB-INF/jsp/auth/form.jsp");
   }
 
   @Override
@@ -50,10 +44,10 @@ public class LoginController extends HttpServlet {
     if (loginUser != null) {
       // 로그인 정보를 다른 요청에서도 사용할 있도록 세션 보관소에 담아 둔다.
       request.getSession().setAttribute("loginUser", loginUser);
-      response.sendRedirect("/");
+      request.setAttribute("viewUrl", "redirect:/");
       return;
     }
-    request.setAttribute("refresh", "2;url=/auth/login");
-    throw new ServletException("회원 정보가 일치하지 않습니다.");
+    request.setAttribute("refresh", "2;url=/app/auth/login");
+    request.setAttribute("exception", new Exception("회원 정보가 일치하지 않습니다."));
   }
 }
