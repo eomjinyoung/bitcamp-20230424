@@ -17,10 +17,8 @@ public class MemberDetailController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
     MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
     request.setAttribute("member", memberDao.findBy(Integer.parseInt(request.getParameter("no"))));
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/WEB-INF/jsp/member/detail.jsp").include(request, response);
+    request.setAttribute("viewUrl", "/WEB-INF/jsp/member/detail.jsp");
   }
 }

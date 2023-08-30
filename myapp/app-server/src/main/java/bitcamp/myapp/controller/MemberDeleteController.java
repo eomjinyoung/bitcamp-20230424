@@ -3,12 +3,12 @@ package bitcamp.myapp.controller;
 import bitcamp.myapp.dao.MemberDao;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @WebServlet("/member/delete")
 public class MemberDeleteController extends HttpServlet {
@@ -27,13 +27,13 @@ public class MemberDeleteController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       } else {
         sqlSessionFactory.openSession(false).commit();
-        response.sendRedirect("/member/list");
+        request.setAttribute("viewUrl", "redirect:list");
       }
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
       request.setAttribute("refresh", "2;url=list");
-      throw new ServletException(e);
+      request.setAttribute("exception", e);
     }
   }
 
