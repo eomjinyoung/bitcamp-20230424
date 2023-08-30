@@ -25,8 +25,7 @@ public class BoardAddController extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/WEB-INF/jsp/board/form.jsp").include(request, response);
+    request.setAttribute("viewUrl", "/WEB-INF/jsp/board/form.jsp");
   }
 
   @Override
@@ -35,7 +34,7 @@ public class BoardAddController extends HttpServlet {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      response.sendRedirect("/auth/login");
+      request.setAttribute("viewUrl", "redirect:../auth/login");
       return;
     }
 
@@ -68,13 +67,13 @@ public class BoardAddController extends HttpServlet {
       }
 
       sqlSessionFactory.openSession(false).commit();
-      response.sendRedirect("list?category=" + request.getParameter("category"));
+      request.setAttribute("viewUrl", "redirect:list?category=" + request.getParameter("category"));
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
       request.setAttribute("message", "게시글 등록 오류!");
       request.setAttribute("refresh", "2;url=list?category=" + request.getParameter("category"));
-      throw new ServletException(e);
+      request.setAttribute("exception", e);
     }
   }
 }

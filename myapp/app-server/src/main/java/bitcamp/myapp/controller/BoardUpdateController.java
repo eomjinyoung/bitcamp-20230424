@@ -1,7 +1,12 @@
 package bitcamp.myapp.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import bitcamp.myapp.dao.BoardDao;
+import bitcamp.myapp.vo.AttachedFile;
+import bitcamp.myapp.vo.Board;
+import bitcamp.myapp.vo.Member;
+import bitcamp.util.NcpObjectStorageService;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
-import bitcamp.myapp.dao.BoardDao;
-import bitcamp.myapp.vo.AttachedFile;
-import bitcamp.myapp.vo.Board;
-import bitcamp.myapp.vo.Member;
-import bitcamp.util.NcpObjectStorageService;
-import org.apache.ibatis.session.SqlSessionFactory;
+import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("/board/update")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
@@ -29,7 +29,7 @@ public class BoardUpdateController extends HttpServlet {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      response.sendRedirect("/auth/login");
+      request.setAttribute("viewUrl", "redirect:../auth/login");
       return;
     }
 
@@ -66,14 +66,14 @@ public class BoardUpdateController extends HttpServlet {
         }
 
         sqlSessionFactory.openSession(false).commit();
-        response.sendRedirect("list?category=" + request.getParameter("category"));
+        request.setAttribute("viewUrl", "redirect:list?category=" + request.getParameter("category"));
       }
 
     } catch (Exception e) {
       sqlSessionFactory.openSession(false).rollback();
       request.setAttribute("refresh", "2;url=detail?category=" + request.getParameter("category") +
               "&no=" + request.getParameter("no"));
-      throw new ServletException(e);
+      request.setAttribute("exception", e);
     }
   }
 }
