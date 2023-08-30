@@ -34,6 +34,7 @@ public class BoardAddController extends HttpServlet {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
+      request.getParts(); // 일단 클라이언트가 보낸 파일을 읽는다. 그래야 응답 가능!
       request.setAttribute("viewUrl", "redirect:../auth/login");
       return;
     }
