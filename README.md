@@ -656,6 +656,7 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 페이지 컨트롤러를 POJO 로 전환하기
   - Spring IoC 컨테이너 도입
 - 프로젝트 실습
+  - 65. 서블릿을 결합하여 MVC 모델2 구조로 변경하기(계속)
   - 66. Front Controller 디자인 패턴 도입하기
   - 67. Spring IoC 컨테이너를 이용하여 페이지 컨트롤러를 관리하기
 
