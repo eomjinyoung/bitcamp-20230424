@@ -30,6 +30,7 @@ public class DispatcherServlet extends HttpServlet {
     SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) this.getServletContext().getAttribute("sqlSessionFactory");
     NcpObjectStorageService ncpObjectStorageService = (NcpObjectStorageService) this.getServletContext().getAttribute("ncpObjectStorageService");
 
+    controllerMap.put("/", new HomeController());
     controllerMap.put("/auth/login", new LoginController(memberDao));
     controllerMap.put("/auth/logout", new LogoutController());
     controllerMap.put("/member/list", new MemberListController(memberDao));
