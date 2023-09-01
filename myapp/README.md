@@ -425,3 +425,4 @@
 ## 69. Mybatis + Spring IoC 컨테이너 = DAO 구현체 자동 생성
 
 - Mybatis의 Spring 연동 플러그인을 사용하여 DAO를 자동 생성하는 방법
+- Mybatis의 Log4j 활성화 하기
