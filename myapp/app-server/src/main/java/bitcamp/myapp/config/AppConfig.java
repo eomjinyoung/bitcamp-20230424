@@ -28,15 +28,6 @@ public class AppConfig {
     System.out.println("AppConfig() 호출됨!");
   }
 
-  // Mybatis 객체 준비
-//  @Bean
-//  public SqlSessionFactory sqlSessionFactory() throws Exception {
-//    System.out.println("AppConfig.sqlSessionFactory() 호출됨!");
-//    return new SqlSessionFactoryProxy(
-//            new SqlSessionFactoryBuilder().build(
-//                    Resources.getResourceAsStream("bitcamp/myapp/config/mybatis-config.xml")));
-//  }
-
   @Bean
   public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext appCtx) throws Exception {
     System.out.println("AppConfig.sqlSessionFactory() 호출됨!");
