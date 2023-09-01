@@ -20,7 +20,7 @@ import javax.sql.DataSource;
         "bitcamp.myapp.dao",
         "bitcamp.myapp.controller",
         "bitcamp.myapp.service"})
-@PropertySource({"classpath:bitcamp/myapp/config/jdbc.properties"})
+@PropertySource({"classpath:bitcamp/myapp/config/ncloud/jdbc.properties"})
 @MapperScan("bitcamp.myapp.dao") // Mybatis가 자동으로 생성할 DAO 객체의 인터페이스 패키지 지정
 public class AppConfig {
 
@@ -44,7 +44,7 @@ public class AppConfig {
     SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
     factoryBean.setDataSource(dataSource);
     factoryBean.setTypeAliasesPackage("bitcamp.myapp.vo");
-    factoryBean.setMapperLocations(appCtx.getResource("classpath:bitcamp/myapp/dao/mysql/*Dao.xml"));
+    factoryBean.setMapperLocations(appCtx.getResources("classpath:bitcamp/myapp/dao/mysql/*Dao.xml"));
 
     return factoryBean.getObject();
   }
