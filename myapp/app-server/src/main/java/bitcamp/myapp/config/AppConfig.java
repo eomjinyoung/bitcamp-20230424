@@ -1,11 +1,18 @@
 package bitcamp.myapp.config;
 
-import bitcamp.util.SqlSessionFactoryProxy;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.sql.DataSource;
 
 // Application을 실행하는데 필요한 객체를 설정하는 일을 한다.
 //
@@ -13,6 +20,8 @@ import org.springframework.context.annotation.ComponentScan;
         "bitcamp.myapp.dao",
         "bitcamp.myapp.controller",
         "bitcamp.myapp.service"})
+@PropertySource({"classpath:bitcamp/myapp/config/jdbc.properties"})
+@MapperScan("bitcamp.myapp.dao") // Mybatis가 자동으로 생성할 DAO 객체의 인터페이스 패키지 지정
 public class AppConfig {
 
   public AppConfig() {
@@ -20,13 +29,48 @@ public class AppConfig {
   }
 
   // Mybatis 객체 준비
+//  @Bean
+//  public SqlSessionFactory sqlSessionFactory() throws Exception {
+//    System.out.println("AppConfig.sqlSessionFactory() 호출됨!");
+//    return new SqlSessionFactoryProxy(
+//            new SqlSessionFactoryBuilder().build(
+//                    Resources.getResourceAsStream("bitcamp/myapp/config/mybatis-config.xml")));
+//  }
+
   @Bean
-  public SqlSessionFactory sqlSessionFactory() throws Exception {
+  public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext appCtx) throws Exception {
     System.out.println("AppConfig.sqlSessionFactory() 호출됨!");
-    return new SqlSessionFactoryProxy(
-            new SqlSessionFactoryBuilder().build(
-                    Resources.getResourceAsStream("bitcamp/myapp/config/mybatis-config.xml")));
+
+    SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+    factoryBean.setDataSource(dataSource);
+    factoryBean.setTypeAliasesPackage("bitcamp.myapp.vo");
+    factoryBean.setMapperLocations(appCtx.getResource("classpath:bitcamp/myapp/dao/mysql/*Dao.xml"));
+
+    return factoryBean.getObject();
   }
 
+  @Bean
+  public DataSource dataSource(
+          @Value("${jdbc.driver}") String driver,
+          @Value("${jdbc.url}") String url,
+          @Value("${jdbc.username}") String username,
+          @Value("${jdbc.password}") String password) {
+    System.out.println("AppConfig.dataSource() 호출됨!");
+
+    DriverManagerDataSource ds = new DriverManagerDataSource();
+    ds.setDriverClassName(driver);
+    ds.setUrl(url);
+    ds.setUsername(username);
+    ds.setPassword(password);
+
+    return ds;
+  }
+
+  @Bean
+  public PlatformTransactionManager transactionManager(DataSource dataSource) {
+    System.out.println("AppConfig.transactionManager() 호출됨!");
+
+    return new DataSourceTransactionManager(dataSource);
+  }
 
 }

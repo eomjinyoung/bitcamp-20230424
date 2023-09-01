@@ -666,6 +666,13 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 스프링 IoC 컨테이너
   - Spring IoC 컨테이너 사용법
 
+### 71일(9/1,금)
+
+- 스프링 IoC 컨테이너
+  - Spring IoC 컨테이너 사용법(계속)
+- 프로젝트 실습
+  - 69. Mybatis + Spring IoC 컨테이너 = DAO 구현체 자동 생성
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
