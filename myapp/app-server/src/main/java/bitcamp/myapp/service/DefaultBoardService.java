@@ -1,6 +1,7 @@
 package bitcamp.myapp.service;
 
 import bitcamp.myapp.dao.BoardDao;
+import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -49,7 +50,7 @@ public class DefaultBoardService implements BoardService {
 
   @Override
   public Board get(int boardNo) throws Exception {
-    return null;
+    return boardDao.findBy(boardNo);
   }
 
   @Override
@@ -59,7 +60,43 @@ public class DefaultBoardService implements BoardService {
 
   @Override
   public int delete(int boardNo) throws Exception {
-    return 0;
+    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+    def.setName("tx1");
+    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+    TransactionStatus status = txManager.getTransaction(def);
+
+    try {
+      boardDao.deleteFiles(boardNo);
+      int count = boardDao.delete(boardNo);
+      txManager.commit(status);
+      return count;
+
+    } catch (Exception e) {
+      txManager.rollback(status);
+      throw e;
+    }
+  }
+
+  @Override
+  public int increaseViewCount(int boardNo) throws Exception {
+    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+    def.setName("tx1");
+    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+    TransactionStatus status = txManager.getTransaction(def);
+
+    try {
+      int count = boardDao.updateCount(boardNo);
+      txManager.commit(status);
+      return count;
+    } catch (Exception e) {
+      txManager.rollback(status);
+      throw e;
+    }
+  }
+
+  @Override
+  public AttachedFile getAttachedFile(int fileNo) throws Exception {
+    return boardDao.findFileBy(fileNo);
   }
 
   @Override

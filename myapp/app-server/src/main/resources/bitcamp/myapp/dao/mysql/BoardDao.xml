@@ -54,7 +54,7 @@
       board_no desc
   </select>
   
-  <select id="findBy" resultMap="boardMap">
+  <select id="findBy" resultMap="boardMap" parameterType="int">
     select
       b.board_no,
       b.title,
@@ -70,8 +70,7 @@
       myapp_board b inner join myapp_member m on b.writer=m.member_no
       left outer join myapp_board_file f on b.board_no=f.board_no
     where
-      b.category=#{categoryNo}
-      and b.board_no=#{boardNo}
+      b.board_no=#{boardNo}
   </select>
   
   <update id="update" parameterType="board">
@@ -84,20 +83,17 @@
 	    and writer=#{writer.no}
   </update>
   
-  <update id="updateCount" parameterType="board">
+  <update id="updateCount" parameterType="int">
     update myapp_board set
-      view_count=#{viewCount}
+      view_count=viewCount + 1
     where
-      category=#{category}
-      and board_no=#{no}
+      board_no=#{no}
   </update>
   
-  <delete id="delete" parameterType="board">
+  <delete id="delete" parameterType="int">
     delete from myapp_board
     where 
-      category=#{category}
       and board_no=#{no}
-      and writer=#{writer.no}
   </delete>
   
   <insert id="insertFiles" parameterType="board">
