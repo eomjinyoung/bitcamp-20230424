@@ -440,3 +440,7 @@
 ## 72. Spring의 TransactionTemplate 으로 교체하기
 
 - 직접 만든 TransactionTemplate 대신 Spring에서 제공하는 클래스 사용하기
+
+## 73. 애노테이션을 사용하여 트랜잭션 제어하기
+
+- 프록시 패턴 기술을 사용하여 트랜잭션 코드를 삽입하기

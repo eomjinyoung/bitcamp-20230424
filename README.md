@@ -678,6 +678,8 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 70. Controller에서 비즈니스 로직 분리하기: 서비스 컴포넌트 도입
   - 71. 트랜잭션 제어 코드를 캡슐화하기: Spring의 TransactionTemplate 모방 구현
+  - 72. Spring의 TransactionTemplate 으로 교체하기
+  - 73. 애노테이션을 사용하여 트랜잭션 제어하기
 
 ## 웨일즈 화상회의
 
