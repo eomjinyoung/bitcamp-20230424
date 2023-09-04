@@ -26,6 +26,12 @@ public class DispatcherServlet extends HttpServlet {
   public void init() throws ServletException {
     System.out.println("DispatcherServlet.init() 호출됨!");
     iocContainer = new AnnotationConfigApplicationContext(AppConfig.class, NcpConfig.class);
+
+//    String[] names = iocContainer.getBeanDefinitionNames();
+//    for (String name : names) {
+//      System.out.printf("=> %s\n", iocContainer.getBean(name).getClass().getName());
+//    }
+
   }
 
   @Override

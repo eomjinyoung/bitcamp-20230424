@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface BoardDao {
-  void insert(Board board);
+  int insert(Board board);
   List<Board> findAll(int category);
   Board findBy(@Param("categoryNo") int category, @Param("boardNo") int no);
   int update(Board board);

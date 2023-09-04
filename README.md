@@ -673,6 +673,11 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 프로젝트 실습
   - 69. Mybatis + Spring IoC 컨테이너 = DAO 구현체 자동 생성
 
+### 72일(9/4,월)
+
+- 프로젝트 실습
+  - 70. Controller에서 비즈니스 로직 분리하기: 서비스 컴포넌트 도입
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
