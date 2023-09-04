@@ -1,11 +1,11 @@
 package bitcamp.myapp.controller;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component("/auth/logout")
+@Controller("/auth/logout")
 public class LogoutController implements PageController {
   @Override
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

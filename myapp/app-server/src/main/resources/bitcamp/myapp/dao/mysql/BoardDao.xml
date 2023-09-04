@@ -78,14 +78,12 @@
 	    title=#{title},
 	    content=#{content}
 	  where 
-	    category=#{category}
-	    and board_no=#{no}
-	    and writer=#{writer.no}
+	    board_no=#{no}
   </update>
   
   <update id="updateCount" parameterType="int">
     update myapp_board set
-      view_count=viewCount + 1
+      view_count=view_count + 1
     where
       board_no=#{no}
   </update>
@@ -93,7 +91,7 @@
   <delete id="delete" parameterType="int">
     delete from myapp_board
     where 
-      and board_no=#{no}
+      board_no=#{no}
   </delete>
   
   <insert id="insertFiles" parameterType="board">

@@ -1,36 +1,26 @@
 package bitcamp.myapp.controller;
 
-import bitcamp.myapp.dao.BoardDao;
+import bitcamp.myapp.service.BoardService;
 import bitcamp.myapp.service.NcpObjectStorageService;
 import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.util.ArrayList;
 
-@Component("/board/update")
+@Controller("/board/update")
 public class BoardUpdateController implements PageController {
 
-  BoardDao boardDao;
-  PlatformTransactionManager txManager;
-  NcpObjectStorageService ncpObjectStorageService;
+  @Autowired
+  BoardService boardService;
 
-  public BoardUpdateController(
-          BoardDao boardDao,
-          PlatformTransactionManager txManager,
-          NcpObjectStorageService ncpObjectStorageService) {
-    this.boardDao = boardDao;
-    this.txManager = txManager;
-    this.ncpObjectStorageService = ncpObjectStorageService;
-  }
+  @Autowired
+  NcpObjectStorageService ncpObjectStorageService;
 
   @Override
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -40,18 +30,14 @@ public class BoardUpdateController implements PageController {
       return "redirect:../auth/login";
     }
 
-    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-    def.setName("tx1");
-    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-    TransactionStatus status = txManager.getTransaction(def);
-
     try {
-      Board board = new Board();
-      board.setWriter(loginUser);
-      board.setNo(Integer.parseInt(request.getParameter("no")));
+      Board board = boardService.get(Integer.parseInt(request.getParameter("no")));
+      if (board == null || board.getWriter().getNo() != loginUser.getNo()) {
+        throw new Exception("게시글이 존재하지 않거나 변경 권한이 없습니다.");
+      }
+
       board.setTitle(request.getParameter("title"));
       board.setContent(request.getParameter("content"));
-      board.setCategory(Integer.parseInt(request.getParameter("category")));
 
       ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
       for (Part part : request.getParts()) {
@@ -65,20 +51,11 @@ public class BoardUpdateController implements PageController {
       }
       board.setAttachedFiles(attachedFiles);
 
-      if (boardDao.update(board) == 0) {
-        throw new Exception("게시글이 없거나 변경 권한이 없습니다.");
-      } else {
-        if (attachedFiles.size() > 0) {
-          boardDao.insertFiles(board);
-        }
-        txManager.commit(status);
-        return "redirect:list?category=" + request.getParameter("category");
-      }
+      boardService.update(board);
+      return "redirect:list?category=" + request.getParameter("category");
 
     } catch (Exception e) {
-      txManager.rollback(status);
-      request.setAttribute("refresh", "2;url=detail?category=" + request.getParameter("category") +
-              "&no=" + request.getParameter("no"));
+      request.setAttribute("refresh", "2;url=detail?no=" + request.getParameter("no"));
       throw e;
     }
   }
