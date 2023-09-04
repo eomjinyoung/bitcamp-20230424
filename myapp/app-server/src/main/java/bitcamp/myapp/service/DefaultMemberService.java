@@ -55,11 +55,35 @@ public class DefaultMemberService implements MemberService {
 
   @Override
   public int update(Member member) throws Exception {
-    return memberDao.update(member);
+    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+    def.setName("tx1");
+    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+    TransactionStatus status = txManager.getTransaction(def);
+
+    try {
+      int count = memberDao.update(member);
+      txManager.commit(status);
+      return count;
+    } catch (Exception e) {
+      txManager.rollback(status);
+      throw e;
+    }
   }
 
   @Override
   public int delete(int memberNo) throws Exception {
-    return memberDao.delete(memberNo);
+    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+    def.setName("tx1");
+    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+    TransactionStatus status = txManager.getTransaction(def);
+
+    try {
+      int count = memberDao.delete(memberNo);
+      txManager.commit(status);
+      return count;
+    } catch (Exception e) {
+      txManager.rollback(status);
+      throw e;
+    }
   }
 }
