@@ -52,7 +52,7 @@ public class BoardUpdateController implements PageController {
       board.setAttachedFiles(attachedFiles);
 
       boardService.update(board);
-      return "redirect:list?category=" + request.getParameter("category");
+      return "redirect:list?category=" + board.getCategory();
 
     } catch (Exception e) {
       request.setAttribute("refresh", "2;url=detail?no=" + request.getParameter("no"));
