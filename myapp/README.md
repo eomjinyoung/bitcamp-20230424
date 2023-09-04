@@ -429,4 +429,14 @@
 
 ## 70. Controller에서 비즈니스 로직 분리하기: 서비스 컴포넌트 도입
 
+- Controller에서 비즈니스 로직을 분리하는 이유
 - 서비스 컴포넌트의 역할 이해
+
+## 71. 트랜잭션 제어 코드를 캡슐화하기: Spring의 TransactionTemplate 모방 구현
+
+- 트랜잭션 제어 코드를 캡슐화하여 반복적인 코드 작업을 줄이는 방법
+- Spring의 TransactionTemplate 클래스를 모방하여 내부 메커니즘을 이해하기
+
+## 72. Spring의 TransactionTemplate 으로 교체하기
+
+- 직접 만든 TransactionTemplate 대신 Spring에서 제공하는 클래스 사용하기
