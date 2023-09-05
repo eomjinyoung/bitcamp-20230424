@@ -9,14 +9,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller("/auth/login")
-public class LoginController {
+@Controller
+public class AuthController {
 
   @Autowired
   MemberService memberService;
 
-  @RequestMapping
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @RequestMapping("/auth/login")
+  public String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
     if (request.getMethod().equals("GET")) {
       return "/WEB-INF/jsp/auth/form.jsp";
     }
@@ -40,6 +40,12 @@ public class LoginController {
     }
 
     request.getSession().setAttribute("loginUser", loginUser);
+    return "redirect:/";
+  }
+
+  @RequestMapping("/auth/logout")
+  public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    request.getSession().invalidate();
     return "redirect:/";
   }
 }
