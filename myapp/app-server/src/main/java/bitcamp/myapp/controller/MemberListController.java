@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller("/member/list")
-public class MemberListController implements PageController {
+public class MemberListController {
 
   @Autowired
   MemberService memberService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     request.setAttribute("list", memberService.list());
     return "/WEB-INF/jsp/member/list.jsp";

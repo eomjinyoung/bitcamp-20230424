@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 @Controller("/member/update")
-public class MemberUpdateController implements PageController {
+public class MemberUpdateController {
 
   @Autowired
   MemberService memberService;
@@ -19,7 +19,7 @@ public class MemberUpdateController implements PageController {
   @Autowired
   NcpObjectStorageService ncpObjectStorageService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     try {
       Member member = new Member();

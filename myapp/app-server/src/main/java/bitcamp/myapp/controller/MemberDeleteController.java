@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller("/member/delete")
-public class MemberDeleteController implements PageController {
+public class MemberDeleteController {
 
   @Autowired
   MemberService memberService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     try {

@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller("/board/list")
-public class BoardListController implements PageController {
+public class BoardListController {
 
   @Autowired
   BoardService boardService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     try {
       request.setAttribute("list", boardService.list(Integer.parseInt(request.getParameter("category"))));

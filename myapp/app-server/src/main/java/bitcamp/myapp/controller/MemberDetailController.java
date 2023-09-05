@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller("/member/detail")
-public class MemberDetailController implements PageController {
+public class MemberDetailController {
 
   @Autowired
   MemberService memberService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     request.setAttribute("member", memberService.get(Integer.parseInt(request.getParameter("no"))));
     return "/WEB-INF/jsp/member/detail.jsp";

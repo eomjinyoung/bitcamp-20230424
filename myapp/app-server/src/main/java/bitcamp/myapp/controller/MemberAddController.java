@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 @Controller("/member/add")
-public class MemberAddController implements PageController {
+public class MemberAddController {
 
   @Autowired
   MemberService memberService;
@@ -19,7 +19,7 @@ public class MemberAddController implements PageController {
   @Autowired
   NcpObjectStorageService ncpObjectStorageService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     if (request.getMethod().equals("GET")) {
       return "/WEB-INF/jsp/member/form.jsp";

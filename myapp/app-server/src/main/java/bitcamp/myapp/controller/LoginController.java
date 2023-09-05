@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller("/auth/login")
-public class LoginController implements PageController {
+public class LoginController {
 
   @Autowired
   MemberService memberService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     if (request.getMethod().equals("GET")) {
       return "/WEB-INF/jsp/auth/form.jsp";

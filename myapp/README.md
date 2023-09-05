@@ -448,3 +448,7 @@
 ## 74. Spring의 @Transactional 로 교체하기
 
 - 직접 제작한 트랜잭션 프록시 객체 대신 Spring에서 제공하는 클래스 및 애노테이션 사용하기
+
+## 75. 애노테이션으로 request handler 표시하기
+
+- PageController 인터페이스를 사용하는 대신에 애노테이션으로 호출될 메서드를 표시하는 방법

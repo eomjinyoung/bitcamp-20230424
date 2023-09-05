@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller("/board/fileDelete")
-public class BoardFileDeleteController implements PageController {
+public class BoardFileDeleteController {
 
   @Autowired
   BoardService boardService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");

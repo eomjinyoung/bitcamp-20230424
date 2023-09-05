@@ -14,7 +14,7 @@ import javax.servlet.http.Part;
 import java.util.ArrayList;
 
 @Controller("/board/update")
-public class BoardUpdateController implements PageController {
+public class BoardUpdateController {
 
   @Autowired
   BoardService boardService;
@@ -22,7 +22,7 @@ public class BoardUpdateController implements PageController {
   @Autowired
   NcpObjectStorageService ncpObjectStorageService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {

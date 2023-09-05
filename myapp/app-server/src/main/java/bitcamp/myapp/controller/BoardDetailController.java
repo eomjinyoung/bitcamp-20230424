@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller("/board/detail")
-public class BoardDetailController implements PageController {
+public class BoardDetailController {
 
   @Autowired
   BoardService boardService;
 
-  @Override
+  @RequestMapping
   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     try {
