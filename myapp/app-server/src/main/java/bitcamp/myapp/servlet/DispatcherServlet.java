@@ -76,17 +76,18 @@ public class DispatcherServlet extends HttpServlet {
       throw new ServletException("요청을 처리할 핸들러가 없습니다!");
     }
 
+    Map<String, Object> model = new HashMap<>();
+
     // request handler 호출하기
     try {
-      Map<String,Object> model = new HashMap<>();
       Object[] arguments = prepareArguments(requestHandlerMapping.handler, request, response, model);
 
       // request handler 호출
       String viewUrl = (String) requestHandlerMapping.handler.invoke(requestHandlerMapping.controller, arguments);
 
       // model 객체에 저장된 값을 ServletRequest 보관소로 옮긴다.
-      Set<Map.Entry<String,Object>> entrySet = model.entrySet();
-      for (Map.Entry<String,Object> entry : entrySet) {
+      Set<Map.Entry<String, Object>> entrySet = model.entrySet();
+      for (Map.Entry<String, Object> entry : entrySet) {
         request.setAttribute(entry.getKey(), entry.getValue());
       }
 
@@ -98,6 +99,12 @@ public class DispatcherServlet extends HttpServlet {
 
     } catch (Exception e) {
       // 페이지 컨트롤러 실행 중 오류가 발생했다면, 예외를 던진다.
+
+      Set<Map.Entry<String, Object>> entrySet = model.entrySet();
+      for (Map.Entry<String, Object> entry : entrySet) {
+        request.setAttribute(entry.getKey(), entry.getValue());
+      }
+
       throw new ServletException("요청 처리 중 오류 발생!", e);
     }
 
@@ -107,7 +114,7 @@ public class DispatcherServlet extends HttpServlet {
           Method handler,
           HttpServletRequest request,
           HttpServletResponse response,
-          Map<String,Object> model) throws Exception {
+          Map<String, Object> model) throws Exception {
     Parameter[] params = handler.getParameters();
     ArrayList<Object> arguments = new ArrayList<>();
 
@@ -166,7 +173,7 @@ public class DispatcherServlet extends HttpServlet {
 
       // 셋터 메서드의 이름을 이용하여 프로퍼티 이름을 알아낸다.
       StringBuilder strBuilder = new StringBuilder();
-      strBuilder.append(m.getName().substring(3,4).toLowerCase());
+      strBuilder.append(m.getName().substring(3, 4).toLowerCase());
       strBuilder.append(m.getName().substring(4));
 
       String propName = strBuilder.toString();
