@@ -19,6 +19,7 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @WebServlet(
         value = "/app/*",
@@ -63,6 +64,9 @@ public class DispatcherServlet extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     String pageControllerPath = request.getPathInfo();
+    if (request.getContentType() != null && request.getContentType().toLowerCase().equals("multipart/form-data")) {
+      request.getParts(); // 일단 클라이언트가 보낸 파일을 읽는다. 그래야 응답 가능!
+    }
 
     response.setContentType("text/html;charset=UTF-8");
 
@@ -74,7 +78,16 @@ public class DispatcherServlet extends HttpServlet {
 
     // request handler 호출하기
     try {
-      Object[] arguments = prepareArguments(requestHandlerMapping.handler, request, response);
+      Map<String,Object> model = new HashMap<>();
+      Object[] arguments = prepareArguments(requestHandlerMapping.handler, request, response, model);
+
+      // model 객체에 저장된 값을 ServletRequest 보관소로 옮긴다.
+      Set<Map.Entry<String,Object>> entrySet = model.entrySet();
+      for (Map.Entry<String,Object> entry : entrySet) {
+        request.setAttribute(entry.getKey(), entry.getValue());
+      }
+
+      // request handler 호출
       String viewUrl = (String) requestHandlerMapping.handler.invoke(requestHandlerMapping.controller, arguments);
       if (viewUrl.startsWith("redirect:")) {
         response.sendRedirect(viewUrl.substring(9)); // 예) redirect:/app/board/list
@@ -89,7 +102,11 @@ public class DispatcherServlet extends HttpServlet {
 
   }
 
-  private Object[] prepareArguments(Method handler, HttpServletRequest request, HttpServletResponse response) throws Exception {
+  private Object[] prepareArguments(
+          Method handler,
+          HttpServletRequest request,
+          HttpServletResponse response,
+          Map<String,Object> model) throws Exception {
     Parameter[] params = handler.getParameters();
     ArrayList<Object> arguments = new ArrayList<>();
 
@@ -108,8 +125,19 @@ public class DispatcherServlet extends HttpServlet {
         arguments.add(Integer.parseInt(request.getParameter(p.getAnnotation(RequestParam.class).value())));
       } else if (p.getType() == char.class) {
         arguments.add(request.getParameter(p.getAnnotation(RequestParam.class).value()).charAt(0));
+      } else if (p.getType() == Map.class) {
+        arguments.add(model);
       } else if (p.getType() == Part.class) {
         arguments.add(request.getPart(p.getAnnotation(RequestParam.class).value()));
+      } else if (p.getType() == Part[].class) {
+        String paramName = p.getAnnotation(RequestParam.class).value();
+        ArrayList<Part> parts = new ArrayList<>();
+        for (Part part : request.getParts()) {
+          if (part.getName().equals(paramName)) {
+            parts.add(part);
+          }
+        }
+        arguments.add(parts.toArray(new Part[]{}));
       } else {
         arguments.add(getValueObject(p.getType(), request));
       }

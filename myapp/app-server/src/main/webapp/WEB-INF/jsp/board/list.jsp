@@ -18,7 +18,7 @@
 
 <h1>게시글 목록</h1>
 <div style='margin:5px;'>
-<a href='add?category=${param.category}'>새 글</a>
+<a href='form?category=${param.category}'>새 글</a>
 </div>
 <table border='1'>
 <thead>
