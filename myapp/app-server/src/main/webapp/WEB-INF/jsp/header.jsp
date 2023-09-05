@@ -12,7 +12,7 @@
 
 <c:choose>
     <c:when test="${empty sessionScope.loginUser}">
-        <a href='/app/auth/login'>로그인</a>
+        <a href='/app/auth/form'>로그인</a>
     </c:when>
     <c:otherwise>
         <c:if test="${empty sessionScope.loginUser.photo}">

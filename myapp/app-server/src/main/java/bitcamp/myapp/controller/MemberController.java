@@ -19,20 +19,28 @@ public class MemberController {
   @Autowired
   NcpObjectStorageService ncpObjectStorageService;
 
+  @RequestMapping("/member/form")
+  public String add() {
+    return "/WEB-INF/jsp/member/form.jsp";
+  }
+
   @RequestMapping("/member/add")
-  public String add(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    if (request.getMethod().equals("GET")) {
-      return "/WEB-INF/jsp/member/form.jsp";
-    }
+  public String add(
+          @RequestParam("name") String name,
+          @RequestParam("email") String email,
+          @RequestParam("password") String password,
+          @RequestParam("gender") char gender,
+          @RequestParam("photo") Part photo,
+          HttpServletRequest request) throws Exception {
 
     try {
       Member m = new Member();
-      m.setName(request.getParameter("name"));
-      m.setEmail(request.getParameter("email"));
-      m.setPassword(request.getParameter("password"));
-      m.setGender(request.getParameter("gender").charAt(0));
+      m.setName(name);
+      m.setEmail(email);
+      m.setPassword(password);
+      m.setGender(gender);
 
-      Part photoPart = request.getPart("photo");
+      Part photoPart = photo;
       if (photoPart.getSize() > 0) {
         String uploadFileUrl = ncpObjectStorageService.uploadFile(
                 "bitcamp-nc7-bucket-118", "member/", photoPart);
@@ -49,7 +57,7 @@ public class MemberController {
   }
 
   @RequestMapping("/member/delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String delete(@RequestParam("no") int no, HttpServletRequest request) throws Exception {
 
     try {
       if (memberService.delete(Integer.parseInt(request.getParameter("no"))) == 0) {
@@ -65,13 +73,13 @@ public class MemberController {
   }
 
   @RequestMapping("/member/detail")
-  public String detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String detail(HttpServletRequest request) throws Exception {
     request.setAttribute("member", memberService.get(Integer.parseInt(request.getParameter("no"))));
     return "/WEB-INF/jsp/member/detail.jsp";
   }
 
   @RequestMapping("/member/list")
-  public String list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String list(HttpServletRequest request) throws Exception {
     request.setAttribute("list", memberService.list());
     return "/WEB-INF/jsp/member/list.jsp";
   }
