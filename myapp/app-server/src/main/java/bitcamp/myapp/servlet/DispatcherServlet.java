@@ -81,14 +81,15 @@ public class DispatcherServlet extends HttpServlet {
       Map<String,Object> model = new HashMap<>();
       Object[] arguments = prepareArguments(requestHandlerMapping.handler, request, response, model);
 
+      // request handler 호출
+      String viewUrl = (String) requestHandlerMapping.handler.invoke(requestHandlerMapping.controller, arguments);
+
       // model 객체에 저장된 값을 ServletRequest 보관소로 옮긴다.
       Set<Map.Entry<String,Object>> entrySet = model.entrySet();
       for (Map.Entry<String,Object> entry : entrySet) {
         request.setAttribute(entry.getKey(), entry.getValue());
       }
 
-      // request handler 호출
-      String viewUrl = (String) requestHandlerMapping.handler.invoke(requestHandlerMapping.controller, arguments);
       if (viewUrl.startsWith("redirect:")) {
         response.sendRedirect(viewUrl.substring(9)); // 예) redirect:/app/board/list
       } else {
