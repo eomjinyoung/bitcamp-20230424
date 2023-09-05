@@ -681,6 +681,11 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 72. Spring의 TransactionTemplate 으로 교체하기
   - 73. 애노테이션을 사용하여 트랜잭션 제어하기
 
+### 73일(9/5,화)
+
+- 프로젝트 실습
+  - 74. Spring의 @Transactional 로 교체하기
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
