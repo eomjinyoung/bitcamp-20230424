@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 @Controller
@@ -26,27 +25,18 @@ public class MemberController {
 
   @RequestMapping("/member/add")
   public String add(
-          @RequestParam("name") String name,
-          @RequestParam("email") String email,
-          @RequestParam("password") String password,
-          @RequestParam("gender") char gender,
-          @RequestParam("photo") Part photo,
+          Member member,
+          @RequestParam("photofile") Part photofile,
           HttpServletRequest request) throws Exception {
 
     try {
-      Member m = new Member();
-      m.setName(name);
-      m.setEmail(email);
-      m.setPassword(password);
-      m.setGender(gender);
-
-      Part photoPart = photo;
-      if (photoPart.getSize() > 0) {
+      System.out.println(member);
+      if (photofile.getSize() > 0) {
         String uploadFileUrl = ncpObjectStorageService.uploadFile(
-                "bitcamp-nc7-bucket-118", "member/", photoPart);
-        m.setPhoto(uploadFileUrl);
+                "bitcamp-nc7-bucket-118", "member/", photofile);
+        member.setPhoto(uploadFileUrl);
       }
-      memberService.add(m);
+      memberService.add(member);
       return "redirect:list";
 
     } catch (Exception e) {
@@ -73,8 +63,10 @@ public class MemberController {
   }
 
   @RequestMapping("/member/detail")
-  public String detail(HttpServletRequest request) throws Exception {
-    request.setAttribute("member", memberService.get(Integer.parseInt(request.getParameter("no"))));
+  public String detail(
+          @RequestParam("no") int no,
+          HttpServletRequest request) throws Exception {
+    request.setAttribute("member", memberService.get(no));
     return "/WEB-INF/jsp/member/detail.jsp";
   }
 
@@ -85,19 +77,14 @@ public class MemberController {
   }
 
   @RequestMapping("/member/update")
-  public String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String update(
+          Member member,
+          @RequestParam("photofile") Part photofile,
+          HttpServletRequest request) throws Exception {
     try {
-      Member member = new Member();
-      member.setNo(Integer.parseInt(request.getParameter("no")));
-      member.setName(request.getParameter("name"));
-      member.setEmail(request.getParameter("email"));
-      member.setPassword(request.getParameter("password"));
-      member.setGender(request.getParameter("gender").charAt(0));
-
-      Part photoPart = request.getPart("photo");
-      if (photoPart.getSize() > 0) {
+      if (photofile.getSize() > 0) {
         String uploadFileUrl = ncpObjectStorageService.uploadFile(
-                "bitcamp-nc7-bucket-118", "member/", photoPart);
+                "bitcamp-nc7-bucket-118", "member/", photofile);
         member.setPhoto(uploadFileUrl);
       }
 

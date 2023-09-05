@@ -35,7 +35,7 @@
   </td>
 </tr>
 <tr>
-  <th>사진</th> <td><input type='file' name='photo'></td>
+  <th>사진</th> <td><input type='file' name='photofile'></td>
 </tr>
 </table>
 <button>등록</button>
