@@ -1,7 +1,9 @@
 package bitcamp.myapp.config;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
@@ -33,11 +35,16 @@ public class AdminWebApplicationInitializer extends AbstractAnnotationConfigDisp
   @Override
   protected String[] getServletMappings() {
     // DispatcherServlet의 URL을 지정한다.
-    return new String[] {"/app/*"};
+    return new String[] {"/admin/*"};
   }
 
   @Override
   protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-    registration.setMultipartConfig(new MultipartConfigElement("temp", 10000000, 15000000, 1000000));
+    registration.setMultipartConfig(new MultipartConfigElement(null , 10000000, 15000000, 1000000));
+  }
+
+  @Override
+  protected Filter[] getServletFilters() {
+    return new Filter[] {new CharacterEncodingFilter("UTF-8")};
   }
 }
