@@ -14,8 +14,17 @@
 	</context-param>
 
 	<servlet>
-		<servlet-name>/board/add.jsp</servlet-name>
-		<jsp-file>/board/add.jsp</jsp-file>
+		<servlet-name>app</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>bitcamp.myapp.config.AppConfig</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
 		<multipart-config>
 			<max-file-size>10000000</max-file-size>
 			<max-request-size>50000000</max-request-size>
@@ -23,50 +32,8 @@
 		</multipart-config>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>/board/add.jsp</servlet-name>
-		<url-pattern>/board/add.jsp</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>/board/update.jsp</servlet-name>
-		<jsp-file>/board/update.jsp</jsp-file>
-		<multipart-config>
-			<max-file-size>10000000</max-file-size>
-			<max-request-size>50000000</max-request-size>
-			<file-size-threshold>1000000</file-size-threshold>
-		</multipart-config>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/board/update.jsp</servlet-name>
-		<url-pattern>/board/update.jsp</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>/member/add.jsp</servlet-name>
-		<jsp-file>/member/add.jsp</jsp-file>
-		<multipart-config>
-			<max-file-size>10000000</max-file-size>
-			<max-request-size>50000000</max-request-size>
-			<file-size-threshold>1000000</file-size-threshold>
-		</multipart-config>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/member/add.jsp</servlet-name>
-		<url-pattern>/member/add.jsp</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>/member/update.jsp</servlet-name>
-		<jsp-file>/member/update.jsp</jsp-file>
-		<multipart-config>
-			<max-file-size>10000000</max-file-size>
-			<max-request-size>50000000</max-request-size>
-			<file-size-threshold>1000000</file-size-threshold>
-		</multipart-config>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/member/update.jsp</servlet-name>
-		<url-pattern>/member/update.jsp</url-pattern>
+		<servlet-name>app</servlet-name>
+		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

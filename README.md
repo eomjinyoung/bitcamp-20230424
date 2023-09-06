@@ -689,6 +689,11 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - 76. CRUD 기능을 한 개의 페이지 컨트롤러로 합치기
   - 77. 요청 파라미터를 자동 주입하기
 
+### 74일(9/6,수)
+
+- 프로젝트 실습
+  - 78. Spring WebMVC 프레임워크 도입하기
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

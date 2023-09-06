@@ -12,12 +12,15 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import javax.sql.DataSource;
 
 // Application을 실행하는데 필요한 객체를 설정하는 일을 한다.
 //
 @ComponentScan(basePackages = {
+        "bitcamp.myapp.config",
         "bitcamp.myapp.dao",
         "bitcamp.myapp.controller",
         "bitcamp.myapp.service"})
@@ -70,4 +73,8 @@ public class AppConfig {
     return new DataSourceTransactionManager(dataSource);
   }
 
+  @Bean
+  public MultipartResolver multipartResolver() {
+    return new StandardServletMultipartResolver();
+  }
 }
