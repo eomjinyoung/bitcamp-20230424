@@ -465,3 +465,4 @@
 ## 78. Spring WebMVC 프레임워크 도입하기
 
 - Spring WebMVC 프레임워크 사용법
+- DispatcherServlet을 등록하는 방법
