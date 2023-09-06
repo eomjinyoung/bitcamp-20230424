@@ -39,6 +39,9 @@ dependencies {
     // Spring WebMVC 라이브러리
     implementation 'org.springframework:spring-webmvc:5.3.29'
 
+    // AspectJ Weaver 라이브러리
+    implementation 'org.aspectj:aspectjweaver:1.9.20.1'
+
     // Spring IoC 컨테이너 라이브러리
     //implementation 'org.springframework:spring-context:5.3.29'
 
