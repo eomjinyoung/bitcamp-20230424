@@ -465,4 +465,11 @@
 ## 78. Spring WebMVC 프레임워크 도입하기
 
 - Spring WebMVC 프레임워크 사용법
-- DispatcherServlet을 등록하는 방법
+- DispatcherServlet을 등록하는 다양한 방법
+- WebApplicationInitializer 동작 메커니즘 이해
+
+## 79. Spring IoC 컨테이너를 Root Context와 Servlet Context로 분리하기
+
+- ContextLoaderListener의 IoC 컨테이너 역할 이해
+- DispatcherServlet의 IoC 컨테이너의 역할 이해
+- 설정하는 방법
