@@ -4,6 +4,8 @@ import bitcamp.myapp.service.MemberService;
 import bitcamp.myapp.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/auth")
 public class AuthController {
 
   {
@@ -21,12 +24,12 @@ public class AuthController {
   @Autowired
   MemberService memberService;
 
-  @RequestMapping("/auth/form")
+  @GetMapping("form")
   public String form() {
     return "/WEB-INF/jsp/auth/form.jsp";
   }
 
-  @RequestMapping("/auth/login")
+  @PostMapping("login")
   public String login(
           String email,
           String password,
@@ -54,7 +57,7 @@ public class AuthController {
     return "redirect:/";
   }
 
-  @RequestMapping("/auth/logout")
+  @GetMapping("logout")
   public String logout(HttpSession session) throws Exception {
     session.invalidate();
     return "redirect:/";

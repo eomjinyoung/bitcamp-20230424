@@ -159,7 +159,7 @@ gradle 을 실행하여 이클립스 IDE 용 웹 프로젝트 관련 파일을 �
 
 ## src-07 : Java Config로 DispatcherServlet의 IoC 컨테이너 설정하기
 
-- bitcamp.AppConfig 클래스 생성
+- bitcamp.config.App1Config 클래스 생성
 - /WEB-INF/web.xml 변경
 
 ## src-08 : SerlvetContainerInitializer 구현체의 활용
