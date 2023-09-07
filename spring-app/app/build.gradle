@@ -19,6 +19,9 @@ dependencies {
     // 임베디드 Tomcat 서버
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.79'
 
+    // Spring WebMVC 라이브러리
+    implementation 'org.springframework:spring-webmvc:5.3.29'
+
     implementation 'com.google.guava:guava:28.2-jre'
     testImplementation 'junit:junit:4.12'
 }

@@ -1,4 +1,4 @@
-package com.eomcs.webmvc;
+package bitcamp;
 
 import java.io.File;
 import org.apache.catalina.WebResourceRoot;
