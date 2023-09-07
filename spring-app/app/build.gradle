@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8';
+}
+
+war {
+  archiveBaseName = "spring-app"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 임베디드 Tomcat 서버
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.79'
+
+    implementation 'com.google.guava:guava:28.2-jre'
+    testImplementation 'junit:junit:4.12'
+}
