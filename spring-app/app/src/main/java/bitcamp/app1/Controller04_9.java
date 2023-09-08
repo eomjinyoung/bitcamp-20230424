@@ -3,6 +3,8 @@ package bitcamp.app1;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
+import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +36,26 @@ public class Controller04_9 {
     out.printf("<p>이름:%s</p>\n", name);
     out.printf("<p>나이:%s</p>\n", age);
     out.printf("<p>통데이터:%s</p>\n", data);
+    out.println("</body></html>");
+    return out0.toString();
+  }
+
+  @PostMapping(value="h2", produces="text/html;charset=UTF-8")
+  @ResponseBody
+  public String handler2(
+          // 클라이언트가 보낸 데이터를 통째로 받으려면 @RequestBody 애노테이션을 붙인다.
+          @RequestBody String jsonData
+  ) throws Exception {
+
+    StringWriter out0 = new StringWriter();
+    PrintWriter out = new PrintWriter(out0);
+    out.println("<html><head><title>c04_9/h2</title></head><body>");
+    out.println("<h1>결과</h1>");
+    out.printf("<p>통데이터:%s</p>\n", jsonData);
+
+    Car car = new Gson().fromJson(jsonData, Car.class);
+    out.printf("<p>%s</p>\n", car.toString());
+
     out.println("</body></html>");
     return out0.toString();
   }

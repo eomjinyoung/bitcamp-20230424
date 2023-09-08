@@ -29,7 +29,9 @@ public class Controller04_6 {
     out.printf("Accept=%s\n", accept);
     out.printf("User-Agent=%s\n", userAgent);
 
-    if (userAgent.matches(".*Edg.*")) {
+    if (userAgent.matches(".*Whale.*")) {
+      out.println("Whale");
+    } else if (userAgent.matches(".*Edg.*")) {
       out.println("Edge");
     } else if (userAgent.matches(".*Chrome.*")) {
       out.println("chrome");

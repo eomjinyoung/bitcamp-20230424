@@ -45,6 +45,10 @@ public class Controller04_8 {
       Part photo // Servlet API의 객체
       ) throws Exception {
 
+    System.out.println(name);
+    System.out.println(age);
+    System.out.println(photo);
+
     String filename = null;
     if (photo.getSize() > 0) {
       filename = UUID.randomUUID().toString();

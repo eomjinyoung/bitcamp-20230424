@@ -4,6 +4,7 @@ package bitcamp.app1;
 import java.beans.PropertyEditorSupport;
 import java.io.PrintWriter;
 import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +27,12 @@ public class Controller04_4 {
   @GetMapping("h1")
   @ResponseBody
   public void handler1(
-      PrintWriter out,
-      String model,
-      @RequestParam(defaultValue = "5") int capacity, // String ===> int : Integer.parseInt(String)
-      boolean auto, // String ===> boolean : Boolean.parseBoolean(String)
-      Date createdDate // 프로퍼티 에디터를 설정하지 않으면 변환 오류 발생
-      ) {
+          PrintWriter out,
+          String model,
+          @RequestParam(defaultValue = "5") int capacity, // String ===> int : Integer.parseInt(String)
+          boolean auto, // String ===> boolean : Boolean.parseBoolean(String)
+          Date createdDate // 프로퍼티 에디터를 설정하지 않으면 변환 오류 발생
+  ) {
 
     out.printf("model=%s\n", model);
     out.printf("capacity=%s\n", capacity);
@@ -44,9 +45,9 @@ public class Controller04_4 {
   @GetMapping("h2")
   @ResponseBody
   public void handler2(PrintWriter out,
-      // 콤마(,)로 구분된 문자열을 Car 객체로 변환하기?
-      // => String ===> Car 프로퍼티 에디터를 등록하면 된다.
-      @RequestParam("car") Car car) {
+                       // 콤마(,)로 구분된 문자열을 Car 객체로 변환하기?
+                       // => String ===> Car 프로퍼티 에디터를 등록하면 된다.
+                       @RequestParam("car") Car car) {
 
     out.println(car);
   }
@@ -56,13 +57,12 @@ public class Controller04_4 {
   @GetMapping("h3")
   @ResponseBody
   public void handler3(PrintWriter out,
-      // 콤마(,)로 구분된 문자열을 Engine 객체로 변환하기?
-      // => String ===> Engine 프로퍼티 에디터를 등록하면 된다.
-      @RequestParam("engine") Engine engine) {
+                       // 콤마(,)로 구분된 문자열을 Engine 객체로 변환하기?
+                       // => String ===> Engine 프로퍼티 에디터를 등록하면 된다.
+                       @RequestParam("engine") Engine engine) {
 
     out.println(engine);
   }
-
 
 
   // 이 페이지 컨트롤러에서 사용할 프로퍼티 에디터 설정하는 방법
@@ -79,7 +79,7 @@ public class Controller04_4 {
   //    즉 이 메서드에 프로퍼티 에디터를 등록하는 코드를 둔다.
   //
 
-  @InitBinder
+//  @InitBinder
   // => 메서드 이름은 마음대로.
   // => 작업하는데 필요한 값이 있다면 파라미터로 선언하라.
   public void initBinder(WebDataBinder binder) {
@@ -93,21 +93,22 @@ public class Controller04_4 {
 
     // WebDataBinder에 프로퍼티 에디터 등록하기
     binder.registerCustomEditor(
-        Date.class, // String을 Date 타입으로 바꾸는 에디터임을 지정한다.
-        propEditor // 바꿔주는 일을 하는 프로퍼티 에디터를 등록한다.
-        );
+            Date.class, // String을 Date 타입으로 바꾸는 에디터임을 지정한다.
+            propEditor // 바꿔주는 일을 하는 프로퍼티 에디터를 등록한다.
+    );
 
 
     // WebDataBinder에 프로퍼티 에디터 등록하기
     binder.registerCustomEditor(
-        Car.class, // String을 Car 타입으로 바꾸는 에디터임을 지정한다.
-        new CarPropertyEditor() // 바꿔주는 일을 하는 프로퍼티 에디터를 등록한다.
-        );
+            Car.class, // String을 Car 타입으로 바꾸는 에디터임을 지정한다.
+            new CarPropertyEditor() // 바꿔주는 일을 하는 프로퍼티 에디터를 등록한다.
+    );
 
     // WebDataBinder에 프로퍼티 에디터 등록하기
-    binder.registerCustomEditor(Engine.class, // String을 Engine 타입으로 바꾸는 에디터임을 지정한다.
-        new EnginePropertyEditor() // 바꿔주는 일을 하는 프로퍼티 에디터를 등록한다.
-        );
+    binder.registerCustomEditor(
+            Engine.class, // String을 Engine 타입으로 바꾸는 에디터임을 지정한다.
+            new EnginePropertyEditor() // 바꿔주는 일을 하는 프로퍼티 에디터를 등록한다.
+    );
   }
 
   // PropertyEditor 만들기

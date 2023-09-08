@@ -22,6 +22,9 @@ dependencies {
     // Spring WebMVC 라이브러리
     implementation 'org.springframework:spring-webmvc:5.3.29'
 
+    // Gson 라이브러리
+    implementation 'com.google.code.gson:gson:2.10.1'
+
     implementation 'com.google.guava:guava:28.2-jre'
     testImplementation 'junit:junit:4.12'
 }
