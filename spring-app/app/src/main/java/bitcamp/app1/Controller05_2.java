@@ -52,6 +52,8 @@ public class Controller05_2 {
     System.out.println("===> /app1/c05_2/h4");
     ModelAndView mv = new ModelAndView();
     mv.setViewName("/WEB-INF/jsp/c05_2.jsp");
+    mv.addObject("name", "홍길동"); // 프론트 컨트롤러가 ServletRequest 보관소로 옮긴다.
+    mv.addObject("age", 20);  // 프론트 컨트롤러가 ServletRequest 보관소로 옮긴다.
     return mv;
   }
 

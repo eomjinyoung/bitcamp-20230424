@@ -7,6 +7,8 @@
 <title>jsp</title>
 </head>
 <body>
-<h1>/jsp/c05_2.jsp - Hello!!!</h1>
+<h1>/WEB-INF/jsp2/c01_2/h4.jsp</h1>
+이름: ${name}<br>
+나이: ${age}<br>
 </body>
 </html>

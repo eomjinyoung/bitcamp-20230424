@@ -7,6 +7,9 @@
 <title>jsp</title>
 </head>
 <body>
-<h1>/jsp/c05_2.jsp - Hello!!!</h1>
+<h1>/WEB-INF/jsp2/c04_1.jsp</h1>
 </body>
 </html>
+<%
+System.out.println("c04_1.jsp 실행");
+%>

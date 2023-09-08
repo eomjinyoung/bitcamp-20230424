@@ -7,6 +7,8 @@
 <title>jsp</title>
 </head>
 <body>
-<h1>/jsp/c05_2.jsp - Hello!!!</h1>
+<h1>/WEB-INF/jsp2/error5.jsp</h1>
+<p>예외객체: ${error}</p>
+<p>오류메시지: ${error.getMessage()}</p>
 </body>
 </html>

@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>jsp</title>
+<title>c01_1</title>
 </head>
 <body>
-<h1>/jsp/c05_2.jsp - Hello!!!</h1>
+<h1>/WEB-INF/jsp/c01_1.jsp</h1>
+이름 = ${name}<br>
+나이 = ${age}<br>
 </body>
 </html>
