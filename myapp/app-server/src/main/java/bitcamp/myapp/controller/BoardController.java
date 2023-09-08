@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -99,10 +100,10 @@ public class BoardController {
     }
   }
 
-  @GetMapping("detail")
-  public void detail(
-          int no,
-          int category,
+  @GetMapping("detail/{category}/{no}")
+  public String detail(
+          @PathVariable int category,
+          @PathVariable int no,
           Model model) throws Exception {
     try {
       Board board = boardService.get(no);
@@ -110,6 +111,7 @@ public class BoardController {
         boardService.increaseViewCount(no);
         model.addAttribute("board", board);
       }
+      return "board/detail";
 
     } catch (Exception e) {
       model.addAttribute("refresh", "5;url=/board/list?category=" + category);

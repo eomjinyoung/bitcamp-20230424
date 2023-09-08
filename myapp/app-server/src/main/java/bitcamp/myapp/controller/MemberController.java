@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,11 +70,12 @@ public class MemberController {
     }
   }
 
-  @GetMapping("detail")
-  public void detail(
-          int no,
+  @GetMapping("{no}")
+  public String detail(
+          @PathVariable int no,
           Model model) throws Exception {
     model.addAttribute("member", memberService.get(no));
+    return "member/detail";
   }
 
   @GetMapping("list")
