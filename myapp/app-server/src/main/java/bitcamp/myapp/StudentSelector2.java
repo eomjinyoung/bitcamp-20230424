@@ -14,9 +14,15 @@ public class StudentSelector2 {
 
     ArrayList<String> nameList = new ArrayList<>(Arrays.asList(names));
 
+    int count = 0;
     while (nameList.size() > 0) {
-      System.out.println(nameList.remove((int)(Math.random() * nameList.size())));
-      Thread.sleep(500);
+      System.out.printf("%s ", nameList.remove((int)(Math.random() * nameList.size())));
+      Thread.sleep(2000);
+      if (++count % 6 == 0) {
+        System.out.println();
+        count = 0;
+        Thread.sleep(10000);
+      }
     }
   }
 }
