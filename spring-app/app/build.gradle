@@ -1,10 +1,13 @@
 plugins {
     id 'java'
+    id 'eclipse'
     id 'war'
 }
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8';
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
 }
 
 war {
@@ -33,4 +36,25 @@ dependencies {
 
     implementation 'com.google.guava:guava:28.2-jre'
     testImplementation 'junit:junit:4.12'
+}
+
+eclipse {
+    project {
+        name = "spring-app"
+    }
+    jdt {
+      sourceCompatibility = 17
+      targetCompatibility = 17
+      javaRuntimeName = "JavaSE-17"
+    }
+    wtp {
+        facet {
+            facet name: 'jst.java', version: '17'
+            //facet name: 'jst.web', version: '4.0'
+        }
+        component {
+            contextPath = '/'
+            //deployName = 'web'
+        }
+    }
 }
