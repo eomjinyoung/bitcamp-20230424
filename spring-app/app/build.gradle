@@ -5,13 +5,17 @@ plugins {
 }
 
 tasks.withType(JavaCompile) {
+<<<<<<< HEAD
     options.encoding = 'UTF-8';
     sourceCompatibility = '17'
     targetCompatibility = '17'
+=======
+    options.encoding = 'UTF-8'
+>>>>>>> a47e97b (.)
 }
 
 war {
-  archiveBaseName = "spring-app"
+    archiveBaseName = "spring-app"
 }
 
 repositories {

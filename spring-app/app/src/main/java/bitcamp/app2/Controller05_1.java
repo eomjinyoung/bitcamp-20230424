@@ -1,14 +1,15 @@
 // JSON 콘텐트 출력하기
 package bitcamp.app2;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.google.gson.Gson;
+
+import java.sql.Date;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/c05_1")
@@ -41,6 +42,15 @@ public class Controller05_1 {
   @GetMapping("h1")
   public void handler1(Model model) {
     model.addAttribute("list", this.list);
+
+    // request handler에서 view 컴포넌트의 URL을 리턴하지 않으면
+    // 프론트 컨트롤러는 요청 URL을 사용하여 JSP를 찾는다.
+    // => 요청 URL: /c05_1/h1
+    // 요청 URL을 InternalResourceViewResolver에서 전달하면
+    // 요청 URL 앞뒤에 접두사, 접미사를 붙여 최종 URL을 완성한다.
+    // => 예) /WEB-INF/jsp2/c05_1/h1.jsp
+    // InternalResourceViewResolver가 완성한 URL을 가지고
+    // 프론트 컨트롤러는 해당 뷰를 실행한다.
   }
 
   // 2) Google Gson 라이브러리를 사용하여 JSON 형식의 콘텐트 출력하기
@@ -50,7 +60,7 @@ public class Controller05_1 {
   // => 이클립스에서 프로젝트를 리프래시 한다.
   // 테스트:
   //   http://.../app2/c05_1/h2
-  @GetMapping(value="h2", produces="text/plain;charset=UTF-8")
+  @GetMapping(value = "h2", produces = "text/plain;charset=UTF-8")
   @ResponseBody
   public String handler2() {
     return new Gson().toJson(this.list);
