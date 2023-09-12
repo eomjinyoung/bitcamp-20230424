@@ -1,12 +1,13 @@
 // JSON 콘텐트 출력하기 - @RestController
 package bitcamp.app2;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 // => 페이지 컨트롤러를 @RestController로 선언하면,
@@ -43,7 +44,7 @@ public class Controller05_2 {
 
   // 테스트:
   //   http://.../app2/c05_2/h2
-  @GetMapping(value="h2", produces="text/plain;charset=UTF-8")
+  @GetMapping(value = "h2", produces = "text/plain;charset=UTF-8")
   public String handler2() {
     return "안녕하세요!"; // String 타입은 그대로 출력한다.
     // 단 출력 문자열의 인코딩을 지정해야 한글이 깨지지 않는다.
@@ -62,7 +63,7 @@ public class Controller05_2 {
   public Object handler4() {
     // primitive 타입이나 String 타입의 값을 JSON 형식으로 출력하려면
     // 도메인 객체나 맵 객체 담아 리턴하라!
-    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String, Object> content = new HashMap<>();
     content.put("v1", 100);
     content.put("v2", "Hello");
 
