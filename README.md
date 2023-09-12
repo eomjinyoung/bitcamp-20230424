@@ -726,6 +726,12 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - Spring WebMVC 사용법(계속)
 - 프로젝트 실습
   - 80. Spring WebMVC 활용하기(계속)
+  - 81. SpringBoot(2.7.x) 적용하기
+
+### 79일(9/13,수)
+
+- 프로젝트 실습
+  - 81. SpringBoot(2.7.x) 적용하기(계속)
 - 1차 프로젝트
   - 프로젝트 깃 저장소 준비
     - 저장소 생성

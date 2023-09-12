@@ -477,3 +477,7 @@
 ## 80. Spring WebMVC 활용하기
 
 - Spring WebMVC 사용법
+
+## 81. SpringBoot(2.7.x) 적용하기
+
+- SpringBoot 사용법
