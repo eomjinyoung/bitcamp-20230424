@@ -17,7 +17,10 @@ dependencies {
     
     // Google JSON 라이브러리
     //implementation 'com.google.code.gson:gson:2.10.1'
-  
+
+    // Jackson JSON 라이브러리
+    //implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
     // Mybatis 라이브러리
     implementation 'org.mybatis:mybatis:3.5.13'
   
