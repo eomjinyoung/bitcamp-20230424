@@ -734,8 +734,16 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   - Actor 및 Usecase 식별법
   - Actor 상속 관계
   - Usecase 포함 및 확장 관계
+- Thymeleaf 사용법
 - 프로젝트 실습
   - 81. SpringBoot(2.7.x) 적용하기(계속)
+  - 82. 뷰 템플릿 기술을 Thymeleaf 로 교체하기
+
+### 80일(9/14,목)
+
+- Thymeleaf 사용법(계속)
+- 프로젝트 실습
+  - 82. 뷰 템플릿 기술을 Thymeleaf 로 교체하기(계속)
 - 1차 프로젝트
   - 프로젝트 깃 저장소 준비
     - 저장소 생성
