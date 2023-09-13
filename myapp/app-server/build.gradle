@@ -43,7 +43,12 @@ dependencies {
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.530'
 
     // JSTL 라이브러리
-    implementation 'jstl:jstl:1.2'
+    //implementation 'jstl:jstl:1.2'
+    implementation 'javax.servlet:jstl:1.2'
+
+    // embedded tomcat 용 JSP 엔진 라이브러리
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.79'
+
 
     // AspectJ Weaver 라이브러리
 //    implementation 'org.aspectj:aspectjweaver:1.9.20.1'

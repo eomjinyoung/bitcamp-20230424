@@ -6,8 +6,11 @@ import org.springframework.context.annotation.Configuration;
 public class NcpConfig {
   private String endPoint = "https://kr.object.ncloudstorage.com";
   private String regionName = "kr-standard";
-  private String accessKey = System.getProperty("accessKey");
-  private String secretKey = System.getProperty("secretKey");
+//  private String accessKey = System.getProperty("accessKey");
+//  private String secretKey = System.getProperty("secretKey");
+  private String accessKey = "8T84wn31xUrjULtuj3iM";
+  private String secretKey = "maGYlwIY3VQMzcXHwec4JC0DHP4gB7GJmcHSwqMT";
+  // -DaccessKey=8T84wn31xUrjULtuj3iM -DsecretKey=maGYlwIY3VQMzcXHwec4JC0DHP4gB7GJmcHSwqMT
 
   public NcpConfig() {
     System.out.println("NcpConfig() 호출됨!");

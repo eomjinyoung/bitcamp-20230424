@@ -730,6 +730,10 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 ### 79일(9/13,수)
 
+- Use-case 모델링
+  - Actor 및 Usecase 식별법
+  - Actor 상속 관계
+  - Usecase 포함 및 확장 관계
 - 프로젝트 실습
   - 81. SpringBoot(2.7.x) 적용하기(계속)
 - 1차 프로젝트
