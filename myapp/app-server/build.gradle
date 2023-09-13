@@ -28,67 +28,38 @@ repositories {
 }
 
 dependencies {
+    // Spring JDBC 관련 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    // Spring WebMVC 관련 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Thymeleaf 관련 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Mybatis 관련 라이브러리
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
+
+    // Lombok 관련 라이브러리
 //    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 //    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+
+    // 개발 보조 라이브러리
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // MySQL JDBC 라이브러리
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
     // Amazon AWS Java SDK s3
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.530'
 
-    // JSTL 라이브러리
-    //implementation 'jstl:jstl:1.2'
-    implementation 'javax.servlet:jstl:1.2'
+    // Spring 설정을 도와주는 라이브러리
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-    // embedded tomcat 용 JSP 엔진 라이브러리
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.79'
-
-
-    // AspectJ Weaver 라이브러리
-//    implementation 'org.aspectj:aspectjweaver:1.9.20.1'
-
-    // Log4j 2.x 라이브러리
-//    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
-
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
 }
-
-
 
 tasks.named('test') {
     useJUnitPlatform()
 }
-
-
-
-/*
-eclipse {
-    project {
-        name = "myapp-server"
-    }
-    jdt {
-      sourceCompatibility = 17
-      targetCompatibility = 17
-      javaRuntimeName = "JavaSE-17"
-    }
-    wtp {
-        facet {
-            facet name: 'jst.java', version: '17'
-            //facet name: 'jst.web', version: '4.0'
-        }
-        component {
-            contextPath = '/'
-            //deployName = 'web'
-        }
-    }
-}
-*/
-//
-//war {
-//    archiveBaseName = "myapp"
-//}
