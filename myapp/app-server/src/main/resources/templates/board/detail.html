@@ -22,7 +22,7 @@
     <td><textarea name='content' style='height:200px; width:400px;' data-th-text="${board.content}">내용입니다!</textarea></td></tr>
     <tr><th>작성자</th> <td data-th-text="${board.writer.name}">홍길동</td></tr>
     <tr><th>조회수</th> <td data-th-text="${board.viewCount}">34</td></tr>
-    <tr><th>등록일</th> <td data-th-text="${board.createdDate}">2023-09-14</td></tr>
+    <tr><th>등록일</th> <td data-th-text="${#dates.format(board.createdDate, 'yyyy-MM-dd')}">2023-09-14</td></tr>
     <tr><th>첨부파일</th><td>
         <div data-th-each="file : ${board.attachedFiles}">
             <a data-th-href="|https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/board/${file.filePath}|"

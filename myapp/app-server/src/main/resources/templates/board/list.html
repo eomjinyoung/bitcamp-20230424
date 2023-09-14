@@ -25,7 +25,7 @@
       </td>
       <td data-th-text="${board.writer.name}">홍길동</td>
       <td data-th-text="${board.viewCount}">27</td>
-      <td data-th-text="${board.createdDate}">2021-09-14</td>
+      <td data-th-text="${#dates.format(board.createdDate, 'yyyy-MM-dd')}">2021-09-14</td>
     </tr>
 </tbody>
 </table>
