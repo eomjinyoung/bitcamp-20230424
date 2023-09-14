@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>회원</title>
+</head>
+<body>
+
+<div data-th-replace="header :: header"></div>
+
+<h1>회원</h1>
+<p data-th-unless="${member}">해당 번호의 회원이 없습니다!</p>
+<form data-th-if="${member}" action='update' method='post' enctype='multipart/form-data'>
+  <table border='1'>
+  <tr>
+      <th style='width:120px;'>사진</th>
+      <td style='width:300px;'>
+          <img data-th-unless="${member.photo}" style='height:80px' src='/images/avatar.png'>
+          <a data-th-if="${member.photo}"
+             data-th-href="|https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/member/${member.photo}|">
+            <img data-th-src="|http://mvsenqskbqzl19010704.cdn.ntruss.com/member/${member.photo}?type=f&w=60&h=80&faceopt=true&ttype=jpg|">
+          </a>
+          <input type='file' name='photofile'></td></tr>
+  <tr>
+      <th style='width:120px;'>번호</th>
+      <td style='width:300px;'><input type='text' name='no' data-th-value="${member.no}" readonly></td></tr>
+  <tr>
+      <th>이름</th>
+      <td><input type='text' name='name' data-th-value="${member.name}"></td></tr>
+  <tr>
+      <th>이메일</th>
+      <td><input type='email' name='email' data-th-value="${member.email}"></td></tr>
+  <tr>
+      <th>암호</th>
+      <td><input type='password' name='password'></td></tr>
+  <tr>
+      <th>성별</th>
+      <td><select name='gender'>
+          <option value='M' data-th-selected="${member.gender} == 'M'">남자</option>
+          <option value='W' data-th-selected="${member.gender} == 'W'">여자</option></select></td></tr>
+  </table>
+  <div>
+  <button>변경</button>
+  <button type='reset'>초기화</button>
+      <a data-th-href="@{/member/delete(no=${member.no})}">삭제</a>
+  <a href='list'>목록</a>
+  </div>
+</form>
+
+<div data-th-replace="footer :: footer"></div>
+
+</body>
+</html>
