@@ -1,8 +1,3 @@
-<%@ page
-    language="java"
-    pageEncoding="UTF-8"
-    contentType="text/html;charset=UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +6,7 @@
 </head>
 <body>
 
-<jsp:include page="../header.jsp"/>
+<div data-th-replace="header :: header"></div>
 
 <h1>회원</h1>
 <form action='add' method='post' enctype='multipart/form-data'>
@@ -41,7 +36,7 @@
 <button>등록</button>
 </form>
 
-<jsp:include page="../footer.jsp"/>
+<div data-th-replace="footer :: footer"></div>
 
 </body>
 </html>
