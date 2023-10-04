@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>비트캠프</title>
+</head>
+<body>
+
+<div data-th-replace="header :: header"></div>
+
+<h1>로그인</h1>
+
+<form action='login' method='post'>
+<table style="border: 1px;">
+<tr>
+  <th>이메일</th> <td><input type='email' name='email' data-th-value='${email}'></td>
+</tr>
+<tr>
+  <th>암호</th> <td><input type='password' name='password'></td>
+</tr>
+</table>
+<button>로그인</button>
+ <input type='checkbox' name='saveEmail' data-th-checked="${email}"> 이메일 저장
+</form>
+
+<div data-th-replace="footer :: footer"></div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

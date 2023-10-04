@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>회원</title>
+</head>
+<body>
+
+<div data-th-replace="header :: header"></div>
+
+<h1>회원 목록</h1>
+<div style='margin:5px;'>
+<a href='form'>새 회원</a>
+</div>
+<table border="1">
+<thead>
+  <tr><th>번호</th> <th>이름</th> <th>이메일</th></tr>
+</thead>
+<tbody>
+    <tr data-th-each="member : ${list}">
+        <td data-th-text="${member.no}">100</td>
+        <td>
+            <img data-th-unless="${member.photo}" src="/images/avatar.png" style="width:30px;height:40px;">
+            <img data-th-if="${member.photo}" data-th-src="@{'http://mvsenqskbqzl19010704.cdn.ntruss.com/member/' + ${member.photo}(type=f,w=30,h=40,faceopt=true,ttype=jpg)}">
+            <a data-th-href='${member.no}' data-th-text="${member.name}">홍길동</a></td>
+        <td data-th-text="${member.email}">hong@test.com</td>
+    </tr>
+</tbody>
+</table>
+<a href='/'>메인</a>
+
+<div data-th-replace="footer :: footer"></div>
+
+</body>
+</html>
