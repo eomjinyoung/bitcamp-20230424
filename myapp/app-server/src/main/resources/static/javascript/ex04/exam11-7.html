@@ -47,12 +47,13 @@ Car.prototype.setLight = function(light) {
 
 // Car 객체 생성
 var c1 = new Car(16, 4, 2000, 5, true);
+console.log(c1);
 
 c1.setLight(true);
 // c1.setLight();
 // --> Car.prototype.setLight()
 
-//c1.print();
+c1.print();
 // c1.print();
 // --> Car.prototype.print()
 //     --> Engine.prototype.print() // 오류!

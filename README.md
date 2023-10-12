@@ -822,13 +822,13 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - JavaScript 사용법(계속)
   - 객체 사용법(계속)
   - DOM API 사용법
-  - Event 다루기
 - 2차 프로젝트
   - 구현  
 
 ### 89일(10/13,금)
 
 - JavaScript 사용법(계속)
+  - Event 다루기
   - AJAX 다루기
 - 2차 프로젝트
   - 구현  

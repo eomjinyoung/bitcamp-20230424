@@ -26,7 +26,7 @@
 // 태그의 속성 바꾸기
 //
 var e = document.querySelector("article:nth-child(2) a");
-//console.log(e.href)
+console.log(e.href);
 console.log(e.getAttribute('href'));
 
 document.querySelector('#btn1').onclick = function() {
@@ -34,6 +34,9 @@ document.querySelector('#btn1').onclick = function() {
   // => 원래 태그에 있던 속성 값을 바꿀 때!
   //      태그객체.속성명 = "값"
   //e.href = "http://www.daum.net";
+  e.okok = "haha"; // 객체에 새 프로퍼티 추가
+  console.log(e.okok);
+  console.log(e.getAttribute("okok"));
 
   // 2) 방법2
   // => 원래 태그에 있던 속성 값을 바꿀 때
@@ -41,6 +44,10 @@ document.querySelector('#btn1').onclick = function() {
   // => 이 메서드를 사용하면 개발자가 임의로 추가한 프로퍼티 값도 바꿀 수 있다.
   //    즉 원래 태그 객체에 없던 프로퍼티 값도 설정할 수 있다.
   e.setAttribute("href", "http://www.google.com");
+  e.setAttribute("nono", "hul..."); // 태그에 새 속성을 추가
+  console.log(e.getAttribute("nono"));
+  console.log(e.nono);
+
 };
 
 </script>

@@ -25,13 +25,14 @@ score1.sum = function() {
 score1.aver = function() {
   return this.sum() / 3;
 };
+console.log(score1);
 console.log(score1.sum(), score1.aver());
 // 다음 sum()과 aver() 함수는 score1 객체에만 소속된다.
 
 var score2 = new Score("임꺽정", 90, 90, 90);
+console.log(score2);
 console.log(score2.sum(), score2.aver());
 // score2에 소속된 함수 중에 sum()과 aver()가 없기 때문에 오류가 발생한다.
-
 </script>
 </body>
 </html>
