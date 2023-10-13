@@ -833,6 +833,14 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 2차 프로젝트
   - 구현  
 
+### 90일(10/16,월)
+
+- JavaScript 사용법(계속)
+  - AJAX 다루기(계속)
+  - Promise 사용법
+- 2차 프로젝트
+  - 구현  
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

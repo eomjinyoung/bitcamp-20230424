@@ -68,6 +68,7 @@ for (var e of el) {
   e.addEventListener("click", function(e) {
     console.log(e.target);
     console.log(e.target.getAttribute("data-no") + " 번 게시물의 제목을 눌렀음!");
+    e.preventDefault();
   });
 }
 </script>

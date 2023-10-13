@@ -45,8 +45,11 @@ document.getElementById("d2").addEventListener("click", function(e) {
 
 // capture, target 단계에서 호출되도록 설정한다.
 document.getElementById("d1").addEventListener("click", function(e) {
-    console.log("d1...");
+    console.log("d1...캡쳐!!!!");
 }, true);
+document.getElementById("d1").addEventListener("click", function(e) {
+    console.log("d1...버블!!!!");
+});
 
 // capture, target  단계에서 호출되도록 설정한다.
 document.body.addEventListener("click", function(e) {

@@ -50,9 +50,9 @@ app.get('/exam03-1', (req, res) => {
 
   setTimeout(()=> {
     res.send("Hello!");
-  }, 10000);
-  
-}); 
+  }, 2000);
+
+});
 
 app.get('/exam03-4', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');

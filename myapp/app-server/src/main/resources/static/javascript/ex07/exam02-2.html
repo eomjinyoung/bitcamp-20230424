@@ -28,7 +28,7 @@ var ta = document.querySelector("#ta");
 
 document.querySelector("#btn1").onclick = () => {
     var xhr = new XMLHttpRequest();
-    
+
     // POST 요청은 데이터를 send()를 호출할 때 넘긴다. 
     xhr.open("POST", "http://127.0.0.1:3000/exam02-2", false);
     
@@ -39,7 +39,7 @@ document.querySelector("#btn1").onclick = () => {
     //    "application/x-www-form-urlencoded"
     //
     xhr.setRequestHeader(
-        "Content-Type", 
+        "Content-Type",
         "application/x-www-form-urlencoded");
     
     var messageBody = "name=" + window.encodeURIComponent("홍길동") + "&age=20";
