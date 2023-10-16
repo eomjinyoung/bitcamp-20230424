@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
+  @GetMapping(value="/test1", produces = "text/plain;charset=UTF-8")
+  @ResponseBody
+  public String test1() throws Exception {
+
+  }
+
   @GetMapping(value="/ex01/exam05_1", produces = "text/plain;charset=UTF-8")
   @ResponseBody
   public String exam051() throws Exception {

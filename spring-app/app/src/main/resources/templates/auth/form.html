@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>비트캠프</title>
+</head>
+<body>
+
+<div data-th-replace="header :: header"></div>
+
+<h1>로그인</h1>
+<div data-th-if="${param.error}">
+    사용자의 이메일 또는 암호가 일치하지 않습니다.
+</div>
+<div data-th-if="${param.logout}">
+    로그아웃 되었습니다.
+</div>
+<form data-th-action='@{/auth/login}' method='post'>
+    <table style="border: 1px;">
+        <tr>
+            <th>이메일</th>
+            <td><input data-th-value='${email}' name='email' type='email'></td>
+        </tr>
+        <tr>
+            <th>암호</th>
+            <td><input name='password' type='password'></td>
+        </tr>
+    </table>
+    <button>로그인</button>
+    <input data-th-checked="${email}" name='saveEmail' type='checkbox'> 이메일 저장
+</form>
+
+<div data-th-replace="footer :: footer"></div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

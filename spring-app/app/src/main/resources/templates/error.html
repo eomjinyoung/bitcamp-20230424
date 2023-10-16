@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>실행오류</title>
+</head>
+<body>
+
+<div data-th-replace="header :: header"></div>
+
+<h1>실행 오류!</h1>
+
+<p data-th-text="${message} ?: '예외 발생!'">예외 발생!</p>
+
+<hr>
+<p data-th-text="${exception} ?: _">예외 상세 내용</p>
+
+
+<div data-th-replace="footer :: footer"></div>
+
+<script>
+    setTimeout(function() {
+        history.back();
+    }, 2000);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

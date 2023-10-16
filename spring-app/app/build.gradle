@@ -1,17 +1,22 @@
 plugins {
     id 'java'
-    id 'eclipse'
-    id 'war'
+    id 'org.springframework.boot' version '2.7.16'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
-tasks.withType(JavaCompile) {
+group = 'bitcamp'
+version = '0.0.1-SNAPSHOT'
+
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     sourceCompatibility = '17'
     targetCompatibility = '17'
 }
 
-war {
-    archiveBaseName = "spring-app"
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
@@ -19,42 +24,42 @@ repositories {
 }
 
 dependencies {
-    // 임베디드 Tomcat 서버
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.79'
+    // Spring JDBC 관련 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
-    // Spring WebMVC 라이브러리
-    implementation 'org.springframework:spring-webmvc:5.3.29'
+    // Spring WebMVC 관련 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // JSTL 라이브러리
-    implementation 'jstl:jstl:1.2'
+    // Thymeleaf 관련 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    // Gson 라이브러리
-    implementation 'com.google.code.gson:gson:2.10.1'
+    // Mybatis 관련 라이브러리
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
 
-    // Jackson 라이브러리
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
-    implementation 'com.google.guava:guava:28.2-jre'
-    testImplementation 'junit:junit:4.12'
+    // Lombok 관련 라이브러리
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // 개발 보조 라이브러리
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // MySQL JDBC 라이브러리
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Amazon AWS Java SDK s3
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.530'
+
+    // Spring 설정 처리를 도와주는 라이브러리
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
-eclipse {
-    project {
-        name = "spring-app"
-    }
-    jdt {
-        sourceCompatibility = 17
-        targetCompatibility = 17
-        javaRuntimeName = "JavaSE-17"
-    }
-    wtp {
-        facet {
-            facet name: 'jst.java', version: '17'
-            //facet name: 'jst.web', version: '4.0'
-        }
-        component {
-            contextPath = '/'
-            //deployName = 'web'
-        }
-    }
+tasks.named('test') {
+    useJUnitPlatform()
 }
