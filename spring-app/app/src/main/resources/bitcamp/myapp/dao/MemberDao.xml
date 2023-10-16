@@ -17,7 +17,7 @@
 
     <insert id="insert" parameterType="member">
         insert into myapp_member(name,email,password,gender,photo)
-        values(#{name},#{email},sha1(#{password}),#{gender},#{photo})
+        values(#{name},#{email},#{password},#{gender},#{photo})
     </insert>
 
     <select id="findAll" resultMap="memberMap">
@@ -37,6 +37,7 @@
         member_no,
         name,
         email,
+        password,
         gender,
         created_date,
         photo
@@ -51,6 +52,7 @@
         member_no,
         name,
         email,
+        password,
         gender,
         created_date,
         photo
@@ -58,7 +60,7 @@
         myapp_member
         where
         email=#{email}
-        and password=sha1(#{password})
+        and password=#{password}
     </select>
 
     <select id="findByEmail" resultMap="memberMap">
@@ -66,6 +68,7 @@
         member_no,
         name,
         email,
+        password,
         gender,
         created_date,
         photo
@@ -79,7 +82,7 @@
         update myapp_member set
         name=#{name}
         ,email=#{email}
-        ,password=sha1(#{password})
+        ,password=#{password}
         ,gender=#{gender}
         <if test="photo != null">
             ,photo=#{photo}

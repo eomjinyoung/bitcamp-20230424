@@ -17,10 +17,10 @@ import java.util.UUID;
 
 @Component
 public class NcpObjectStorageService {
-  final AmazonS3 s3;
+
+  private final AmazonS3 s3;
 
   public NcpObjectStorageService(NcpConfig ncpConfig) {
-    System.out.println("NcpObjectStorageService() 호출됨!");
     s3 = AmazonS3ClientBuilder.standard()
         .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
             ncpConfig.getEndPoint(), ncpConfig.getRegionName()))

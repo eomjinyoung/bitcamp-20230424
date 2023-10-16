@@ -17,7 +17,6 @@ public class App implements WebMvcConfigurer {
 
   @Override
   public void configurePathMatch(PathMatchConfigurer configurer) {
-    System.out.println("AppConfig.configurePathMatch() 호출됨!");
     UrlPathHelper pathHelper = new UrlPathHelper();
 
     // @MatrixVariable 기능 활성화

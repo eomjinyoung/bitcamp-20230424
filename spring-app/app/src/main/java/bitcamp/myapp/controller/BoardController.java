@@ -5,6 +5,7 @@ import bitcamp.myapp.service.NcpObjectStorageService;
 import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +16,13 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardController {
 
-  {
-    System.out.println("BoardController 생성됨!");
-  }
+  private final BoardService boardService;
 
-  @Autowired
-  BoardService boardService;
-
-  @Autowired
-  NcpObjectStorageService ncpObjectStorageService;
+  private final NcpObjectStorageService ncpObjectStorageService;
 
   @GetMapping("form")
   public void form() {

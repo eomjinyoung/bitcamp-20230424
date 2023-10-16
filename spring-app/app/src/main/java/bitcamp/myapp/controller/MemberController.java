@@ -3,6 +3,7 @@ package bitcamp.myapp.controller;
 import bitcamp.myapp.service.MemberService;
 import bitcamp.myapp.service.NcpObjectStorageService;
 import bitcamp.myapp.vo.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,18 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
 
-  {
-    System.out.println("MemberController 생성됨!");
-  }
+  private final MemberService memberService;
 
-  @Autowired
-  MemberService memberService;
-
-  @Autowired
-  NcpObjectStorageService ncpObjectStorageService;
+  private final NcpObjectStorageService ncpObjectStorageService;
 
   @GetMapping("form")
   public void form() {
