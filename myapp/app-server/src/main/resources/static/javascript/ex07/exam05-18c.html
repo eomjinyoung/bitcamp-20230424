@@ -20,14 +20,14 @@
 </table>
 <button id="btn1">데이터 가져오기!</button>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 "use strict"
 
 var tbody = $("tbody");
 
 $("#btn1").click(() => {
-    $.getJSON("http://localhost:8080/boards", (result) => {
+    $.getJSON("http://localhost:3000/exam04-3", (result) => {
         result.forEach((b) => {
             $("<tr>")
             .html("<td>" + b.no + "</td>" + 

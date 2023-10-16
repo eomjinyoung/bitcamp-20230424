@@ -20,9 +20,12 @@
 <script>
 "use strict"
 
+//var tbody = document.querySelector("tbody");
+//var tbody = document.querySelectorAll("tbody")[0];
+//var tbody = jQuery("tbody")[0];
 var tbody = $("tbody")[0];
 
-document.querySelector("#btn1").onclick = () => {
+$("#btn1")[0].onclick = () => {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4) {

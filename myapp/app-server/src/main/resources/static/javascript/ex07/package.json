@@ -1,17 +1,17 @@
 {
   "name": "ex07",
   "version": "1.0.0",
-  "main": "",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.2.3",
-    "jquery": "^3.6.3",
+    "bootstrap": "^5.3.2",
+    "jquery": "^3.7.1",
     "jquery-ui": "^1.13.2",
-    "sweetalert2": "^11.6.16"
-  },
-  "description": ""
+    "sweetalert2": "^11.7.32"
+  }
 }
