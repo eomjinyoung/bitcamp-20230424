@@ -493,3 +493,8 @@
 ## 84. SpringSecurity 적용하기
 
 - SpringSecurity 사용법
+
+## 85. AJAX 기술을 이용하여 Backend와 Frontend 분리하기
+
+- AJAX 활용법
+- REST API를 구현하는 방법
