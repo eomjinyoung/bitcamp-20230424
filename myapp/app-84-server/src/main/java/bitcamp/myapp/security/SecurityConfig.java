@@ -24,11 +24,12 @@ public class SecurityConfig {
                     .anyRequest().authenticated()
             )
             .formLogin(formLoginConfigurer -> formLoginConfigurer
-                    .loginPage("/auth/form")
-                    .loginProcessingUrl("/auth/login")
-                    .usernameParameter("email")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/home", true)
+                    .loginPage("/auth/form") // 로그인폼의 URL 지정
+                    .loginProcessingUrl("/auth/login") // 로그인 요청을 처리할 URL 지정
+                    .usernameParameter("email") // username 값이 들어 있는 요청 파라미터 이름
+                    .passwordParameter("password") // password 값이 들어 있는 요청 파라미터 이름
+                    //.defaultSuccessUrl("/home", true)
+                    .successForwardUrl("/auth/loginSuccess") // 로그인 성공 후 포워딩할 URL
                     .permitAll()
             )
             .logout(withDefaults())
