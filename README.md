@@ -837,10 +837,19 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 - JavaScript 사용법(계속)
   - AJAX 다루기(계속)
-  - Promise 사용법
 - 2차 프로젝트
   - 구현  
 
+### 91일(10/17,화)
+
+- 프로젝트 실습
+  - 84. SpringSecurity 적용하기
+- JavaScript 사용법(계속)
+  - AJAX 다루기(계속)
+  - Promise 사용법
+- 2차 프로젝트
+  - 구현  
+  
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

@@ -489,3 +489,7 @@
 ## 83. Lombok 적용하기
 
 - Lombok 사용법
+
+## 84. SpringSecurity 적용하기
+
+- SpringSecurity 사용법

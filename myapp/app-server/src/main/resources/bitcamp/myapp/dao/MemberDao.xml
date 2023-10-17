@@ -60,6 +60,21 @@
       email=#{email}
       and password=sha1(#{password})
   </select>
+
+  <select id="findByEmail" resultMap="memberMap">
+    select
+      member_no,
+      name,
+      email,
+      password,
+      gender,
+      created_date,
+      photo
+    from
+      myapp_member
+    where
+      email=#{email}
+  </select>
   
   <update id="update" parameterType="member">
     update myapp_member set

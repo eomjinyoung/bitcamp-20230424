@@ -3,6 +3,7 @@ package bitcamp.myapp.service;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +14,12 @@ import java.util.List;
 public class DefaultMemberService implements MemberService {
 
   private final MemberDao memberDao;
+  private final PasswordEncoder passwordEncoder;
 
   @Transactional
   @Override
   public int add(Member member) {
+    member.setPassword(passwordEncoder.encode(member.getPassword()));
     return memberDao.insert(member);
   }
 
@@ -43,6 +46,7 @@ public class DefaultMemberService implements MemberService {
   @Transactional
   @Override
   public int update(Member member) {
+    member.setPassword(passwordEncoder.encode(member.getPassword()));
     return memberDao.update(member);
   }
 

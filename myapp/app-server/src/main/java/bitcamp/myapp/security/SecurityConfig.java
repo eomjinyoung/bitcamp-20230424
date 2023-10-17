@@ -15,43 +15,34 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-  public static void main(String[] args) {
-    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    System.out.println(passwordEncoder.encode("1111"));
-  }
-
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http.csrf().disable().cors().disable()
-            .authorizeHttpRequests(authorize -> authorize
+            .authorizeHttpRequests(registry -> registry
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .mvcMatchers("/images/**", "/member/form", "/member/add").permitAll()
                     .anyRequest().authenticated()
             )
-            .formLogin(form -> form
+            .formLogin(formLoginConfigurer -> formLoginConfigurer
                     .loginPage("/auth/form")
                     .loginProcessingUrl("/auth/login")
                     .usernameParameter("email")
                     .passwordParameter("password")
-                    .defaultSuccessUrl("/", true)
-                    //.successForwardUrl("/")
-                    //.failureForwardUrl("/auth/form")
+                    .defaultSuccessUrl("/")
                     .permitAll()
             )
-//            .logout((logout) ->
-//                    logout.deleteCookies("JSESSIONID")
-//                            .invalidateHttpSession(true)
-//                            .logoutUrl("/auth/logout")
-//                            .logoutSuccessUrl("/")
-//            )
-            //.logout().deleteCookies("JSESSIONID").invalidateHttpSession(true)
-            //.logoutUrl("/logout").logoutSuccessUrl("/").and()
             .logout(withDefaults())
             .build();
   }
 
   @Bean
   public PasswordEncoder passwordEncoder() {
+    //return new SimplePasswordEncoder();
     return new BCryptPasswordEncoder();
+  }
+
+  public static void main(String[] args) {
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    System.out.println(passwordEncoder.encode("1111"));
   }
 }

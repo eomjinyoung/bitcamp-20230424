@@ -2,7 +2,7 @@ package bitcamp.myapp.controller;
 
 import bitcamp.myapp.service.MemberService;
 import bitcamp.myapp.vo.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -16,14 +16,10 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-  {
-    System.out.println("AuthController 생성됨!");
-  }
-
-  @Autowired
-  MemberService memberService;
+  private final MemberService memberService;
 
   @GetMapping("form")
   public void form(@CookieValue(required = false) String email, Model model) {

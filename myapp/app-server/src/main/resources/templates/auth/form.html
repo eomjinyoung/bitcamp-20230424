@@ -9,11 +9,16 @@
 <div data-th-replace="header :: header"></div>
 
 <h1>로그인</h1>
-
-<form action='login' method='post'>
+<div data-th-if="${param.error}" class="alert alert-error">
+    이메일 또는 암호가 일치하지 않습니다.
+</div>
+<div data-th-if="${param.logout}" class="alert alert-success">
+    로그아웃 했습니다.
+</div>
+<form data-th-action='@{/auth/login}' method='post'>
 <table style="border: 1px;">
 <tr>
-  <th>이메일</th> <td><input type='email' name='email' data-th-value='${email}'></td>
+  <th>이메일</th> <td><input type='text' name='email' data-th-value='${email}'></td>
 </tr>
 <tr>
   <th>암호</th> <td><input type='password' name='password'></td>

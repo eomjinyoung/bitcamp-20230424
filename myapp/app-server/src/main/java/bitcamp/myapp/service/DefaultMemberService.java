@@ -2,53 +2,54 @@ package bitcamp.myapp.service;
 
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DefaultMemberService implements MemberService {
-  {
-    System.out.println("DefaultMemberService 생성됨!");
-  }
 
-  MemberDao memberDao;
-
-  public DefaultMemberService(MemberDao memberDao) {
-    this.memberDao = memberDao;
-  }
+  @NonNull MemberDao memberDao;
 
   @Transactional
   @Override
-  public int add(Member member) throws Exception {
+  public int add(Member member) {
     return memberDao.insert(member);
   }
 
   @Override
-  public List<Member> list() throws Exception {
+  public List<Member> list() {
     return memberDao.findAll();
   }
 
   @Override
-  public Member get(int memberNo) throws Exception {
+  public Member get(int memberNo) {
     return memberDao.findBy(memberNo);
   }
 
   @Override
-  public Member get(String email, String password) throws Exception {
+  public Member get(String email, String password) {
     return memberDao.findByEmailAndPassword(email, password);
+  }
+
+  @Override
+  public Member get(String email) {
+    return memberDao.findByEmail(email);
   }
 
   @Transactional
   @Override
-  public int update(Member member) throws Exception {
+  public int update(Member member) {
     return memberDao.update(member);
   }
 
   @Transactional
   @Override
-  public int delete(int memberNo) throws Exception {
+  public int delete(int memberNo) {
     return memberDao.delete(memberNo);
   }
 }
