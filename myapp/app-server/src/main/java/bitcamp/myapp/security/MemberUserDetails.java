@@ -1,38 +1,35 @@
-package bitcamp.myapp.vo;
+package bitcamp.myapp.security;
 
+import bitcamp.myapp.vo.Member;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
-public class Member implements UserDetails {
+@RequiredArgsConstructor
+public class MemberUserDetails implements UserDetails {
 
-  public static final char MALE = 'M';
-  public static final char FEMALE = 'W';
-
-  private int no;
-  private String name;
-  private String email;
-  private String password;
-  private char gender;
-  private Date createdDate;
-  private String photo;
-
+  private final Member member;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    Collection<GrantedAuthority> collectors = new ArrayList<>();
-    collectors.add(() -> "ROLE_USER");
-    return collectors;
+    Collection<GrantedAuthority> authorities = new ArrayList<>();
+    authorities.add(() -> "ROLE_USER");
+    return authorities;
+  }
+
+  @Override
+  public String getPassword() {
+    return member.getPassword();
   }
 
   @Override
   public String getUsername() {
-    return this.email;
+    return member.getUsername();
   }
 
   @Override
