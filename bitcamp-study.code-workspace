@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../spring-security-samples"
+		},
+		{
+			"path": "../eomcs-java"
 		}
 	],
 	"settings": {

@@ -844,11 +844,18 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 - 프로젝트 실습
   - 84. SpringSecurity 적용하기
+- 2차 프로젝트
+  - 구현  
+
+ ### 92일(10/18,수)
+
+- 프로젝트 실습
+  - 85. AJAX 기술을 이용하여 Backend와 Frontend 분리하기
 - JavaScript 사용법(계속)
   - AJAX 다루기(계속)
   - Promise 사용법
 - 2차 프로젝트
-  - 구현  
+  - 구현   
   
 ## 웨일즈 화상회의
 

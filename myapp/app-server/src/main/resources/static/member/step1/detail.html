@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>게시글</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+
+<header class="x-page-header"></header>
+
+<h1>회원</h1>
+
+<form id="x-member-form" enctype='multipart/form-data'>
+  <table border='1'>
+  <tr>
+      <th style='width:120px;'>사진</th>
+      <td style='width:300px;'>
+        <a id="x-photo-link">
+          <img id="x-photo-img" style='height:80px' src='/images/avatar.png'>
+        </a>
+        <input type='file' name='photofile'></td></tr>
+  <tr>
+      <th style='width:120px;'>번호</th>
+      <td style='width:300px;'><input id="x-no" type='text' name='no' readonly></td></tr>
+  <tr>
+      <th>이름</th>
+      <td><input id="x-name" type='text' name='name'></td></tr>
+  <tr>
+      <th>이메일</th>
+      <td><input id="x-email" type='email' name='email'></td></tr>
+  <tr>
+      <th>암호</th>
+      <td><input type='password' name='password'></td></tr>
+  <tr>
+      <th>성별</th>
+      <td><select id="x-gender" name='gender'>
+          <option value='M'>남자</option>
+          <option value='W'>여자</option></select></td></tr>
+  </table>
+  <div>
+  <button>변경</button>
+  <button id="x-delete-link" type="button">삭제</a>
+  <button type='reset'>초기화</button>
+  <a href='list.html'>목록</a>
+  </div>
+</form>
+
+<footer class="x-page-footer"></footer>
+
+<script src="/js/common.js"></script>
+<script>
+    "use strict";
+
+    const memberForm = document.querySelector("#x-member-form");
+
+    loadHTML("header", "http://localhost/header.html");
+    loadHTML("footer", "http://localhost/footer.html");
+
+    (function() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    console.log(result);
+                    if (result.status == "success") {
+                        if (result.data.photo) {
+                            document.querySelector("#x-photo-img").src = `http://mvsenqskbqzl19010704.cdn.ntruss.com/member/${result.data.photo}?type=f&w=60&h=80&faceopt=true&ttype=jpg`;
+                            document.querySelector("#x-photo-link").href = `https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/member/${result.data.photo}`;
+                        }
+                        memberForm["x-no"].value = result.data.no;
+                        memberForm["x-name"].value = result.data.name;
+                        memberForm["x-email"].value = result.data.email;
+                        memberForm["x-gender"].value = result.data.gender;
+                    } else {
+                        alert(result.error);
+                    }
+                }
+            }
+        };
+        xhr.open("GET" , `/members/${pageContext.params.no}` , true);
+        xhr.send();
+    })();
+
+    memberForm.onsubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(memberForm);
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    //console.log(result);
+                    if (result.status == "success") {
+                        location.href = "list.html";
+                    } else {
+                        alert("회원 변경 오류입니다!");
+                    }
+                }
+            }
+        };
+        xhr.open("PUT" , `/members/${pageContext.params.no}` , true);
+        xhr.send(formData);
+    };
+
+    document.querySelector("#x-delete-link").onclick = () => {
+        const no = memberForm["x-no"].value;
+        const xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    //console.log(result);
+                    if (result.status == "success") {
+                        location.href = "list.html";
+                    } else {
+                        alert("회원 삭제 오류입니다!");
+                    }
+                }
+            }
+        };
+        xhr.open("DELETE" , `/members/${pageContext.params.no}`, true);
+        xhr.send();
+    };
+</script>
+
+
+</body>
+</html>

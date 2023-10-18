@@ -6,16 +6,14 @@ import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
-@Controller
-@RequestMapping("/board")
+@RestController
+@RequestMapping("/boards")
 @RequiredArgsConstructor
 public class BoardController {
 
@@ -23,17 +21,10 @@ public class BoardController {
 
   private final NcpObjectStorageService ncpObjectStorageService;
 
-  @GetMapping("form")
-  public void form() {
-  }
 
-  @PostMapping("add")
-  public String add(Board board, MultipartFile[] files, HttpSession session) throws Exception {
+  @PostMapping("{category}")
+  public RestResult add(@PathVariable int category, Board board, MultipartFile[] files, HttpSession session) throws Exception {
     Member loginUser = (Member) session.getAttribute("loginUser");
-    if (loginUser == null) {
-      return "redirect:/auth/form";
-    }
-
     board.setWriter(loginUser);
 
     ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
@@ -47,53 +38,67 @@ public class BoardController {
       }
     }
     board.setAttachedFiles(attachedFiles);
-
     boardService.add(board);
-    return "redirect:/board/list?category=" + board.getCategory();
+
+    return RestResult.builder()
+            .status(RestResult.SUCCESS)
+            .data(board)
+            .build();
   }
 
-  @GetMapping("delete")
-  public String delete(int no, int category, HttpSession session) throws Exception {
+  @DeleteMapping("{category}/{no}")
+  public RestResult delete(@PathVariable int category, @PathVariable int no, HttpSession session) throws Exception {
     Member loginUser = (Member) session.getAttribute("loginUser");
-    if (loginUser == null) {
-      return "redirect:/auth/form";
-    }
 
     Board b = boardService.get(no);
-
     if (b == null || b.getWriter().getNo() != loginUser.getNo()) {
-      throw new Exception("해당 번호의 게시글이 없거나 삭제 권한이 없습니다.");
-    } else {
-      boardService.delete(b.getNo());
-      return "redirect:/board/list?category=" + category;
+      return RestResult.builder()
+              .status(RestResult.FAILURE)
+              .error("게시글이 존재하지 않거나 삭제 권한이 없습니다.")
+              .build();
     }
+
+    boardService.delete(b.getNo());
+
+    return RestResult.builder().status(RestResult.SUCCESS).build();
   }
 
-  @GetMapping("detail/{category}/{no}")
-  public String detail(@PathVariable int category, @PathVariable int no, Model model) throws Exception {
+  @GetMapping("{category}/{no}")
+  public RestResult detail(@PathVariable int category, @PathVariable int no) throws Exception {
     Board board = boardService.get(no);
-    if (board != null) {
-      boardService.increaseViewCount(no);
-      model.addAttribute("board", board);
+
+    if (board == null) {
+      return RestResult.builder()
+              .status(RestResult.FAILURE)
+              .error("해당 번호의 게시글이 없습니다.")
+              .build();
     }
-    return "board/detail";
+
+    boardService.increaseViewCount(no);
+    return RestResult.builder()
+            .status(RestResult.SUCCESS)
+            .data(board)
+            .build();
   }
 
-  @GetMapping("list")
-  public void list(int category, Model model) throws Exception {
-    model.addAttribute("list", boardService.list(category));
+  @GetMapping("{category}")
+  public RestResult list(@PathVariable int category) throws Exception {
+    return RestResult.builder()
+            .status(RestResult.SUCCESS)
+            .data(boardService.list(category))
+            .build();
   }
 
-  @PostMapping("update")
-  public String update(Board board, MultipartFile[] files, HttpSession session) throws Exception {
+  @PutMapping("{category}/{no}")
+  public RestResult update(@PathVariable int category, @PathVariable int no, Board board, MultipartFile[] files, HttpSession session) throws Exception {
     Member loginUser = (Member) session.getAttribute("loginUser");
-    if (loginUser == null) {
-      return "redirect:/auth/form";
-    }
 
     Board b = boardService.get(board.getNo());
     if (b == null || b.getWriter().getNo() != loginUser.getNo()) {
-      throw new Exception("게시글이 존재하지 않거나 변경 권한이 없습니다.");
+      return RestResult.builder()
+              .status(RestResult.FAILURE)
+              .error("게시글이 존재하지 않거나 변경 권한이 없습니다.")
+              .build();
     }
 
     ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
@@ -109,28 +114,40 @@ public class BoardController {
     board.setAttachedFiles(attachedFiles);
 
     boardService.update(board);
-    return "redirect:/board/list?category=" + b.getCategory();
+
+    return RestResult.builder()
+            .status(RestResult.SUCCESS)
+            .data(board)
+            .build();
   }
 
-  @GetMapping("fileDelete/{attachedFile}") // 예) .../fileDelete/attachedFile;no=30
-  public String fileDelete(@MatrixVariable("no") int no, HttpSession session) throws Exception {
+  @DeleteMapping("{category}/{boardNo}/files/{fileNo}") //
+  public RestResult fileDelete(
+          @PathVariable int category,
+          @PathVariable int boardNo,
+          @PathVariable int fileNo,
+          HttpSession session) throws Exception {
     Member loginUser = (Member) session.getAttribute("loginUser");
-    if (loginUser == null) {
-      return "redirect:/auth/form";
+
+    AttachedFile attachedFile = boardService.getAttachedFile(fileNo);
+    if (attachedFile == null || attachedFile.getBoardNo() != boardNo) {
+      return RestResult.builder()
+              .status(RestResult.FAILURE)
+              .error("첨부파일이 없거나 해당 게시글의 첨부파일이 아닙니다.")
+              .build();
     }
 
-    Board board = null;
-    AttachedFile attachedFile = boardService.getAttachedFile(no);
-    board = boardService.get(attachedFile.getBoardNo());
+    Board board = boardService.get(boardNo);
     if (board.getWriter().getNo() != loginUser.getNo()) {
-      throw new Exception("게시글 변경 권한이 없습니다!");
+      return RestResult.builder()
+              .status(RestResult.FAILURE)
+              .error("게시글 변경 권한이 없습니다!")
+              .build();
     }
 
-    if (boardService.deleteAttachedFile(no) == 0) {
-      throw new Exception("해당 번호의 첨부파일이 없다.");
-    } else {
-      return "redirect:/board/detail/" + board.getCategory() + "/" + board.getNo();
-    }
+    boardService.deleteAttachedFile(fileNo);
+
+    return RestResult.builder().status(RestResult.SUCCESS).build();
   }
 }
 

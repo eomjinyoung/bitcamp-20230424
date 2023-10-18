@@ -1,0 +1,15 @@
+body {
+    font-size: small;
+}
+
+.x-page-header {
+    padding: 10px;
+    background-color: wheat;
+}
+
+.x-page-footer {
+    padding: 10px;
+    text-align: center;
+    background-color: navy;
+    color: white;
+}

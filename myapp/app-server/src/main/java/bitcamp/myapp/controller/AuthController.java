@@ -61,7 +61,7 @@ public class AuthController {
     //    Member 객체를 꺼내서 세션에 보관한다.
     session.setAttribute("loginUser", ((MemberUserDetails) principal).getMember());
 
-    return "redirect:/home";
+    return "redirect:/";
   }
 
   @GetMapping("logout")
