@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>회원</title>
+<link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+
+    <header class="x-page-header"></header>
+
+<h1>회원 목록</h1>
+
+<div>
+<a id="x-new-member" href='form.html'>새 회원</a>
+</div>
+
+<table border="1">
+<thead>
+  <tr><th>번호</th> <th>이름</th> <th>이메일</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+<a href='/'>메인</a>
+
+<footer class="x-page-footer"></footer>
+
+<script src="/js/common.js"></script>
+<script src="/js/page-init.js"></script>
+<script>
+"use strict";
+
+const tbody = document.querySelector("tbody");
+
+// 목록 데이터 요청
+(function() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var result = JSON.parse(xhr.responseText);
+                if (result.status == "failure") {
+                    alert("데이터 오류 입니다!");
+                    return;
+                }
+                for (let member of result.data) {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `<td>${member.no}</td>\n`
+                        + `<td>\n`
+                        +  (member.photo ? 
+                            `  <img src="http://mvsenqskbqzl19010704.cdn.ntruss.com/member/${member.photo}?type=f&w=30&h=40&faceopt=true&ttype=jpg">\n` : 
+                            `  <img src="/images/avatar.png" style="width:30px;height:40px;">\n`)
+                        + `<a href="detail.html?no=${member.no}">${member.name}</a></td>\n`
+                        + `<td>${member.email}</td>\n`;
+                    tbody.appendChild(tr);
+                }
+            }
+        }
+    };
+    xhr.open("GET", `http://localhost/members`, true);
+    xhr.send();
+})();
+
+</script>
+</body>
+</html>

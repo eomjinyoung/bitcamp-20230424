@@ -494,7 +494,12 @@
 
 - SpringSecurity 사용법
 
-## 85. AJAX 기술을 이용하여 Backend와 Frontend 분리하기
+## 85. AJAX 기술을 이용하여 Backend와 Frontend 분리하기 - XMLHttpRequest 활용
 
-- AJAX 활용법
+- XMLHttpRequest를 이용한 AJAX 활용법
 - REST API를 구현하는 방법
+
+## 86. Backend와 Frontend를 서로 다른 서버로 분리하기
+
+- Node.js를 이용한 프론트엔드 서버 구축하기
+- CORS를 다루는 방법

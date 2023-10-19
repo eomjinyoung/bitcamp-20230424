@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시글</title>
+<link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+
+<header class="x-page-header"></header>
+
+<h1>게시글 목록</h1>
+
+<div>
+<a id="x-new-board" href="form.html">새 글</a>
+</div>
+
+<table border='1'>
+<thead>
+  <tr><th>번호</th> <th>제목</th> <th>작성자</th> <th>조회수</th> <th>등록일</th></tr>
+</thead>
+<tbody></tbody>
+</table> 
+ 
+<div>
+<a href='/'>메인</a>
+</div>
+
+<footer class="x-page-footer"></footer>
+
+<script src="/js/common.js"></script>
+<script src="/js/page-init.js"></script>
+<script>
+"use strict";
+
+const tbody = document.querySelector("tbody");
+
+document.querySelector("#x-new-board").href = `form.html?category=${pageContext.params.category}`;
+
+// 목록 데이터 요청
+(function() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var result = JSON.parse(xhr.responseText);
+                if (result.status == "failure") {
+                    alert("데이터 오류 입니다!");
+                    return;
+                }
+                for (let board of result.data) {
+                    let tr = document.createElement("tr");
+                    if (!board.title)
+                      board.title = "제목없음";
+                    tr.innerHTML = `<td>${board.no}</td>\n`
+                        + `<td><a href="detail.html?category=${pageContext.params.category}&no=${board.no}">${board.title}</a></td>\n`
+                        +  `<td>${board.writer.name}</td>\n`
+                        +  `<td>${board.viewCount}</td>\n`
+                        +  `<td>${board.createdDate}</td>\n`;
+                    tbody.appendChild(tr);
+                }
+            }
+        }
+    };
+    xhr.open("GET", `http://localhost/boards/${pageContext.params.category}`, true);
+    xhr.send();
+})();
+
+</script>
+</body>
+</html>

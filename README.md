@@ -851,12 +851,16 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 - 프로젝트 실습
   - 85. AJAX 기술을 이용하여 Backend와 Frontend 분리하기
-- JavaScript 사용법(계속)
-  - AJAX 다루기(계속)
-  - Promise 사용법
 - 2차 프로젝트
   - 구현   
-  
+
+### 93일(10/19,목)
+
+- 프로젝트 실습
+  - 85. AJAX 기술을 이용하여 Backend와 Frontend 분리하기 - XMLHttpRequest 활용(계속)
+- 2차 프로젝트
+  - 구현   
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
