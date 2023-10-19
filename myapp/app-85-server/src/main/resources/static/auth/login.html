@@ -35,6 +35,8 @@
 
     const loginForm = document.querySelector("#x-login-form");
 
+    loginForm["x-email"].value = getCookie("email");
+
     loginForm.onsubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(loginForm);

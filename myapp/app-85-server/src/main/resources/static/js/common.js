@@ -32,3 +32,8 @@ function loadHTML(selector, url, listener) {
     xhr.open("GET", url, true);
     xhr.send();
 }
+
+function getCookie(name) {
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value? value[2] : null;
+}

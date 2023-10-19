@@ -1,23 +1,18 @@
 package bitcamp.myapp.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.beans.PropertyEditorSupport;
 
-//@ControllerAdvice
+@ControllerAdvice
 public class GlobalControllerAdvice {
-
-  @ExceptionHandler
-  public ModelAndView exceptionHandler(Exception ex) {
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("exception", ex);
-    mv.addObject("message", ex.getMessage());
-    mv.setViewName("error");
-    return mv;
-  }
 
   @InitBinder
   public void initBinder(WebDataBinder binder) {

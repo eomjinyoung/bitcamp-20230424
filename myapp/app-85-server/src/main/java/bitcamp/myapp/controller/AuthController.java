@@ -41,6 +41,7 @@ public class AuthController {
     // 응답 헤더에 이메일 쿠기를 추가한다.
     if (saveEmail != null) {
       Cookie cookie = new Cookie("email", email);
+      cookie.setPath("/");
       response.addCookie(cookie);
     } else {
       Cookie cookie = new Cookie("email", "no");

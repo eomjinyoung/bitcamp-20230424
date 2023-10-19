@@ -2,6 +2,11 @@ package bitcamp.myapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,7 +22,6 @@ public class App implements WebMvcConfigurer {
 
   @Override
   public void configurePathMatch(PathMatchConfigurer configurer) {
-    System.out.println("AppConfig.configurePathMatch() 호출됨!");
     UrlPathHelper pathHelper = new UrlPathHelper();
 
     // @MatrixVariable 기능 활성화
@@ -34,5 +38,6 @@ public class App implements WebMvcConfigurer {
 ////            .addInterceptor(new MyInterceptor())
 ////            .addPathPatterns("/c04_1/**");
 //  }
+
 
 }

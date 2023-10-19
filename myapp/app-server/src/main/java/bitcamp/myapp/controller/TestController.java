@@ -2,10 +2,12 @@ package bitcamp.myapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class TestController {
+
 
   @GetMapping(value="/ex01/exam05_1", produces = "text/plain;charset=UTF-8")
   @ResponseBody
