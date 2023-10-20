@@ -861,6 +861,13 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 2차 프로젝트
   - 구현   
 
+### 94일(10/20,금)
+
+- 프로젝트 실습
+  - 86. Backend와 Frontend를 서로 다른 서버로 분리하기
+- 2차 프로젝트
+  - 구현   
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

@@ -1,6 +1,6 @@
 "use strict";
 
-loadHTML("header", "http://localhost/header.html", () => {
+loadHTML("header", "/header.html", () => {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4) {
@@ -19,11 +19,11 @@ loadHTML("header", "http://localhost/header.html", () => {
             }
         }
     };
-    xhr.open("GET", "/auth/userInfo", true);
+    xhr.open("GET", "http://localhost:8080/auth/userInfo", true);
     xhr.send();
 });
 
-loadHTML("footer", "http://localhost/footer.html");
+loadHTML("footer", "/footer.html");
 
 function logout(e) {
     e.preventDefault();
@@ -36,7 +36,7 @@ function logout(e) {
             }
         }
     };
-    xhr.open("POST" , `/auth/logout` , true);
+    xhr.open("POST" , `http://localhost:8080/auth/logout` , true);
     xhr.setRequestHeader(
         "Content-Type",
         "application/x-www-form-urlencoded");

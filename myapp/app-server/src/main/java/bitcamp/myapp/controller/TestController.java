@@ -1,11 +1,21 @@
 package bitcamp.myapp.controller;
 
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class TestController {
+
+  @GetMapping(value="/csrf/token", produces = "text/plain;charset=UTF-8")
+  @ResponseBody
+  public String csrfToken(HttpServletRequest request) throws Exception {
+    CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+    return String.format("%s = %s", token.getHeaderName(), token.getToken());
+  }
 
   @GetMapping(value="/ex01/exam05_1", produces = "text/plain;charset=UTF-8")
   @ResponseBody

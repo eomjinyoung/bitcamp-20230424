@@ -22,6 +22,7 @@
   <th>암호</th> <td><input id="x-password" type='password' name='password'></td>
 </tr>
 </table>
+<input id="x-csrf" type="text" name="XSRF-TOKEN" />
 <button>로그인</button>
  <input id="x-saveEmail" type='checkbox' name='saveEmail'> 이메일 저장
 </form>
@@ -36,8 +37,9 @@
     const loginForm = document.querySelector("#x-login-form");
 
     loginForm["x-email"].value = getCookie("email");
+    loginForm["XSRF-TOKEN"].value = getCookie("XSRF-TOKEN");
 
-    loginForm.onsubmit = (e) => {
+    loginForm.onsubmit = (e) => { 
         e.preventDefault();
         const formData = new FormData(loginForm);
         const xhr = new XMLHttpRequest();
@@ -55,7 +57,8 @@
                 }
             }
         };
-        xhr.open("POST" , `/auth/login` , true);
+        xhr.open("POST" , `http://localhost:8080/auth/login` , true);
+        xhr.withCredentials = true;
         xhr.send(formData);
     };
 </script>
