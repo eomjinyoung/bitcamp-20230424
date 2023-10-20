@@ -7,7 +7,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.7.16/4f118a21283b38e36ddb92aa7abb28ac8f98bc8b/spring-boot-configuration-processor-2.7.16.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.7.17/299f97eea012babd839e789c6aad8162343cbb36/spring-boot-configuration-processor-2.7.17.jar" />
         </processorPath>
         <module name="myapp.app-server.main" />
       </profile>
