@@ -39,3 +39,7 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// 실행
+// $ npm install 
+// $ DEBUG=node:* npm start
