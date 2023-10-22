@@ -501,5 +501,6 @@
 
 ## 86. Backend와 Frontend를 서로 다른 서버로 분리하기
 
-- Node.js를 이용한 프론트엔드 서버 구축하기
+- Node.js 와 express를 이용하여 프론트엔드 서버 구축하는 방법
 - CORS를 다루는 방법
+- CSRF를 다루는 방법

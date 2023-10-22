@@ -17,7 +17,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(registry -> registry
                         .mvcMatchers("/images/**", "/css/**", "/js/**").permitAll()
                         .mvcMatchers("/member/form", "/member/add", "/").permitAll()
-                        .regexMatchers(".*\\.html?.*", ".*\\.css", ".*\\.js").permitAll()
+                        .regexMatchers(".*\\.html?.*", ".*\\.css", ".*\\.js", ".*\\.ico").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLoginConfigurer -> formLoginConfigurer

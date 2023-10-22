@@ -20,7 +20,7 @@ public class SecurityConfig {
     return http.csrf().disable().cors().disable()
             .authorizeHttpRequests(registry -> registry
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                    .mvcMatchers("/images/**", "/member/form", "/member/add", "/", "/logout").permitAll()
+                    .mvcMatchers("/favicon.ico", "/images/**", "/member/form", "/member/add", "/", "/logout").permitAll()
                     .anyRequest().authenticated()
             )
             .formLogin(formLoginConfigurer -> formLoginConfigurer
