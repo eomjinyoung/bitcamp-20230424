@@ -504,3 +504,8 @@
 - Node.js 와 express를 이용하여 프론트엔드 서버 구축하는 방법
 - CORS를 다루는 방법
 - CSRF를 다루는 방법
+
+## 87. AJAX 기술 다루기 - fetch() 활용
+
+- fetch() 를 사용하여 AJAX 요청을 처리하는 방법
+- Promise 문법을 활용하는 방법
