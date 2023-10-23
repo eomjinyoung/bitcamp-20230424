@@ -36,6 +36,8 @@ dependencies {
     // SpringSecurity 관련 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    // JWT 관련 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
     // Lombok 관련 라이브러리
     compileOnly 'org.projectlombok:lombok'

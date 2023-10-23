@@ -1,15 +1,16 @@
 package bitcamp.myapp.controller;
 
 import bitcamp.myapp.service.BoardService;
+import bitcamp.myapp.service.MemberService;
 import bitcamp.myapp.service.NcpObjectStorageService;
 import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @RestController
@@ -17,14 +18,15 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class BoardController {
 
+  private final MemberService memberService;
   private final BoardService boardService;
 
   private final NcpObjectStorageService ncpObjectStorageService;
 
 
   @PostMapping("{category}")
-  public RestResult add(@PathVariable int category, Board board, MultipartFile[] files, HttpSession session) throws Exception {
-    Member loginUser = (Member) session.getAttribute("loginUser");
+  public RestResult add(@PathVariable int category, Board board, MultipartFile[] files, Authentication authentication) throws Exception {
+    Member loginUser = memberService.get(authentication.getName());
     board.setWriter(loginUser);
 
     ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
@@ -47,8 +49,8 @@ public class BoardController {
   }
 
   @DeleteMapping("{category}/{no}")
-  public RestResult delete(@PathVariable int category, @PathVariable int no, HttpSession session) throws Exception {
-    Member loginUser = (Member) session.getAttribute("loginUser");
+  public RestResult delete(@PathVariable int category, @PathVariable int no, Authentication authentication) throws Exception {
+    Member loginUser = memberService.get(authentication.getName());
 
     Board b = boardService.get(no);
     if (b == null || b.getWriter().getNo() != loginUser.getNo()) {
@@ -90,8 +92,8 @@ public class BoardController {
   }
 
   @PutMapping("{category}/{no}")
-  public RestResult update(@PathVariable int category, @PathVariable int no, Board board, MultipartFile[] files, HttpSession session) throws Exception {
-    Member loginUser = (Member) session.getAttribute("loginUser");
+  public RestResult update(@PathVariable int category, @PathVariable int no, Board board, MultipartFile[] files, Authentication authentication) throws Exception {
+    Member loginUser = memberService.get(authentication.getName());
 
     Board b = boardService.get(board.getNo());
     if (b == null || b.getWriter().getNo() != loginUser.getNo()) {
@@ -126,8 +128,8 @@ public class BoardController {
           @PathVariable int category,
           @PathVariable int boardNo,
           @PathVariable int fileNo,
-          HttpSession session) throws Exception {
-    Member loginUser = (Member) session.getAttribute("loginUser");
+          Authentication authentication) throws Exception {
+    Member loginUser = memberService.get(authentication.getName());
 
     AttachedFile attachedFile = boardService.getAttachedFile(fileNo);
     if (attachedFile == null || attachedFile.getBoardNo() != boardNo) {

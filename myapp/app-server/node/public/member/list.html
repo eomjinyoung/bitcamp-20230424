@@ -53,9 +53,7 @@
 
 // 목록 데이터 요청
 (function() {
-    axios.get(`${RESTAPI_HOST}/members`, {
-        withCredentials: true,
-    })
+    axios.get(`${RESTAPI_HOST}/members`)
     .then((response) => {
         let result = response.data;
         if (result.status == "failure") {

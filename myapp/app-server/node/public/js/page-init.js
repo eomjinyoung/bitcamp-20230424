@@ -2,6 +2,11 @@
 
 const RESTAPI_HOST = "http://localhost:8080";
 
+if ($.cookie("TOKEN")) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${$.cookie("TOKEN")}`;
+    // console.log(axios.defaults.headers);
+}
+
 axios.get("/header.html", {
     responseType: "text",
 })
@@ -22,14 +27,10 @@ axios.get("/footer.html", {
 });
 
 function loadUserInfo() {
-
-    axios.get(`${RESTAPI_HOST}/auth/userInfo`, {
-        withCredentials: true,
-        //responseType: "json", // 기본값
-    })
+    axios.get(`${RESTAPI_HOST}/auth/userInfo`)
     .then((response) => {
         let result = response.data;
-        console.log(result.data);
+        // console.log(result.data);
         if (result.status == "success") {
             if (result.data.photo) {
                 $("#x-user-photo").attr("src", `http://mvsenqskbqzl19010704.cdn.ntruss.com/member/${result.data.photo}?type=f&w=30&h=40&faceopt=true&ttype=jpg`);
@@ -44,14 +45,13 @@ function loadUserInfo() {
 
 function logout(e) {
     e.preventDefault();
-
-    axios.post(`${RESTAPI_HOST}/auth/logout`, new FormData(), {
-        withCredentials: true,
-    })
+/*
+    axios.post(`${RESTAPI_HOST}/auth/logout`, {})
     .then((response) => {
         let result = response.data;
         console.log(result);
         location.href = "/";
     });
+*/
 }
 

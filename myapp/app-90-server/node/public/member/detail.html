@@ -84,7 +84,6 @@
         e.preventDefault();
         axios.put(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`, new FormData(memberForm[0]), {
             withCredentials: true,
-            method: "PUT",
         })
         .then((response) => {
             let result = response.data;

@@ -63,9 +63,7 @@ $("#x-new-board").attr("href", `form.html?category=${pageContext.params.get("cat
 
 // 목록 데이터 요청
 (function() {
-    axios.get(`${RESTAPI_HOST}/boards/${pageContext.params.get("category")}`, {
-        withCredentials: true,
-    })
+    axios.get(`${RESTAPI_HOST}/boards/${pageContext.params.get("category")}`)
     .then((response) => {
         let result = response.data;
         if (result.status == "failure") {

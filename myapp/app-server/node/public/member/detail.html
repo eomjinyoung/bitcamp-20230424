@@ -59,9 +59,7 @@
     const memberForm = $("#x-member-form");
 
     (function() {
-        axios.get(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`, {
-            withCredentials: true,
-        })
+        axios.get(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`)
         .then((response) => {
             let result = response.data;
             console.log(result);
@@ -82,10 +80,7 @@
 
     memberForm.submit((e) => {
         e.preventDefault();
-        axios.put(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`, new FormData(memberForm[0]), {
-            withCredentials: true,
-            method: "PUT",
-        })
+        axios.put(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`, new FormData(memberForm[0]))
         .then((response) => {
             let result = response.data;
             //console.log(result);
@@ -98,10 +93,7 @@
     });
 
     $("#x-delete-link").click(() => {
-        axios.delete(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`, {
-            withCredentials: true,
-            data: new FormData(),
-        })
+        axios.delete(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`)
         .then((response) => {
             let result = response.data;
             //console.log(result);

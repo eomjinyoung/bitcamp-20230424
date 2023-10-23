@@ -39,34 +39,26 @@
 
     const loginForm = $("#x-login-form");
 
-    axios.get(`${RESTAPI_HOST}/csrf/token`, {
-        withCredentials: true,
-    })
-    .then((response) => {
-        let result = response.data;
-        console.log(result);
-        if (result.status != "success") {
-            alert("CSRF 보안 토큰을 받을 수 없습니다.");
-        }
-    });
-
     loginForm.find("#x-email").val($.cookie("email"));
 
     loginForm.submit((e) => { 
         e.preventDefault();
         
-        axios.post(`${RESTAPI_HOST}/auth/login`, new FormData(loginForm[0]), {
-            withCredentials: true,
+        if ($("#x-saveEmail:checked").length > 0) {
+            $.cookie("email", $("#x-email").val());
+        } else {
+            $.cookie("email", "");
+        }
+
+        axios.post(`${RESTAPI_HOST}/jwt/token`, {}, {
+            auth: {
+                username: $("#x-email").val(),
+                password: $("#x-password").val()
+            },
         })
         .then((response) => {
-            let result = response.data;
-            console.log(result);
-            if (result.status == "success") {
-                location.href = "/";
-            } else {
-                $("#x-message").removeClass("x-hidden");
-                loginForm.find("#x-password").val("");
-            }
+            $.cookie("TOKEN", response.data, {path: '/'});
+            location.href = "/";
         });
     });
 </script>
