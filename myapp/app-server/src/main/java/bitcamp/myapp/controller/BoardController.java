@@ -1,5 +1,6 @@
 package bitcamp.myapp.controller;
 
+import bitcamp.myapp.security.MemberUserDetails;
 import bitcamp.myapp.service.BoardService;
 import bitcamp.myapp.service.MemberService;
 import bitcamp.myapp.service.NcpObjectStorageService;
@@ -8,6 +9,10 @@ import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,15 +23,22 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class BoardController {
 
-  private final MemberService memberService;
+  private final JwtDecoder decoder;
   private final BoardService boardService;
 
   private final NcpObjectStorageService ncpObjectStorageService;
 
 
   @PostMapping("{category}")
-  public RestResult add(@PathVariable int category, Board board, MultipartFile[] files, Authentication authentication) throws Exception {
-    Member loginUser = memberService.get(authentication.getName());
+  public RestResult add(
+          @PathVariable int category,
+          Board board,
+          MultipartFile[] files,
+          @RequestHeader("Authorization") String token) throws Exception {
+
+    Jwt jwt = decoder.decode(token.split(" ")[1]);
+    Member loginUser = new Member();
+    loginUser.setNo(Integer.parseInt(jwt.getClaim("userNo")));
     board.setWriter(loginUser);
 
     ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
@@ -49,11 +61,16 @@ public class BoardController {
   }
 
   @DeleteMapping("{category}/{no}")
-  public RestResult delete(@PathVariable int category, @PathVariable int no, Authentication authentication) throws Exception {
-    Member loginUser = memberService.get(authentication.getName());
+  public RestResult delete(
+          @PathVariable int category,
+          @PathVariable int no,
+          @RequestHeader("Authorization") String token) throws Exception {
+
+    Jwt jwt = decoder.decode(token.split(" ")[1]);
+    int loginUserNo = Integer.parseInt(jwt.getClaim("userNo"));
 
     Board b = boardService.get(no);
-    if (b == null || b.getWriter().getNo() != loginUser.getNo()) {
+    if (b == null || b.getWriter().getNo() != loginUserNo) {
       return RestResult.builder()
               .status(RestResult.FAILURE)
               .error("게시글이 존재하지 않거나 삭제 권한이 없습니다.")
@@ -66,7 +83,9 @@ public class BoardController {
   }
 
   @GetMapping("{category}/{no}")
-  public RestResult detail(@PathVariable int category, @PathVariable int no) throws Exception {
+  public RestResult detail(
+          @PathVariable int category,
+          @PathVariable int no) throws Exception {
     Board board = boardService.get(no);
 
     if (board == null) {
@@ -92,11 +111,18 @@ public class BoardController {
   }
 
   @PutMapping("{category}/{no}")
-  public RestResult update(@PathVariable int category, @PathVariable int no, Board board, MultipartFile[] files, Authentication authentication) throws Exception {
-    Member loginUser = memberService.get(authentication.getName());
+  public RestResult update(
+          @PathVariable int category,
+          @PathVariable int no,
+          Board board,
+          MultipartFile[] files,
+          @RequestHeader("Authorization") String token) throws Exception {
+
+    Jwt jwt = decoder.decode(token.split(" ")[1]);
+    int loginUserNo = Integer.parseInt(jwt.getClaim("userNo"));
 
     Board b = boardService.get(board.getNo());
-    if (b == null || b.getWriter().getNo() != loginUser.getNo()) {
+    if (b == null || b.getWriter().getNo() != loginUserNo) {
       return RestResult.builder()
               .status(RestResult.FAILURE)
               .error("게시글이 존재하지 않거나 변경 권한이 없습니다.")
@@ -128,8 +154,10 @@ public class BoardController {
           @PathVariable int category,
           @PathVariable int boardNo,
           @PathVariable int fileNo,
-          Authentication authentication) throws Exception {
-    Member loginUser = memberService.get(authentication.getName());
+          @RequestHeader("Authorization") String token) throws Exception {
+
+    Jwt jwt = decoder.decode(token.split(" ")[1]);
+    int loginUserNo = Integer.parseInt(jwt.getClaim("userNo"));
 
     AttachedFile attachedFile = boardService.getAttachedFile(fileNo);
     if (attachedFile == null || attachedFile.getBoardNo() != boardNo) {
@@ -140,7 +168,7 @@ public class BoardController {
     }
 
     Board board = boardService.get(boardNo);
-    if (board.getWriter().getNo() != loginUser.getNo()) {
+    if (board.getWriter().getNo() != loginUserNo) {
       return RestResult.builder()
               .status(RestResult.FAILURE)
               .error("게시글 변경 권한이 없습니다!")

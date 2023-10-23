@@ -43,7 +43,7 @@ public class SecurityConfig {
     return http
             .cors().and()
             .authorizeHttpRequests(registry -> registry
-                    .mvcMatchers("/member/add", "/auth/userInfo").permitAll()
+                    .mvcMatchers("/member/add", "/auth/userInfo", "/auth/logout").permitAll()
                     .anyRequest().authenticated()
             )
             .csrf((csrf) -> csrf.ignoringAntMatchers("/jwt/token"))

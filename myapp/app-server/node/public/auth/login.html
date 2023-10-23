@@ -45,7 +45,7 @@
         e.preventDefault();
         
         if ($("#x-saveEmail:checked").length > 0) {
-            $.cookie("email", $("#x-email").val());
+            $.cookie("email", $("#x-email").val(), {expires: 7});
         } else {
             $.cookie("email", "");
         }
@@ -58,6 +58,7 @@
         })
         .then((response) => {
             $.cookie("TOKEN", response.data, {path: '/'});
+            //console.log(response.data);
             location.href = "/";
         });
     });

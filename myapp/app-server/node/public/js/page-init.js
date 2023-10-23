@@ -14,7 +14,7 @@ axios.get("/header.html", {
     $("header").html(response.data)
 })
 .then(() => {
-    if ($.cookie("XSRF-TOKEN")) {
+    if ($.cookie("TOKEN")) {
         loadUserInfo();
     }
 });
@@ -45,13 +45,12 @@ function loadUserInfo() {
 
 function logout(e) {
     e.preventDefault();
-/*
-    axios.post(`${RESTAPI_HOST}/auth/logout`, {})
+
+    axios.get(`${RESTAPI_HOST}/auth/logout`)
     .then((response) => {
         let result = response.data;
         console.log(result);
         location.href = "/";
     });
-*/
 }
 
