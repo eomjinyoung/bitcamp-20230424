@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시글</title>
+<link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+
+<header class="x-page-header"></header>
+
+<h1>게시글 목록</h1>
+
+<div>
+<a id="x-new-board" href="form.html">새 글</a>
+</div>
+
+<table border='1'>
+<thead>
+  <tr><th>번호</th> <th>제목</th> <th>작성자</th> <th>조회수</th> <th>등록일</th></tr>
+</thead>
+<tbody></tbody>
+</table> 
+ 
+<div>
+<a href='/'>메인</a>
+</div>
+
+<footer class="x-page-footer"></footer>
+
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each data}}
+<tr>
+    <td>{{no}}</td>
+    <td>
+        <a href="detail.html?category={{category}}&no={{no}}">
+        {{#if title}}
+            {{title}}
+        {{else}}
+            제목없음
+        {{/if}}
+        </a>
+    </td>
+    <td>{{writer.name}}</td>
+    <td>{{viewCount}}</td>
+    <td>{{createdDate}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/jquery.cookie/jquery.cookie.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/page-init.js"></script>
+<script>
+"use strict";
+
+const tbody = $("tbody");
+
+$("#x-new-board").attr("href", `form.html?category=${pageContext.params.get("category")}`);
+
+// 목록 데이터 요청
+(function() {
+    axios.get(`${RESTAPI_HOST}/boards/${pageContext.params.get("category")}`)
+    .then((response) => {
+        let result = response.data;
+        if (result.status == "failure") {
+            alert("데이터 오류 입니다!");
+            return;
+        }
+
+        result.category = pageContext.params.get("category");
+
+        var trTemplate = Handlebars.compile($("#tr-template").html());
+        // console.log(trTemplate(result));
+        $("tbody").html(trTemplate(result));
+    });
+})();
+
+</script>
+</body>
+</html>
