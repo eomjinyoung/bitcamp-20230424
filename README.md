@@ -868,6 +868,16 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 2차 프로젝트
   - 구현   
 
+### 95일(10/23,월)
+
+- 프로젝트 실습
+  - 87. AJAX 기술 다루기 - fetch() 활용
+  - 88. AJAX 기술 다루기 - jQuery 활용
+  - 89. AJAX 기술 다루기 - axios 활용
+  - 90. JavaScript 템플릿 라이브러리 적용하기 - Handlebars 활용
+- 2차 프로젝트
+  - 구현   
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

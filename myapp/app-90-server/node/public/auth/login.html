@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>비트캠프</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+
+<header class="x-page-header"></header>
+
+<h1>로그인</h1>
+<div id="x-message" class="alert alert-error x-hidden">
+    이메일 또는 암호가 일치하지 않습니다.
+</div>
+<form id="x-login-form">
+    <table style="border: 1px;">
+    <tr>
+        <th>이메일</th> <td><input id="x-email" type='text' name='email'></td>
+    </tr>
+    <tr>
+        <th>암호</th> <td><input id="x-password" type='password' name='password'></td>
+    </tr>
+    </table>
+    <span id="x-csrf"></span><br>
+    <button>로그인</button>
+    <input id="x-saveEmail" type='checkbox' name='saveEmail'> 이메일 저장
+</form>
+
+<footer class="x-page-footer"></footer>
+
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/jquery.cookie/jquery.cookie.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/page-init.js"></script>
+<script>
+    "use strict";
+
+    const loginForm = $("#x-login-form");
+
+    axios.get(`${RESTAPI_HOST}/csrf/token`, {
+        withCredentials: true,
+    })
+    .then((response) => {
+        let result = response.data;
+        console.log(result);
+        if (result.status != "success") {
+            alert("CSRF 보안 토큰을 받을 수 없습니다.");
+        }
+    });
+
+    loginForm.find("#x-email").val($.cookie("email"));
+
+    loginForm.submit((e) => { 
+        e.preventDefault();
+        
+        axios.post(`${RESTAPI_HOST}/auth/login`, new FormData(loginForm[0]), {
+            withCredentials: true,
+        })
+        .then((response) => {
+            let result = response.data;
+            console.log(result);
+            if (result.status == "success") {
+                location.href = "/";
+            } else {
+                $("#x-message").removeClass("x-hidden");
+                loginForm.find("#x-password").val("");
+            }
+        });
+    });
+</script>
+</body>
+</html>

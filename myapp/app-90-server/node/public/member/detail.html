@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>게시글</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+
+<header class="x-page-header"></header>
+
+<h1>회원</h1>
+
+<form id="x-member-form" enctype='multipart/form-data'>
+  <table border='1'>
+  <tr>
+      <th style='width:120px;'>사진</th>
+      <td style='width:300px;'>
+        <a id="x-photo-link">
+          <img id="x-photo-img" style='height:80px' src='/images/avatar.png'>
+        </a>
+        <input type='file' name='photofile'></td></tr>
+  <tr>
+      <th style='width:120px;'>번호</th>
+      <td style='width:300px;'><input id="x-no" type='text' name='no' readonly></td></tr>
+  <tr>
+      <th>이름</th>
+      <td><input id="x-name" type='text' name='name'></td></tr>
+  <tr>
+      <th>이메일</th>
+      <td><input id="x-email" type='email' name='email'></td></tr>
+  <tr>
+      <th>암호</th>
+      <td><input type='password' name='password'></td></tr>
+  <tr>
+      <th>성별</th>
+      <td><select id="x-gender" name='gender'>
+          <option value='M'>남자</option>
+          <option value='W'>여자</option></select></td></tr>
+  </table>
+  <div>
+  <button>변경</button>
+  <button id="x-delete-link" type="button">삭제</a>
+  <button type='reset'>초기화</button>
+  <a href='list.html'>목록</a>
+  </div>
+</form>
+
+<footer class="x-page-footer"></footer>
+
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/jquery.cookie/jquery.cookie.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/page-init.js"></script>
+<script>
+    "use strict";
+
+    const memberForm = $("#x-member-form");
+
+    (function() {
+        axios.get(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`, {
+            withCredentials: true,
+        })
+        .then((response) => {
+            let result = response.data;
+            console.log(result);
+            if (result.status == "success") {
+                if (result.data.photo) {
+                    $("#x-photo-img").attr("src", `http://mvsenqskbqzl19010704.cdn.ntruss.com/member/${result.data.photo}?type=f&w=60&h=80&faceopt=true&ttype=jpg`);
+                    $("#x-photo-link").attr("href", `https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/member/${result.data.photo}`);
+                }
+                memberForm.find("#x-no").val(result.data.no);
+                memberForm.find("#x-name").val(result.data.name);
+                memberForm.find("#x-email").val(result.data.email);
+                memberForm.find("#x-gender").val(result.data.gender);
+            } else {
+                alert(result.error);
+            }
+        });
+    })();
+
+    memberForm.submit((e) => {
+        e.preventDefault();
+        axios.put(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`, new FormData(memberForm[0]), {
+            withCredentials: true,
+            method: "PUT",
+        })
+        .then((response) => {
+            let result = response.data;
+            //console.log(result);
+            if (result.status == "success") {
+                location.href = "list.html";
+            } else {
+                alert(result.error);
+            }
+        });
+    });
+
+    $("#x-delete-link").click(() => {
+        axios.delete(`${RESTAPI_HOST}/members/${pageContext.params.get("no")}`, {
+            withCredentials: true,
+            data: new FormData(),
+        })
+        .then((response) => {
+            let result = response.data;
+            //console.log(result);
+            if (result.status == "success") {
+                location.href = "list.html";
+            } else {
+                alert(result.error);
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>
