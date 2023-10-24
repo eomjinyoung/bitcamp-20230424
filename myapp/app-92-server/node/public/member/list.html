@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>회원</title>
+<link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+
+    <header class="x-page-header"></header>
+
+<h1>회원 목록</h1>
+
+<div>
+<a id="x-new-member" href='form.html'>새 회원</a>
+</div>
+
+<table border="1">
+<thead>
+  <tr><th>번호</th> <th>이름</th> <th>이메일</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+<a href='/'>메인</a>
+
+<footer class="x-page-footer"></footer>
+
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each this}}
+<tr>
+    <td>{{no}}</td>
+    <td>
+    {{#if photo}}
+        <img src="http://mvsenqskbqzl19010704.cdn.ntruss.com/member/{{photo}}?type=f&w=30&h=40&faceopt=true&ttype=jpg">
+    {{else}}
+        <img src="/images/avatar.png" style="width:30px;height:40px;">
+    {{/if}}
+        <a href="detail.html?no={{no}}">{{name}}</a>
+    </td>
+    <td>{{email}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/jquery.cookie/jquery.cookie.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/page-init.js"></script>
+<script>
+"use strict";
+
+// 목록 데이터 요청
+(function() {
+    axios.get(`${RESTAPI_HOST}/members`)
+    .then((response) => {
+        let result = response.data;
+        if (result.status == "failure") {
+            alert("데이터 오류 입니다!");
+            return;
+        }
+        
+        var trTemplate = Handlebars.compile($("#tr-template").html());
+        $("tbody").html(trTemplate(result.data));
+    });
+})();
+
+</script>
+</body>
+</html>
