@@ -882,7 +882,8 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 
 - 프로젝트 실습
   - 91. JWT 사용자 인증 적용하기
-  - 92. WYSIWYG 자바스클립트 편집기 사용하기 - summernote 활용
+  - 92. WYSIWYG 자바스크립트 편집기 사용하기 - summernote 활용
+  - 93. SNS 로그인 적용하기 - Facebook 로그인
 - 2차 프로젝트
   - 구현   
 
