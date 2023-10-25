@@ -39,8 +39,16 @@ public class JwtController {
             .issuedAt(now)
             .expiresAt(now.plusSeconds(expiry))
             .subject(authentication.getName())
-            .claim("scope", scope)
-            .claim("userNo", String.valueOf(userDetails.getMember().getNo()))
+            .claims(map -> {
+                // 사용자 권한 정보
+                map.put("scope", scope);
+  
+                // 사용자 기타 정보
+  //              map.put("no", String.valueOf(userDetails.getMember().getNo()));
+  //              map.put("name", userDetails.getMember().getName());
+  //              map.put("email", userDetails.getMember().getEmail());
+  //              map.put("photo", userDetails.getMember().getPhoto());
+              })
             .build();
     return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
   }
