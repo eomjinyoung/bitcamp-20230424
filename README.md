@@ -887,6 +887,22 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 2차 프로젝트
   - 구현   
 
+### 97일(10/25,수)
+
+- 2차 프로젝트
+  - 구현   
+
+### 98일(10/26,목)
+
+- 2차 프로젝트
+  - 리허설 및 발표
+
+### 96일(10/24,화)
+
+- 프로젝트 실습
+  - 94. OpenFeign REST Client 사용하기 - RestTemplate 대체
+- 종강
+
 ## 웨일즈 화상회의
 
 https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

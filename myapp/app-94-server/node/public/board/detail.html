@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>게시글</title>
+    <link rel="stylesheet" href="/node_modules/summernote/dist/summernote-lite.min.css">
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+
+<header class="x-page-header"></header>
+
+<h1>게시글</h1>
+
+<form id="x-board-form" enctype='multipart/form-data'>
+    <table border='1'>
+    <tr><th style='width:120px;'>번호</th>
+    <td style='width:300px;'><input id="x-no" type='text' name='no' value="100" readonly></td></tr>
+    <tr><th>제목</th>
+    <td><input id="x-title" type='text' name='title' value="제목입니다."></td></tr>
+    <tr><th>내용</th>
+    <td><textarea id="x-content" name='content' style='height:200px; width:400px;'>내용입니다!</textarea></td></tr>
+    <tr><th>작성자</th> <td id="x-writer-name">홍길동</td></tr>
+    <tr><th>조회수</th> <td id="x-viewCount">34</td></tr>
+    <tr><th>등록일</th> <td id="x-createdDate">2023-09-14</td></tr>
+    <tr><th>첨부파일</th><td>
+        <div id="x-attachedfiles"></div>
+        <input type='file' name='files' multiple>
+    </td></tr>
+    </table>
+
+    <div>
+    <button>변경</button>
+    <button  id="x-delete-link" type="button">삭제</a>
+    <button type='reset'>초기화</button>
+    <a id="x-list-link" href="">목록</a>
+    </div>
+</form>
+
+<footer class="x-page-footer"></footer>
+
+<script id="attachedfiles-template" type="text/x-handlebars-template">
+{{#each this}}
+<div class="x-attachedfile">
+    <a href="https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-118/board/{{filePath}}">{{filePath}}</a>
+    [<a href="" class="x-filedelete-link" data-file-no="{{no}}">삭제</a>]<br>
+</div>
+{{/each}}
+</script>
+
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/jquery.cookie/jquery.cookie.js"></script>
+<script src="/node_modules/summernote/dist/summernote-lite.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/page-init.js"></script>
+<script>
+    "use strict"
+    $('#x-content').summernote({
+        tabsize: 2,
+        height: 200,
+        width: 600,
+    });
+</script>
+<script>
+    "use strict";
+
+    const boardForm = $("#x-board-form");
+    $("#x-list-link").attr("href", `list.html?category=${pageContext.params.get("category")}`);
+
+    (function() {
+        axios.get(`${RESTAPI_HOST}/boards/${pageContext.params.get("category")}/${pageContext.params.get("no")}`, {
+            withCredentials: true,
+        })
+        .then((response) => {
+            let result = response.data;
+            console.log(result);
+            if (result.status == "success") {
+                boardForm.find("#x-no").val(result.data.no);
+                boardForm.find("#x-title").val(result.data.title);
+                // boardForm.find("#x-content").val(result.data.content);
+                boardForm.find("#x-content").summernote('code', result.data.content);
+                boardForm.find("#x-writer-name").html(result.data.writer.name);
+                boardForm.find("#x-viewCount").html(result.data.writer.name);
+                boardForm.find("#x-createdDate").html(result.data.createdDate);
+                
+                var trTemplate = Handlebars.compile($("#attachedfiles-template").html());
+                //console.log(trTemplate(result.data.attachedFiles));
+                $("#x-attachedfiles").html(trTemplate(result.data.attachedFiles));
+
+            } else {
+                alert(result.error);
+            }
+        });
+    })();
+
+    boardForm.submit((e) => {
+        e.preventDefault();
+        axios.put(`${RESTAPI_HOST}/boards/${pageContext.params.get("category")}/${pageContext.params.get("no")}`, new FormData(boardForm[0]), {
+                withCredentials: true,
+        })
+        .then((response) => {
+            let result = response.data;
+            //console.log(result);
+            if (result.status == "success") {
+                location.href = "list.html?category=" + pageContext.params.get("category");
+            } else {
+                alert("게시글 변경 오류입니다!");
+            }
+        });
+    });
+
+    $("#x-delete-link").click(() => {
+        axios.delete(`${RESTAPI_HOST}/boards/${pageContext.params.get("category")}/${pageContext.params.get("no")}`, {
+            withCredentials: true,
+            data: new FormData(), 
+        })
+        .then((response) => {
+            let result = response.data;
+            //console.log(result);
+            if (result.status == "success") {
+                location.href = "list.html?category=" + pageContext.params.get("category");
+            } else {
+                alert(result.error);
+            }
+        });
+    });
+
+    $("#x-attachedfiles").on("click", ".x-filedelete-link", (e) => {
+        e.preventDefault();
+
+        const fileNo = event.target.getAttribute("data-file-no");
+
+        axios.delete(`${RESTAPI_HOST}/boards/${pageContext.params.get("category")}/${pageContext.params.get("no")}/files/${fileNo}`, {
+            withCredentials: true,
+            data: new FormData(), 
+        })
+        .then((response) => {
+            let result = response.data;
+            //console.log(result);
+            if (result.status == "success") {
+                //location.href = `detail.html?category=${pageContext.params.get("category")}&no=${pageContext.params.get("no")}`;
+                $(e.target).parent(".x-attachedfile").remove();
+            } else {
+                alert(result.error);
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

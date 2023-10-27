@@ -537,3 +537,7 @@
 
 - 페이스북 Login API 사용법
 - 소셜 로그인 구동원리 이해
+
+## 94. OpenFeign REST Client 사용하기 - RestTemplate 대체
+
+- Spring Cloud OpenFeign 설정과 사용법

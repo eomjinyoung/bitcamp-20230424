@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>비트캠프</title>
+    <link rel="stylesheet" href="/node_modules/summernote/dist/summernote-lite.min.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+<header class="x-page-header"></header>
+
+<h1>게시글</h1>
+<form id="x-board-form" enctype='multipart/form-data'>
+제목 <input type='text' name='title'><br>
+내용 <textarea id="x-content" name='content'></textarea><br>
+파일 <input type='file' name='files' multiple><br>
+<input id="x-category" type='hidden' name='category'>
+<button>등록</button>
+</form>
+
+<footer class="x-page-footer"></footer>
+
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/jquery.cookie/jquery.cookie.js"></script>
+<script src="/node_modules/summernote/dist/summernote-lite.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/page-init.js"></script>
+<script>
+    "use strict"
+    $('#x-content').summernote({
+        tabsize: 2,
+        height: 200,
+        width: 600,
+    });
+</script>
+<script>
+    "use strict";
+
+    const boardForm = $("#x-board-form");
+
+    $("#x-category").val(pageContext.params.get("category"));
+
+    boardForm.submit((e) => {
+        e.preventDefault();
+        $('#x-content').val($('#x-content').summernote('code'));
+        
+        axios.post(`${RESTAPI_HOST}/boards/${pageContext.params.get("category")}`, new FormData(boardForm[0]))
+        .then((response) => {
+            let result = response.data;
+            //console.log(result);
+            if (result.status == "success") {
+                location.href = `list.html?category=${pageContext.params.get("category")}`;
+            } else {
+                alert("게시글 등록 오류입니다!");
+            }
+        });
+        
+    });
+</script>
+</body>
+</html>
