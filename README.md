@@ -1,9 +1,5 @@
 # 네이버 클라우드 7기(2023-04-24 ~ 2023-10-27)
 
-## 웨일즈 화상회의
-
-https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
-
 ## 학습 내용
 
 ### 1일(5/22,월)
@@ -897,12 +893,9 @@ https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
 - 2차 프로젝트
   - 리허설 및 발표
 
-### 96일(10/24,화)
+### 99일(10/27,금)
 
 - 프로젝트 실습
   - 94. OpenFeign REST Client 사용하기 - RestTemplate 대체
 - 종강
 
-## 웨일즈 화상회의
-
-https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
